@@ -1,0 +1,14 @@
+    repositories {
+        maven { url "http://nexus.yodo1.com:8081/repository/maven-public/" }
+        maven { url 'https://dl.bintray.com/yodo1/android-sdk' }
+
+        jcenter()
+        google()
+
+        maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://maven.soom.la/repo' }
+        jcenter { url = 'https://dl.bintray.com/swrve-inc/android' }
+        flatDir {
+            dirs 'libs'
+        }
+    }
