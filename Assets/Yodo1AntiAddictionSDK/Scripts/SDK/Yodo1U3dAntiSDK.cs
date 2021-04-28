@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 namespace Yodo1.AntiAddiction.SDK
 {
     using Entity;
@@ -10,8 +11,11 @@ namespace Yodo1.AntiAddiction.SDK
     public class Yodo1U3dAntiSDK : MonoBehaviour
     {
         private static Yodo1U3dAntiSDK _instance = null;
-        public static Yodo1U3dAntiSDK Instance {
-            get {
+
+        public static Yodo1U3dAntiSDK Instance
+        {
+            get
+            {
                 if (_instance == null)
                 {
                     var type = typeof(Yodo1U3dAntiSDK);
@@ -19,18 +23,20 @@ namespace Yodo1.AntiAddiction.SDK
                     _instance = sdkObject.GetComponent<Yodo1U3dAntiSDK>(); // Its Awake() method sets Instance.
                     _instance.InitAntiAddiction();
                 }
+
                 return _instance;
             }
         }
 
         #region private
+
         private Yodo1U3dAntiAddictionImpl _antiAddictionImpl;
         private Yodo1U3dAntiDelegate _antiAddictionDelegate;
         private bool initialized = false;
 
         private void Awake()
         {
-             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
 
         /// <summary>
@@ -56,6 +62,7 @@ namespace Yodo1.AntiAddiction.SDK
         #endregion
 
         #region public
+
         /// <summary>
         /// Set initialization callback
         /// </summary>
@@ -67,6 +74,7 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogWarning("_antiAddictionDelegate is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             _antiAddictionDelegate.SetInitCallBack(initCallBack);
         }
 
@@ -81,6 +89,7 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogWarning("_antiAddictionDelegate is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             _antiAddictionDelegate.SetTimeLimitNotifyCallBack(timeLimitNotifyCallBack);
         }
 
@@ -94,6 +103,7 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogWarning("_antiAddictionDelegate is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             _antiAddictionDelegate.SetPlayerDisconnectionCallBack(playerDisconnectionCallback);
         }
 
@@ -104,7 +114,8 @@ namespace Yodo1.AntiAddiction.SDK
         {
             if (initialized == true)
             {
-                Debug.LogWarningFormat("{0} The SDK has been initialized, please do not initialize the SDK repeatedly.", Yodo1U3dConstants.LOG_TAG);
+                Debug.LogWarningFormat("{0} The SDK has been initialized, please do not initialize the SDK repeatedly.",
+                    Yodo1U3dConstants.LOG_TAG);
                 return;
             }
 
@@ -113,9 +124,25 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogWarning("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
                 return;
             }
-            // Debug.Log(Yodo1U3dSettings.Instance.AppKey);
+
+            string appkey = Yodo1U3dSettings.Instance.AppKey;
+            string regioncode = Yodo1U3dSettings.Instance.RegionCode;
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + " appkey:" + appkey + "  regionCode:" + regioncode);
+            if (string.IsNullOrEmpty(appkey))
+            {
+                appkey = PlayerPrefs.GetString("AppKey");
+            }
+
+            if (string.IsNullOrEmpty(regioncode))
+            {
+                regioncode = PlayerPrefs.GetString("RegionCode");
+            }
+
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + " appkey:" + appkey + "  regionCode:" + regioncode);
             Yodo1U3dExtra yodo1U3DExtra = Yodo1U3dExtra.Create();
-            _antiAddictionImpl.Init(Yodo1U3dSettings.Instance.AppKey, yodo1U3DExtra.ToJsonString(), Yodo1U3dSettings.Instance.RegionCode, _antiAddictionDelegate.SdkObjectName, _antiAddictionDelegate.SdkMethodName);
+            _antiAddictionImpl.Init(appkey, yodo1U3DExtra.ToJsonString(), regioncode,
+                _antiAddictionDelegate.SdkObjectName,
+                _antiAddictionDelegate.SdkMethodName);
             initialized = true;
         }
 
@@ -124,7 +151,8 @@ namespace Yodo1.AntiAddiction.SDK
         /// </summary>
         /// <param name="initCallBack"></param>
         /// <param name="timeLimitNotifyCallBack"></param>
-        public void Init(InitDelegate initCallBack, TimeLimitNotifyDelegate timeLimitNotifyCallBack,  PlayerDisconnectionDelegate playerDisconnectionCallback)
+        public void Init(InitDelegate initCallBack, TimeLimitNotifyDelegate timeLimitNotifyCallBack,
+            PlayerDisconnectionDelegate playerDisconnectionCallback)
         {
             SetInitCallBack(initCallBack);
             SetTimeLimitNotifyCallBack(timeLimitNotifyCallBack);
@@ -150,8 +178,10 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogWarning("_antiAddictionDelegate is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             _antiAddictionDelegate.SetCertificationCallBack(callBack);
-            _antiAddictionImpl.VerifyCertificationInfo(accountId, _antiAddictionDelegate.SdkObjectName, _antiAddictionDelegate.SdkMethodName);
+            _antiAddictionImpl.VerifyCertificationInfo(accountId, _antiAddictionDelegate.SdkObjectName,
+                _antiAddictionDelegate.SdkMethodName);
         }
 
         /// <summary>
@@ -165,11 +195,13 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogWarning("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             if (_antiAddictionDelegate == null)
             {
                 Debug.LogWarning("_antiAddictionDelegate is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             _antiAddictionDelegate.SetBehaviorResultCallBack(behaviorResultCallback);
             _antiAddictionImpl.Online(_antiAddictionDelegate.SdkObjectName, _antiAddictionDelegate.SdkMethodName);
         }
@@ -185,14 +217,15 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogWarning("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             if (_antiAddictionDelegate == null)
             {
                 Debug.LogWarning("_antiAddictionDelegate is null, please do not initialize the SDK repeatedly.");
                 return;
             }
+
             _antiAddictionDelegate.SetBehaviorResultCallBack(behaviorResultCallback);
             _antiAddictionImpl.Offline(_antiAddictionDelegate.SdkObjectName, _antiAddictionDelegate.SdkMethodName);
-
         }
 
         /// <summary>
@@ -215,7 +248,8 @@ namespace Yodo1.AntiAddiction.SDK
             }
 
             _antiAddictionDelegate.SetVerifyPurchaseCallBack(callBack);
-            _antiAddictionImpl.VerifyPurchase(priceCent, currency, _antiAddictionDelegate.SdkObjectName, _antiAddictionDelegate.SdkMethodName);
+            _antiAddictionImpl.VerifyPurchase(priceCent, currency, _antiAddictionDelegate.SdkObjectName,
+                _antiAddictionDelegate.SdkMethodName);
         }
 
         /// <summary>
@@ -238,13 +272,15 @@ namespace Yodo1.AntiAddiction.SDK
             }
 
             _antiAddictionDelegate.SetVerifyPurchaseCallBack(callBack);
-            _antiAddictionImpl.VerifyPurchaseYuan(priceYuan, currency, _antiAddictionDelegate.SdkObjectName, _antiAddictionDelegate.SdkMethodName);
+            _antiAddictionImpl.VerifyPurchaseYuan(priceYuan, currency, _antiAddictionDelegate.SdkObjectName,
+                _antiAddictionDelegate.SdkMethodName);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void ReportProductReceipt(string productId, Yodo1U3dProductType productType, double price, string currency, string orderId)
+        public void ReportProductReceipt(string productId, Yodo1U3dProductType productType, double price,
+            string currency, string orderId)
         {
             if (_antiAddictionImpl == null)
             {
@@ -252,7 +288,8 @@ namespace Yodo1.AntiAddiction.SDK
                 return;
             }
 
-            Yodo1U3dProductReceipt productReceipt = Yodo1U3dProductReceipt.Create(productId, productType, price, currency, orderId);
+            Yodo1U3dProductReceipt productReceipt =
+                Yodo1U3dProductReceipt.Create(productId, productType, price, currency, orderId);
             if (productReceipt == null)
             {
                 Debug.LogWarning("productReceipt is null !");
@@ -265,7 +302,8 @@ namespace Yodo1.AntiAddiction.SDK
         /// <summary>
         /// 
         /// </summary>
-        public void ReportProductReceiptYuan(string productId, Yodo1U3dProductType productType, double priceYuan, string currency, string orderId)
+        public void ReportProductReceiptYuan(string productId, Yodo1U3dProductType productType, double priceYuan,
+            string currency, string orderId)
         {
             if (_antiAddictionImpl == null)
             {
@@ -273,7 +311,8 @@ namespace Yodo1.AntiAddiction.SDK
                 return;
             }
 
-            Yodo1U3dProductReceipt productReceipt = Yodo1U3dProductReceipt.Create(productId, productType, priceYuan, currency, orderId);
+            Yodo1U3dProductReceipt productReceipt =
+                Yodo1U3dProductReceipt.Create(productId, productType, priceYuan, currency, orderId);
             if (productReceipt == null)
             {
                 Debug.LogWarning("productReceipt is null !");
@@ -294,6 +333,7 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogError("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
                 return false;
             }
+
             return _antiAddictionImpl.IsChineseMainland();
         }
 
@@ -308,8 +348,10 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogError("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
                 return false;
             }
+
             return _antiAddictionImpl.IsGuestUser();
         }
+
         #endregion
     }
 }

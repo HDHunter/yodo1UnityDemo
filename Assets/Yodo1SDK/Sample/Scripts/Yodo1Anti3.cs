@@ -12,6 +12,14 @@ public class Yodo1Anti3 : MonoBehaviour
     void Start()
     {
         // Debug.Log(Yodo1U3dConstants.LOG_TAG + " SetInitCallBack result:" + result + "   content:" + content);
+        if (Yodo1U3dAntiAddiction.IsChineseMainland())
+        {
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1U3dAntiAddiction 中国大陆用户");
+        }
+        else
+        {
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1U3dAntiAddiction 不是中国大陆用户");
+        }
     }
 
     // Use this for initialization
