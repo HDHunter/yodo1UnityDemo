@@ -142,17 +142,27 @@ public class Yodo1Demo : MonoBehaviour
             btn_startY = 110;
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY, btn_w, btn_h), "账户/防沉迷功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY, btn_w, btn_h), "账户功能"))
         {
             SceneManager.LoadScene("AccountScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 2 + btn_h, btn_w, btn_h), "商品支付功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 2 + btn_h, btn_w, btn_h), "实名/防沉迷1.0功能"))
+        {
+            SceneManager.LoadScene("Anti1Scene");
+        }
+
+        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "实名/防沉迷2.0/3.0功能"))
+        {
+            SceneManager.LoadScene("Anti3Scene");
+        }
+
+        if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "商品支付功能"))
         {
             SceneManager.LoadScene("PayScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "分享功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 5 + btn_h * 4, btn_w, btn_h), "分享功能"))
         {
             Yodo1U3dShareInfo shareParam = new Yodo1U3dShareInfo();
             shareParam.SNSType = Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeWeixinMoments |
@@ -170,17 +180,17 @@ public class Yodo1Demo : MonoBehaviour
             Yodo1U3dUtils.Share(shareParam);
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "统计功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 6 + btn_h * 5, btn_w, btn_h), "统计功能"))
         {
             SceneManager.LoadScene("AnalyticsScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 5 + btn_h * 4, btn_w, btn_h), "其他功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 7 + btn_h * 6, btn_w, btn_h), "其他功能"))
         {
             SceneManager.LoadScene("VerifyScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 6 + btn_h * 5, btn_w, btn_h), "获取在线参数"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 8 + btn_h * 7, btn_w, btn_h), "获取在线参数"))
         {
             string deviceId = Yodo1U3dUtils.getDeviceId();
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "deviceId : " + deviceId);
@@ -192,12 +202,12 @@ public class Yodo1Demo : MonoBehaviour
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1OnlineParam : " + param2);
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 7 + btn_h * 6, btn_w, btn_h), "广告功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 9 + btn_h * 8, btn_w, btn_h), "广告功能"))
         {
             SceneManager.LoadScene("Yodo1AdsScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 8 + btn_h * 7, btn_w, btn_h), "退出"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 10 + btn_h * 9, btn_w, btn_h), "退出"))
         {
             Yodo1U3dUtils.exit(this, exitCallback);
         }
