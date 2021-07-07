@@ -11,25 +11,19 @@ namespace Yodo1Ads
         {
             if (initialized)
             {
-                Debug.LogWarning(
-                    "[Yodo1 Ads] The SDK has been initialized, please do not initialize the SDK repeatedly.");
+                Debug.LogWarning("[Yodo1 Ads] The SDK has been initialized, please do not initialize the SDK repeatedly.");
                 return;
             }
 
             var type = typeof(Yodo1U3dAdsSDK);
-            var sdkObj =
-                new GameObject("Yodo1U3dAdsSDK", type)
-                    .GetComponent<Yodo1U3dAdsSDK>(); // Its Awake() method sets Instance.
+            var sdkObj = new GameObject("Yodo1U3dAdsSDK", type).GetComponent<Yodo1U3dAdsSDK>(); // Its Awake() method sets Instance.
             if (Yodo1U3dAdsSDK.Instance != sdkObj)
             {
-                Debug.LogError("[Yodo1 Ads] It looks like you have the " + type.Name +
-                               " on a GameObject in your scene. Please remove the script from your scene.");
+                Debug.LogError("[Yodo1 Ads] It looks like you have the " + type.Name + " on a GameObject in your scene. Please remove the script from your scene.");
                 return;
             }
 
-            Yodo1Ads.Yodo1AdSettings settings =
-                Resources.Load("Yodo1Ads/Yodo1AdSettings",
-                    typeof(Yodo1Ads.Yodo1AdSettings)) as Yodo1Ads.Yodo1AdSettings;
+            Yodo1Ads.Yodo1AdSettings settings = Resources.Load("Yodo1Ads/Yodo1AdSettings", typeof(Yodo1Ads.Yodo1AdSettings)) as Yodo1Ads.Yodo1AdSettings;
             if (settings == null)
             {
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. The Yodo1AdSettings is missing.");
@@ -148,8 +142,7 @@ namespace Yodo1Ads
             }
         }
 
-        #region BannerAd
-
+        #region  BannerAd
         /// <summary>
         /// Sets the banner ad align.
         /// </summary>
@@ -161,7 +154,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -224,7 +216,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -234,8 +225,7 @@ namespace Yodo1Ads
             else if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
-                Yodo1U3dAdvertForAndroid.ShowBanner(Yodo1U3dAdsSDK.Instance.SdkObjectName,
-                    Yodo1U3dAdsSDK.Instance.SdkMethodName);
+                Yodo1U3dAdvertForAndroid.ShowBanner(Yodo1U3dAdsSDK.Instance.SdkObjectName, Yodo1U3dAdsSDK.Instance.SdkMethodName);
 #endif
             }
         }
@@ -251,7 +241,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -261,8 +250,7 @@ namespace Yodo1Ads
             else if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
-                Yodo1U3dAdvertForAndroid.ShowBanner(Yodo1U3dAdsSDK.Instance.SdkObjectName,
-                    Yodo1U3dAdsSDK.Instance.SdkMethodName, placementId);
+                Yodo1U3dAdvertForAndroid.ShowBanner(Yodo1U3dAdsSDK.Instance.SdkObjectName, Yodo1U3dAdsSDK.Instance.SdkMethodName, placementId);
 #endif
             }
         }
@@ -277,7 +265,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -302,7 +289,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -328,7 +314,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return false;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -341,14 +326,12 @@ namespace Yodo1Ads
                 return Yodo1U3dAdvertForAndroid.BannerIsReady();
 #endif
             }
-
             return false;
         }
 
         #endregion
 
-        #region InterstitialAd
-
+        #region  InterstitialAd
         /// <summary>
         /// Whether the interstitial ads have been loaded.
         /// </summary>
@@ -360,7 +343,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return false;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -373,7 +355,6 @@ namespace Yodo1Ads
                 return Yodo1U3dAdvertForAndroid.InterstitialIsReady();
 #endif
             }
-
             return false;
         }
 
@@ -387,7 +368,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -397,8 +377,7 @@ namespace Yodo1Ads
             else if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
-                Yodo1U3dAdvertForAndroid.ShowInterstitial(Yodo1U3dAdsSDK.Instance.SdkObjectName,
-                    Yodo1U3dAdsSDK.Instance.SdkMethodName);
+                Yodo1U3dAdvertForAndroid.ShowInterstitial(Yodo1U3dAdsSDK.Instance.SdkObjectName, Yodo1U3dAdsSDK.Instance.SdkMethodName);
 #endif
             }
         }
@@ -414,7 +393,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -424,16 +402,14 @@ namespace Yodo1Ads
             else if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
-                Yodo1U3dAdvertForAndroid.ShowInterstitial(Yodo1U3dAdsSDK.Instance.SdkObjectName,
-                    Yodo1U3dAdsSDK.Instance.SdkMethodName, placementId);
+                Yodo1U3dAdvertForAndroid.ShowInterstitial(Yodo1U3dAdsSDK.Instance.SdkObjectName, Yodo1U3dAdsSDK.Instance.SdkMethodName, placementId);
 #endif
             }
         }
 
         #endregion
 
-        #region RewardedVideoAd
-
+        #region  RewardedVideoAd
         /// <summary>
         /// Whether the reward video ads have been loaded.
         /// </summary>
@@ -445,7 +421,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return false;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -458,7 +433,6 @@ namespace Yodo1Ads
                 return Yodo1U3dAdvertForAndroid.VideoIsReady();
 #endif
             }
-
             return false;
         }
 
@@ -472,7 +446,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -482,8 +455,7 @@ namespace Yodo1Ads
             else if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
-                Yodo1U3dAdvertForAndroid.ShowVideo(Yodo1U3dAdsSDK.Instance.SdkObjectName,
-                    Yodo1U3dAdsSDK.Instance.SdkMethodName);
+                Yodo1U3dAdvertForAndroid.ShowVideo(Yodo1U3dAdsSDK.Instance.SdkObjectName, Yodo1U3dAdsSDK.Instance.SdkMethodName);
 #endif
             }
         }
@@ -499,7 +471,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -509,16 +480,13 @@ namespace Yodo1Ads
             else if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
-                Yodo1U3dAdvertForAndroid.ShowVideo(Yodo1U3dAdsSDK.Instance.SdkObjectName,
-                    Yodo1U3dAdsSDK.Instance.SdkMethodName, placementId);
+                Yodo1U3dAdvertForAndroid.ShowVideo(Yodo1U3dAdsSDK.Instance.SdkObjectName, Yodo1U3dAdsSDK.Instance.SdkMethodName, placementId);
 #endif
             }
         }
-
         #endregion
 
         #region RewardGame
-
         /// <summary>
         /// Check reward game is enable or not
         /// </summary>
@@ -530,7 +498,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return false;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -543,7 +510,6 @@ namespace Yodo1Ads
                 return Yodo1U3dAdvertForAndroid.RewardGameIsEnable();
 #endif
             }
-
             return false;
         }
 
@@ -557,7 +523,6 @@ namespace Yodo1Ads
                 Debug.LogError("[Yodo1 Ads] The SDK has not been initialized yet. Please initialize the SDK first.");
                 return;
             }
-
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
 #if UNITY_IPHONE
@@ -567,8 +532,7 @@ namespace Yodo1Ads
             else if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
-                Yodo1U3dAdvertForAndroid.ShowRewardGame(Yodo1U3dAdsSDK.Instance.SdkObjectName,
-                    Yodo1U3dAdsSDK.Instance.SdkMethodName);
+                Yodo1U3dAdvertForAndroid.ShowRewardGame(Yodo1U3dAdsSDK.Instance.SdkObjectName, Yodo1U3dAdsSDK.Instance.SdkMethodName);
 #endif
             }
         }
@@ -576,7 +540,6 @@ namespace Yodo1Ads
         #endregion
 
         #region NativeAd
-
         /// <summary>
         /// Shows the native ad
         /// Note: works on android platform only.
@@ -621,7 +584,6 @@ namespace Yodo1Ads
         #endregion
 
         #region SplashAd
-
         /// <summary>
         /// Show splash ad. Only works on iOS platform.
         /// </summary>

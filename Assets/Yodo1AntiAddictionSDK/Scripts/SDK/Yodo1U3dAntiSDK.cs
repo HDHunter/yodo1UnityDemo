@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 namespace Yodo1.AntiAddiction.SDK
 {
     using Entity;
@@ -272,15 +271,13 @@ namespace Yodo1.AntiAddiction.SDK
             }
 
             _antiAddictionDelegate.SetVerifyPurchaseCallBack(callBack);
-            _antiAddictionImpl.VerifyPurchaseYuan(priceYuan, currency, _antiAddictionDelegate.SdkObjectName,
-                _antiAddictionDelegate.SdkMethodName);
+            _antiAddictionImpl.VerifyPurchaseYuan(priceYuan, currency, _antiAddictionDelegate.SdkObjectName, _antiAddictionDelegate.SdkMethodName);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void ReportProductReceipt(string productId, Yodo1U3dProductType productType, double price,
-            string currency, string orderId)
+        public void ReportProductReceipt(string productId, Yodo1U3dProductType productType, double price, string currency, string orderId)
         {
             if (_antiAddictionImpl == null)
             {
@@ -288,8 +285,7 @@ namespace Yodo1.AntiAddiction.SDK
                 return;
             }
 
-            Yodo1U3dProductReceipt productReceipt =
-                Yodo1U3dProductReceipt.Create(productId, productType, price, currency, orderId);
+            Yodo1U3dProductReceipt productReceipt = Yodo1U3dProductReceipt.Create(productId, productType, price, currency, orderId);
             if (productReceipt == null)
             {
                 Debug.LogWarning("productReceipt is null !");
@@ -302,8 +298,7 @@ namespace Yodo1.AntiAddiction.SDK
         /// <summary>
         /// 
         /// </summary>
-        public void ReportProductReceiptYuan(string productId, Yodo1U3dProductType productType, double priceYuan,
-            string currency, string orderId)
+        public void ReportProductReceiptYuan(string productId, Yodo1U3dProductType productType, double priceYuan, string currency, string orderId)
         {
             if (_antiAddictionImpl == null)
             {
@@ -311,8 +306,7 @@ namespace Yodo1.AntiAddiction.SDK
                 return;
             }
 
-            Yodo1U3dProductReceipt productReceipt =
-                Yodo1U3dProductReceipt.Create(productId, productType, priceYuan, currency, orderId);
+            Yodo1U3dProductReceipt productReceipt = Yodo1U3dProductReceipt.Create(productId, productType, priceYuan, currency, orderId);
             if (productReceipt == null)
             {
                 Debug.LogWarning("productReceipt is null !");
@@ -333,7 +327,6 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogError("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
                 return false;
             }
-
             return _antiAddictionImpl.IsChineseMainland();
         }
 
@@ -348,10 +341,8 @@ namespace Yodo1.AntiAddiction.SDK
                 Debug.LogError("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
                 return false;
             }
-
             return _antiAddictionImpl.IsGuestUser();
         }
-
         #endregion
     }
 }

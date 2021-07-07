@@ -52,6 +52,13 @@ public class Yodo1U3dUtils
         Yodo1U3dUtilsForAndroid.OpenCommunity();
 #endif
     }
+    
+    public static void OpenFeedback()
+    {
+#if UNITY_ANDROID
+        Yodo1U3dUtilsForAndroid.OpenFeedback();
+#endif
+    }
 
     public static bool HasCommunity()
     {

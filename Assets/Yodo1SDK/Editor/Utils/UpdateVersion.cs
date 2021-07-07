@@ -8,7 +8,7 @@ using Yodo1JSON;
 
 public class UpdateVersion : EditorWindow
 {
-    public static string Yodo1PluginVersion = "5.5.0";
+    public static string Yodo1PluginVersion = "5.9.0";
     public static string UnitypackageName = "yodo1SDK.unitypackage";
 
     WWW WwwDownload = null;

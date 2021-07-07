@@ -23,6 +23,7 @@ public class Yodo1Account : MonoBehaviour
         Yodo1U3dAccount.SetRegistDelegate(RegistDelegate);
 
         if (Yodo1U3dUtils.IsChineseMainland()) {
+
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "中国大陆用户");
         }
         else
@@ -113,11 +114,12 @@ public class Yodo1Account : MonoBehaviour
         }
 
 #if UNITY_IPHONE
+
         loginExtr = GUI.TextField(new Rect(btn_x, btn_startY, btn_w, btn_h), loginExtr);
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 2 + btn_h, btn_w, btn_h), "iOS 防沉迷实名初始化"))
         {
-            // Yodo1U3dImpubicProtect.IndentifyUser("", IndentifyUserDelegate);
+            Yodo1U3dImpubicProtect.IndentifyUser("", IndentifyUserDelegate);
         }
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "查询防沉迷规则"))
@@ -204,13 +206,35 @@ public class Yodo1Account : MonoBehaviour
 
     public void QueryTermsAndPrivacy()
     {
-        Yodo1U3dSDK.QueryUserAgreementAndPrivacyInfo(
-            (bool isUpdate, int limitAge, string termsUrl, string privacyUrl) =>
-            {
-                Debug.Log(string.Format(
-                    Yodo1U3dConstants.LOG_TAG +
-                    "QueryUserAgreementAndPrivacyInfo, isUpdate:{0}, limitAge:{1}, termsUrl:{2}, privacyUrl:{3}",
-                    isUpdate, limitAge, termsUrl, privacyUrl));
-            });
+        Yodo1U3dSDK.QueryUserAgreementAndPrivacyInfo((bool isUpdate, int limitAge, string termsUrl, string privacyUrl) =>
+        {
+            Debug.Log(string.Format(Yodo1U3dConstants.LOG_TAG + "QueryUserAgreementAndPrivacyInfo, isUpdate:{0}, limitAge:{1}, termsUrl:{2}, privacyUrl:{3}", isUpdate, limitAge, termsUrl, privacyUrl));
+        });
     }
+
+    public void QueryPaymentAmount()
+    {
+        int price = int.Parse(loginExtr);
+        Debug.Log(string.Format(Yodo1U3dConstants.LOG_TAG + "price:{0}", price));
+
+        Yodo1U3dImpubicProtect.VerifyPaymentAmount(price, (int resultCode, string msg) =>
+        {
+            Debug.Log(string.Format(Yodo1U3dConstants.LOG_TAG + "VerifyPaymentAmount, resultCode:{0}, msg:{1}", resultCode, msg));
+        });
+    }
+
+    public void QueryPaymentConst()
+    {
+        Yodo1U3dImpubicProtect.QueryPlayerRemainingCost((int resultCode, string msg, double cost) =>
+        {
+            Debug.Log(string.Format(Yodo1U3dConstants.LOG_TAG + "QueryPlayerRemainingCost, resultCode:{0}, msg:{1},cost:{2}", resultCode, msg,cost));
+        });
+    }
+
+
+    public void QuitGame(string msg)
+    {
+        Application.Quit();
+    }
+
 }

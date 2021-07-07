@@ -6,13 +6,11 @@ using Yodo1Unity;
 
 public class Yodo1Verify : MonoBehaviour
 {
-
     private bool isRunTimes = false;
 
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -26,7 +24,6 @@ public class Yodo1Verify : MonoBehaviour
 
     void OnGUI()
     {
-
         float btn_w = Screen.width * 0.6f;
         float btn_h = 100;
         float btn_x = Screen.width * 0.5f - btn_w / 2;
@@ -73,7 +70,13 @@ public class Yodo1Verify : MonoBehaviour
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "OpenBBS");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 6 + btn_h * 5, btn_w, btn_h), "返回"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 6 + btn_h * 5, btn_w, btn_h), "打开Feedback"))
+        {
+            Yodo1U3dUtils.OpenFeedback();
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "OpenFeedback");
+        }
+
+        if (GUI.Button(new Rect(btn_x, btn_startY * 7 + btn_h * 6, btn_w, btn_h), "返回"))
         {
             SceneManager.LoadScene("Yodo1Demo");
         }

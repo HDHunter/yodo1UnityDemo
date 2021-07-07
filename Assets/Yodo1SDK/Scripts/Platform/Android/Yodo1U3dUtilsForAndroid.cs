@@ -179,6 +179,17 @@ public class Yodo1U3dUtilsForAndroid
             }
         }
     }
+    
+    public static void OpenFeedback()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (null != androidCall)
+            {
+                androidCall.CallStatic("openFeedback");
+            }
+        }
+    }
 
 
     public static void OpenBBS()

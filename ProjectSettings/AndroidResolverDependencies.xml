@@ -5,51 +5,7 @@
     <package>com.yodo1.common:support:1.1.+</package>
     <package>com.yodo1:advert-cn:3.14.0</package>
   </packages>
-  <files>
-    <file>Assets/Plugins/Android/android.arch.core.common-1.1.1.jar</file>
-    <file>Assets/Plugins/Android/android.arch.core.runtime-1.1.1.aar</file>
-    <file>Assets/Plugins/Android/android.arch.lifecycle.common-1.1.1.jar</file>
-    <file>Assets/Plugins/Android/android.arch.lifecycle.extensions-1.1.1.aar</file>
-    <file>Assets/Plugins/Android/android.arch.lifecycle.livedata-1.1.1.aar</file>
-    <file>Assets/Plugins/Android/android.arch.lifecycle.livedata-core-1.1.1.aar</file>
-    <file>Assets/Plugins/Android/android.arch.lifecycle.runtime-1.1.1.aar</file>
-    <file>Assets/Plugins/Android/android.arch.lifecycle.viewmodel-1.1.1.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.animated-vector-drawable-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.appcompat-v7-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.asynclayoutinflater-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.collections-28.0.0.jar</file>
-    <file>Assets/Plugins/Android/com.android.support.coordinatorlayout-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.cursoradapter-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.customview-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.documentfile-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.drawerlayout-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.interpolator-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.loader-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.localbroadcastmanager-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.multidex-1.0.3.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.print-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.recyclerview-v7-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.slidingpanelayout-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.support-annotations-28.0.0.jar</file>
-    <file>Assets/Plugins/Android/com.android.support.support-compat-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.support-core-ui-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.support-core-utils-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.support-fragment-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.support-vector-drawable-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.swiperefreshlayout-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.versionedparcelable-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.android.support.viewpager-28.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.anti-addiction.core-3.0.10.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.common.collection-1.1.4.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.common.kit-1.1.2.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.common.noHttp-1.1.2.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.common.online-config-1.0.3.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.common.sensor-1.0.4.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.common.support-1.0.2.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.pay.libs-adapter-1.0.2.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.pay.libs-ops-1.0.1.aar</file>
-    <file>Assets/Plugins/Android/pl.droidsonroids.gif.android-gif-drawable-1.2.5.aar</file>
-  </files>
+  <files />
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
     <setting name="bundleId" value="com.yodo1.UnityDemo" />

@@ -217,7 +217,7 @@ public class Yodo1Demo : MonoBehaviour
     public void exitCallback(string msg)
     {
         Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game callback, msg = " + msg);
-        Dictionary<string, object> dic = (Dictionary<string, object>) JSONObject.Deserialize(msg);
+        Dictionary<string, object> dic = (Dictionary<string, object>)JSONObject.Deserialize(msg);
 
         if (dic != null && dic.ContainsKey("code"))
         {
