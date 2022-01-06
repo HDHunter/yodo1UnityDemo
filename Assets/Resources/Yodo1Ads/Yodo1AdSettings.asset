@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Yodo1AdSettings
   m_EditorClassIdentifier: 
   androidSettings:
-    AppKey: 2qzpQ2MGQd
-    AdmobAppID: ' '
+    AppKey: LFo9FuZSz
+    AdmobAppID: 
     GooglePlayStore: 0
     ChineseAndroidStores: 1
     Channel: CN
   iOSSettings:
-    AppKey: 
-    AdmobAppID: 
+    AppKey: O5MZrEn3EkV
+    AdmobAppID: ca-app-pub-7188592076082444~4968329815
     ChinaRegion: 0
     GlobalRegion: 1
     AppLovinSdkKey: 

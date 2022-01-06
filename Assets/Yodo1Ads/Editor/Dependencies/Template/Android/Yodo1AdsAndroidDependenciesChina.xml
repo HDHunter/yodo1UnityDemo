@@ -3,9 +3,8 @@
     <androidPackages>
         <repositories>
             <repository>https://jitpack.io</repository>
-            <repository>https://dl.bintray.com/yodo1/maven</repository>
+            <repository>http://repo1.maven.org/maven2/</repository>
         </repositories>
-        <androidPackage spec="com.yodo1:advert-cn:3.14.0" />
-        <androidPackage spec="com.android.support:appcompat-v7:25.1.0" />
+        <androidPackage spec="com.yodo1:advert-cn:3.14.1" />
     </androidPackages>
 </dependencies>

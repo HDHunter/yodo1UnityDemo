@@ -2,21 +2,18 @@
 <dependencies>
     <androidPackages>
         <repositories>
-            <repository>https://dl.bintray.com/yodo1/android-sdk</repository>
-            <repository>https://applovin.bintray.com/Android-Adapter-SDKs</repository>
-            <repository>https://dl.bintray.com/ironsource-mobile/android-sdk</repository>
-            <repository>https://dl.bintray.com/ironsource-mobile/android-adapters</repository>
-            <repository>https://adcolony.bintray.com/AdColony</repository>
+            <repository>http://repo1.maven.org/maven2/</repository>
+            <repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>
+            <repository>https://android-sdk.is.com/</repository>
+            <repository>https://imobile-maio.github.io/maven</repository>
+            <repository>https://sdk.tapjoy.com/</repository>
+            <repository>https://artifact.bytedance.com/repository/pangle</repository>
+            <repository>https://s3.amazonaws.com/smaato-sdk-releases/</repository>
+            <repository>https://maven.soom.la/repo</repository>
+            <repository>https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea</repository>
             <repository>http://dl.appnext.com</repository>
-            <repository>https://fyber.bintray.com/marketplace</repository>
-            <repository>https://dl.bintray.com/mintegral-official/mintegral_ad_sdk_android_for_oversea</repository>
             <repository>https://jitpack.io</repository>
-            <repository>https://dl.bintray.com/yodo1/maven</repository>
         </repositories>
-        <androidPackage spec="com.yodo1:advert-gp:3.14.0" />
-        <androidPackage spec="com.android.support:appcompat-v7:26.1.0" />
-        <androidPackage spec="com.google.android.gms:play-services-basement:16.0.1" />
-        <androidPackage spec="com.google.android.gms:play-services-base:16.1.0" />
-        <androidPackage spec="com.google.android.gms:play-services-ads-identifier:16.0.0" />
+        <androidPackage spec="com.yodo1:advert-gp:3.14.2" />
     </androidPackages>
 </dependencies>
