@@ -3,7 +3,36 @@
 An independent SDK for game developers implement `Anti-Addiction` function easily.
 Face to the Chinese mobile game marks.
 
-Version: 2.0.2-beta
+
+#anti-indulged-system-SDK
+Version : 3.1.4:
+1，iOS 更改一个版本号。
+
+#anti-indulged-system-SDK
+Version : 3.1.3:
+1，Android iOS 防沉迷未成年人实名弹框内容。
+
+#anti-indulged-system-SDK
+Version : 3.1.2:
+1，Android一些优化
+
+Version : 3.1.1:
+1，Android根据客户端实名结果STOP游戏，HW,baiduly,yyb。
+2，iOS游客开关可控制
+3，iOS限时限额文案提示
+4，iOS兼容AppleStore,applestore.大小写。
+
+Version : 3.0.11:
+1. iOS 国家防沉迷3.0
+
+Version : 3.0.15:
+1. 键盘遮挡UI的问题（未解决，后续修改）
+2. 新旧防沉迷无法同时使用
+3. Unity2019.3.0以上版本 单接防沉迷2.0sdk需要再xcode工程配置加拷贝bundle资源脚本，接入Yodo1SDK+防沉迷2.0忽略这个问题, 
+
+
+后续优化：
+1. IOS IsChineseMainland接口功能没有做
 
   
 ## Usage

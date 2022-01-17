@@ -32,7 +32,7 @@ namespace Yodo1Ads
 
             string appKey = string.Empty;
 #if UNITY_ANDROID
-            appKey = PlayerPrefs.GetString("AppKey");
+            appKey = settings.androidSettings.AppKey;
 #elif UNITY_IOS
             appKey = settings.iOSSettings.AppKey;
 #endif

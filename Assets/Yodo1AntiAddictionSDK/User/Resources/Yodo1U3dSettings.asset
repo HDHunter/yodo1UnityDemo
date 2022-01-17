@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7720977dbf8064382a0c6ef3fa5e533d, type: 3}
   m_Name: Yodo1U3dSettings
   m_EditorClassIdentifier: 
-  _isEnableLog: 0
-  _isEnableDebugMode: 0
+  _isEnableLog: 1
+  _isEnableDebugMode: 1
   _cocoapodsVersion: 
   _iosSettings:
     _isEnabled: 1
@@ -23,5 +23,5 @@ MonoBehaviour:
   _androidSettings:
     _isEnabled: 1
     _autoLoad: 1
-    _appKey: 
-    _regionCode: 
+    _appKey: asdf
+    _regionCode: asdf

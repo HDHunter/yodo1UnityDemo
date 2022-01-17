@@ -5,16 +5,15 @@ AntiAddiction Ios Android Dependencies.
 <dependencies>
   <iosPods>
     <sources>
-      <source>https://github.com/Yodo1Sdk/Yodo1Spec.git</source>
+      <source>https://github.com/Yodo1Games/Yodo1Spec.git</source>
     </sources>
-    <iosPod name="Yodo1AntiAddiction2.0" version="0.9.3" minTargetSdk="9.0">
+    <iosPod name="Yodo1AntiAddiction" version="6.0.2" minTargetSdk="10.0">
     </iosPod>
   </iosPods>
   <androidPackages>
     <repositories>
       <repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>
     </repositories>
-    <androidPackage spec="com.yodo1.common:support:1.1.+" />
-    <androidPackage spec="com.yodo1.anti-addiction:core:3.0.+" />
+    <androidPackage spec="com.yodo1.anti-addiction:core:3.0.22" />
   </androidPackages>
 </dependencies>

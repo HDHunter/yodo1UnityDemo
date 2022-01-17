@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e4b2049b47b4e10baf951e88000c6e, type: 3}
+  m_Script: {fileID: 11500000, guid: cab848f3d4e7b4b08ace9212504f9626, type: 3}
   m_Name: Yodo1AdSettings
   m_EditorClassIdentifier: 
   androidSettings:
     AppKey: LFo9FuZSz
-    AdmobAppID: 
-    GooglePlayStore: 0
-    ChineseAndroidStores: 1
-    Channel: CN
+    AdmobAppID: ca-app-pub-7188592076082444~5943610619
+    GooglePlayStore: 1
+    ChineseAndroidStores: 0
+    Channel: GooglePlay
   iOSSettings:
-    AppKey: O5MZrEn3EkV
-    AdmobAppID: ca-app-pub-7188592076082444~4968329815
+    AppKey: LFo9FuZSz
+    AdmobAppID: ca-app-pub-7188592076082444~5943610619
     ChinaRegion: 0
     GlobalRegion: 1
     AppLovinSdkKey: 

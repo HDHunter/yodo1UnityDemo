@@ -5,15 +5,10 @@
             <repository>http://repo1.maven.org/maven2/</repository>
             <repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>
             <repository>https://android-sdk.is.com/</repository>
-            <repository>https://imobile-maio.github.io/maven</repository>
             <repository>https://sdk.tapjoy.com/</repository>
             <repository>https://artifact.bytedance.com/repository/pangle</repository>
-            <repository>https://s3.amazonaws.com/smaato-sdk-releases/</repository>
             <repository>https://maven.soom.la/repo</repository>
-            <repository>https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea</repository>
-            <repository>http://dl.appnext.com</repository>
-            <repository>https://jitpack.io</repository>
         </repositories>
-        <androidPackage spec="com.yodo1:advert-gp:3.14.2" />
+        <androidPackage spec="com.yodo1:advert-gp:3.17.6.3" />
     </androidPackages>
 </dependencies>

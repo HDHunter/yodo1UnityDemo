@@ -1,4 +1,7 @@
 ﻿
+
+
+
 namespace Yodo1Unity
 {
     public class SettingsConstants
@@ -129,6 +132,8 @@ namespace Yodo1Unity
             Umeng,
             Swrve,//4
             Soomla,//5
+            Thinking,//6
+            Firebase,//7
         }
 
         /// <summary>
@@ -162,9 +167,12 @@ namespace Yodo1Unity
         public const string WechatAppId = "WechatAppId";
         public const string WechatUniversalLink = "WechatUniversalLink";
         public const string QQAppId = "QQAppId";
+        public const string QQUniversalLink = "QQUniversalLink";
         public const string SinaAppId = "SinaAppId";
         public const string SinaCallbackUrl = "SinaCallbackUrl";
         public const string SinaSecret = "SinaSecret";
+        public const string SinaUniversalLink = "SinaUniversalLink";
+        
         public const string TwitterConsumerKey = "TwitterConsumerKey";
         public const string TwitterConsumerSecret = "TwitterConsumerSecret";
 
@@ -175,6 +183,10 @@ namespace Yodo1Unity
         public const string TalkingDataAppId = "TalkingDataAppId";
         public const string GameAnalyticsGameKey = "GameAnalyticsGameKey";
         public const string GameAnalyticsGameSecret = "GameAnalyticsGameSecret";
+
+        public const string ThinkingAppId = "ThinkingAppId";
+        public const string ThinkingServerUrl = "ThinkingServerUrl";
+
         public const string AppsFlyerDevKey = "AppsFlyerDevKey";
         public const string AppleAppId = "AppleAppId";
 

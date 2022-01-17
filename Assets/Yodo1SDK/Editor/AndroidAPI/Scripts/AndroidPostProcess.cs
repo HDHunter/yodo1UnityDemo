@@ -664,7 +664,10 @@ public class AndroidPostProcess
         TextUtils.WriteBelow(rootgradlePath, reg, "\t\tflatDir { dirs 'libs' }");
         //TextUtils.WriteBelow(rootgradlePath, reg, "\t\tjcenter()");
         //TextUtils.WriteBelow(rootgradlePath, reg, "\t\tgoogle()");
-        TextUtils.WriteBelow(rootgradlePath, reg, "\t\tmaven { url \"https://dl.bintray.com/yodo1/android-sdk\" }");
+        //TextUtils.WriteBelow(rootgradlePath, reg, "\t\tmaven { url \"https://dl.bintray.com/yodo1/android-sdk\" }");
+        
+        TextUtils.WriteBelow(rootgradlePath, reg, "\t\tmaven { url 'http://developer.huawei.com/repo/' }");
+        TextUtils.WriteBelow(rootgradlePath, reg, "\t\tmaven { url 'http://maven.byted.org/repository/android_public/' }");
         TextUtils.WriteBelow(rootgradlePath, reg,
             "\t\tmaven { url \"http://nexus.yodo1.com:8081/repository/maven-public/\" }");
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using System.IO;
+
 #if UNITY_IOS || UNITY_IPHONE
 using UnityEditor.iOS.Xcode;
 #endif
@@ -14,12 +15,11 @@ namespace Yodo1.AntiAddiction
     using System.Text.RegularExpressions;
     using System.Xml;
     using Settings;
-    
+
     public class Yodo1AntiAddictionXcodePostProcess
     {
         const int BUILD_ORDER_BEFORE_GOOGLE_POSTBUILDPROCESS = 100;
         const string K_SDK_RES_SCRIPTS_PATH = "SDKResScripts.bin";
-
 
 
         ///
@@ -29,10 +29,10 @@ namespace Yodo1.AntiAddiction
         public static void OnBuildPostProcess(BuildTarget buildTarget, string projPath)
         {
             // Debug.LogFormat("<color=#00ff00>---OnBuildPostProcess proj: {0}</color>", projPath);
-            if(buildTarget == BuildTarget.iOS)
-            {   
+            if (buildTarget == BuildTarget.iOS)
+            {
                 string podPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Podfile/Podfile");
-                if(File.Exists(podPath))
+                if (File.Exists(podPath))
                 {
                     Yodo1U3dSettingsEditor.MergeAntiAddictionPodfile(podPath);
                 }
@@ -40,31 +40,10 @@ namespace Yodo1.AntiAddiction
                 {
                     Debug.LogFormat("<color=orange>Podfile dosenot exists...: {0}</color>", projPath);
                 }
+
                 DeployXCodeProj(Path.GetFullPath(projPath));
             }
-
         }
-
-
-       
-        
-
-// 用于单元测试XML是否修改正确了
-/**
-        [MenuItem("Test/Load XML")]
-        static void UnitTest1()
-        {
-            UpdateDependencies("0.0.9");
-        }
-
-        [MenuItem("Test/Load Cocoapods")]
-        static void UnitTest2()
-        {
-            UpdateCocoapodsVersion("0.0.9");
-        }
-**/
-
-        
 
 
         static void DeployXCodeProj(string path)
@@ -80,7 +59,8 @@ namespace Yodo1.AntiAddiction
             unityFrameworkTargetGuid = proj.GetUnityFrameworkTargetGuid();
             proj.AddBuildProperty(unityFrameworkTargetGuid, "ENABLE_BITCODE", "NO");
 
-            string script = File.ReadAllText("Assets/" + Yodo1U3dAntiAddictionEditor.K_SDK_ROOT_NAME + "/bin/" + K_SDK_RES_SCRIPTS_PATH);
+            string script =
+ File.ReadAllText("Assets/" + Yodo1U3dAntiAddictionEditor.K_SDK_ROOT_NAME + "/bin/" + K_SDK_RES_SCRIPTS_PATH);
             proj.AddShellScriptBuildPhase(mainTargetGuid, "Copy SDKBundle", "/bin/sh", script);
 #else
             mainTargetGuid = proj.TargetGuidByName("Unity-iPhone");
@@ -91,5 +71,4 @@ namespace Yodo1.AntiAddiction
 #endif
         }
     }
-
 }

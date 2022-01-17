@@ -8,6 +8,7 @@ using Yodo1.AntiAddiction.Settings;
 namespace Yodo1.AntiAddiction
 {
     using System.Reflection;
+
     // using Settings;
 
     /// <summary>
@@ -16,15 +17,22 @@ namespace Yodo1.AntiAddiction
     /// </summary>
     public class Yodo1U3dAntiAddictionEditor : EditorWindow
     {
-
         public const string K_SDK_ROOT_NAME = "Yodo1AntiAddictionSDK";
+        const string K_LAN_ROOT = "Yodo1AntiAddictionSDK/Editor";
+        const string K_LANGUAGE_CSV_NAME = "Language.csv";
+
+        public static string CSVPath
+        {
+            get { return Application.dataPath + "/" + K_LAN_ROOT + "/" + K_LANGUAGE_CSV_NAME; }
+        }
 
         private static Yodo1U3dAntiAddictionEditor _instance;
+
         public static Yodo1U3dAntiAddictionEditor Instance
         {
-            get 
+            get
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = EditorWindow.CreateInstance<Yodo1U3dAntiAddictionEditor>();
                     _instance.Init();
@@ -44,52 +52,71 @@ namespace Yodo1.AntiAddiction
             var settings = Yodo1U3dSettings.Instance;
 
 
-            if(settings != null &&  settings.CheckEmptyKey())
+            if (settings != null && settings.CheckEmptyKey())
             {
-                // string title = Yodo1U3dAntiAddictionLanguage.Loc(Yodo1U3dAntiAddictionLanguage.K_SDK_WARNING_TITLE);
-                // string content = Yodo1U3dAntiAddictionLanguage.Loc(Yodo1U3dAntiAddictionLanguage.K_SDK_WARNING_CONTENT);
-
-                // if(EditorUtility.DisplayDialog(title, content, "OK"))
-                // {
-                //     //    Debug.Log("Instance: " + Yodo1U3dSettings.Instance);
-                //     if(!Application.isPlaying)
-                //     {
-                //         Selection.activeObject = Yodo1U3dSettings.Instance;
-                //         OpenWindow();
-                //     } 
-                // }
-
                 Selection.activeObject = null;
                 AssetDatabase.Refresh();
                 Selection.activeObject = settings;
                 // Debug.Log("activeObject: " + Selection.activeObject);
-                
+
                 AssetDatabase.Refresh();
             }
-        }    
+        }
 
-        [MenuItem("Yodo1/Show SDK Settings")]
+        [MenuItem("Yodo1/Yodo1Anti Settings")]
         public static void OpenWindow()
         {
             // Instance.Close();
             Instance.Show();
         }
 
+        [MenuItem("Yodo1/Yodo1Anti Tools/Update Language Asset")]
+        public static void UpdateLanAsset()
+        {
+            if (File.Exists(CSVPath))
+            {
+                string[] lines = File.ReadAllLines(CSVPath);
+                Debug.Log(">>> CSV Lines: " + lines.Length);
+
+                if (lines == null || lines.Length == 0)
+                {
+                    Debug.LogError("Read CSV Fail...");
+                    return;
+                }
+
+                List<Yodo1U3dLanguageSourceTerm> list = new List<Yodo1U3dLanguageSourceTerm>();
+
+                var header = lines[0];
+                for (var i = 1; i < lines.Length; i++)
+                {
+                    var term = new Yodo1U3dLanguageSourceTerm();
+                    term.ParseRaw(header, lines[i]);
+                    list.Add(term);
+                }
+
+
+                Yodo1U3dLanguageSource source = Yodo1U3dLanguageSource.LoadOrCreate();
+                source.terms = list;
+                source.Save();
+
+                AssetDatabase.Refresh();
+            }
+            else
+            {
+                Debug.LogError(">>> Importe Fail, Can't find CSV: " + CSVPath);
+            }
+        }
 
         private static void OnPlayModeChanged(PlayModeStateChange pmsc)
         {
             EditorApplication.playModeStateChanged -= OnPlayModeChanged;
 
-            if(pmsc == PlayModeStateChange.ExitingPlayMode)
+            if (pmsc == PlayModeStateChange.ExitingPlayMode)
             {
                 Selection.activeObject = Yodo1U3dSettings.Instance;
             }
-        }    
+        }
 
-
-
-
-        
         private Yodo1U3dSettings m_settings;
         private string m_appKey;
         private bool m_isEnabled;
@@ -108,8 +135,8 @@ namespace Yodo1.AntiAddiction
         }
 
 
-
-        private void OnEnable() {
+        private void OnEnable()
+        {
             m_settings = Yodo1U3dSettings.Instance;
             m_appKey = m_settings.AppKey;
             m_isEnabled = m_settings.IsEnabled;
@@ -117,11 +144,7 @@ namespace Yodo1.AntiAddiction
             m_regionCode = m_settings.RegionCode;
 
             m_isDirty = false;
-
         }
-
-
-
 
 
         /// <summary>
@@ -134,63 +157,58 @@ namespace Yodo1.AntiAddiction
             //EditorGUI.indentLevel ++;
 
             GUI_StringFixBlock(ref m_appKey, "AppKey", m_titleW);
-            if(m_appKey != m_settings.AppKey)
+            if (m_appKey != m_settings.AppKey)
             {
                 m_settings.AppKey = m_appKey;
                 m_isDirty = true;
             }
 
             GUI_StringFixBlock(ref m_regionCode, "Regin Code", m_titleW);
-            if(m_regionCode != m_settings.RegionCode)
+            if (m_regionCode != m_settings.RegionCode)
             {
                 m_settings.RegionCode = m_regionCode;
                 m_isDirty = true;
             }
 
             GUI_BoolFixBlock(ref m_isEnabled, "Enabled", m_titleW);
-            if(m_isEnabled != m_settings.IsEnabled)
+            if (m_isEnabled != m_settings.IsEnabled)
             {
                 m_settings.IsEnabled = m_isEnabled;
                 m_isDirty = true;
             }
-            
 
             GUI_BoolFixBlock(ref m_autoLoad, "Auto Load", m_titleW);
-            if(m_autoLoad != m_settings.AutoLoad)
+            if (m_autoLoad != m_settings.AutoLoad)
             {
                 m_settings.AutoLoad = m_autoLoad;
                 m_isDirty = true;
             }
 
             //EditorGUI.indentLevel --;
-
-
-            if(m_isDirty)
+            if (m_isDirty)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Space(m_headerGap);
-                if(GUILayout.Button("OK", GUILayout.Height(32)))
+                if (GUILayout.Button("OK", GUILayout.Height(32)))
                 {
                     SaveSettings();
                 }
+
                 GUILayout.EndHorizontal();
             }
-            
         }
 
 
         private void SaveSettings()
         {
             // AssetDatabase.StartAssetEditing();
-
             m_settings.AppKey = m_appKey;
             m_settings.IsEnabled = m_isEnabled;
             m_settings.AutoLoad = m_autoLoad;
-            m_settings.RegionCode = m_regionCode; 
+            m_settings.RegionCode = m_regionCode;
 
             m_settings.Save();
             // AssetDatabase.StopAssetEditing();
-
             m_isDirty = false;
         }
 
@@ -223,7 +241,6 @@ namespace Yodo1.AntiAddiction
         /// <returns></returns>
         private void GUI_BoolFixBlock(ref bool inputVal, string title, float titleW = 60)
         {
-
             GUILayout.BeginHorizontal();
             GUILayout.Space(m_headerGap);
             GUILayout.Label(title, GUILayout.Width(titleW));
@@ -231,12 +248,7 @@ namespace Yodo1.AntiAddiction
             GUILayout.EndHorizontal();
             GUILayout.Space(m_lineGap);
         }
-
-
     }
-
-
-
 
     [InitializeOnLoad]
     internal class UpdateAgent
@@ -244,20 +256,6 @@ namespace Yodo1.AntiAddiction
         static UpdateAgent()
         {
             Yodo1U3dAntiAddictionEditor.CheckEmptyKey();
-            
         }
     }
-
-
-
-
-
-
 }
-
-
-
-
-
-
-

@@ -177,25 +177,6 @@ public class Yodo1AdsTest : MonoBehaviour
                 Debug.Log("[Yodo1 Ads] Reward game is disabled.");
             }
         }
-        
-        if (GUI.Button(new Rect(Screen.width / 4, startHeight + buttonHeight * 4 + buttonSpace * 5, buttonWidth, buttonHeight), "show native ad"))
-        {
-            //Show reward game
-            if (Yodo1U3dAds.RewardGameIsEnable())
-            {
-                Yodo1U3dAds.ShowNativeAd(0,100,800,400);
-            }
-            else
-            {
-                Debug.Log("[Yodo1 Ads] Reward game is disabled.");
-            }
-        }
 
-        if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 5 + buttonSpace * 6, buttonWidth, buttonHeight),
-            "返回"))
-        {
-            SceneManager.LoadScene("Yodo1Demo");
-        }
     }
 }

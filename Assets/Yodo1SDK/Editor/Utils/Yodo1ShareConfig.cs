@@ -16,6 +16,7 @@ namespace Yodo1Unity
         static string sinaWeiboAppKey = string.Empty;
         static string sinaWeiboSecrit = string.Empty;
         static string sinaCallbackUrl = string.Empty;
+        static string sinaUniversalLink = string.Empty;
         static string twitterConsumerKey = string.Empty;
         static string twitterConsumerSecret = string.Empty;
         static string facebookAppId = string.Empty;
@@ -42,9 +43,12 @@ namespace Yodo1Unity
             sinaWeiboAppKey = settings.GetKeyItem().SinaAppId;
             sinaWeiboSecrit = settings.GetKeyItem().SinaSecret;
             sinaCallbackUrl = settings.GetKeyItem().SinaCallbackUrl;
+            sinaUniversalLink = settings.GetKeyItem().SinaUniversalLink;
+
             Debug.Log("wechatUniversalLink:" + wechatUniversalLink);
             Debug.Log("twitterConsumerSecret:" + twitterConsumerSecret);
             Debug.Log("sinaCallbackUrl:" + sinaCallbackUrl);
+            Debug.Log("sinaUniversalLink:" + sinaUniversalLink);
 
             twitterConsumerKey = settings.GetKeyItem().TwitterConsumerKey;
             twitterConsumerSecret = settings.GetKeyItem().TwitterConsumerSecret;
@@ -78,7 +82,7 @@ namespace Yodo1Unity
             applicationQueriesSchemesArray.AddString("twitter");
             applicationQueriesSchemesArray.AddString("twitterauth");
             applicationQueriesSchemesArray.AddString("fbapi");
-            applicationQueriesSchemesArray.AddString("fbauth2");
+            applicationQueriesSchemesArray.AddString("fbauth2"); 
             applicationQueriesSchemesArray.AddString("fbshareextension");
             applicationQueriesSchemesArray.AddString("fb-messenger-api");
             applicationQueriesSchemesArray.AddString("fb-messenger-share-api");
@@ -86,13 +90,14 @@ namespace Yodo1Unity
             applicationQueriesSchemesArray.AddString("weixin");
             applicationQueriesSchemesArray.AddString("weibosdk");
             applicationQueriesSchemesArray.AddString("weibosdk2.5");
+            applicationQueriesSchemesArray.AddString("weibosdk3.3");
             applicationQueriesSchemesArray.AddString("mqqapi");
             applicationQueriesSchemesArray.AddString("mqqopensdkapiV2");
             applicationQueriesSchemesArray.AddString("mqq");
             applicationQueriesSchemesArray.AddString("mttbrowser");
             applicationQueriesSchemesArray.AddString("wechat");
             applicationQueriesSchemesArray.AddString("weixinULAPI");
-
+            
             //FacebookAppID
             PlistElementString fbElement = (PlistElementString)rootDict["FacebookAppID"];
             if (fbElement == null)

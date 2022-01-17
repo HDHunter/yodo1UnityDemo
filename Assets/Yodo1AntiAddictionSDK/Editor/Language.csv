@@ -1,0 +1,7 @@
+KEY,EN,CN
+K_SDK_WINDOW_WELCOME,Welcome using Yodo1 Anti-Addiction SDK,欢迎使用Yodo1防沉迷SDK
+K_SDK_UI_OK,OK,确定
+K_SDK_UI_CANCEL,Cancel,取消
+K_SDK_APP_KEY_INFO,Set the valid AppKey in the blank please.,请填写有效的AppKey
+K_SDK_WARNING_TITLE,Missing Key Parameter,缺少关键参数
+K_SDK_WARNING_CONTENT,You should fill the blank with valid AppKey,此处请填写有效的AppKey

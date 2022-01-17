@@ -28,10 +28,15 @@ namespace Yodo1Unity
         public string SinaAppId;
         public string SinaSecret;
         public string SinaCallbackUrl;
+        public string SinaUniversalLink;
         /// <summary>
-        /// The QQA pp key.
+        /// The QQApp key.
         /// </summary>
         public string QQAppId;
+        /// <summary>
+        /// The QQ UniversalLink.
+        /// </summary>
+        public string QQUniversalLink;
         /// <summary>
         /// The twitter consumer key.
         /// </summary>
@@ -82,6 +87,11 @@ namespace Yodo1Unity
         /// The soomla app key.
         /// </summary>
         public string SoomlaAppKey;
+        /// <summary>
+        /// Thinking of AppId
+        /// </summary>
+        public string ThinkingAppId;
+        public string ThinkingServerUrl;
 
     }
 }

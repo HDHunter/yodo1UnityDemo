@@ -71,7 +71,7 @@ public class Sample : MonoBehaviour
         {
             Debug.LogFormat("PlayerDisconnectionCallBack title = {0}, context = {1}", title, content);
             // Try to go online again.(重新尝试上线)
-            // Online();
+             Online();
         });
     }
 
@@ -110,24 +110,24 @@ public class Sample : MonoBehaviour
         purchaseSuccess();
     }
 
-    private void Online ()
+    public void Online ()
     {
         Yodo1U3dAntiAddiction.Online((bool result, string content) => {
             Debug.LogFormat("Online result = {0}, content = {1}", result, content);
             if (result)
             {
-                //Dialog.ShowMsgDialog("Warm prompt(温馨提示)", "Player is online(玩家已上线)");
+                Dialog.ShowMsgDialog("Warm prompt(温馨提示)", "Player is online(玩家已上线)");
             }
         });
     }
 
-    private void Offline()
+    public void Offline()
     {
         Yodo1U3dAntiAddiction.Offline((bool result, string content) => {
             Debug.LogFormat("Offline result = {0}, content = {1}", result, content);
             if (result)
             {
-                //Dialog.ShowMsgDialog("Warm prompt(温馨提示)", "Player is offline(玩家已下线)");
+                Dialog.ShowMsgDialog("Warm prompt(温馨提示)", "Player is offline(玩家已下线)");
             }
         });
     }

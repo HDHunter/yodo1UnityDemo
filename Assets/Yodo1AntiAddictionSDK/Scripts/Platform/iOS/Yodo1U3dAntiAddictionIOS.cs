@@ -20,6 +20,16 @@ namespace Yodo1.AntiAddiction.Platform.IOS
         private static extern void UnityVerifyCertificationInfo(string accountId, string gameObjectName, string callbackName);
 
         [DllImport(Yodo1U3dConstants.LIB_NAME)]
+        private static extern void UnityOnline(string gameObjectName, string callbackName);
+        
+        [DllImport(Yodo1U3dConstants.LIB_NAME)]
+        private static extern void UnityOffline(string gameObjectName, string callbackName);
+
+        
+        [DllImport(Yodo1U3dConstants.LIB_NAME)]
+        private static extern void UnityPlayerDisconnection(string gameObjectName, string callbackName);
+
+        [DllImport(Yodo1U3dConstants.LIB_NAME)]
         private static extern void UnityVerifyPurchase(double price, string currency, string gameObjectName, string callbackName);
 
         [DllImport(Yodo1U3dConstants.LIB_NAME)]
@@ -68,7 +78,7 @@ namespace Yodo1.AntiAddiction.Platform.IOS
 
         /// <summary>
         /// 
-        /// </summary>
+        /// </summary> 
         /// <param name="accountId"></param>
         /// <param name="gameObjectName"></param>
         /// <param name="callbackName"></param>
@@ -83,6 +93,40 @@ namespace Yodo1.AntiAddiction.Platform.IOS
 #endif
             Debug.LogFormat("Call Yodo1U3dAntiAddictionIOS -> VerifyCertificationInfo : accountId = {0}", accountId);
         }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="gameObjectName"></param>
+        /// <param name="callbackName"></param>
+        public override void Online(string gameObjectName, string callbackName)
+        {
+            Debug.LogFormat("Call Yodo1U3dAntiAddictionAndroid -> Online()");
+#if UNITY_IPHONE || UNITY_IOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer) {
+                UnityOnline(gameObjectName,callbackName);
+                return;
+            }
+#endif
+
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="gameObjectName"></param>
+        /// <param name="callbackName"></param>
+        public override void Offline(string gameObjectName, string callbackName)
+        {
+            Debug.LogFormat("Call Yodo1U3dAntiAddictionAndroid -> Offline()");
+#if UNITY_IPHONE || UNITY_IOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer) {
+                UnityOffline(gameObjectName,callbackName);
+                return;
+            }
+#endif
+        }
+
 
         /// <summary>
         /// 

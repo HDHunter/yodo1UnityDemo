@@ -1,21 +1,15 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 
 namespace Yodo1.AntiAddiction
 {
-
-
-
-
     /// <summary>
     /// i18N Language Keys and terms for UI text
     /// </summary>
     public class Yodo1U3dAntiAddictionLanguage
     {
-
         public const string K_SDK_WINDOW_WELCOME = "K_SDK_WINDOW_WELCOME";
         public const string K_SDK_APP_KEY_INFO = "K_SDK_APP_KEY_INFO";
         public const string K_SDK_AUTO_LOAD_INFO = "K_SDK_AUTO_LOAD_INFO";
@@ -39,14 +33,14 @@ namespace Yodo1.AntiAddiction
         /// <returns></returns>
         public static string Loc(string key)
         {
-            if(source == null) source = Yodo1U3dLanguageSource.LoadOrCreate();
-            if(source == null)
+            if (source == null) source = Yodo1U3dLanguageSource.LoadOrCreate();
+            if (source == null)
             {
                 return key;
-            } 
+            }
 
             string loc = K_LAN_TAG_EN;
-            if(IsChineseUser()) loc = K_LAN_TAG_CN;
+            if (IsChineseUser()) loc = K_LAN_TAG_CN;
             return source.Localized(key, loc);
         }
 
@@ -54,23 +48,20 @@ namespace Yodo1.AntiAddiction
         public static bool IsChineseUser()
         {
             var lan = Application.systemLanguage;
-            switch(lan)
+            switch (lan)
             {
                 case SystemLanguage.Chinese:
                 case SystemLanguage.ChineseSimplified:
                 case SystemLanguage.ChineseTraditional:
                     return true;
             }
+
             return false;
         }
-
-
-        
-
     }
 
 
-      /// <summary>
+    /// <summary>
     /// SDK Localization source file
     /// Contains all language keys and values
     /// </summary>
@@ -78,47 +69,46 @@ namespace Yodo1.AntiAddiction
     [System.Serializable]
     public class Yodo1U3dLanguageSource
     {
-
-        
         public const string K_CONFIG_NAME = "SDKLanguageConfig.bin";
-        public static string AssetPath { get {return "Assets/"+ Yodo1U3dAntiAddictionEditor.K_SDK_ROOT_NAME + "/bin/" +  K_CONFIG_NAME;}}
 
-        
+        public static string AssetPath
+        {
+            get { return "Assets/" + Yodo1U3dAntiAddictionEditor.K_SDK_ROOT_NAME + "/bin/" + K_CONFIG_NAME; }
+        }
+
+
         public List<Yodo1U3dLanguageSourceTerm> terms;
 
 
         public static Yodo1U3dLanguageSource LoadOrCreate()
         {
-
             Yodo1U3dLanguageSource source = null;
             CheckAssetDirectory();
 
 
-
-            if(File.Exists(AssetPath))
+            if (File.Exists(AssetPath))
             {
                 string json = File.ReadAllText(AssetPath);
-                if(!string.IsNullOrEmpty(json))
+                if (!string.IsNullOrEmpty(json))
                 {
                     source = JsonUtility.FromJson<Yodo1U3dLanguageSource>(json);
                 }
             }
-            
-            if(source == null)
+
+            if (source == null)
             {
                 source = new Yodo1U3dLanguageSource();
-                source.Save();  
+                source.Save();
             }
-              
+
             return source;
         }
-
 
 
         private static void CheckAssetDirectory()
         {
             var dir = Directory.GetParent(AssetPath).FullName;
-            if(!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
         }
 
 
@@ -135,10 +125,11 @@ namespace Yodo1.AntiAddiction
 
         public Yodo1U3dLanguageSourceTerm GetTerm(string key)
         {
-            foreach(var t in terms)
+            foreach (var t in terms)
             {
-                if(t.key == key) return t; 
+                if (t.key == key) return t;
             }
+
             return null;
         }
 
@@ -149,15 +140,13 @@ namespace Yodo1.AntiAddiction
 
             //Debug.Log("t: "+ t.key);
 
-            if(t != null)
+            if (t != null)
             {
                 return t.GetTrans(loc);
             }
 
             return key;
         }
-
-
     }
 
 
@@ -167,6 +156,7 @@ namespace Yodo1.AntiAddiction
         public string key;
         public List<string> locs;
         public List<string> trans;
+
         public void ParseRaw(string header, string raw)
         {
             locs = new List<string>();
@@ -179,11 +169,10 @@ namespace Yodo1.AntiAddiction
             trans.AddRange(line);
 
             int idx = locs.IndexOf(Yodo1U3dAntiAddictionLanguage.K_LAN_TAG_KEY);
-            if(idx != -1)
+            if (idx != -1)
             {
                 this.key = trans[idx];
             }
-
         }
 
 
@@ -195,14 +184,8 @@ namespace Yodo1.AntiAddiction
         public string GetTrans(string loc)
         {
             int idx = locs.IndexOf(loc);
-            if(idx != -1) return trans[idx];
+            if (idx != -1) return trans[idx];
             return "";
         }
-  
     }
-
 }
-
-    
-
-

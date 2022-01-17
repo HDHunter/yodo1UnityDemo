@@ -2,9 +2,13 @@
 <dependencies>
     <androidPackages>
         <repositories>
-            <repository>https://jitpack.io</repository>
             <repository>http://repo1.maven.org/maven2/</repository>
+            <repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>
+            <repository>https://android-sdk.is.com/</repository>
+            <repository>https://sdk.tapjoy.com/</repository>
+            <repository>https://artifact.bytedance.com/repository/pangle</repository>
+            <repository>https://maven.soom.la/repo</repository>
         </repositories>
-        <androidPackage spec="com.yodo1:advert-cn:3.14.1" />
+        <androidPackage spec="com.yodo1:advert-cn:3.17.0" />
     </androidPackages>
 </dependencies>

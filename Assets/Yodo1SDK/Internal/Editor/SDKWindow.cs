@@ -197,10 +197,13 @@ namespace Yodo1Unity
                             this.settings.GetKeyItem().SinaAppId = EditorGUILayout.TextField("[新浪微博]AppKey", this.settings.GetKeyItem().SinaAppId, new GUILayoutOption[0]);
                             this.settings.GetKeyItem().SinaSecret = EditorGUILayout.TextField("[新浪微博]Secret", this.settings.GetKeyItem().SinaSecret, new GUILayoutOption[0]);
                             this.settings.GetKeyItem().SinaCallbackUrl = EditorGUILayout.TextField("[新浪微博]CallbackUrl", this.settings.GetKeyItem().SinaCallbackUrl, new GUILayoutOption[0]);
+                            this.settings.GetKeyItem().SinaUniversalLink = EditorGUILayout.TextField("[新浪微博]UniversalLink", this.settings.GetKeyItem().SinaUniversalLink, new GUILayoutOption[0]);
 
                             EditorGUILayout.Separator();
 
                             this.settings.GetKeyItem().QQAppId = EditorGUILayout.TextField("[QQ]AppKey", this.settings.GetKeyItem().QQAppId, new GUILayoutOption[0]);
+
+                            this.settings.GetKeyItem().QQUniversalLink = EditorGUILayout.TextField("[QQ]UniversalLink", this.settings.GetKeyItem().QQUniversalLink, new GUILayoutOption[0]);
 
                             //EditorGUILayout.Separator();
 
@@ -328,6 +331,18 @@ namespace Yodo1Unity
                                     //EditorGUILayout.Separator();
                                     //GUILayout.EndVertical();
 
+                                    break;
+                                case (int)SettingsConstants.AnalyticsType.Thinking:
+                                    GUIStyle gUIStyle7 = new GUIStyle();
+                                    gUIStyle7.padding = (new RectOffset(20, 10, 5, 5));
+                                    GUILayout.BeginVertical(gUIStyle7, new GUILayoutOption[0]);
+                                    this.settings.GetKeyItem().ThinkingAppId = EditorGUILayout.TextField("Thinking AppId", this.settings.GetKeyItem().ThinkingAppId, new GUILayoutOption[0]);
+                                    this.settings.GetKeyItem().ThinkingServerUrl = EditorGUILayout.TextField("Thinking ServerUrl", this.settings.GetKeyItem().ThinkingServerUrl, new GUILayoutOption[0]);
+                                    EditorGUILayout.Separator();
+                                    GUILayout.EndVertical();
+                                    break;
+                                case (int)SettingsConstants.AnalyticsType.Firebase:
+                                 
                                     break;
                             }
                             GUILayout.Label("---------------------------------", EditorStyles.boldLabel, new GUILayoutOption[0]);

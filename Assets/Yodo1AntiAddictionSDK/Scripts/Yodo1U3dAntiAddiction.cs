@@ -7,7 +7,7 @@ namespace Yodo1.AntiAddiction
     {
         // DONOT change the comment line below, we need this to fix the version value - by Eric
         //**SDK_VERSION**//
-		public const string SDK_VERSION = "3.0.10";
+		public const string SDK_VERSION = "3.1.4";
 
         /// <summary>
         /// Set SDK initialization callback(设置sdk初始化回调).

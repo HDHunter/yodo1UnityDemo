@@ -83,6 +83,7 @@ namespace Yodo1Ads
             {
                 this.SaveConfig();
             }
+
             GUILayout.EndVertical();
 
             GUILayout.EndScrollView();
@@ -97,11 +98,15 @@ namespace Yodo1Ads
 
             GUILayout.BeginVertical(gUIStyle, new GUILayoutOption[0]);
             //Set AppKey
-            this.adSettings.androidSettings.AppKey = EditorGUILayout.TextField("MAS App Key", this.adSettings.androidSettings.AppKey, new GUILayoutOption[0]);
+            this.adSettings.androidSettings.AppKey = EditorGUILayout.TextField("MAS App Key",
+                this.adSettings.androidSettings.AppKey, new GUILayoutOption[0]);
             if (string.IsNullOrEmpty(this.adSettings.androidSettings.AppKey))
             {
-                EditorGUILayout.HelpBox("Please fill in the MAS app key correctly, you can find your app key on the MAS dashboard.", MessageType.Error);
+                EditorGUILayout.HelpBox(
+                    "Please fill in the MAS app key correctly, you can find your app key on the MAS dashboard.",
+                    MessageType.Error);
             }
+
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical(gUIStyle, new GUILayoutOption[0]);
@@ -114,25 +119,33 @@ namespace Yodo1Ads
             GUILayout.BeginVertical(storeStyle, new GUILayoutOption[0]);
 
             //Google Play Store
-            this.adSettings.androidSettings.GooglePlayStore = EditorGUILayout.BeginToggleGroup("Google Play-Global", this.adSettings.androidSettings.GooglePlayStore);
+            this.adSettings.androidSettings.GooglePlayStore = EditorGUILayout.BeginToggleGroup("Google Play-Global",
+                this.adSettings.androidSettings.GooglePlayStore);
             //Set AdMob App ID
-            this.adSettings.androidSettings.AdmobAppID = EditorGUILayout.TextField("AdMob App ID", this.adSettings.androidSettings.AdmobAppID, new GUILayoutOption[0]);
+            this.adSettings.androidSettings.AdmobAppID = EditorGUILayout.TextField("AdMob App ID",
+                this.adSettings.androidSettings.AdmobAppID, new GUILayoutOption[0]);
             if (string.IsNullOrEmpty(this.adSettings.androidSettings.AdmobAppID))
             {
-                EditorGUILayout.HelpBox("A null or incorrect value will cause a crash when it builds. Please make sure to copy Admob App ID from MAS dashboard.", MessageType.Info);
+                EditorGUILayout.HelpBox(
+                    "A null or incorrect value will cause a crash when it builds. Please make sure to copy Admob App ID from MAS dashboard.",
+                    MessageType.Info);
             }
 
             this.adSettings.androidSettings.ChineseAndroidStores = !this.adSettings.androidSettings.GooglePlayStore;
             EditorGUILayout.EndToggleGroup();
 
             //Chinese Android Stores
-            this.adSettings.androidSettings.ChineseAndroidStores = EditorGUILayout.BeginToggleGroup("Chinese Android Stores", this.adSettings.androidSettings.ChineseAndroidStores);
+            this.adSettings.androidSettings.ChineseAndroidStores =
+                EditorGUILayout.BeginToggleGroup("Chinese Android Stores",
+                    this.adSettings.androidSettings.ChineseAndroidStores);
 
             //Set Channel
-            this.adSettings.androidSettings.Channel = EditorGUILayout.TextField("Channel", this.adSettings.androidSettings.Channel, new GUILayoutOption[0]);
+            this.adSettings.androidSettings.Channel = EditorGUILayout.TextField("Channel",
+                this.adSettings.androidSettings.Channel, new GUILayoutOption[0]);
             if (string.IsNullOrEmpty(this.adSettings.androidSettings.Channel))
             {
-                EditorGUILayout.HelpBox("Please enter the name of the app store.\nFor example: GooglePlay.", MessageType.Info);
+                EditorGUILayout.HelpBox("Please enter the name of the app store.\nFor example: GooglePlay.",
+                    MessageType.Info);
             }
 
             EditorGUILayout.EndToggleGroup();
@@ -158,10 +171,13 @@ namespace Yodo1Ads
             GUILayout.BeginVertical(gUIStyle, new GUILayoutOption[0]);
 
             //Set AppKey
-            this.adSettings.iOSSettings.AppKey = EditorGUILayout.TextField("MAS App Key", this.adSettings.iOSSettings.AppKey, new GUILayoutOption[0]);
+            this.adSettings.iOSSettings.AppKey = EditorGUILayout.TextField("MAS App Key",
+                this.adSettings.iOSSettings.AppKey, new GUILayoutOption[0]);
             if (string.IsNullOrEmpty(this.adSettings.iOSSettings.AppKey))
             {
-                EditorGUILayout.HelpBox("Please fill in the MAS app key correctly, you can find your app key on the MAS dashboard.", MessageType.Error);
+                EditorGUILayout.HelpBox(
+                    "Please fill in the MAS app key correctly, you can find your app key on the MAS dashboard.",
+                    MessageType.Error);
             }
 
             GUILayout.EndVertical();
@@ -181,37 +197,23 @@ namespace Yodo1Ads
 
                 //Set AdMob App ID
 
-                this.adSettings.iOSSettings.AdmobAppID = EditorGUILayout.TextField("AdMob App ID", this.adSettings.iOSSettings.AdmobAppID, new GUILayoutOption[0]);
+                this.adSettings.iOSSettings.AdmobAppID = EditorGUILayout.TextField("AdMob App ID",
+                    this.adSettings.iOSSettings.AdmobAppID, new GUILayoutOption[0]);
                 if (string.IsNullOrEmpty(this.adSettings.iOSSettings.AdmobAppID))
                 {
-                    EditorGUILayout.HelpBox("A null or incorrect value will cause a crash when it builds. Please make sure to copy Admob App ID from MAS dashboard.", MessageType.Info);
+                    EditorGUILayout.HelpBox(
+                        "A null or incorrect value will cause a crash when it builds. Please make sure to copy Admob App ID from MAS dashboard.",
+                        MessageType.Info);
                 }
 
                 GUILayout.EndVertical();
             }
-            //this.adSettings.iOSSettings.AppLovinSdkKey = EditorGUILayout.TextField("AppLovin Sdk Key", this.adSettings.iOSSettings.AppLovinSdkKey, new GUILayoutOption[0]);
-            //if (string.IsNullOrEmpty(this.adSettings.iOSSettings.AppLovinSdkKey))
-            //{
-            //    EditorGUILayout.HelpBox("AppLovin Sdk Key Missing for this platform", MessageType.Info);
-            //}
-            //Debug.Log("[Yodo1 Ads] applovinSdkKey:" + this.adSettings.iOSSettings.AppLovinSdkKey);
-
-            //EditorGUILayout.EndToggleGroup();
-
-            // this.adSettings.iOSSettings.ChinaRegion = !this.adSettings.iOSSettings.GlobalRegion;
-
-            //China Region
-            //this.adSettings.iOSSettings.ChinaRegion = EditorGUILayout.BeginToggleGroup("Mainland China Only", this.adSettings.iOSSettings.ChinaRegion);
-            //EditorGUILayout.EndToggleGroup();
-            //this.adSettings.iOSSettings.GlobalRegion = !this.adSettings.iOSSettings.ChinaRegion;
-;
         }
 
         private void SaveConfig()
         {
             if (selectPlarformTab == PlatfromTab.Android)
             {
-
                 if (Yodo1PostProcess.CheckConfiguration_Android(this.adSettings))
                 {
 #if UNITY_2019_1_OR_NEWER
@@ -224,6 +226,7 @@ namespace Yodo1Ads
                     return;
                 }
             }
+
             if (selectPlarformTab == PlatfromTab.iOS)
             {
                 if (!Yodo1PostProcess.CheckConfiguration_iOS(this.adSettings))

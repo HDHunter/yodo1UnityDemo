@@ -1,2 +1,2 @@
-    implementation 'com.yodo1.pay:core:1.1.34'
+    implementation 'com.yodo1.pay:core:1.1.65'
     //yodo1_import_librarys

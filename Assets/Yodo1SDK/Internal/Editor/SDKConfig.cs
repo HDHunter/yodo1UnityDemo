@@ -60,7 +60,7 @@ namespace Yodo1Unity
 
         public const string sourceCocoapodsSpec = "source \'https://github.com/CocoaPods/Specs.git\'";
 
-        public const string platformURL = "platform :ios, '9.0'";
+        public const string platformURL = "platform :ios, '10.0'";
         public const string gitURL = ",";
 
         public const string Yodo1BunldePath = "./Assets/Plugins/iOS/Yodo1KeyConfig.bundle";
@@ -202,6 +202,20 @@ namespace Yodo1Unity
                         appId = null;
                     }
 
+                    appId = settings.GetKeyItem().QQUniversalLink;
+                    if (shareInfo.ContainsKey(SettingsConstants.QQUniversalLink))
+                    {
+                        if (XcodePostprocess.IsVaildSNSKey(appId))
+                        {
+                            shareInfo[SettingsConstants.QQUniversalLink] = new PListString(appId);
+                        }
+                        else
+                        {
+                            shareInfo[SettingsConstants.QQUniversalLink] = new PListString(string.Empty);
+                        }
+                        appId = null;
+                    }
+
                     appId = settings.GetKeyItem().SinaAppId;
                     bool isVaildSina = false;
                     if (shareInfo.ContainsKey(SettingsConstants.SinaAppId))
@@ -228,6 +242,19 @@ namespace Yodo1Unity
                         else
                         {
                             shareInfo[SettingsConstants.SinaCallbackUrl] = new PListString(string.Empty);
+                        }
+                        appId = null;
+                    }
+                    appId = settings.GetKeyItem().SinaUniversalLink;
+                    if (shareInfo.ContainsKey(SettingsConstants.SinaUniversalLink))
+                    {
+                        if (isVaildSina && XcodePostprocess.IsVaildSNSKey(appId))
+                        {
+                            shareInfo[SettingsConstants.SinaUniversalLink] = new PListString(appId);
+                        }
+                        else
+                        {
+                            shareInfo[SettingsConstants.SinaUniversalLink] = new PListString(string.Empty);
                         }
                         appId = null;
                     }
@@ -283,6 +310,10 @@ namespace Yodo1Unity
                     if (shareInfo.ContainsKey(SettingsConstants.SinaCallbackUrl))
                     {
                         shareInfo[SettingsConstants.SinaCallbackUrl] = new PListString(string.Empty);
+                    }
+                    if (shareInfo.ContainsKey(SettingsConstants.SinaUniversalLink))
+                    {
+                        shareInfo[SettingsConstants.SinaUniversalLink] = new PListString(string.Empty);
                     }
                     //if (shareInfo.ContainsKey(SettingsConstants.TwitterConsumerKey))
                     //{
@@ -506,6 +537,52 @@ namespace Yodo1Unity
                     }
                 }
 
+
+                //Thinking
+                if (EnableSelected(SettingType.Analytics, (int)AnalyticsType.Thinking))
+                {
+                    string appId = settings.GetKeyItem().ThinkingAppId;
+                    bool isVaildGameAnalytic = false;
+                    if (analyticsInfo.ContainsKey(SettingsConstants.ThinkingAppId))
+                    {
+                        if (XcodePostprocess.IsVaildSNSKey(appId))
+                        {
+                            analyticsInfo[SettingsConstants.ThinkingAppId] = new PListString(appId);
+                            isVaildGameAnalytic = true;
+                        }
+                        else
+                        {
+                            analyticsInfo[SettingsConstants.ThinkingAppId] = new PListString(string.Empty);
+                        }
+                        appId = null;
+                    }
+                    appId = settings.GetKeyItem().ThinkingServerUrl;
+                    if (analyticsInfo.ContainsKey(SettingsConstants.ThinkingServerUrl))
+                    {
+                        if (isVaildGameAnalytic && XcodePostprocess.IsVaildSNSKey(appId))
+                        {
+                            analyticsInfo[SettingsConstants.ThinkingServerUrl] = new PListString(appId);
+                        }
+                        else
+                        {
+                            analyticsInfo[SettingsConstants.ThinkingServerUrl] = new PListString(string.Empty);
+                        }
+                        appId = null;
+                    }
+                }
+                else
+                {
+
+                    if (analyticsInfo.ContainsKey(SettingsConstants.ThinkingAppId))
+                    {
+                        analyticsInfo[SettingsConstants.ThinkingAppId] = new PListString(string.Empty);
+                    }
+                    if (analyticsInfo.ContainsKey(SettingsConstants.ThinkingServerUrl))
+                    {
+                        analyticsInfo[SettingsConstants.ThinkingServerUrl] = new PListString(string.Empty);
+                    }
+                }
+
                 if (EnableSoomla())
                 {
                     string appId = settings.GetKeyItem().SoomlaAppKey;
@@ -589,7 +666,7 @@ namespace Yodo1Unity
             CreateFile(podfileDirPath, dependenciesName, "\t\t\t<source>https://github.com/Yodo1Games/Yodo1Spec.git</source>");
             CreateFile(podfileDirPath, dependenciesName, "\t\t</sources>");
 
-            string pod = string.Format("\t\t<iosPod name=\"Yodo1Ads/Yodo1_UnityConfigKey\" version=\"{0}\" bitcode=\"false\" minTargetSdk=\"9.0\" />", EditorSettings.sdkVersion);
+            string pod = string.Format("\t\t<iosPod name=\"Yodo1Ads/Yodo1_UnityConfigKey\" version=\"{0}\" bitcode=\"false\" minTargetSdk=\"10.0\" />", EditorSettings.sdkVersion);
 
             CreateFile(podfileDirPath, dependenciesName, pod);
 
@@ -844,8 +921,10 @@ namespace Yodo1Unity
                 if (EnableSettingsItem(itemInfo))
                 {
                     //CreateFile(GetPodfilePath(), podfileName, itemInfo.Url + gitURL + "\'" + SDKWindow.Yodo1sdkVersion + "\'");
-
-                    string pod = string.Format("\t\t<iosPod name=\"{0}\" version=\"{1}\" bitcode=\"false\" minTargetSdk=\"9.0\" />", itemInfo.Url, EditorSettings.sdkVersion);
+                    if (itemInfo.Name.Contains("Thinking[数数统计]")) {
+                        continue;
+                    }
+                    string pod = string.Format("\t\t<iosPod name=\"{0}\" version=\"{1}\" bitcode=\"false\" minTargetSdk=\"10.0\" />", itemInfo.Url, EditorSettings.sdkVersion);
                     CreateFile(GetPodfileDirPath(), dependenciesName, pod);
 
                     isEnabled = true;

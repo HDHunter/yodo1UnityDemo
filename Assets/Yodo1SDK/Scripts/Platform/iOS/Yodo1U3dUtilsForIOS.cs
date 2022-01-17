@@ -184,6 +184,22 @@ public class Yodo1U3dUtilsForIOS
         }
     }
 
+    /// <summary>
+    /// 最新隐私UI展示
+    /// </summary>
+#if YODO1_PRIVACY
+    [DllImport(Yodo1U3dConstants.LIB_NAME)]
+    private static extern void Unity3dDialogShowPrivacy(string gameObject);
+#endif
+    public static void DialogShowPrivacy(string appKey)
+    {
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+#if YODO1_PRIVACY
+            Unity3dDialogShowPrivacy(Yodo1U3dSDK.Instance.SdkObjectName);
+#endif
+        }
+    }
 
     //
     /// <summary>

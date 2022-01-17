@@ -8,7 +8,7 @@ using Yodo1JSON;
 
 public class UpdateVersion : EditorWindow
 {
-    public static string Yodo1PluginVersion = "5.9.0";
+    public static string Yodo1PluginVersion = "5.15.4";
     public static string UnitypackageName = "yodo1SDK.unitypackage";
 
     WWW WwwDownload = null;
@@ -32,7 +32,7 @@ public class UpdateVersion : EditorWindow
 
         if (NeedCheck && WWWJson == null)
         {
-            String UrlJson = "https://bj-ali-opp-sdk-update.oss-cn-beijing.aliyuncs.com/Yodo1SdkUnityPlugins/version.json";
+            String UrlJson = "https://bj-ali-opp-sdk-update.oss-cn-beijing.aliyuncs.com/Yodo1Sdk_Suit/version.json";
             WWWJson = new WWW(UrlJson);
         }
         else if (NeedCheck && WWWJson.isDone)

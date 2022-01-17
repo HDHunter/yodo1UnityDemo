@@ -223,10 +223,18 @@ namespace Yodo1Unity
                 {
                     configDic[SettingsConstants.SinaCallbackUrl] = new PListString(item.SinaCallbackUrl);
                 }
+                if (configDic.ContainsKey(SettingsConstants.SinaUniversalLink))
+                {
+                    configDic[SettingsConstants.SinaUniversalLink] = new PListString(item.SinaUniversalLink);
+                }
                 //QQ
                 if (configDic.ContainsKey(SettingsConstants.QQAppId))
                 {
                     configDic[SettingsConstants.QQAppId] = new PListString(item.QQAppId);
+                }
+                if (configDic.ContainsKey(SettingsConstants.QQUniversalLink))
+                {
+                    configDic[SettingsConstants.QQUniversalLink] = new PListString(item.QQUniversalLink);
                 }
                 //Twitter
                 if (configDic.ContainsKey(SettingsConstants.TwitterConsumerKey))
@@ -285,6 +293,17 @@ namespace Yodo1Unity
                 {
                     configDic[SettingsConstants.AppleAppId] = new PListString(item.AppleAppId);
                 }
+                if (configDic.ContainsKey(SettingsConstants.ThinkingAppId))
+                {
+                    configDic[SettingsConstants.ThinkingAppId] = new PListString(item.ThinkingAppId);
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.ThinkingServerUrl))
+                {
+                    configDic[SettingsConstants.ThinkingServerUrl] = new PListString(item.ThinkingServerUrl);
+                }
+
+
                 root.Save(SettingsConstants.CONFIG_PATH, PListFormat.Xml);
                 root.Save(SettingsConstants.CONFIG_PATH, PListFormat.Binary);
             }
@@ -337,10 +356,18 @@ namespace Yodo1Unity
                 {
                     item.SinaCallbackUrl = (PListString)configDic[SettingsConstants.SinaCallbackUrl];
                 }
+                if (configDic.ContainsKey(SettingsConstants.SinaUniversalLink))
+                {
+                    item.SinaUniversalLink = (PListString)configDic[SettingsConstants.SinaUniversalLink];
+                }
                 //QQ
                 if (configDic.ContainsKey(SettingsConstants.QQAppId))
                 {
                     item.QQAppId = (PListString)configDic[SettingsConstants.QQAppId];
+                }
+                if (configDic.ContainsKey(SettingsConstants.QQUniversalLink))
+                {
+                    item.QQUniversalLink = (PListString)configDic[SettingsConstants.QQUniversalLink];
                 }
                 //Twitter
                 if (configDic.ContainsKey(SettingsConstants.TwitterConsumerKey))
@@ -409,6 +436,15 @@ namespace Yodo1Unity
                 {
                     item.SoomlaAppKey = (PListString)configDic[SettingsConstants.SoomlaAppKey];
                 }
+                if (configDic.ContainsKey(SettingsConstants.ThinkingAppId))
+                {
+                    item.ThinkingAppId = (PListString)configDic[SettingsConstants.ThinkingAppId];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.ThinkingServerUrl))
+                {
+                    item.ThinkingServerUrl = (PListString)configDic[SettingsConstants.ThinkingServerUrl];
+                }
                 configKey.Add(item);
             }
         }
@@ -464,10 +500,18 @@ namespace Yodo1Unity
                 {
                     currItem.SinaCallbackUrl = item.SinaCallbackUrl;
                 }
+                if (item.SinaUniversalLink != null)
+                {
+                    currItem.SinaUniversalLink = item.SinaUniversalLink;
+                }
 
                 if (item.QQAppId != null)
                 {
                     currItem.QQAppId = item.QQAppId;
+                }
+                if (item.QQUniversalLink != null)
+                {
+                    currItem.QQUniversalLink = item.QQUniversalLink;
                 }
 
                 if (item.TwitterConsumerKey != null)
@@ -531,7 +575,14 @@ namespace Yodo1Unity
                 {
                     currItem.SoomlaAppKey = item.SoomlaAppKey;
                 }
-
+                if (item.ThinkingAppId != null)
+                {
+                    currItem.ThinkingAppId = item.ThinkingAppId;
+                }
+                if (item.ThinkingServerUrl != null)
+                {
+                    currItem.ThinkingServerUrl = item.ThinkingServerUrl;
+                }
             }
         }
 
