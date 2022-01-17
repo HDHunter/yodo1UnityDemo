@@ -1,0 +1,592 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542a372a81afd439ca94d248a2bcc8cf, type: 3}
+  m_Name: EditorSettings
+  m_EditorClassIdentifier: 
+  configKey:
+  - AppKey: 
+    RegionCode: 
+    SdkVersion: 6.1.0
+    WechatAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684\u5FAE\u4FE1AppId]"
+    WechatUniversalLink: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684\u5FAE\u4FE1UniversalLink]"
+    SinaAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684\u65B0\u6D6AAppId]"
+    SinaSecret: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684\u65B0\u6D6ASecret]"
+    SinaCallbackUrl: https://api.weibo.com/oauth2/default.html
+    SinaUniversalLink: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684\u65B0\u6D6A\u5FAE\u535AUniversalLink]"
+    QQAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684QQ\u5206\u4EABAppId]"
+    QQUniversalLink: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684QQ\u5206\u4EABUniversalLink]"
+    TwitterConsumerKey: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Twitter
+      \u5206\u4EABKey]"
+    TwitterConsumerSecret: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Twitter
+      \u5206\u4EABSecret]"
+    ApplovinSdkKey: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Applovin SdkKey]"
+    GADApplicationIdentifier: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Admob
+      AppId]"
+    FacebookAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Facebook of
+      AppId]"
+    AdTrackingAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684AppId]"
+    UmengAnalytics: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684\u53CB\u76DF\u7EDF\u8BA1AppId]"
+    TalkingDataAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Talking Data
+      of AppId]"
+    GameAnalyticsGameKey: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684GA\u7EDF\u8BA1GameKey]"
+    GameAnalyticsGameSecret: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684GA\u7EDF\u8BA1GameSecret]"
+    AppsFlyerDevKey: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684App flyer
+      devKey]"
+    AppleAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Apple of AppId]"
+    SwrveAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684AppId]"
+    SwrveApiKey: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684ApiKey]"
+    SoomlaAppKey: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684AppKey]"
+    ThinkingAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Thinking\u7EDF\u8BA1\u7684AppId]"
+    ThinkingServerUrl: https://c1.yodo1.com
+  configBasic:
+  - Name: "MoreGame[\u66F4\u591A\u6E38\u620F]"
+    Index: 0
+    Url: Yodo1Ads/Yodo1_MoreGame
+    Enable: 0
+    Selected: 0
+  - Name: "Share[\u5206\u4EAB]"
+    Index: 1
+    Url: Yodo1Ads/Yodo1_Share
+    Enable: 1
+    Selected: 0
+  - Name: "UCpayment[\u5185\u4ED8\u8D39]"
+    Index: 2
+    Url: Yodo1Ads/Yodo1_UCenter
+    Enable: 1
+    Selected: 0
+  - Name: GameCenter
+    Index: 3
+    Url: Yodo1Ads/Yodo1_GameCenter
+    Enable: 1
+    Selected: 0
+  - Name: iCloud
+    Index: 4
+    Url: Yodo1Ads/Yodo1_iCloud
+    Enable: 1
+    Selected: 0
+  - Name: "Notification[iOS \u901A\u77E5]"
+    Index: 5
+    Url: Yodo1Ads/Yodo1_Notification
+    Enable: 1
+    Selected: 0
+  - Name: "ReplayVideo[\u89C6\u9891\u5F55\u5236]"
+    Index: 6
+    Url: Yodo1Ads/Yodo1_Replay
+    Enable: 1
+    Selected: 0
+  - Name: "AppStore[\u8BC4\u8BBA]"
+    Index: 7
+    Url: Yodo1Ads/Yodo1_iRate
+    Enable: 1
+    Selected: 0
+  - Name: "Facebook[\u6FC0\u6D3B\u7EDF\u8BA1\u4E0E\u5206\u4EAB]"
+    Index: 8
+    Url: Yodo1Ads/Yodo1_FBSDKCoreKit
+    Enable: 0
+    Selected: 0
+  - Name: "AgePrivacy[\u9690\u79C1\u548C\u513F\u7AE5]"
+    Index: 9
+    Url: Yodo1Ads/Yodo1_Privacy
+    Enable: 1
+    Selected: 0
+  - Name: "AntiAddiction[\u9632\u6C89\u8FF7]"
+    Index: 10
+    Url: Yodo1Ads/Yodo1_AntiIndulged
+    Enable: 0
+    Selected: 0
+  configAnalytics:
+  - Name: AppsFlyer
+    Index: 0
+    Url: Yodo1Ads/Analytics_AppsFlyer
+    Enable: 1
+    Selected: 0
+  - Name: GameAnalytics
+    Index: 1
+    Url: Yodo1Ads/Analytics_GameAnalytics
+    Enable: 0
+    Selected: 0
+  - Name: TalkingData
+    Index: 2
+    Url: Yodo1Ads/Analytics_TalkingData
+    Enable: 1
+    Selected: 0
+  - Name: "Umeng[\u53CB\u76DF\u7EDF\u8BA1]"
+    Index: 3
+    Url: Yodo1Ads/Analytics_Umeng
+    Enable: 1
+    Selected: 0
+  - Name: "Swrve[\u7EDF\u8BA1]"
+    Index: 4
+    Url: Yodo1Ads/Analytics_Swrve
+    Enable: 1
+    Selected: 0
+  - Name: "Soomla[\u7EDF\u8BA1]"
+    Index: 5
+    Url: Yodo1Ads/Yodo1_Soomla
+    Enable: 1
+    Selected: 0
+  - Name: "Thinking[\u6570\u6570\u7EDF\u8BA1]"
+    Index: 6
+    Url: Yodo1Ads/Analytics_Thinking
+    Enable: 1
+    Selected: 1
+  - Name: Firebase
+    Index: 7
+    Url: Yodo1Ads/Analytics_Firebase
+    Enable: 1
+    Selected: 0
+  configSoomla:
+  - Name: Soomla[AppLovin]
+    Index: 0
+    Url: Yodo1Ads/Soomla_AppLovin'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[InMobi]
+    Index: 1
+    Url: Yodo1Ads/Soomla_InMobi'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[MoPub]
+    Index: 2
+    Url: Yodo1Ads/Soomla_MoPub'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[Facebook]
+    Index: 3
+    Url: Yodo1Ads/Soomla_Facebook'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[Tapjoy]
+    Index: 4
+    Url: Yodo1Ads/Soomla_Tapjoy'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[UnityAds]
+    Index: 5
+    Url: Yodo1Ads/Soomla_UnityAds'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[Vungle]
+    Index: 6
+    Url: Yodo1Ads/Soomla_Vungle'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[IronSource]
+    Index: 7
+    Url: Yodo1Ads/Soomla_IronSource'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[AdMob]
+    Index: 8
+    Url: Yodo1Ads/Soomla_AdMob'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[Chartboost]
+    Index: 9
+    Url: Yodo1Ads/Soomla_Chartboost'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[Toutiao]
+    Index: 10
+    Url: Yodo1Ads/Soomla_Toutiao'
+    Enable: 0
+    Selected: 0
+  - Name: Soomla[Mintegral]
+    Index: 11
+    Url: Yodo1Ads/Soomla_Mintegral'
+    Enable: 0
+    Selected: 0
+  configYd1Advert:
+  - Name: UnityAds
+    Index: 0
+    Url: Yodo1Ads/YD1_UnityAds'
+    Enable: 1
+    Selected: 0
+  - Name: Vungle
+    Index: 1
+    Url: Yodo1Ads/YD1_Vungle'
+    Enable: 1
+    Selected: 0
+  - Name: Mintegral
+    Index: 2
+    Url: Yodo1Ads/YD1_Mintegral'
+    Enable: 1
+    Selected: 0
+  - Name: "Toutiao[\u4ECA\u65E5\u5934\u6761]"
+    Index: 3
+    Url: Yodo1Ads/YD1_Toutiao'
+    Enable: 1
+    Selected: 0
+  - Name: Admob
+    Index: 4
+    Url: Yodo1Ads/YD1_Admob'
+    Enable: 1
+    Selected: 0
+  - Name: Tapjoy
+    Index: 5
+    Url: Yodo1Ads/YD1_Tapjoy'
+    Enable: 1
+    Selected: 0
+  - Name: IronSource
+    Index: 6
+    Url: Yodo1Ads/YD1_IronSource'
+    Enable: 1
+    Selected: 0
+  - Name: "GDT[\u5E7F\u70B9\u901A]"
+    Index: 7
+    Url: Yodo1Ads/YD1_GDT'
+    Enable: 1
+    Selected: 0
+  - Name: Applovin
+    Index: 8
+    Url: Yodo1Ads/YD1_Applovin'
+    Enable: 1
+    Selected: 0
+  - Name: Facebook
+    Index: 9
+    Url: Yodo1Ads/YD1_Facebook'
+    Enable: 1
+    Selected: 0
+  - Name: Inmobi
+    Index: 10
+    Url: Yodo1Ads/YD1_Inmobi'
+    Enable: 0
+    Selected: 0
+  - Name: "Baidu[\u767E\u5EA6]"
+    Index: 11
+    Url: Yodo1Ads/YD1_Baidu'
+    Enable: 1
+    Selected: 0
+  - Name: Mopub
+    Index: 12
+    Url: Yodo1Ads/YD1_Mopub'
+    Enable: 0
+    Selected: 0
+  - Name: ApplovinMax
+    Index: 13
+    Url: Yodo1Ads/YD1_ApplovinMax'
+    Enable: 1
+    Selected: 0
+  - Name: OneWay
+    Index: 14
+    Url: Yodo1Ads/YD1_OneWay'
+    Enable: 0
+    Selected: 0
+  - Name: Chartboost
+    Index: 15
+    Url: Yodo1Ads/YD1_Chartboost'
+    Enable: 1
+    Selected: 0
+  - Name: AdColony
+    Index: 16
+    Url: Yodo1Ads/YD1_AdColony'
+    Enable: 1
+    Selected: 0
+  - Name: MyTarget
+    Index: 17
+    Url: Yodo1Ads/YD1_MyTarget'
+    Enable: 1
+    Selected: 0
+  - Name: Yandex
+    Index: 18
+    Url: Yodo1Ads/YD1_Yandex'
+    Enable: 1
+    Selected: 0
+  - Name: Smaato
+    Index: 19
+    Url: Yodo1Ads/YD1_Smaato'
+    Enable: 1
+    Selected: 0
+  configAdmob:
+  - Name: Facebook
+    Index: 0
+    Url: Yodo1Ads/Admob_Facebook'
+    Enable: 1
+    Selected: 0
+  - Name: Tapjoy
+    Index: 1
+    Url: Yodo1Ads/Admob_Tapjoy'
+    Enable: 1
+    Selected: 0
+  - Name: IronSource
+    Index: 2
+    Url: Yodo1Ads/Admob_IronSource'
+    Enable: 1
+    Selected: 0
+  - Name: Vungle
+    Index: 3
+    Url: Yodo1Ads/Admob_Vungle'
+    Enable: 1
+    Selected: 0
+  - Name: Inmobi
+    Index: 4
+    Url: Yodo1Ads/Admob_Inmobi'
+    Enable: 0
+    Selected: 0
+  - Name: UnityAds
+    Index: 5
+    Url: Yodo1Ads/Admob_UnityAds'
+    Enable: 1
+    Selected: 0
+  - Name: Chartboost
+    Index: 6
+    Url: Yodo1Ads/Admob_Chartboost'
+    Enable: 1
+    Selected: 0
+  - Name: AppLovin
+    Index: 7
+    Url: Yodo1Ads/Admob_AppLovin'
+    Enable: 1
+    Selected: 0
+  - Name: AdColony
+    Index: 8
+    Url: Yodo1Ads/Admob_AdColony'
+    Enable: 1
+    Selected: 0
+  - Name: MyTarget
+    Index: 9
+    Url: Yodo1Ads/Admob_MyTarget'
+    Enable: 1
+    Selected: 0
+  configIronSource:
+  - Name: Facebook
+    Index: 0
+    Url: Yodo1Ads/IS_Facebook'
+    Enable: 1
+    Selected: 0
+  - Name: UnityAds
+    Index: 1
+    Url: Yodo1Ads/IS_UnityAds'
+    Enable: 1
+    Selected: 0
+  - Name: Vungle
+    Index: 2
+    Url: Yodo1Ads/IS_Vungle'
+    Enable: 1
+    Selected: 0
+  - Name: Tapjoy
+    Index: 3
+    Url: Yodo1Ads/IS_Tapjoy'
+    Enable: 1
+    Selected: 0
+  - Name: Applovin
+    Index: 4
+    Url: Yodo1Ads/IS_AppLovin'
+    Enable: 1
+    Selected: 0
+  - Name: Admob
+    Index: 5
+    Url: Yodo1Ads/IS_Admob'
+    Enable: 1
+    Selected: 0
+  - Name: "Pangle[\u5934\u6761]"
+    Index: 6
+    Url: Yodo1Ads/IS_Pangle'
+    Enable: 1
+    Selected: 0
+  - Name: AdColony
+    Index: 7
+    Url: Yodo1Ads/IS_AdColony'
+    Enable: 1
+    Selected: 0
+  - Name: Inmobi
+    Index: 8
+    Url: Yodo1Ads/IS_Inmobi'
+    Enable: 1
+    Selected: 0
+  - Name: Chartboost
+    Index: 9
+    Url: Yodo1Ads/IS_Chartboost'
+    Enable: 1
+    Selected: 0
+  configMopub:
+  - Name: Vungle
+    Index: 0
+    Url: Yodo1Ads/Mopub_Vungle'
+    Enable: 0
+    Selected: 0
+  - Name: Tapjoy
+    Index: 1
+    Url: Yodo1Ads/Mopub_Tapjoy'
+    Enable: 0
+    Selected: 0
+  - Name: Facebook
+    Index: 2
+    Url: Yodo1Ads/Mopub_Facebook'
+    Enable: 0
+    Selected: 0
+  - Name: Admob
+    Index: 3
+    Url: Yodo1Ads/Mopub_Admob'
+    Enable: 0
+    Selected: 0
+  - Name: UnityAds
+    Index: 4
+    Url: Yodo1Ads/Mopub_UnityAds'
+    Enable: 0
+    Selected: 0
+  - Name: Applovin
+    Index: 5
+    Url: Yodo1Ads/Mopub_Applovin'
+    Enable: 0
+    Selected: 0
+  - Name: IronSource
+    Index: 6
+    Url: Yodo1Ads/Mopub_IronSource'
+    Enable: 0
+    Selected: 0
+  configApplovinMax:
+  - Name: Facebook
+    Index: 0
+    Url: Yodo1Ads/ApplovinMax_Facebook'
+    Enable: 1
+    Selected: 0
+  - Name: Admob
+    Index: 1
+    Url: Yodo1Ads/ApplovinMax_Admob'
+    Enable: 1
+    Selected: 0
+  - Name: Inmobi
+    Index: 2
+    Url: Yodo1Ads/ApplovinMax_Inmobi'
+    Enable: 0
+    Selected: 0
+  - Name: IronSource
+    Index: 3
+    Url: Yodo1Ads/ApplovinMax_IronSource'
+    Enable: 1
+    Selected: 0
+  - Name: Mintegral
+    Index: 4
+    Url: Yodo1Ads/ApplovinMax_Mintegral'
+    Enable: 1
+    Selected: 0
+  - Name: Mopub
+    Index: 5
+    Url: Yodo1Ads/ApplovinMax_Mopub'
+    Enable: 0
+    Selected: 0
+  - Name: Tapjoy
+    Index: 6
+    Url: Yodo1Ads/ApplovinMax_Tapjoy'
+    Enable: 1
+    Selected: 0
+  - Name: UnityAds
+    Index: 7
+    Url: Yodo1Ads/ApplovinMax_UnityAds'
+    Enable: 1
+    Selected: 0
+  - Name: Vungle
+    Index: 8
+    Url: Yodo1Ads/ApplovinMax_Vungle'
+    Enable: 1
+    Selected: 0
+  - Name: "Toutiao[\u4ECA\u65E5\u5934\u6761]"
+    Index: 9
+    Url: Yodo1Ads/ApplovinMax_Toutiao'
+    Enable: 1
+    Selected: 0
+  - Name: Chartboost
+    Index: 10
+    Url: Yodo1Ads/ApplovinMax_Chartboost'
+    Enable: 1
+    Selected: 0
+  - Name: AdColony
+    Index: 11
+    Url: Yodo1Ads/ApplovinMax_AdColony'
+    Enable: 1
+    Selected: 0
+  - Name: MyTarget
+    Index: 12
+    Url: Yodo1Ads/ApplovinMax_MyTarget'
+    Enable: 1
+    Selected: 0
+  - Name: Yandex
+    Index: 13
+    Url: Yodo1Ads/ApplovinMax_Yandex'
+    Enable: 1
+    Selected: 0
+  - Name: Smaato
+    Index: 14
+    Url: Yodo1Ads/ApplovinMax_Smaato'
+    Enable: 1
+    Selected: 0
+  - Name: "GDT[\u5E7F\u70B9\u901A]"
+    Index: 15
+    Url: Yodo1Ads/ApplovinMax_GDT'
+    Enable: 1
+    Selected: 0
+  - Name: Amazon
+    Index: 16
+    Url: Yodo1Ads/ApplovinMax_Amazon'
+    Enable: 1
+    Selected: 0
+  - Name: Verizon
+    Index: 17
+    Url: Yodo1Ads/ApplovinMax_Verizon'
+    Enable: 1
+    Selected: 0
+  - Name: Fyber
+    Index: 18
+    Url: Yodo1Ads/ApplovinMax_Fyber'
+    Enable: 1
+    Selected: 0
+  configTopon:
+  - Name: Baidu
+    Index: 0
+    Url: Yodo1Ads/AnyThink_Baidu'
+    Enable: 1
+    Selected: 0
+  - Name: Mintegral
+    Index: 1
+    Url: Yodo1Ads/AnyThink_Mintegral'
+    Enable: 1
+    Selected: 0
+  - Name: Sigmob
+    Index: 2
+    Url: Yodo1Ads/AnyThink_Sigmob'
+    Enable: 1
+    Selected: 0
+  - Name: UnityAds
+    Index: 3
+    Url: Yodo1Ads/AnyThink_UnityAds'
+    Enable: 1
+    Selected: 0
+  - Name: GDT
+    Index: 4
+    Url: Yodo1Ads/AnyThink_GDT'
+    Enable: 1
+    Selected: 0
+  - Name: Admob
+    Index: 5
+    Url: Yodo1Ads/AnyThink_Admob'
+    Enable: 1
+    Selected: 0
+  - Name: Vungle
+    Index: 6
+    Url: Yodo1Ads/AnyThink_Vungle'
+    Enable: 1
+    Selected: 0
+  - Name: Toutiao
+    Index: 7
+    Url: Yodo1Ads/AnyThink_TouTiao'
+    Enable: 1
+    Selected: 0
+  - Name: KuaiShou
+    Index: 8
+    Url: Yodo1Ads/AnyThink_KuaiShou'
+    Enable: 0
+    Selected: 0
+  debugEnabled: 0
+  yodo1AdTrackingEnabled: 0
+  applovinEnabled: 0
+  admobEnabled: 0
