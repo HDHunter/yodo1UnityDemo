@@ -6,27 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Yodo1SDK/Sample/Scene/Yodo1Demo.unity
-    guid: 4f45666e8ab7a403dab972cf5e131a6a
-  - enabled: 1
-    path: Assets/Yodo1SDK/Sample/Scene/PayScene.unity
-    guid: b06779ac4edb64d8c841af7ea5fa8d73
-  - enabled: 1
-    path: Assets/Yodo1SDK/Sample/Scene/AccountScene.unity
-    guid: 7a9f4dec6e4774248bff3975d17b7380
-  - enabled: 1
-    path: Assets/Yodo1SDK/Sample/Scene/AnalyticsScene.unity
-    guid: c84026d3edc124249b81d0f8fd25832d
-  - enabled: 1
-    path: Assets/Yodo1SDK/Sample/Scene/VerifyScene.unity
-    guid: 0668c7f5372fdad468e2de20028bcd9c
+    path: Assets/Yodo1/Suit/Sample/Scene/Yodo1Demo.unity
+    guid: b4dbf3f4741b949859132ab67fa35378
   - enabled: 1
     path: Assets/Yodo1Ads/Sample/Yodo1AdsScene.unity
     guid: 9aa5866e47649407fb066afebf56e4c9
   - enabled: 1
-    path: Assets/Yodo1SDK/Sample/Scene/Anti1Scene.unity
-    guid: d04f1406f3e6f4bf7b37893100ee996c
+    path: Assets/Yodo1/Suit/Sample/Scene/AnalyticsScene.unity
+    guid: 24f771d4525ad4961b642e5a61e3e108
   - enabled: 1
-    path: Assets/Yodo1SDK/Sample/Scene/Anti3Scene.unity
-    guid: 69b2bdff8029e4a4c9ebeb78e50c92d9
+    path: Assets/Yodo1/Suit/Sample/Scene/VerifyScene.unity
+    guid: c22dbd1d17e834287aa01ffcb0e04d6d
+  - enabled: 1
+    path: Assets/Yodo1/Suit/Sample/Scene/PayScene.unity
+    guid: b06779ac4edb64d8c841af7ea5fa8d73
+  - enabled: 1
+    path: Assets/Yodo1/Suit/Sample/Scene/AccountScene.unity
+    guid: 7a9f4dec6e4774248bff3975d17b7380
   m_configObjects: {}

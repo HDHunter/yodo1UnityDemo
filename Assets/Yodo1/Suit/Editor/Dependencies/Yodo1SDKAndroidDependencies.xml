@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dependencies>
+	<androidPackages>
+		<repositories>
+			<repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>
+			<repository>http://mvnrepository.com/</repository>
+		</repositories>
+		<androidPackage spec="com.yodo1.suit.pay:core:1.4.1.12" />
+	</androidPackages>
+</dependencies>

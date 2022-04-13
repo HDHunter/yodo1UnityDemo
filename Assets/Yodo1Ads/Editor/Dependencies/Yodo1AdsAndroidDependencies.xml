@@ -9,6 +9,6 @@
             <repository>https://artifact.bytedance.com/repository/pangle</repository>
             <repository>https://maven.soom.la/repo</repository>
         </repositories>
-        <androidPackage spec="com.yodo1:advert-gp:3.17.6.3" />
+        <androidPackage spec="com.yodo1:advert-cn:3.17.0" />
     </androidPackages>
 </dependencies>

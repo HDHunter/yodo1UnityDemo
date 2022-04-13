@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   androidSettings:
     AppKey: LFo9FuZSz
-    AdmobAppID: ca-app-pub-7188592076082444~5943610619
-    GooglePlayStore: 1
-    ChineseAndroidStores: 0
-    Channel: GooglePlay
+    AdmobAppID: 
+    GooglePlayStore: 0
+    ChineseAndroidStores: 1
+    Channel: Huawei
   iOSSettings:
-    AppKey: LFo9FuZSz
-    AdmobAppID: ca-app-pub-7188592076082444~5943610619
+    AppKey: 
+    AdmobAppID: 
     ChinaRegion: 0
     GlobalRegion: 1
     AppLovinSdkKey: 

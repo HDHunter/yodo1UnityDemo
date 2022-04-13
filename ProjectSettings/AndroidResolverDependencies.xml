@@ -1,23 +1,94 @@
 <dependencies>
   <packages>
-    <package>com.yodo1.anti-addiction:core:3.0.+</package>
-    <package>com.yodo1.common:support:1.1.+</package>
-    <package>com.yodo1:advert-cn:3.14.1</package>
+    <package>com.yodo1.anti-addiction:core:3.0.22</package>
+    <package>com.yodo1.suit.pay:core:1.4.1.12</package>
+    <package>com.yodo1:advert-cn:3.17.0</package>
   </packages>
-  <files />
+  <files>
+    <file>Assets/Plugins/Android/androidx.annotation.annotation-1.0.0.jar</file>
+    <file>Assets/Plugins/Android/androidx.appcompat.appcompat-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.arch.core.core-common-2.0.0.jar</file>
+    <file>Assets/Plugins/Android/androidx.arch.core.core-runtime-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.asynclayoutinflater.asynclayoutinflater-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.collection.collection-1.0.0.jar</file>
+    <file>Assets/Plugins/Android/androidx.coordinatorlayout.coordinatorlayout-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.core.core-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.cursoradapter.cursoradapter-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.customview.customview-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.documentfile.documentfile-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.drawerlayout.drawerlayout-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.fragment.fragment-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.interpolator.interpolator-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.legacy.legacy-support-core-ui-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.legacy.legacy-support-core-utils-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-common-2.0.0.jar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-extensions-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-livedata-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-livedata-core-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-process-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-runtime-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-service-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-viewmodel-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.loader.loader-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.localbroadcastmanager.localbroadcastmanager-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.multidex.multidex-2.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.print.print-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.slidingpanelayout.slidingpanelayout-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.swiperefreshlayout.swiperefreshlayout-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.vectordrawable.vectordrawable-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.vectordrawable.vectordrawable-animated-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.viewpager.viewpager-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/cn.thinkingdata.android.ThinkingAnalyticsSDK-2.7.6.2.aar</file>
+    <file>Assets/Plugins/Android/com.qq.e.union.union-4.420.1290.aar</file>
+    <file>Assets/Plugins/Android/com.squareup.okhttp3.logging-interceptor-4.9.3.jar</file>
+    <file>Assets/Plugins/Android/com.squareup.okhttp3.okhttp-4.9.3.jar</file>
+    <file>Assets/Plugins/Android/com.squareup.okio.okio-2.8.0.jar</file>
+    <file>Assets/Plugins/Android/com.umeng.umsdk.apm-1.5.2.aar</file>
+    <file>Assets/Plugins/Android/com.umeng.umsdk.asms-1.4.1.aar</file>
+    <file>Assets/Plugins/Android/com.umeng.umsdk.common-9.4.4.jar</file>
+    <file>Assets/Plugins/Android/com.yodo1.3rdparty.advert.pangle.ads-sdk-3.9.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.advert.core-1.0.20.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.advert.gdt-4.420.1290.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.advert.libs-advert-1.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.advert.libs-advert-config-1.0.1.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.advert.pangle-3.9.0.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.advert.yodo1-9.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.advert-cn-3.17.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.analytics.base-adapter-3.0.10.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.analytics.core-3.1.4.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.analytics.umeng-9.4.4.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.anti-addiction.core-3.0.22.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.common.collection-10.0.5.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.common.kit-1.1.2.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.common.noHttp-1.1.2.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.common.online-config-1.0.3.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.common.support-1.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.pay.libs-adapter-1.0.4.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.pay.libs-ops-1.0.2.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.analytics.lib-adapter-1.4.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.common.collection-1.4.1.6.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.pay.core-1.4.1.12.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.pay.lib-adapter-1.4.1.2.aar</file>
+    <file>Assets/Plugins/Android/org.jetbrains.annotations-13.0.jar</file>
+    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-1.4.10.jar</file>
+    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-common-1.4.10.jar</file>
+    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-jdk7-1.4.10.jar</file>
+    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-jdk8-1.4.10.jar</file>
+  </files>
   <settings>
-    <setting name="androidAbis" value="arm64-v8a" />
-    <setting name="bundleId" value="com.yodo1.UnityDemo" />
+    <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
+    <setting name="bundleId" value="com.yodo1.rodeo" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
-    <setting name="gradlePropertiesTemplateEnabled" value="True" />
-    <setting name="gradleTemplateEnabled" value="True" />
+    <setting name="gradlePropertiesTemplateEnabled" value="False" />
+    <setting name="gradleTemplateEnabled" value="False" />
     <setting name="installAndroidPackages" value="True" />
     <setting name="localMavenRepoDir" value="Assets/GeneratedLocalRepo" />
     <setting name="packageDir" value="Assets/Plugins/Android" />
     <setting name="patchAndroidManifest" value="True" />
     <setting name="patchMainTemplateGradle" value="True" />
-    <setting name="projectExportEnabled" value="False" />
+    <setting name="projectExportEnabled" value="True" />
     <setting name="useJetifier" value="True" />
   </settings>
 </dependencies>
