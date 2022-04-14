@@ -99,12 +99,12 @@ public class Yodo1AdsTest : MonoBehaviour
 
     void OnGUI()
     {
-        int buttonHeight = Screen.height / 13;
-        int buttonWidth = Screen.width / 2;
-        int buttonSpace = buttonHeight / 2;
-        int startHeight = buttonHeight / 2;
+        int btnH = Screen.height / 13;
+        int btnW = Screen.width / 2;
+        int space = btnH / 2;
+        int top = btnH / 2;
 
-        if (GUI.Button(new Rect(Screen.width / 4, startHeight, buttonWidth, buttonHeight), "show banner ad"))
+        if (GUI.Button(new Rect(Screen.width / 4, top, btnW, btnH), "show banner ad"))
         {
             if (!Yodo1U3dAds.BannerIsReady())
             {
@@ -127,7 +127,7 @@ public class Yodo1AdsTest : MonoBehaviour
             Yodo1U3dAds.ShowBanner();
         }
 
-        if (GUI.Button(new Rect(Screen.width / 4, startHeight + buttonSpace + buttonHeight, buttonWidth, buttonHeight),
+        if (GUI.Button(new Rect(Screen.width / 4, top + space + btnH, btnW, btnH),
             "hide banner ad"))
         {
             //Hide banner ad
@@ -135,7 +135,7 @@ public class Yodo1AdsTest : MonoBehaviour
         }
 
         if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 2 + buttonSpace * 2, buttonWidth, buttonHeight),
+            new Rect(Screen.width / 4, top + btnH * 2 + space * 2, btnW, btnH),
             "show interstitial ad"))
         {
             //Show interstitial ad
@@ -150,7 +150,7 @@ public class Yodo1AdsTest : MonoBehaviour
         }
 
         if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 3 + buttonSpace * 3, buttonWidth, buttonHeight),
+            new Rect(Screen.width / 4, top + btnH * 3 + space * 3, btnW, btnH),
             "show reward video ad"))
         {
             //Show reward video ad
@@ -164,8 +164,7 @@ public class Yodo1AdsTest : MonoBehaviour
             }
         }
 
-        if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 4 + buttonSpace * 4, buttonWidth, buttonHeight),
+        if (GUI.Button(new Rect(Screen.width / 4, top + btnH * 4 + space * 4, btnW, btnH),
             "show lucky wheel"))
         {
             //Show reward game
@@ -177,6 +176,12 @@ public class Yodo1AdsTest : MonoBehaviour
             {
                 Debug.Log("[Yodo1 Ads] Reward game is disabled.");
             }
+        }
+
+        if (GUI.Button(new Rect(Screen.width / 4, top + btnH * 5 + space * 5, btnW, btnH),
+            "返回"))
+        {
+            SceneManager.LoadScene("Yodo1Demo");
         }
     }
 }
