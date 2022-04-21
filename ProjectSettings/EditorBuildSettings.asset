@@ -9,18 +9,21 @@ EditorBuildSettings:
     path: Assets/Yodo1/Suit/Sample/Scene/Yodo1Demo.unity
     guid: b4dbf3f4741b949859132ab67fa35378
   - enabled: 1
-    path: Assets/Yodo1Ads/Sample/Yodo1AdsScene.unity
+    path: Assets/Yodo1/Yodo1Ads/Sample/Yodo1AdsScene.unity
     guid: 9aa5866e47649407fb066afebf56e4c9
+  - enabled: 1
+    path: Assets/Yodo1/Anti/Sample/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Yodo1/Suit/Sample/Scene/AccountScene.unity
+    guid: 7a9f4dec6e4774248bff3975d17b7380
   - enabled: 1
     path: Assets/Yodo1/Suit/Sample/Scene/AnalyticsScene.unity
     guid: 24f771d4525ad4961b642e5a61e3e108
   - enabled: 1
-    path: Assets/Yodo1/Suit/Sample/Scene/VerifyScene.unity
-    guid: c22dbd1d17e834287aa01ffcb0e04d6d
-  - enabled: 1
     path: Assets/Yodo1/Suit/Sample/Scene/PayScene.unity
     guid: b06779ac4edb64d8c841af7ea5fa8d73
   - enabled: 1
-    path: Assets/Yodo1/Suit/Sample/Scene/AccountScene.unity
-    guid: 7a9f4dec6e4774248bff3975d17b7380
+    path: Assets/Yodo1/Suit/Sample/Scene/VerifyScene.unity
+    guid: c22dbd1d17e834287aa01ffcb0e04d6d
   m_configObjects: {}

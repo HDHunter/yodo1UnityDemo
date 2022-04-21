@@ -40,7 +40,10 @@
                 android:name="android.max_aspect"
                 android:value="2.1"/>
 
-        <!--Yodo1App--><!--Yodo1App_end-->
+        <!--Yodo1App-->
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="" /><!--Yodo1App_end-->
         <activity
                 android:name="com.yodo1.android.sdk.view.SplashActivity"
                 android:configChanges="orientation|screenSize|keyboardHidden"

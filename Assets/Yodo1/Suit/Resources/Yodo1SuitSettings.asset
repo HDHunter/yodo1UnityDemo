@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Yodo1SuitSettings
   m_EditorClassIdentifier: 
   androidSettings:
-    AppKey: 
+    AppKey: asdf
     RegionCode: 
     thisProjectOrient: portrait
     Yodo1SDKType: GooglePlay
     yodo1_sdk_mode: offline
-    share_code: 0
+    share_code: 1
     configChannel:
     - Name: GooglePlay
       Dependency: com.yodo1.suit.pay:google:4.0.0.3
@@ -27,7 +27,7 @@ MonoBehaviour:
         Value: 
       - Key: google_app_id
         Value: 
-      Selected: 0
+      Selected: 1
     configAnalytics:
     - Name: ThinkingData
       Dependency: 
@@ -38,7 +38,7 @@ MonoBehaviour:
         Value: https://c1.yodo1.com/
       Selected: 1
     - Name: Appsflyer
-      Dependency: com.yodo1.suit.analytics:appsflyer:6.5.3.2
+      Dependency: com.yodo1.suit.analytics:appsflyer:6.5.3.3
       analyticsProperty:
       - Key: appsflyer_dev_key
         Value: 
@@ -61,4 +61,5 @@ MonoBehaviour:
       - Key: UMENG_CHANNEL
         Value: GooglePlay
       Selected: 0
-    debugEnabled: 0
+    debugEnabled: 1
+    isShowYodo1Logo: 1
