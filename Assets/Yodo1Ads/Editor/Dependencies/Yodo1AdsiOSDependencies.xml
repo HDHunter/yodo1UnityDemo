@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<dependencies>
-	<iosPods>
-		<sources>
-			<source>https://github.com/Yodo1Games/Yodo1Spec.git</source>
-		</sources>
-		<iosPod name="MasSdk/MasSdk_Unity" version="3.16.8" bitcode="false" minTargetSdk="10.0" />
-	</iosPods>
-</dependencies>
