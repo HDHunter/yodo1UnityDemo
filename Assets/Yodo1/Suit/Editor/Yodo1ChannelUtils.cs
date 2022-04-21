@@ -9,9 +9,8 @@ public class Yodo1ChannelUtils
 {
     public static void ChannelHandle()
     {
-        //revert
-        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1ValuePath);
-        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1Assets);
+        //revert.do not del game assets.
+        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1ValuePath + "/ids.xml");
         try
         {
             StreamReader sr = new StreamReader(Yodo1AndroidConfig.manifest);
@@ -91,7 +90,7 @@ public class Yodo1ChannelUtils
         {
             if (i.Key.Contains("uriSchema"))
             {
-                deeplink.Replace("@uri_schema", i.Value);
+                deeplink = deeplink.Replace("@uri_schema", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
                     isValue = true;
@@ -99,7 +98,7 @@ public class Yodo1ChannelUtils
             }
             else if (i.Key.Contains("uriHost"))
             {
-                deeplink.Replace("@uri_host", i.Value);
+                deeplink = deeplink.Replace("@uri_host", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
                     isValue = true;
@@ -107,7 +106,7 @@ public class Yodo1ChannelUtils
             }
             else if (i.Key.Contains("urlSchema"))
             {
-                deeplink.Replace("@url_schema", i.Value);
+                deeplink = deeplink.Replace("@url_schema", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
                     isValue = true;
@@ -115,7 +114,7 @@ public class Yodo1ChannelUtils
             }
             else if (i.Key.Contains("urlHost"))
             {
-                deeplink.Replace("@url_host", i.Value);
+                deeplink = deeplink.Replace("@url_host", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
                     isValue = true;
@@ -123,7 +122,7 @@ public class Yodo1ChannelUtils
             }
             else if (i.Key.Contains("urlPath"))
             {
-                deeplink.Replace("@url_path", i.Value);
+                deeplink = deeplink.Replace("@url_path", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
                     isValue = true;
@@ -139,23 +138,18 @@ public class Yodo1ChannelUtils
 
     private static void googlePlay(AnalyticsItem item)
     {
-        string appid = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                       "<resources>\n" +
-                       "    <string name=\"google_app_id\">@google_appid</string>\n" +
-                       "</resources>";
         string manifestdata = "\n" +
                               "        <meta-data\n" +
                               "            android:name=\"com.google.android.gms.games.APP_ID\"\n" +
-                              "            android:value=\"@string/google_app_id\" />";
+                              "            android:value=\"@google_appid\" />";
         foreach (KVItem i in item.analyticsProperty)
         {
             if (i != null && "google_app_id".Equals(i.Key))
             {
-                appid = appid.Replace("@google_appid", i.Value);
+                manifestdata = manifestdata.Replace("@google_appid", i.Value);
             }
         }
 
-        EditorFileUtils.WriteFile(Yodo1AndroidConfig.Yodo1ValuePath, "ids.xml", appid);
         EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Yodo1App_end-->",
             manifestdata + "<!--Yodo1App_end-->");
     }

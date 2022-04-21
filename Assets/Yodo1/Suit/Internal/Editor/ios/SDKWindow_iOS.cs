@@ -57,8 +57,8 @@ namespace Yodo1Unity
 
             if (GUI.Button(new Rect(base.position.width - 105, 5, 60, 30), "Save"))
             {
-                Debug.Log("Yodo1Suit  Save Config!!");
                 SaveConfig();
+                Close();
             }
 
             GUILayout.Space(45);
@@ -252,19 +252,15 @@ namespace Yodo1Unity
             GUILayout.EndVertical();
         }
 
-        private void OnDisable()
-        {
-            SaveConfig();
-
-            settings = null;
-
-            Debug.Log("Yodo1Suit  OnDisable");
-        }
 
         private void SaveConfig()
         {
             //保存配置
-            SettingsSave.Save(settings);
+            if (settings != null)
+            {
+                SettingsSave.Save(settings);
+            }
+
             //修改plist
             SDKConfig.UpdateYodo1KeyInfo();
             //生成podfile文件
@@ -275,19 +271,25 @@ namespace Yodo1Unity
 
         private void OnEnable()
         {
-            Debug.Log("Yodo1Suit  OnEnable");
-            settings = SettingsSave.LoadEditor(true);
+            if (settings == null)
+            {
+                Debug.Log("Yodo1Suit SDKWindowiOS OnEnable:" + settings);
+                settings = SettingsSave.LoadEditor(true);
+            }
+            else
+            {
+                Debug.Log("Yodo1Suit SDKWindowiOS OnEnable::" + settings);
+            }
 
             Yodo1sdkIcon =
                 (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "yodo1sdk-icon.png", typeof(Texture2D));
-            if (Yodo1sdkIcon == null)
-            {
-                Debug.Log("Yodo1Suit  Icon Image is null!");
-            }
-
             questionMarkIcon =
                 (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "question-mark.png", typeof(Texture2D));
-            base.Repaint();
+        }
+
+        private void OnDisable()
+        {
+            SaveConfig();
         }
 
         private void OnGUI()

@@ -37,32 +37,32 @@ namespace Yodo1Unity
 
             EditorFileUtils.DeleteFile(Yodo1KeyInfoPath);
             File.Create(Yodo1KeyInfoPath).Dispose();
-            Yodo1PropertiesUtils yodo1PropertiesUtils = new Yodo1PropertiesUtils(Yodo1KeyInfoPath);
+            Yodo1PropertiesUtils props = new Yodo1PropertiesUtils(Yodo1KeyInfoPath);
             RuntimeAndroidSettings sets = settings.androidSettings;
-            yodo1PropertiesUtils.Add("mainClassName", "com.yodo1.plugin.u3d.Yodo1UnityActivity");
-            yodo1PropertiesUtils.Add("isshow_yodo1_logo", "true");
-            yodo1PropertiesUtils.Add("Yodo1SDKVersion", UpdateVersion.Yodo1PluginVersion);
+            props.Add("mainClassName", "com.yodo1.plugin.u3d.Yodo1UnityActivity");
+            props.Add("isshow_yodo1_logo", sets.isShowYodo1Logo?"true":"false");
+            props.Add("Yodo1SDKVersion", UpdateVersion.Yodo1PluginVersion);
             if (!string.IsNullOrEmpty(sets.AppKey))
             {
-                yodo1PropertiesUtils.Add("game_key", sets.AppKey);
+                props.Add("game_key", sets.AppKey);
             }
 
             if (!string.IsNullOrEmpty(sets.RegionCode))
             {
-                yodo1PropertiesUtils.Add("regionCode", sets.RegionCode);
+                props.Add("regionCode", sets.RegionCode);
             }
 
             if (!string.IsNullOrEmpty(sets.yodo1_sdk_mode))
             {
-                yodo1PropertiesUtils.Add("yodo1_sdk_mode", sets.yodo1_sdk_mode);
+                props.Add("yodo1_sdk_mode", sets.yodo1_sdk_mode);
             }
 
-            yodo1PropertiesUtils.Add("debugEnabled", sets.debugEnabled ? "1" : "0");
+            props.Add("debugEnabled", sets.debugEnabled ? "1" : "0");
 
             string setsYodo1SDKType = sets.Yodo1SDKType;
             if (!string.IsNullOrEmpty(sets.thisProjectOrient))
             {
-                yodo1PropertiesUtils.Add("thisProjectOrient", sets.thisProjectOrient);
+                props.Add("thisProjectOrient", sets.thisProjectOrient);
                 if (setsYodo1SDKType.Equals("GooglePlay"))
                 {
                     if ("portrait".Equals(sets.thisProjectOrient))
@@ -96,20 +96,20 @@ namespace Yodo1Unity
             {
                 if (setsYodo1SDKType.Equals("GooglePlay"))
                 {
-                    yodo1PropertiesUtils.Add("Yodo1SDKType", "yodo1_global");
-                    yodo1PropertiesUtils.Add("CHANNEL_CODE_PUBLISH", "GooglePlay");
-                    yodo1PropertiesUtils.Add("CHANNEL_CODE", "GooglePlay");
-                    yodo1PropertiesUtils.Add("sdk_code", "GooglePlay");
+                    props.Add("Yodo1SDKType", "yodo1_global");
+                    props.Add("CHANNEL_CODE_PUBLISH", "GooglePlay");
+                    props.Add("CHANNEL_CODE", "GooglePlay");
+                    props.Add("sdk_code", "GooglePlay");
                 }
                 else
                 {
-                    yodo1PropertiesUtils.Add("Yodo1SDKType", "yodo1_cn");
+                    props.Add("Yodo1SDKType", "yodo1_cn");
                 }
             }
 
             if (sets.share_code)
             {
-                yodo1PropertiesUtils.Add("share_code", "AndroidSystem");
+                props.Add("share_code", "AndroidSystem");
             }
 
             List<AnalyticsItem> analytics = sets.configAnalytics;
@@ -124,7 +124,7 @@ namespace Yodo1Unity
                         {
                             foreach (KVItem item in prop)
                             {
-                                yodo1PropertiesUtils.Add(item.Key, item.Value);
+                                props.Add(item.Key, item.Value);
                             }
                         }
                     }
@@ -143,14 +143,14 @@ namespace Yodo1Unity
                         {
                             foreach (KVItem item in prop)
                             {
-                                yodo1PropertiesUtils.Add(item.Key, item.Value);
+                                props.Add(item.Key, item.Value);
                             }
                         }
                     }
                 }
             }
 
-            yodo1PropertiesUtils.Save();
+            props.Save();
         }
 
         public static void CreateDependencies()

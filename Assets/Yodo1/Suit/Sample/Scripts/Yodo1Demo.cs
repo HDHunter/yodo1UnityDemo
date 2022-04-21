@@ -213,6 +213,12 @@ public class Yodo1Demo : MonoBehaviour
             }
         }
 
+
+        if (GUI.Button(new Rect(btn_x, btn_startY * 10 + btn_h * 9, btn_w, btn_h), "防沉迷功能"))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+
         if (GUI.Button(new Rect(btn_x, btn_startY * 11 + btn_h * 10, btn_w, btn_h), "广告功能"))
         {
             SceneManager.LoadScene("Yodo1AdsScene");

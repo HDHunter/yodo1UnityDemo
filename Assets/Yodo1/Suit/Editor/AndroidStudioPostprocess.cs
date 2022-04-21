@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -11,27 +12,21 @@ public class AndroidStudioPostprocess
         {
             //得到xcode工程的路径
             string path = Path.GetFullPath(bpOption.locationPathName);
-            //修改properties
-            Yodo1AndroidConfig.UpdateProperties();
-            //修改dependency
-            Yodo1AndroidConfig.CreateDependencies();
-            //渠道特殊处理
-            Yodo1ChannelUtils.ChannelHandle();
             //IAP支付处理
-            GeneratePayInfo(path);
+            try
+            {
+                GeneratePayInfo(path);
+                Debug.Log("Yodo1Suit You have create iap config file.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                EditorUtility.DisplayDialog("提示：", "IapConfig计费点表格无法解析!", "是(Yes)");
+                throw;
+            }
+
             Debug.Log("Yodo1Suit AndroidStudioPostprocess-BeforeBuildProcess pathToBuiltProject:" + path);
         }
-    }
-
-
-    public static void GeneratePayInfo(string path)
-    {
-        if (!Directory.Exists(Yodo1AndroidConfig.Yodo1Assets))
-        {
-            Directory.CreateDirectory(Yodo1AndroidConfig.Yodo1Assets);
-        }
-
-        Yodo1IAPConfig.GenerateIAPsConifg(BuildTarget.Android, Yodo1AndroidConfig.Yodo1Assets);
     }
 
     public static void AfterBuildProcess(BuildTarget buildTarget, string pathToBuiltProject)
@@ -41,5 +36,15 @@ public class AndroidStudioPostprocess
             Debug.Log("Yodo1Suit AndroidStudioPostprocess-AfterBuildProcess pathToBuiltProject:" +
                       pathToBuiltProject);
         }
+    }
+
+    public static void GeneratePayInfo(string path)
+    {
+        if (!Directory.Exists(Yodo1AndroidConfig.Yodo1Assets))
+        {
+            Directory.CreateDirectory(Yodo1AndroidConfig.Yodo1Assets);
+        }
+
+        Yodo1IAPConfig.GenerateIAPsConifg(BuildTarget.Android, Yodo1AndroidConfig.Yodo1Assets);
     }
 }

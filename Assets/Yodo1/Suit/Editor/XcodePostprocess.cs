@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEditor;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
@@ -144,7 +145,7 @@ namespace Yodo1Unity
 
         //continueUserActivity:userActivity,handler
         private const string continueUser =
-            "- (BOOL)Application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {";
+            "- (BOOL)Application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {";
 
         const string continueUserAnalyticsManager =
             "\n\t[[Yodo1AnalyticsManager sharedInstance] SubApplication:application continueUserActivity:userActivity restorationHandler:restorationHandler];\n";
@@ -198,12 +199,21 @@ namespace Yodo1Unity
         {
             if (bpOption.target == BuildTarget.iOS)
             {
-                //修改Yodo1KeyConfig.bundle里面的plist
-                SDKConfig.UpdateYodo1KeyInfo();
-                //计费点处理
-                Yodo1IAPConfig.GenerateIAPsConifg(BuildTarget.iOS, Path.GetFullPath(SDKConfig.Yodo1BunldePath));
-                Debug.Log("Yodo1Suit XcodePostprocess-BeforeBuildProcess pathToBuiltProject:" +
-                          bpOption.locationPathName);
+                //得到xcode工程的路径
+                string path = Path.GetFullPath(bpOption.locationPathName);
+                //IAP支付处理
+                try
+                {
+                    Yodo1IAPConfig.GenerateIAPsConifg(BuildTarget.iOS, Path.GetFullPath(SDKConfig.Yodo1BunldePath));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    EditorUtility.DisplayDialog("提示：", "IapConfig计费点表格无法解析!", "是(Yes)");
+                    throw;
+                }
+
+                Debug.Log("Yodo1Suit XcodePostprocess-BeforeBuildProcess pathToBuiltProject:" + path);
             }
         }
 

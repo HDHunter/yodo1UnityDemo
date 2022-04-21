@@ -32,18 +32,14 @@ namespace Yodo1Unity
             window.Show();
         }
 
-
-        private void OnDisable()
-        {
-            Debug.Log("Yodo1Suit SDKWindow--OnDisable");
-            SaveConfig();
-            runtimeSettings = null;
-        }
-
         private void SaveConfig()
         {
             //保存配置
-            SettingsSave.Save(runtimeSettings);
+            if (runtimeSettings != null)
+            {
+                SettingsSave.Save(runtimeSettings);
+            }
+
             //修改properties
             Yodo1AndroidConfig.UpdateProperties();
             //修改dependency
@@ -54,13 +50,25 @@ namespace Yodo1Unity
 
         private void OnEnable()
         {
-            Debug.Log("Yodo1Suit SDKWindowAndroid--OnEnable");
-            runtimeSettings = SettingsSave.Load(true);
+            if (runtimeSettings == null)
+            {
+                Debug.Log("Yodo1Suit SDKWindowAndroid OnEnable:" + runtimeSettings);
+                runtimeSettings = SettingsSave.Load(true);
+            }
+            else
+            {
+                Debug.Log("Yodo1Suit SDKWindowAndroid OnEnable::" + runtimeSettings);
+            }
+
             Yodo1sdkIcon =
                 (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "yodo1sdk-icon.png", typeof(Texture2D));
             questionMarkIcon =
                 (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "question-mark.png", typeof(Texture2D));
-            Repaint();
+        }
+
+        private void OnDisable()
+        {
+            SaveConfig();
         }
 
         private void OnGUI()
@@ -120,6 +128,7 @@ namespace Yodo1Unity
             if (GUI.Button(new Rect(position.width - 105, 5, 60, 30), "Save"))
             {
                 SaveConfig();
+                Close();
             }
 
             GUILayout.Space(45);
@@ -198,6 +207,10 @@ namespace Yodo1Unity
             }
 
             EditorGUILayout.Separator();
+
+            runtimeSettings.androidSettings.isShowYodo1Logo =
+                EditorGUILayout.Toggle("isSplashShowYodo1Logo", runtimeSettings.androidSettings.isShowYodo1Logo,
+                    new GUILayoutOption[0]);
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical(gUIStyle);
@@ -278,28 +291,6 @@ namespace Yodo1Unity
                 EditorGUILayout.Separator();
                 GUILayout.EndVertical();
             }
-        }
-
-        private void OnHierarchyChange()
-        {
-            Debug.Log("Yodo1Suit--OnHierarchyChange");
-            Repaint();
-        }
-
-        private void OnInspectorUpdate()
-        {
-            Repaint();
-        }
-
-        private void OnProjectChange()
-        {
-            Debug.Log("Yodo1Suit--OnProjectChange");
-            Repaint();
-        }
-
-        private void OnSelectionChange()
-        {
-            Debug.Log("Yodo1Suit--OnSelectionChange");
         }
     }
 }

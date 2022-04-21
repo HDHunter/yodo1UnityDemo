@@ -121,8 +121,10 @@ namespace Yodo1.AntiAddiction
 
             // Debug.Log(Yodo1U3dSettings.Instance.AppKey);
             Yodo1U3dExtra yodo1U3DExtra = Yodo1U3dExtra.Create();
-            _antiAddictionImpl.Init(Yodo1U3dSettings.Instance.AppKey, yodo1U3DExtra.ToJsonString(),
-                Yodo1U3dSettings.Instance.RegionCode, _antiAddictionDelegate.SdkObjectName,
+            string appKey = PlayerPrefs.GetString(Yodo1Demo.KEY_APP_KEY);
+            string regionCode = PlayerPrefs.GetString(Yodo1Demo.KEY_REGION_CODE);
+            _antiAddictionImpl.Init(appKey, yodo1U3DExtra.ToJsonString(),
+                regionCode, _antiAddictionDelegate.SdkObjectName,
                 _antiAddictionDelegate.SdkMethodName);
             initialized = true;
         }

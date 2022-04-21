@@ -20,6 +20,7 @@ namespace Yodo1Unity
         public List<AnalyticsItem> configChannel;
         public List<AnalyticsItem> configAnalytics;
         public bool debugEnabled;
+        public bool isShowYodo1Logo;
 
         public RuntimeAndroidSettings()
         {
@@ -46,6 +47,7 @@ namespace Yodo1Unity
             }
 
             cutSettings.androidSettings.debugEnabled = oldSettings.androidSettings.debugEnabled;
+            cutSettings.androidSettings.isShowYodo1Logo = oldSettings.androidSettings.isShowYodo1Logo;
 
             if (!string.IsNullOrEmpty(oldSettings.androidSettings.AppKey))
             {
