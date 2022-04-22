@@ -100,10 +100,10 @@ public class Yodo1AdsTest : MonoBehaviour
 
     void OnGUI()
     {
-        int buttonHeight = Screen.height / 13;
+        int buttonHeight = Screen.height / 14;
         int buttonWidth = Screen.width / 2;
-        int buttonSpace = buttonHeight / 2;
-        int startHeight = buttonHeight / 2;
+        int buttonSpace = buttonHeight / 3;
+        int startHeight = buttonHeight / 3;
 
         if (GUI.Button(new Rect(Screen.width / 4, startHeight, buttonWidth, buttonHeight), "show banner ad"))
         {
@@ -203,6 +203,13 @@ public class Yodo1AdsTest : MonoBehaviour
             {
                 Debug.Log("[Yodo1 Ads] lucky wheel is not enable.");
             }
+        }
+
+        if (GUI.Button(
+            new Rect(Screen.width / 4, startHeight + buttonHeight * 7 + buttonSpace * 7, buttonWidth, buttonHeight),
+            "退出"))
+        {
+            SceneManager.LoadScene("Yodo1Demo");
         }
     }
 }

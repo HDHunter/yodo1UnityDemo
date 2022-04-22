@@ -5,8 +5,5 @@
 			<repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>
 			<repository>http://mvnrepository.com/</repository>
 		</repositories>
-		<androidPackage spec="com.yodo1.suit.pay:core:1.5.0.0" />
-		<androidPackage spec="com.yodo1.suit.pay:google:4.0.0.3" />
-		<androidPackage spec="com.yodo1.suit.share:system:1.1.0" />
 	</androidPackages>
 </dependencies>

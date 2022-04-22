@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Yodo1SuitSettings
   m_EditorClassIdentifier: 
   androidSettings:
-    AppKey: asdf
+    AppKey: 
     RegionCode: 
     thisProjectOrient: portrait
-    Yodo1SDKType: GooglePlay
+    Yodo1SDKType: ChinaMainLand
     yodo1_sdk_mode: offline
-    share_code: 1
+    share_code: 0
     configChannel:
     - Name: GooglePlay
       Dependency: com.yodo1.suit.pay:google:4.0.0.3
@@ -27,7 +27,7 @@ MonoBehaviour:
         Value: 
       - Key: google_app_id
         Value: 
-      Selected: 1
+      Selected: 0
     configAnalytics:
     - Name: ThinkingData
       Dependency: 
