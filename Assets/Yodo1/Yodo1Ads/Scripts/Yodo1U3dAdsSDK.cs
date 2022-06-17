@@ -20,7 +20,7 @@ namespace Yodo1Ads
 
         public string SdkObjectName
         {
-            get { return gameObject.name; }
+            get { return "Yodo1U3dAdsSDK"; }
         }
 
         #region Ad Delegate
