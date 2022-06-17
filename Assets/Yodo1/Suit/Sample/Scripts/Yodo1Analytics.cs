@@ -50,60 +50,59 @@ public class Yodo1Analytics : MonoBehaviour
             }
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "上传充值事件-request,success"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "上传充值事件-request"))
         {
-            //充值请求，与充值成功需要配合调用
-            string orderId = "orderidtest0001";
-            Yodo1U3dDMPPay dmpPay = new Yodo1U3dDMPPay();
-            dmpPay.OrderId = orderId; //订单号
-            dmpPay.Coin = 100; //换算成等价的虚拟币
-            dmpPay.ProductId = "product001"; //商品id
-            dmpPay.ProductName = "测试商品"; //商品名
-            dmpPay.ProductPrice = 0.1; //价格
-            dmpPay.PayChannel = Yodo1U3dConstants.PayType.PayTypeSMS; //支付渠道
-            dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
-            Yodo1U3dAnalytics.onRechargeRequest(dmpPay);
-            //充值成功
-            Yodo1U3dAnalytics.onRechargeSuccess(orderId);
-            Yodo1U3dAnalytics.onRechargeFail(orderId);
+            if (eventName.Equals(""))
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId");
+                Yodo1U3dUtils.ShowAlert("", "请输入product001的orderId", "", "ok", "", null, null);
+            }
+            else
+            {
+                //充值请求，与充值成功需要配合调用
+                Yodo1U3dDMPPay dmpPay = new Yodo1U3dDMPPay();
+                dmpPay.OrderId = eventName; //订单号
+                dmpPay.Coin = 100; //换算成等价的虚拟币
+                dmpPay.ProductId = "product001"; //商品id
+                dmpPay.ProductName = "测试商品"; //商品名
+                dmpPay.ProductPrice = 0.1; //价格
+                dmpPay.PayChannel = Yodo1U3dConstants.PayType.PayTypeSMS; //支付渠道
+                dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
+                Yodo1U3dAnalytics.onRechargeRequest(dmpPay);
+            }
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h),
-            "上传mission-begin,completed,faild"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "上传充值事件-success,fail"))
         {
-            //关卡
-            string missionId = "mission01";
-            Yodo1U3dAnalytics.missionBegin(missionId); //关卡开始
-            Yodo1U3dAnalytics.missionCompleted(missionId); //关卡完成
-            Yodo1U3dAnalytics.missionFailed(missionId, "error"); //关卡失败
+            if (eventName.Equals(""))
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId");
+                Yodo1U3dUtils.ShowAlert("", "请输入product001的orderId", "", "ok", "", null, null);
+            }
+            else
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId：" + eventName);
+                //充值成功/失败
+                Yodo1U3dAnalytics.onRechargeSuccess(eventName);
+                Yodo1U3dAnalytics.onRechargeFail(eventName);
+            }
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 5 + btn_h * 4, btn_w, btn_h), "上传玩家等级-playerLevel"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 7 + btn_h * 6, btn_w, btn_h), "统计Login"))
         {
-            //设置玩家等级
-            Yodo1U3dAnalytics.setPlayerLevel(1);
-        }
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 6 + btn_h * 5, btn_w, btn_h), "上传虚拟币事件-use,reward"))
-        {
-            //花费虚拟币购买物品
-            Yodo1U3dAnalytics.onPurchanseGamecoin("product001", 1, 100);
-            //消耗物品
-            Yodo1U3dAnalytics.onUseItem("product001", 1, 100);
-            //虚拟币赠与
-            Yodo1U3dAnalytics.onGameReward(100, "测试", 1);
-        }
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 7 + btn_h * 6, btn_w, btn_h), "missionCompleted"))
-        {
-            string eventName = "YODO3_TEST";
-            //submit
-            Yodo1U3dDMPPay payInfo = new Yodo1U3dDMPPay();
-            payInfo.OrderId = "12333135454";
-            payInfo.ProductId = "com.yodo1.Conin10";
-            payInfo.ProductPrice = 12.0;
-            payInfo.Coin = 60.0;
-            payInfo.PayChannel = Yodo1U3dConstants.PayType.PayTypeChannel;
+            if (eventName.Equals(""))
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "playerId");
+                Yodo1U3dUtils.ShowAlert("", "请输入login的PlayerId", "", "ok", "", null, null);
+            }
+            else
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "playerId：" + eventName);
+                //统计登录的用户id。
+                Yodo1U3dUser user = new Yodo1U3dUser();
+                user.PlayerId = eventName;
+                Yodo1U3dAnalytics.login(user);
+            }
         }
 
 #if UNITY_IPHONE

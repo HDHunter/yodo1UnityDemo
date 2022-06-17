@@ -38,4 +38,48 @@ unity iOS配置读写，iOS依赖优化
 2022年04月02日	张建秋
 
 1.5.0
-1,
+1，getSDKVersion实现。
+2, verifyActivationCode优惠码功能实现。
+3，增加超神抖音渠道,233广告类型增加
+4，Android/iOS debug标记支持，日志和调试模式。
+5，根据UnityEditor配置gameKey,提前进行init初始化。
+6，appleStore/googlePlay加入queryMissOrder逻辑。
+2022年04月14日	张建秋
+
+6.0.0
+1，Suit Android/iOS原生文档 OpenSuit Android集成文档 OpenSuit iOS集成文档。
+2，iOS Cocopads 从Yodo1Ads分离
+3，iOS deeplink cs脚本修改，deeplink值获取修复
+4，UnityEdit添加isshow_yodo1logo Android，修复assets资源删除问题。
+5，360渠道升级和修复。酷派安装修复。
+6，碰到的KTPlay,Anti,MAS4冲突问题
+2022年04月28日	张建秋
+
+6.0.1
+1，customAFUserId defalut value.
+2，GooglePlay渠道权限请求逻辑
+3，协议内容Web对话框上一页不可点击时置灰
+4，iOS AppsFlyer 更新到6.5.4
+5，iOS AppsFlyer Deeplink安装启动时deeplink值获取修复
+2022年05月11日	张建秋
+
+6.0.2
+1，移除bugly
+2, 带有订阅商品游戏的AF purchase事件
+3，Android AppsFlyer Deeplink安装启动时deeplink值获取修复
+4，Android 验证码倒计时秒.
+2022年05月16日	张建秋
+
+6.1.0
+1，Android suit 6.+ 支持PA打包(国内打包)
+2，Android 4399/4399纯广告 联运更新3.1.2到3.3.4
+3，Android 4399广告更新1.4.3到1.4.5
+4，Android huawei联运6.2.0到6.5.0
+5，Android huawei广告13.4.52到13.4.54
+6，Android yyb联运1.8.10更新到1.8.14
+7，Android Thinkingdata更新2.7.6.2到2.8.0
+8，Android GooglePlay PendingTrasaction Research.
+9, Android bilibili更新5.1.0更新到5.4.2
+10，Server 防沉迷消费限制修改
+11，Server googlePlay支付auth鉴权更新
+2022年06月09日	张建秋

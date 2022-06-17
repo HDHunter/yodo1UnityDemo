@@ -21,6 +21,22 @@ public class Yodo1U3dAnalytics
 #endif
     }
 
+    /**
+     * 游戏自定义玩家属性值，来配置填充到统计sdk上。eg.accountId(clientId,user,playId)
+     *
+     * (user.playId  AF,td上的用户id)
+     */
+    public static void login(Yodo1U3dUser user)
+    {
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAnalyticsForAndroid.login(user);
+#elif UNITY_IPHONE
+        Yodo1U3dAnalyticsForIOS.login(user);
+#endif
+    }
+
+
     public static void customEventAppsflyer(string eventId, Dictionary<string, string> value = null)
     {
         string jsonData = (value == null ? null : Yodo1JSONObject.Serialize(value));
@@ -67,112 +83,6 @@ public class Yodo1U3dAnalytics
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
         Yodo1U3dAnalyticsForAndroid.onRechargeFail(orderId);
-#endif
-    }
-
-
-    /// <summary>
-    /// 花费虚拟币购买物品
-    /// </summary>
-    /// <param name="productId">物品编号</param>
-    /// <param name="number">数量</param>
-    /// <param name="coin">单价</param>
-    public static void onPurchanseGamecoin(string productId, int number, double coin)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onPurchanseGamecoin(productId, number, coin);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.PurchaseAnalytics(productId, number, coin);
-#endif
-    }
-
-    /// <summary>
-    /// 使用物品
-    /// </summary>
-    /// <param name="productId">道具id</param>
-    /// <param name="number">数量</param>
-    /// <param name="coin">所消耗物品的单价</param>
-    public static void onUseItem(string productId, int number, double coin)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onUseItem(productId, number, coin);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.UseAnalytics(productId, number, coin);
-#endif
-    }
-
-    /// <summary>
-    /// 虚拟币赠与
-    /// </summary>
-    /// <param name="coin">虚拟币数量</param>
-    /// <param name="trigger">事件编号,取值1-10（1已经被友盟定义为'系统奖励', 2-10需要在友盟网站自定义）</param>
-    /// <param name="reason">事件描述（32个字符以内，可以有中文，注:最多支持100种）</param>
-    public static void onGameReward(double coin, string reason = "", int trigger = 1)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onGameReward(coin, trigger, reason);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.RewardAnalytics(coin, reason, trigger);
-#endif
-    }
-
-    /// <summary>
-    /// 关卡开始
-    /// </summary>
-    /// <param name="missionId"></param>
-    public static void missionBegin(string missionId)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.missionBegin(missionId);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.StartLevelAnalytics(missionId);
-#endif
-    }
-
-    /// <summary>
-    /// 关卡完成
-    /// </summary>
-    /// <param name="missionId"></param>
-    public static void missionCompleted(string missionId)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.missionCompleted(missionId);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.FinishLevelAnalytics(missionId);
-#endif
-    }
-
-    /// <summary>
-    /// 关卡失败
-    /// </summary>
-    /// <param name="missionId"></param>
-    /// <param name="cause">原因</param>
-    public static void missionFailed(string missionId, string cause)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.missionFailed(missionId, cause);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.FailLevelAnalytics(missionId, cause);
-#endif
-    }
-
-    /// <summary>
-    /// 统计玩家等级
-    /// </summary>
-    /// <param name="level">等级</param>
-    public static void setPlayerLevel(int level)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.setPlayerLevel(level);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.UserLevelIdAnalytics(level);
 #endif
     }
 

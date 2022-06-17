@@ -27,6 +27,17 @@ namespace Yodo1Ads
 #endif
             }
         }
+        
+        public static void SetPersonal(bool isPersonal)
+        {
+            initialized = true;
+             if (Application.platform == RuntimePlatform.Android)
+            {
+#if UNITY_ANDROID
+                Yodo1U3dAdvertForAndroid.SetPersonal(isPersonal);
+#endif
+            }
+        }
 
 
         #region BannerAd

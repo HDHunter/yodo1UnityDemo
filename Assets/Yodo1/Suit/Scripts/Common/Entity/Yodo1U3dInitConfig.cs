@@ -4,8 +4,8 @@ public class Yodo1U3dInitConfig
 {
     private string appKey = "";
     private string regionCode = "";
+    private string appsflyerCustomUserId = "";
     private Yodo1U3dConstants.GameType gameType;
-    private string appsflyerCustomUserId;
 
     public string toJson()
     {

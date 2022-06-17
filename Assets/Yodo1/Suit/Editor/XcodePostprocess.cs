@@ -145,7 +145,7 @@ namespace Yodo1Unity
 
         //continueUserActivity:userActivity,handler
         private const string continueUser =
-            "- (BOOL)Application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {";
+            "- (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {";
 
         const string continueUserAnalyticsManager =
             "\n\t[[Yodo1AnalyticsManager sharedInstance] SubApplication:application continueUserActivity:userActivity restorationHandler:restorationHandler];\n";

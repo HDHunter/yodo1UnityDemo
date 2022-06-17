@@ -21,7 +21,7 @@ MonoBehaviour:
     share_code: 0
     configChannel:
     - Name: GooglePlay
-      Dependency: com.yodo1.suit.pay:google:4.0.0.3
+      Dependency: com.yodo1.suit.pay:google:4.0.0.4
       analyticsProperty:
       - Key: google_publish_key
         Value: 
@@ -38,7 +38,7 @@ MonoBehaviour:
         Value: https://c1.yodo1.com/
       Selected: 1
     - Name: Appsflyer
-      Dependency: com.yodo1.suit.analytics:appsflyer:6.5.3.3
+      Dependency: com.yodo1.suit.analytics:appsflyer:6.6.0.1
       analyticsProperty:
       - Key: appsflyer_dev_key
         Value: 

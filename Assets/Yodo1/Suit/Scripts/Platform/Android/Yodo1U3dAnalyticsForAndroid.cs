@@ -42,6 +42,20 @@ public class Yodo1U3dAnalyticsForAndroid
         }
     }
 
+    public static void login(Yodo1U3dUser user)
+    {
+        if (null != androidCall)
+        {
+            string userjson = "";
+            if (user != null)
+            {
+                userjson = user.toJson();
+            }
+
+            androidCall.CallStatic("login", userjson);
+        }
+    }
+
     public static void customEventAppsflyer(string eventId, string jsonData)
     {
         if (null != androidCall)
@@ -83,33 +97,6 @@ public class Yodo1U3dAnalyticsForAndroid
         }
     }
 
-    //花费游戏币购买物品
-    public static void onPurchanseGamecoin(string productId, int number, double coin)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("onPurchanseGamecoin", productId, number, coin);
-        }
-    }
-
-    //使用道具
-    public static void onUseItem(string productId, int number, double coin)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("onUseItem", productId, number, coin);
-        }
-    }
-
-    //虚拟币赠与
-    public static void onGameReward(double coin, int trigger, string reason)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("onGameReward", coin, trigger, reason);
-        }
-    }
-
     //获取在线参数
     public static string StringParams(string key, string defaultValue)
     {
@@ -133,42 +120,6 @@ public class Yodo1U3dAnalyticsForAndroid
         }
 
         return defaultValue;
-    }
-
-    //关卡开始
-    public static void missionBegin(string missionId)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("onMissionBegion", missionId);
-        }
-    }
-
-    //关卡完成
-    public static void missionCompleted(string missionId)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("onMissionCompleted", missionId);
-        }
-    }
-
-    //关卡失败
-    public static void missionFailed(string missionId, string cause)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("onMissionFailed", missionId, cause);
-        }
-    }
-
-    //设置玩家等级
-    public static void setPlayerLevel(int level)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("setPlayerLevel", level);
-        }
     }
 
 

@@ -35,6 +35,18 @@ public class Yodo1U3dAdvertForAndroid
     }
 
 
+    public static void SetPersonal(bool isPersonal)
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (jc != null)
+            {
+                jc.CallStatic("setPersonal", isPersonal);
+            }
+        }
+    }
+
+
     //显示插屏广告
     public static void ShowInterstitial(string gameObjectName, string callbackName)
     {

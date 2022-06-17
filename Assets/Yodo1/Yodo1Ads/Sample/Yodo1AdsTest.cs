@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 public class Yodo1AdsTest : MonoBehaviour
 {
     bool isTimes;
+    private bool isPersonal = true;
 
     void Start()
     {
         isTimes = true;
         string appKey = PlayerPrefs.GetString(Yodo1Demo.KEY_APP_KEY);
         Yodo1U3dAds.InitWithAppKey(appKey);
+        
         Yodo1U3dAdsSDK.setBannerdDelegate((Yodo1U3dAdsConstants.AdEvent adEvent, string error) =>
         {
             Debug.Log("[Yodo1 Ads] BannerdDelegate:" + adEvent + "\n" + error);
@@ -100,10 +102,10 @@ public class Yodo1AdsTest : MonoBehaviour
 
     void OnGUI()
     {
-        int buttonHeight = Screen.height / 14;
+        int buttonHeight = Screen.height / 13;
         int buttonWidth = Screen.width / 2;
-        int buttonSpace = buttonHeight / 3;
-        int startHeight = buttonHeight / 3;
+        int buttonSpace = buttonHeight / 2;
+        int startHeight = buttonHeight / 2;
 
         if (GUI.Button(new Rect(Screen.width / 4, startHeight, buttonWidth, buttonHeight), "show banner ad"))
         {
@@ -205,11 +207,14 @@ public class Yodo1AdsTest : MonoBehaviour
             }
         }
 
-        if (GUI.Button(
+        bool isT = GUI.Toggle(
             new Rect(Screen.width / 4, startHeight + buttonHeight * 7 + buttonSpace * 7, buttonWidth, buttonHeight),
-            "退出"))
+            isPersonal,
+            "个性化推荐开关");
+        if (isPersonal != isT)
         {
-            SceneManager.LoadScene("Yodo1Demo");
+            Yodo1U3dAds.SetPersonal(isT);
+            isPersonal = isT;
         }
     }
 }

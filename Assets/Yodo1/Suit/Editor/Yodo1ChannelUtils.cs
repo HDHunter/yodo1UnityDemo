@@ -138,18 +138,23 @@ public class Yodo1ChannelUtils
 
     private static void googlePlay(AnalyticsItem item)
     {
+        string appid = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                       "<resources>\n" +
+                       "    <string name=\"yodo1_google_appid\">@yodo1_google_appid</string>\n" +
+                       "</resources>";
         string manifestdata = "\n" +
                               "        <meta-data\n" +
                               "            android:name=\"com.google.android.gms.games.APP_ID\"\n" +
-                              "            android:value=\"@google_appid\" />";
+                              "            android:value=\"@string/yodo1_google_appid\" />";
         foreach (KVItem i in item.analyticsProperty)
         {
             if (i != null && "google_app_id".Equals(i.Key))
             {
-                manifestdata = manifestdata.Replace("@google_appid", i.Value);
+                appid = appid.Replace("@yodo1_google_appid", i.Value);
             }
         }
 
+        EditorFileUtils.WriteFile(Yodo1AndroidConfig.Yodo1ValuePath, "ids.xml", appid);
         EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Yodo1App_end-->",
             manifestdata + "<!--Yodo1App_end-->");
     }

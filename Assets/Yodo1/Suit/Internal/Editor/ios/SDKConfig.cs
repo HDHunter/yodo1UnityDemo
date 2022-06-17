@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using UnityEditor;
@@ -205,7 +205,7 @@ namespace Yodo1Unity
 
             string pod =
                 string.Format(
-                    "\t\t<iosPod name=\"Yodo1Ads/Yodo1_UnityConfigKey\" version=\"{0}\" bitcode=\"false\" minTargetSdk=\"10.0\" />",
+                    "\t\t<iosPod name=\"Yodo1Suit/Yodo1_UnityConfigKey\" version=\"{0}\" bitcode=\"false\" minTargetSdk=\"10.0\" />",
                     RuntimeiOSSettings.sdkVersion);
 
             CreateFile(podfileDirPath, dependenciesName, pod);

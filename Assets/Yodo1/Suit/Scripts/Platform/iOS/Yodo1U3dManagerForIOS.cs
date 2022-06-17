@@ -31,7 +31,7 @@ public class Yodo1U3dManagerForIOS
 #if UNITY_IPHONE
         return UnityStringParams(key, defaultValue);
 #endif
-        return "";
+        return defaultValue;
     }
 
 #if UNITY_IPHONE
@@ -60,7 +60,7 @@ public class Yodo1U3dManagerForIOS
 #if UNITY_IPHONE
         return UnityBoolParams(key, defaultValue);
 #endif
-        return false;
+        return defaultValue;
     }
 
     /// <summary>
