@@ -232,6 +232,9 @@ public class AndroidPostProcess
         string unityLibraryGradle = gradlePath.Replace("launcher", "unityLibrary");
         TextUtils.WriteBelow(unityLibraryGradle, "apply plugin: 'com.android.library'",
             "\n" + TextUtils.GetText(configPath + "/repositories.txt") + "\n");
+        fileTree = "implementation fileTree(dir: 'libs', include: ['*.jar'])";
+        TextUtils.WriteBelow(unityLibraryGradle, fileTree,
+            "\n" + TextUtils.GetText(configPath + "/dependencies.txt") + "\n");
 #endif
     }
 
@@ -265,6 +268,7 @@ public class AndroidPostProcess
         string buildTools5 = "classpath 'com.android.tools.build:gradle:2.1.0'";
         string buildTools6 = "classpath 'com.android.tools.build:gradle:2.3.0'";
         string buildTools7 = "classpath 'com.android.tools.build:gradle:3.5.4'";
+        string buildTools8 = "classpath 'com.android.tools.build:gradle:4.0.1'";
         string gradlePlugin = "classpath 'com.android.tools.build:gradle:4.1.3'";
         TextUtils.Replace(rootgradlePath, buildTools, gradlePlugin);
         TextUtils.Replace(rootgradlePath, buildTools2, gradlePlugin);
@@ -273,6 +277,7 @@ public class AndroidPostProcess
         TextUtils.Replace(rootgradlePath, buildTools5, gradlePlugin);
         TextUtils.Replace(rootgradlePath, buildTools6, gradlePlugin);
         TextUtils.Replace(rootgradlePath, buildTools7, gradlePlugin);
+        TextUtils.Replace(rootgradlePath, buildTools8, gradlePlugin);
     }
 
     private static void ModifyGradle_Allprojects(string path, string gradlePath)

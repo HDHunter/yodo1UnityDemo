@@ -59,11 +59,6 @@ public class StructureUtils : Editor
 
     public static string GetAppBuildGradlePath2(string path)
     {
-        if (EditorUserBuildSettings.androidBuildSystem == AndroidBuildSystem.Gradle)
-        {
-            return path + "/build.gradle";
-        }
-
         return path + "/build.gradle";
     }
 }
