@@ -1,0 +1,3 @@
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 15, 'minutes'
+}

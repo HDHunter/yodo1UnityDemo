@@ -1,0 +1,20 @@
+    repositories {
+        maven { url "https://nexus.yodo1.com/repository/maven-public/" }
+        mavenCentral()
+        google()
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url 'https://mvn.4399doc.com/repository/maven-releases' }
+        maven {
+            url "https://repos.xiaomi.com/maven"
+            credentials {
+                username 'mi-gamesdk'
+                password 'AKCp8mYeLuhuaGj6bK1XK7t2w4CsPuGwg6GpQdZ9cat7K59y5sD7Tx3dHjJcFrBGj3TQ4vi7g'
+            }
+        }
+        maven { url 'https://artifact.bytedance.com/repository/ttgamesdk/' }
+        maven { url 'https://artifact.bytedance.com/repository/pangle' }
+    }
+    
+    configurations.all {
+        resolutionStrategy.cacheDynamicVersionsFor 15, 'minutes'
+    }

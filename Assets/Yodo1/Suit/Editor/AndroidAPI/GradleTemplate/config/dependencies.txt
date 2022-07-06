@@ -1,0 +1,2 @@
+    implementation 'com.yodo1.suit.pay:core:6.1.2.4'
+    //yodo1_import_librarys
