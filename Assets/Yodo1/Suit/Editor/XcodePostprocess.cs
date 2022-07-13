@@ -109,7 +109,7 @@ namespace Yodo1Unity
         }
 
         const string unityAppControllerText = "#import \"UnityAppController.h\"";
-        const string import1 = "#import <Yodo1Manager.h>";
+        const string import1 = "#import <Yodo1SNSManager.h>";
         const string import2 = "#import \"Yodo1AnalyticsManager.h\"";
 
         const string topTag = "- (void)preStartUnity               {}";
@@ -118,10 +118,10 @@ namespace Yodo1Unity
         const string app_openUrl =
             "- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation\n{";
 
-        const string yodo1Manager =
-            "\n\t[Yodo1Manager handleOpenURL:url sourceApplication:sourceApplication];\n";
+        const string yodo1SNSManager =
+            "\n\t[[Yodo1SNSManager sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];\n";
 
-        const string app_openUrl_Text = app_openUrl + yodo1Manager + "\treturn YES;\n}";
+        const string app_openUrl_Text = app_openUrl + yodo1SNSManager + "\treturn YES;\n}";
 
         //openURL:url,options,options.UIApplicationOpenURLOptionsKey was added only in ios10 sdk
         // private const string openUrl =
@@ -132,10 +132,10 @@ namespace Yodo1Unity
         const string openUrl_iOS9_0 =
             "- (BOOL)application:(UIApplication*)app openURL:(NSURL*)url options:(NSDictionary<NSString*, id>*)options\n{";
 
-        const string openUrl_iOS9_0_Text = "\n\t[Yodo1Manager handleOpenURL:url sourceApplication:nil];\n";
+        const string openUrl_iOS9_0_Text = "\n\t[[Yodo1SNSManager sharedInstance] application:nil openURL:url options:nil];\n";
 
         const string Yodo1AnalyticsManager =
-            "\n\t[[Yodo1AnalyticsManager sharedInstance] SubApplication:app openURL:url options:options];\n";
+            "\n\t[[Yodo1AnalyticsManager sharedInstance] handleOpenUrl:url options:options];\n";
 
         const string openUrlText =
             "- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options \n {"
@@ -145,10 +145,10 @@ namespace Yodo1Unity
 
         //continueUserActivity:userActivity,handler
         private const string continueUser =
-            "- (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {";
+            "- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity\n#if defined(__IPHONE_12_0) || defined(__TVOS_12_0)\n    restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring> > * _Nullable restorableObjects))restorationHandler\n#else\n    restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler\n#endif\n{";
 
         const string continueUserAnalyticsManager =
-            "\n\t[[Yodo1AnalyticsManager sharedInstance] SubApplication:application continueUserActivity:userActivity restorationHandler:restorationHandler];\n";
+            "\n\t[[Yodo1AnalyticsManager sharedInstance] continueUserActivity:userActivity];\n";
 
         const string continueUser_Text = continueUser + continueUserAnalyticsManager + "\treturn YES;\n}";
 
@@ -160,7 +160,7 @@ namespace Yodo1Unity
             //openURL:url,source,annotation
             if (app.IsHaveText(app_openUrl))
             {
-                app.WriteBelow(app_openUrl, yodo1Manager);
+                app.WriteBelow(app_openUrl, yodo1SNSManager);
                 Debug.LogWarning("-------1-openURL:url,source,annotation--WriteBelow---");
             }
             else

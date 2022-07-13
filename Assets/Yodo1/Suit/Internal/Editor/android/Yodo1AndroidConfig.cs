@@ -170,8 +170,8 @@ namespace Yodo1Unity
                                     "\t\t<repositories>");
             //开始
             CreateFile(depDir, dep,
-                "\t\t\t<repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>\n" +
-                "\t\t\t<repository>http://mvnrepository.com/</repository>\n" +
+                "\t\t\t<repository>https://nexus.yodo1.com/repository/maven-public/</repository>\n" +
+                "\t\t\t<repository>https://mvnrepository.com/</repository>\n" +
                 "\t\t</repositories>");
             Yodo1PropertiesUtils prop = new Yodo1PropertiesUtils(CONFIG_Android_PATH);
 

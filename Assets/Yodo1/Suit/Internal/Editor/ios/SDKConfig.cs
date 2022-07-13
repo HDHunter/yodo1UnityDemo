@@ -200,7 +200,7 @@ namespace Yodo1Unity
             CreateFile(podfileDirPath, dependenciesName, "\t<iosPods>");
             CreateFile(podfileDirPath, dependenciesName, "\t\t<sources>");
             CreateFile(podfileDirPath, dependenciesName,
-                "\t\t\t<source>https://github.com/Yodo1Games/Yodo1Spec.git</source>");
+                "\t\t\t<source>https://github.com/Yodo1Games/Yodo1-Games-Spec.git</source>");
             CreateFile(podfileDirPath, dependenciesName, "\t\t</sources>");
 
             string pod =

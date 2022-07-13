@@ -83,3 +83,23 @@ unity iOS配置读写，iOS依赖优化
 10，Server 防沉迷消费限制修改
 11，Server googlePlay支付auth鉴权更新
 2022年06月09日	张建秋
+
+6.1.1
+1，抖音，超神抖音，今日游戏更新到2.1.2.0
+2，Android 友盟更新到9.5.0.1
+3，Android 数数thinkingdata更新到2.8.1
+4，Android 新加 Yodo1Advert.setPersonal()开关个性化推荐。对接支持华为，gdt广点通，pangle.
+5，Android pangle更新4.3.0.6到4.5.2.2
+6，Android vivo_ad 5460更新到5560
+7，Android 存储权限请求合规优化,vivo.
+8，Suit订单超级事件属性删除,增加orderid。
+9，Suit新加Analytics.login(),支持统计定义用户id。
+10，iOS重构。移除统计中任务相关api。
+2022年06月23日	张建秋
+
+6.1.2
+1，iOS facebook分享更新到12.3.2
+2，iOS ThinkingData更新到2.8.1.1
+3，iOS AppsFlyer更新到6.7.0
+4，iOS 数据统计超级属性清理，保留sdkVersion, gameKey，publishChannelCode，channel_code，device_id
+2022年07月13日	张建秋

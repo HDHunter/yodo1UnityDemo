@@ -409,12 +409,12 @@ public class Yodo1U3dUtils
             if (EditorUtility.DisplayDialog(title, message, positiveButton, negativeButton))
             {
                 //确定
-                result = "1";
+                result = @"1";
             }
             else
             {
                 //取消
-                result = "0";
+                result = @"0";
             }
 
             if (callbackMethod != null)

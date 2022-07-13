@@ -44,7 +44,7 @@ public class Yodo1U3dAnalytics
 #elif UNITY_ANDROID
         Yodo1U3dAnalyticsForAndroid.customEventAppsflyer(eventId, jsonData);
 #elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.EventAdAnalyticsWithName(eventId, jsonData);
+        Yodo1U3dAnalyticsForIOS.EventAppsFlyerAnalyticsWithName(eventId, jsonData);
 #endif
     }
 
@@ -111,5 +111,13 @@ public class Yodo1U3dAnalytics
         string transactionId)
     {
         Yodo1U3dAnalyticsForIOS.validateInAppPurchase(productId, price, currency, transactionId);
+    }
+
+    /// <summary>
+    /// Custom Validates the in app purchase apple store. 自定义事件上报支付
+    /// </summary>
+    public static void eventAndValidateInAppPurchase_Apple(string revenue, string currency, string quantity, string contentId, string receiptId)
+    {
+        Yodo1U3dAnalyticsForIOS.customValidateInAppPurchase(revenue, currency, quantity, contentId, receiptId);
     }
 }

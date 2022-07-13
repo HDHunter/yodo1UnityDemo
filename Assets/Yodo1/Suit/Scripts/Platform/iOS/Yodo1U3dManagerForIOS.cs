@@ -67,30 +67,16 @@ public class Yodo1U3dManagerForIOS
     /// Unities the switch yodo1 GM.GMG在线参数开关控制
     /// </summary>
     /// <returns><c>true</c>, if switch yodo1 GM was unityed, <c>false</c> otherwise.</returns>
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern bool UnitySwitchMoreGame();
-#endif
     public static bool SwitchMoreGame()
     {
-#if UNITY_IPHONE
-        return UnitySwitchMoreGame();
-#endif
         return false;
     }
 
     /// <summary>
     /// Unities the show yodo1 basic promotion.显示更多游戏
     /// </summary>
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern void UnityShowMoreGame();
-#endif
     public static void ShowMoreGame()
     {
-#if UNITY_IPHONE
-        UnityShowMoreGame();
-#endif
     }
 
     /// <summary>

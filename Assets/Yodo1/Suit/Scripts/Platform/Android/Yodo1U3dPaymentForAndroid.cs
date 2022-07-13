@@ -35,12 +35,9 @@ public class Yodo1U3dPaymentForAndroid
     /// <param name="productId">道具id</param>
     /// <param name="gameObjectName"></param>
     /// <param name="callbackName"></param>
-    public static void purchase(string productId, string gameObjectName, string callbackName)
+    public static void purchase(string productId, string extra, string gameObjectName, string callbackName)
     {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("purchase", productId, gameObjectName, callbackName);
-        }
+        purchase(productId, 0, extra, gameObjectName, callbackName);
     }
 
     /// <summary>
@@ -50,11 +47,12 @@ public class Yodo1U3dPaymentForAndroid
     /// <param name="productId">道具id</param>
     /// <param name="gameObjectName"></param>
     /// <param name="callbackName"></param>
-    public static void purchase(string productId, double discount, string gameObjectName, string callbackName)
+    public static void purchase(string productId, double discount, string extra, string gameObjectName,
+        string callbackName)
     {
         if (null != androidCall)
         {
-            androidCall.CallStatic("purchase", productId, discount, gameObjectName, callbackName);
+            androidCall.CallStatic("purchase", productId, discount, extra, gameObjectName, callbackName);
         }
     }
 

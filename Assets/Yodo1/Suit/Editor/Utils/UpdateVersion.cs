@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 public class UpdateVersion : EditorWindow
 {
-    public static string Yodo1PluginVersion = "6.1.0";
+    public static string Yodo1PluginVersion = "6.1.2";
 
     WWW WwwDownload = null;
     WWW WWWJson = null;

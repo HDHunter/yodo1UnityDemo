@@ -192,7 +192,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dPaymentForAndroid.purchase(productId, Yodo1U3dSDK.Instance.SdkObjectName,
+        Yodo1U3dPaymentForAndroid.purchase(productId, extra, Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
         Yodo1U3dUCenterForIOS.purchase(productId, extra);
