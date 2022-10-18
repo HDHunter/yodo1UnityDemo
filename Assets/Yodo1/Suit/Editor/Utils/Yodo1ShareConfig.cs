@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEditor.iOS.Xcode;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 #endif
@@ -13,6 +14,7 @@ public class Yodo1ShareConfig : Editor
     static string sinaWeiboAppKey = string.Empty;
     static string sinaWeiboSecrit = string.Empty;
     static string facebookAppId = string.Empty;
+    static string afSkanUrl = "https://appsflyer-skadnetwork.com/";
 
     public static void UpdateInfoPlist(string path, RuntimeiOSSettings settings)
     {
@@ -29,6 +31,17 @@ public class Yodo1ShareConfig : Editor
             UpdateInfoPlist(path);
 #endif
         }
+
+        string plistPath = Path.Combine(path, "Info.plist");
+        PlistDocument plist = new PlistDocument();
+        plist.ReadFromString(File.ReadAllText(plistPath));
+        //Get Root
+        PlistElementDict root = plist.root;
+
+        // 添加appsflyer skan
+        PlistElementString af_skan_element = (PlistElementString) root["NSAdvertisingAttributionReportEndpoint"];
+        root.SetString("NSAdvertisingAttributionReportEndpoint", afSkanUrl);
+        plist.WriteToFile(plistPath);
 
         if (SDKConfig.EnableSelected(settings, SettingsConstants.SettingType.Analytics,
             (int) SettingsConstants.AnalyticsType.AppsFlyer))
@@ -127,6 +140,7 @@ public class Yodo1ShareConfig : Editor
         schemes.AddString("fbapi");
         schemes.AddString("fbauth2");
         schemes.AddString("fbshareextension");
+	schemes.AddString("fb");
         schemes.AddString("fb-messenger-api");
         schemes.AddString("fb-messenger-share-api");
         schemes.AddString("sinaweibo");
@@ -140,6 +154,8 @@ public class Yodo1ShareConfig : Editor
         schemes.AddString("mttbrowser");
         schemes.AddString("wechat");
         schemes.AddString("weixinULAPI");
+
+
 
         //FacebookAppID
         PlistElementString fbElement = (PlistElementString) root["FacebookAppID"];

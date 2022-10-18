@@ -1,3 +1,0 @@
-    packagingOptions{
-        doNotStrip "*/armeabi/*.so"
-    }

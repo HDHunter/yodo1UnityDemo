@@ -41,6 +41,7 @@ public class Yodo1U3dAccount
     /// </summary>
     /// <param name="loginType">Login type.</param>
     /// <param name="extra">Extra.</param>
+	[System.Obsolete("Please use 'Login()','Login(Yodo1U3dConstants.LoginType loginType, string extra)' is deprecated.")]
     public static void Login(Yodo1U3dConstants.LoginType loginType, string extra)
     {
 #if UNITY_EDITOR

@@ -7,8 +7,38 @@ namespace Yodo1Ads
     {
         static bool initialized = false;
 
+        public static void InitializeSdk()
+        {
+            if (initialized)
+            {
+                Debug.LogWarning(
+                    "[Yodo1 Ads] The SDK has been initialized, please do not initialize the SDK repeatedly.");
+                return;
+            }
+
+            var type = typeof(Yodo1U3dAdsSDK);
+            var sdkObj = new GameObject("Yodo1U3dAdsSDK", type)
+                .GetComponent<Yodo1U3dAdsSDK>(); // Its Awake() method sets Instance.
+            if (Yodo1U3dAdsSDK.Instance != sdkObj)
+            {
+                Debug.LogError("[Yodo1 Ads] It looks like you have the " + type.Name +
+                               " on a GameObject in your scene. Please remove the script from your scene.");
+            }
+            else
+            {
+                Debug.LogError("[Yodo1 Ads] instance null.");
+            }
+
+            string appKey = PlayerPrefs.GetString(Yodo1Demo.KEY_APP_KEY);
+
+            Debug.Log("[Yodo1 Ads] The SDK has been initialized, the app key is " + appKey);
+            Yodo1U3dAds.InitWithAppKey(appKey);
+
+            initialized = true;
+        }
+
         /// <summary>
-        /// Initialize with app key.
+        /// Initialize with app key..直接调用注意手动初始化Yodo1U3dAdsSDK实例。
         /// </summary>
         /// <param name="appKey">The app key obtained from MAS Developer Platform.</param>
         public static void InitWithAppKey(string appKey)
@@ -27,11 +57,11 @@ namespace Yodo1Ads
 #endif
             }
         }
-        
+
         public static void SetPersonal(bool isPersonal)
         {
             initialized = true;
-             if (Application.platform == RuntimePlatform.Android)
+            if (Application.platform == RuntimePlatform.Android)
             {
 #if UNITY_ANDROID
                 Yodo1U3dAdvertForAndroid.SetPersonal(isPersonal);

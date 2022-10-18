@@ -7,7 +7,7 @@ namespace Yodo1Ads
 {
     public static class Yodo1AdSettingsSave
     {
-        const string YODO1_RESOURCE_PATH = "Assets/Yodo1/Yodo1Ads/Resources/";
+        const string YODO1_RESOURCE_PATH = "Assets/Resources/";
         const string YODO1_ADS_SETTINGS_PATH = YODO1_RESOURCE_PATH + "Yodo1AdSettings.asset";
 
         public static Yodo1AdSettings Load()
@@ -29,8 +29,6 @@ namespace Yodo1Ads
                     AssetDatabase.SaveAssets();
 
                     settings = AssetDatabase.LoadAssetAtPath<Yodo1AdSettings>(YODO1_ADS_SETTINGS_PATH);
-                    settings.iOSSettings.AppLovinSdkKey =
-                        "xcGD2fy-GdmiZQapx_kUSy5SMKyLoXBk8RyB5u9MVv34KetGdbl4XrXvAUFy0Qg9scKyVTI0NM4i_yzdXih4XE";
                 }
                 catch (UnityException)
                 {

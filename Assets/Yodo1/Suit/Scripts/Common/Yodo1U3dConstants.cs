@@ -23,9 +23,9 @@ public class Yodo1U3dConstants
         Device = 1,
         Google = 2,
         Yodo1 = 3,
-        Wechat = 4,
+        [System.Obsolete("Wechat login is deprecated.")] Wechat = 4,
         Sina = 5,
-        QQ = 6,
+        [System.Obsolete("QQ login is deprecated.")] QQ = 6,
     }
 
     public enum AccountEvent
@@ -65,27 +65,13 @@ public class Yodo1U3dConstants
     public enum Yodo1SNSType
     {
         Yodo1SNSTypeNone = -1,
-        Yodo1SNSTypeTencentQQ = 1 << 0,
-
-        /**< QQ分享 >*/
-        Yodo1SNSTypeWeixinMoments = 1 << 1,
-
-        /**< 朋友圈 >*/
-        Yodo1SNSTypeWeixinContacts = 1 << 2,
-
-        /**< 聊天界面 >*/
-        Yodo1SNSTypeSinaWeibo = 1 << 3,
-
-        /**< 新浪微博 >*/
-        Yodo1SNSTypeFacebook = 1 << 4,
-
-        /**< Facebook >*/
-        Yodo1SNSTypeTwitter = 1 << 5,
-
-        /**< Twitter >*/
-        Yodo1SNSTypeInstagram = 1 << 6,
-
-        /**< Instagram >*/
+        Yodo1SNSTypeTencentQQ = 1 << 0,/**< QQ分享 >*/
+        Yodo1SNSTypeWeixinMoments = 1 << 1,/**< 朋友圈 >*/
+        Yodo1SNSTypeWeixinContacts = 1 << 2, /**< 聊天界面 >*/
+        Yodo1SNSTypeSinaWeibo = 1 << 3,/**< 新浪微博 >*/
+        Yodo1SNSTypeFacebook = 1 << 4,/**< Facebook >*/
+        [System.Obsolete("Twitter share is deprecated.")] Yodo1SNSTypeTwitter = 1 << 5,/**< Twitter >*/
+        [System.Obsolete("Instagram share is deprecated.")] Yodo1SNSTypeInstagram = 1 << 6,/**< Instagram >*/
         Yodo1SNSTypeAll = 1 << 7 /**< 所有平台分享 >*/
     }
 

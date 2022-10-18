@@ -107,6 +107,7 @@ public class Yodo1U3dAnalytics
     /// <param name="price">Price.</param>
     /// <param name="currency">Currency.</param>
     /// <param name="transactionId">Transaction identifier.</param>
+	[System.Obsolete("Please use 'eventAndValidateInAppPurchase_Apple','validateInAppPurchase_Apple' is deprecated.")]
     public static void validateInAppPurchase_Apple(string productId, string price, string currency,
         string transactionId)
     {

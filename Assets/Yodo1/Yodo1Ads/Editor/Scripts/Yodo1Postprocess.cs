@@ -69,6 +69,7 @@ namespace Yodo1Ads
 
         #region iOS Content
 
+#if UNITY_IOS
         public static bool CheckConfiguration_iOS(Yodo1AdSettings settings)
         {
             if (settings == null)
@@ -87,8 +88,6 @@ namespace Yodo1Ads
 
             return true;
         }
-
-#if UNITY_IOS
         private static void UpdateIOSPlist(string path, Yodo1AdSettings settings)
         {
             string plistPath = Path.Combine(path, "Info.plist");

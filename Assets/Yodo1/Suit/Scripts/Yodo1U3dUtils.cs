@@ -480,6 +480,7 @@ public class Yodo1U3dUtils
     /// 判断当前是不是大陆地区 【中国用户】
     /// </summary>
     /// <returns></returns>
+	[System.Obsolete("'IsChineseMainland' is deprecated.")]
     public static bool IsChineseMainland()
     {
 #if UNITY_EDITOR

@@ -254,7 +254,7 @@ namespace Yodo1.AntiAddiction
     {
         static UpdateAgent()
         {
-            Yodo1U3dAntiAddictionEditor.CheckEmptyKey();
+            //Yodo1U3dAntiAddictionEditor.CheckEmptyKey();
         }
     }
 }

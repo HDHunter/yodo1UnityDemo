@@ -100,6 +100,68 @@ unity iOS配置读写，iOS依赖优化
 6.1.2
 1，iOS facebook分享更新到12.3.2
 2，iOS ThinkingData更新到2.8.1.1
-3，iOS AppsFlyer更新到6.7.0
-4，iOS 数据统计超级属性清理，保留sdkVersion, gameKey，publishChannelCode，channel_code，device_id
+3，Android/iOS AppsFlyer更新到6.7.0
+4，Android，iOS 数据统计超级属性清理,保留sdkVersion，gameKey,publishChannelCode,channel_code,device_id.profileSet
+5，Android 12 PushNotification兼容
+6，OPPO广告4.2.1=>4.2.2，OPPO单机网游渠道3.0.3=>3.0.5
+7，Android gdt广点通4.452.1322=>4.471.1341
+8，Android pangle4.5.2.2=>4.6.0.7
+9，Android mmy摸摸鱼1.4.2.1=>1.4.3.1,闪屏资源移xx。
+10，Huawei广告13.4.54.302=>13.4.55.300,Huawei渠道6.5.0=>6.6.0
+11，Xiaomi广告1.7.0=>1.7.8,小米渠道3.3.0.5=>3.3.0.6
+12，4399广告1.4.5=>1.4.6
+13，Vivo广告5.5.6.0=>5.6.3.2
+14，233渠道2.2.4=>2.2.7
+15，lenovo渠道3.0.1=>3.2.0
+16，360渠道2.3.4.780=>2.3.4.782
+17，Alipay支付宝15.8.1=>15.8.10
+18，UC单机网游9.3.5.6=>9.3.12
+19，Kupai酷派渠道1.0.5=>1.0.7
+20，游戏启动主题。
 2022年07月13日	张建秋
+
+6.1.3
+1，google移除safetyNet,nearby。修复补单，恢复购买问题。
+2，Android修复YNetworkUtils网络判断方法
+3，超神抖音pa2配置错误。update 2.1.2.0=>2.1.3.0。
+4，fix vivoAd videoClose issue.fix baiduly loginPermission issue.233 param meta-data fetch.
+5，代码仓库迁移使用mavenCenter中央仓。
+6，增加配置一台4倍性能的打包机，试用两月。
+7，iOS修复facebook引入打包问题解决，和无法分享的适配问题。
+2022年08月04日14:52:34	张建秋，饶加峰
+
+6.1.4
+1，支持>Android10手机打log。安装开日志工具。
+2，激活码多个兑换功能测试发布。
+3，gp支付成功，AFvalidatePurchase和orderSuccess统计冲突。
+4，suitSDK login API流程加入统计埋点。
+5，mas3首次启动初始化
+6，iOS优化debug模式下日志输出
+2022年08月23日18:40:21	张建秋
+
+6.1.5
+1，咪咕云游戏 “MIGUYXX” v80010发布
+2，Android AFissuesFix 版本更新到v6.8.2。
+3，Android test onlineConfig 移除。
+4，Android oppo原生广告健全,无支付方式拉起支付异常修复。
+2022年09月14日17:40:00	张建秋
+
+6.1.6
+1，umeng: 9.5.0 => 9.5.2 应用宝合规，性能优化
+2，gdt: 4.471.1341 => 4.482.1352
+3，pangle: 4.6.0.7 => 4.7.1.2
+4，huawei: 6.6.0 => 6.7.0
+5，huaweiAd: 13.4.55.300 => 13.4.56.302
+6，oppoAd:4.2.2=>4.6.4
+7，4399Ad: 1.4.5 => 1.4.7.0
+9，meizu: 7.6.0 => 7.11.2
+10，4399: 3.3.4 => 3.7.0
+11，vivoAd: 5.5.6.0 => 5.6.3.3
+12，vivo: 4.7.2.0 => 4.7.4.1
+13，233: 2.2.7 => 3.0.0
+14，233Ad: 1.0.6 => 1.0.7
+15，yyb: 1.8.14 => 1.8.20
+16，UC单机网游：9.3.12 => 9.5.0.0
+17，xiaomiAd: 1.7.0 => 1.8.0
+18，更新AppsFlyer SKAN
+2022年09月22日20:54:48	张建秋

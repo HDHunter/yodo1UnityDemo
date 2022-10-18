@@ -3,29 +3,51 @@
 An independent SDK for game developers implement `Anti-Addiction` function easily.
 Face to the Chinese mobile game marks.
 
+#anti v3.2.4:
+date:
+1，iOS版本对齐，Yodo1AntiAddiction '3.2.4'
+2，Android依赖更新。
 
-#anti-indulged-system-SDK
-Version : 3.1.4:
+#anti v3.2.3:
+date:2022年08月23日18:51:59
+1，更新依赖
+2，更新本地默认防沉迷配置json.
+
+#anti v3.2.2:
+date:2022年08月04日14:17:40
+1，添加标点符号,防沉迷文案。
+
+#anti v3.2.1:
+date:2022年06月23日19:02:04
+1，update depend更新依赖。
+2，Unity检查更新
+
+#anti v3.2.0:
+date:2022年06月09日14:19:19
+1，update depend for suit6。
+
+#anti v3.1.4:
+date:2022年04月08日15:02:22
 1，iOS 更改一个版本号。
 
-#anti-indulged-system-SDK
-Version : 3.1.3:
+#anti v3.1.3:
 1，Android iOS 防沉迷未成年人实名弹框内容。
 
-#anti-indulged-system-SDK
-Version : 3.1.2:
+#anti v3.1.2:
 1，Android一些优化
 
-Version : 3.1.1:
+#anti v3.1.1:
+date:2022年04月01日22:35:02
 1，Android根据客户端实名结果STOP游戏，HW,baiduly,yyb。
 2，iOS游客开关可控制
 3，iOS限时限额文案提示
 4，iOS兼容AppleStore,applestore.大小写。
 
-Version : 3.0.11:
+#anti v3.0.11:
 1. iOS 国家防沉迷3.0
 
-Version : 3.0.15:
+#anti v3.0.15:
+date:2021年08月10日16:21:37
 1. 键盘遮挡UI的问题（未解决，后续修改）
 2. 新旧防沉迷无法同时使用
 3. Unity2019.3.0以上版本 单接防沉迷2.0sdk需要再xcode工程配置加拷贝bundle资源脚本，接入Yodo1SDK+防沉迷2.0忽略这个问题, 

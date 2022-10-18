@@ -1,18 +1,17 @@
 <dependencies>
   <packages>
-    <package>com.yodo1.suit.pay:core:1.5.0.0</package>
-    <package>com.yodo1.suit.pay:google:4.0.0.3</package>
-    <package>com.yodo1.suit.share:system:1.1.0</package>
+    <package>com.yodo1.suit.anti:core:3.2.4.0</package>
+    <package>com.yodo1.suit.pay:core:6.1.7.1</package>
   </packages>
   <files>
-    <file>Assets/Plugins/Android/androidx.annotation.annotation-1.1.0.jar</file>
+    <file>Assets/Plugins/Android/androidx.annotation.annotation-1.0.0.jar</file>
     <file>Assets/Plugins/Android/androidx.appcompat.appcompat-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.arch.core.core-common-2.0.0.jar</file>
     <file>Assets/Plugins/Android/androidx.arch.core.core-runtime-2.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.asynclayoutinflater.asynclayoutinflater-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.collection.collection-1.0.0.jar</file>
     <file>Assets/Plugins/Android/androidx.coordinatorlayout.coordinatorlayout-1.0.0.aar</file>
-    <file>Assets/Plugins/Android/androidx.core.core-1.2.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.core.core-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.cursoradapter.cursoradapter-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.customview.customview-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.documentfile.documentfile-1.0.0.aar</file>
@@ -34,37 +33,17 @@
     <file>Assets/Plugins/Android/androidx.swiperefreshlayout.swiperefreshlayout-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.vectordrawable.vectordrawable-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.vectordrawable.vectordrawable-animated-1.0.0.aar</file>
-    <file>Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.1.0.aar</file>
+    <file>Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.viewpager.viewpager-1.0.0.aar</file>
-    <file>Assets/Plugins/Android/cn.thinkingdata.android.ThinkingAnalyticsSDK-2.7.6.2.aar</file>
-    <file>Assets/Plugins/Android/com.android.billingclient.billing-4.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-auth-20.1.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-auth-api-phone-18.0.1.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-auth-base-18.0.1.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-base-18.0.1.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-18.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-drive-17.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-games-22.0.1.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-gcm-17.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-iid-17.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-nearby-18.0.2.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-safetynet-18.0.1.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-stats-17.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-tasks-18.0.1.aar</file>
-    <file>Assets/Plugins/Android/com.squareup.okhttp3.logging-interceptor-4.9.3.jar</file>
-    <file>Assets/Plugins/Android/com.squareup.okhttp3.okhttp-4.9.3.jar</file>
-    <file>Assets/Plugins/Android/com.squareup.okio.okio-2.8.0.jar</file>
-    <file>Assets/Plugins/Android/com.yodo1.suit.analytics.lib-adapter-1.4.0.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.suit.common.collection-1.4.1.6.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.suit.pay.core-1.5.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.suit.pay.google-4.0.0.3.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.suit.pay.lib-adapter-1.4.1.2.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.suit.share.system-1.1.0.aar</file>
-    <file>Assets/Plugins/Android/org.jetbrains.annotations-13.0.jar</file>
-    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-1.4.10.jar</file>
-    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-common-1.4.10.jar</file>
-    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-jdk7-1.4.10.jar</file>
-    <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-jdk8-1.4.10.jar</file>
+    <file>Assets/Plugins/Android/cn.thinkingdata.android.ThinkingAnalyticsSDK-2.8.2.aar</file>
+    <file>Assets/Plugins/Android/com.squareup.okhttp3.logging-interceptor-3.10.0.jar</file>
+    <file>Assets/Plugins/Android/com.squareup.okhttp3.okhttp-3.10.0.jar</file>
+    <file>Assets/Plugins/Android/com.squareup.okio.okio-1.14.0.jar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.analytics.lib-6.1.2.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.anti.core-3.2.4.0.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.pay.core-6.1.7.1.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.pay.lib-6.1.2.aar</file>
+    <file>Assets/Plugins/Android/com.yodo1.suit.plugin.common-6.1.7.1.aar</file>
   </files>
   <settings>
     <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />

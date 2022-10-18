@@ -16,6 +16,3 @@ namespace Yodo1Ads
         }
     }
 }
-
-
-

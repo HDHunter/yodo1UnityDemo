@@ -3,6 +3,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Yodo1.AntiAddiction;
+using Yodo1Ads;
 
 public class Yodo1Demo : MonoBehaviour
 {
@@ -68,6 +70,11 @@ public class Yodo1Demo : MonoBehaviour
         config.RegionCode = regionCode;
         Yodo1U3dSDK.InitWithConfig(config);
         Yodo1U3dSDK.setShareDelegate(ShareDelegate); //分享回调
+
+        Yodo1U3dAds.InitializeSdk();
+
+        //Non automatic initialization call(非自动初始化调用).
+        Yodo1U3dAntiAddiction.Init();
 
         initialized = true;
     }

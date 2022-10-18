@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<dependencies>
-	<androidPackages>
-		<repositories>
-			<repository>http://nexus.yodo1.com:8081/repository/maven-public/</repository>
-			<repository>http://mvnrepository.com/</repository>
-		</repositories>
-	</androidPackages>
-</dependencies>

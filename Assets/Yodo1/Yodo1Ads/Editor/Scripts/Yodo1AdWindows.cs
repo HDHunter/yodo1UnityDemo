@@ -70,22 +70,21 @@ namespace Yodo1Ads
             if (selectPlarformTab == PlatfromTab.iOS)
             {
                 DrawIOSContent();
-                GUIStyle gUIStyle = new GUIStyle();
-                gUIStyle.padding = new RectOffset(10, 10, 10, 0);
-                GUILayout.BeginVertical(gUIStyle, new GUILayoutOption[0]);
-                if (GUILayout.Button("Save Configuration"))
-                {
-                    this.SaveConfig();
-                }
-
-                GUILayout.EndVertical();
             }
             else
             {
                 DrawAndroidContent();
             }
 
+            GUIStyle gUIStyle = new GUIStyle();
+            gUIStyle.padding = new RectOffset(10, 10, 10, 0);
+            GUILayout.BeginVertical(gUIStyle, new GUILayoutOption[0]);
+            if (GUILayout.Button("Save Configuration"))
+            {
+                this.SaveConfig();
+            }
 
+            GUILayout.EndVertical();
             GUILayout.EndScrollView();
         }
 
@@ -97,8 +96,16 @@ namespace Yodo1Ads
             gUIStyle.padding = new RectOffset(10, 10, 10, 0);
 
             GUILayout.BeginVertical(gUIStyle, new GUILayoutOption[0]);
-            EditorGUILayout.LabelField("请正确地调用Yodo1U3dAds.InitWithAppKey()\n进行初始化即可。", gUIStyle,
-                new GUILayoutOption[0]);
+            //Set AppKey
+            this.adSettings.androidSettings.AppKey = EditorGUILayout.TextField("MAS App Key",
+                this.adSettings.androidSettings.AppKey, new GUILayoutOption[0]);
+            if (string.IsNullOrEmpty(this.adSettings.androidSettings.AppKey))
+            {
+                EditorGUILayout.HelpBox(
+                    "Please fill in the MAS app key correctly, you can find your app key on the MAS dashboard.",
+                    MessageType.Error);
+            }
+
             GUILayout.EndVertical();
         }
 
@@ -109,31 +116,17 @@ namespace Yodo1Ads
 
             GUILayout.BeginVertical(gUIStyle, new GUILayoutOption[0]);
 
-            EditorGUILayout.LabelField("请正确地调用Yodo1U3dAds.InitWithAppKey()", gUIStyle,
-                new GUILayoutOption[0]);
-            EditorGUILayout.LabelField("进行初始化即可。", gUIStyle,
-                new GUILayoutOption[0]);
+            //Set AppKey
+            this.adSettings.iOSSettings.AppKey = EditorGUILayout.TextField("MAS App Key",
+                this.adSettings.iOSSettings.AppKey, new GUILayoutOption[0]);
+            if (string.IsNullOrEmpty(this.adSettings.iOSSettings.AppKey))
+            {
+                EditorGUILayout.HelpBox(
+                    "Please fill in the MAS app key correctly, you can find your app key on the MAS dashboard.",
+                    MessageType.Error);
+            }
 
             GUILayout.EndVertical();
-            if (isHaveAdmob)
-            {
-                GUIStyle storeStyle = EditorStyles.helpBox;
-                storeStyle.padding = new RectOffset(5, 5, 5, 5);
-
-                GUILayout.BeginVertical(storeStyle, new GUILayoutOption[0]);
-
-                //Set AdMob App ID
-                this.adSettings.iOSSettings.AdmobAppID = EditorGUILayout.TextField("AdMob App ID",
-                    this.adSettings.iOSSettings.AdmobAppID, new GUILayoutOption[0]);
-                if (string.IsNullOrEmpty(this.adSettings.iOSSettings.AdmobAppID))
-                {
-                    EditorGUILayout.HelpBox(
-                        "A null or incorrect value will cause a crash when it builds. Please make sure to copy Admob App ID from MAS dashboard.",
-                        MessageType.Info);
-                }
-
-                GUILayout.EndVertical();
-            }
         }
 
         private void SaveConfig()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -14,7 +14,7 @@ public class VersionLoader
 
     public string DownloadUrl
     {
-        get { return VersionGate.SDKUrl + "?version=" + version; }
+        get { return VersionGate.Init(); }
     }
 
 
@@ -27,9 +27,9 @@ public class VersionLoader
     // Get the latest versioin from repo 
     public static void Fetch(System.Action<bool, string> callback)
     {
-        Networker.Get(VersionGate.VersionLatesetUrl, (res) =>
+        Networker.Get(VersionGate.Yodo1PluginVersion, (res) =>
         {
-            string verStr = "0.0.1";
+            string verStr = VersionGate.Yodo1PluginVersion;
             if (res.success)
             {
                 verStr = VersionLoader.Parse(res.text).version;
@@ -66,7 +66,7 @@ public class VersionLoader
 
     public static void CheckUpdate()
     {
-        Networker.Get(VersionGate.VersionLatesetUrl, (res) =>
+        Networker.Get(VersionGate.Yodo1PluginVersion, (res) =>
         {
             if (res.success)
             {
@@ -102,7 +102,7 @@ public class VersionLoader
             {
                 // FAIL on load version info
                 EditorUtility.DisplayDialog("Check version Fail",
-                    "Check Yodo1AntiAddictionSDK version [" + VersionGate.VersionLatesetUrl + "] failed.\n" + res.text,
+                    "Check Yodo1AntiAddictionSDK version [" + VersionGate.Yodo1PluginVersion + "] failed.\n" + res.text,
                     "OK");
             }
         });

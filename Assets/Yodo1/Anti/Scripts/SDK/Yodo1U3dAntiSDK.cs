@@ -43,10 +43,10 @@ namespace Yodo1.AntiAddiction
             {
                 return;
             }
-#if UNIRY_IOS || UNITY_IPHONE
-            _antiAddictionImpl = new Yodo1U3dAntiAddictionIOS();
+#if UNITY_IOS || UNITY_IPHONE
+            _antiAddictionImpl = new Yodo1.AntiAddiction.Yodo1U3dAntiAddictionIOS();
 #elif UNITY_ANDROID
-            _antiAddictionImpl = new Yodo1U3dAntiAddictionAndroid();
+            _antiAddictionImpl = new Yodo1.AntiAddiction.Yodo1U3dAntiAddictionAndroid();
 #endif
 
             // delegate
@@ -123,8 +123,7 @@ namespace Yodo1.AntiAddiction
             Yodo1U3dExtra yodo1U3DExtra = Yodo1U3dExtra.Create();
             string appKey = PlayerPrefs.GetString(Yodo1Demo.KEY_APP_KEY);
             string regionCode = PlayerPrefs.GetString(Yodo1Demo.KEY_REGION_CODE);
-            _antiAddictionImpl.Init(appKey, yodo1U3DExtra.ToJsonString(),
-                regionCode, _antiAddictionDelegate.SdkObjectName,
+            _antiAddictionImpl.Init(appKey, yodo1U3DExtra.ToJsonString(),regionCode, _antiAddictionDelegate.SdkObjectName,
                 _antiAddictionDelegate.SdkMethodName);
             initialized = true;
         }

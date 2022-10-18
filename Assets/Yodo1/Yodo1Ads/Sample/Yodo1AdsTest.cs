@@ -10,8 +10,6 @@ public class Yodo1AdsTest : MonoBehaviour
     void Start()
     {
         isTimes = true;
-        string appKey = PlayerPrefs.GetString(Yodo1Demo.KEY_APP_KEY);
-        Yodo1U3dAds.InitWithAppKey(appKey);
         
         Yodo1U3dAdsSDK.setBannerdDelegate((Yodo1U3dAdsConstants.AdEvent adEvent, string error) =>
         {
