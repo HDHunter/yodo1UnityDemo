@@ -35,6 +35,7 @@ public class Yodo1Verify : MonoBehaviour
         Debug.Log(Yodo1U3dConstants.LOG_TAG + " Reward:" + activationdata.Rewards);
         Debug.Log(Yodo1U3dConstants.LOG_TAG + " errorMsg:" + activationdata.ErrorMsg);
         Debug.Log(Yodo1U3dConstants.LOG_TAG + " rewardDesp:" + activationdata.RewardDes);
+        Debug.Log(Yodo1U3dConstants.LOG_TAG + " errorCode:" + activationdata.ErrorCode);
     }
 
     // Update is called once per frame

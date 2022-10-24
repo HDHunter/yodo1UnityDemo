@@ -373,5 +373,11 @@ namespace Yodo1Unity
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, symbolsStr);
             }
         }
+
+
+        //private static void GetPlaySetting()
+        //{
+        //    PlayerSettings.iOS.appleDeveloperTeamID
+        //}
     }
 }

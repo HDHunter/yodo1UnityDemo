@@ -9,6 +9,7 @@ public class Yodo1U3dActivationCodeData
     private Dictionary<string, object> rewards;
     private string rewardDes;
     private string errorMsg;
+    private int errorCode;
 
     public Yodo1U3dConstants.ActivityEvent Code
     {
@@ -32,6 +33,12 @@ public class Yodo1U3dActivationCodeData
     {
         get { return errorMsg; }
         set { errorMsg = value; }
+    }
+
+    public int ErrorCode
+    {
+        get { return errorCode; }
+        set { errorCode = value; }
     }
 
     public static Yodo1U3dActivationCodeData GetActivationCodeData(string data)
@@ -62,6 +69,11 @@ public class Yodo1U3dActivationCodeData
             if (dic.ContainsKey("errorMsg"))
             {
                 codeData.ErrorMsg = dic["errorMsg"].ToString();
+            }
+
+            if (dic.ContainsKey("errorCode"))
+            {
+                codeData.ErrorCode = int.Parse(dic["errorCode"].ToString());
             }
         }
 
