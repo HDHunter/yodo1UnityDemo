@@ -66,7 +66,6 @@ public class Yodo1Analytics : MonoBehaviour
                 dmpPay.ProductId = "product001"; //商品id
                 dmpPay.ProductName = "测试商品"; //商品名
                 dmpPay.ProductPrice = 0.1; //价格
-                dmpPay.PayChannel = Yodo1U3dConstants.PayType.PayTypeSMS; //支付渠道
                 dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
                 Yodo1U3dAnalytics.onRechargeRequest(dmpPay);
             }
@@ -83,8 +82,15 @@ public class Yodo1Analytics : MonoBehaviour
             {
                 Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId：" + eventName);
                 //充值成功/失败
-                Yodo1U3dAnalytics.onRechargeSuccess(eventName);
-                Yodo1U3dAnalytics.onRechargeFail(eventName);
+                Yodo1U3dDMPPay dmpPay = new Yodo1U3dDMPPay();
+                dmpPay.OrderId = eventName; //订单号
+                dmpPay.Coin = 100; //换算成等价的虚拟币
+                dmpPay.ProductId = "product001"; //商品id
+                dmpPay.ProductName = "测试商品"; //商品名
+                dmpPay.ProductPrice = 0.1; //价格
+                dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
+                Yodo1U3dAnalytics.onRechargeSuccess(dmpPay);
+                Yodo1U3dAnalytics.onRechargeFail(dmpPay);
             }
         }
 

@@ -110,6 +110,7 @@ namespace Yodo1.AntiAddiction
             if (!string.IsNullOrEmpty(cocoapodVersion))
             {
                 string[] pods = Yodo1U3dSettingsEditor.UpdateCocoapodsVersion(cocoapodVersion);
+                
                 if (pods != null && pods.Length > 0)
                 {
                     Debug.LogFormat("<color=#00ff00>>> inject pod for Anti-Addiction: total {0} lines</color>",
@@ -146,6 +147,7 @@ namespace Yodo1.AntiAddiction
                     }
 
                 }
+
                 File.WriteAllLines(PodAssetPath, pods);   // Update SDKPodfile.bin
                 return pods;
             }

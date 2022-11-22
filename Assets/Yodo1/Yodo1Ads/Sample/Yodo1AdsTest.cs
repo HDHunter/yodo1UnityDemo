@@ -10,7 +10,7 @@ public class Yodo1AdsTest : MonoBehaviour
     void Start()
     {
         isTimes = true;
-        
+
         Yodo1U3dAdsSDK.setBannerdDelegate((Yodo1U3dAdsConstants.AdEvent adEvent, string error) =>
         {
             Debug.Log("[Yodo1 Ads] BannerdDelegate:" + adEvent + "\n" + error);

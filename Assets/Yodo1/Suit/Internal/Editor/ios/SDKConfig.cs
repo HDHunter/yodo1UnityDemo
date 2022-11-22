@@ -37,7 +37,7 @@ namespace Yodo1Unity
             SettingItem basicItem = settings.GetSettingItem(type, index);
             if (basicItem == null)
             {
-                Debug.LogError("Yodo1Suit SettingItem null.");
+                Debug.LogWarning("Yodo1Suit SettingItem null.");
             }
 
             return basicItem != null && basicItem.Selected && basicItem.Enable;
@@ -100,6 +100,8 @@ namespace Yodo1Unity
                 updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyerDevKey, AppsFlyerDevKey);
                 string AppleAppId = settings.GetKeyItem().AppleAppId;
                 updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppleAppId, AppleAppId);
+                string AppsFlyerOneLinkId = settings.GetKeyItem().AppsFlyerOneLinkId;
+                updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyerOneLinkId, AppsFlyerOneLinkId);
                 string AppsFlyer_identifier = settings.GetKeyItem().AppsFlyer_identifier;
                 updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyer_identifier,
                     AppsFlyer_identifier);

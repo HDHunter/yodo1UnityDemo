@@ -182,6 +182,11 @@ namespace Yodo1Unity
                     item.AppsFlyerDevKey = (PListString) configDic[SettingsConstants.AppsFlyerDevKey];
                 }
 
+                if (configDic.ContainsKey(SettingsConstants.AppsFlyerOneLinkId))
+                {
+                    item.AppsFlyerOneLinkId = (PListString)configDic[SettingsConstants.AppsFlyerOneLinkId];
+                }
+
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_identifier))
                 {
                     item.AppsFlyer_identifier = (PListString) configDic[SettingsConstants.AppsFlyer_identifier];
@@ -305,6 +310,12 @@ namespace Yodo1Unity
                 if (AppsFlyerDevKey != null && XcodePostprocess.IsVaildSNSKey(AppsFlyerDevKey))
                 {
                     sdkSettings.configKey.AppsFlyerDevKey = AppsFlyerDevKey;
+                }
+
+                string AppsFlyerOneLinkId = oldSettings.configKey.AppsFlyerOneLinkId;
+                if (AppsFlyerOneLinkId != null && XcodePostprocess.IsVaildSNSKey(AppsFlyerOneLinkId))
+                {
+                    sdkSettings.configKey.AppsFlyerOneLinkId = AppsFlyerOneLinkId;
                 }
 
                 string AppsFlyer_Schemes = oldSettings.configKey.AppsFlyer_Schemes;

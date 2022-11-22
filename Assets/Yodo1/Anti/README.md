@@ -3,6 +3,10 @@
 An independent SDK for game developers implement `Anti-Addiction` function easily.
 Face to the Chinese mobile game marks.
 
+#anti v3.2.5:
+date:
+1，iOS依赖更新
+
 #anti v3.2.4:
 date:
 1，iOS版本对齐，Yodo1AntiAddiction '3.2.4'

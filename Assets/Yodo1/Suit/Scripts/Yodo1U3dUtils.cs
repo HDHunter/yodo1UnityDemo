@@ -181,10 +181,9 @@ public class Yodo1U3dUtils
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dInitForAndroid.Share(param.toJson(), Yodo1U3dSDK.Instance.SdkObjectName,
-            Yodo1U3dSDK.Instance.SdkMethodName);
+        Yodo1U3dInitForAndroid.Share(param.toJson(), Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-        Yodo1U3dManagerForIOS.PostStatus(param.toJson());
+        //Yodo1U3dManagerForIOS.PostStatus(param.toJson());
 #endif
     }
 
@@ -480,7 +479,7 @@ public class Yodo1U3dUtils
     /// 判断当前是不是大陆地区 【中国用户】
     /// </summary>
     /// <returns></returns>
-	[System.Obsolete("'IsChineseMainland' is deprecated.")]
+    [System.Obsolete("'IsChineseMainland' is deprecated.")]
     public static bool IsChineseMainland()
     {
 #if UNITY_EDITOR

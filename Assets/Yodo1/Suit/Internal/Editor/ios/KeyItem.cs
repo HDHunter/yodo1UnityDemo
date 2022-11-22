@@ -70,6 +70,7 @@ namespace Yodo1Unity
         /// </summary>
         public string AppsFlyerDevKey;
 
+        public string AppsFlyerOneLinkId;
         public string AppsFlyer_identifier;
         public string AppsFlyer_Schemes;
         public string AppsFlyer_domain;

@@ -25,6 +25,7 @@ namespace Yodo1Unity
         //渠道配置,数据统计配置状态
         public bool showAnalyticsStatus;
         public bool showChannelStatus;
+        private bool showShareStatus;
 
         public static void Init()
         {
@@ -105,9 +106,11 @@ namespace Yodo1Unity
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
             DrawAndroidContent();
             DrawAndroidChannel();
+            DrawAndroidShare();
             DrawAndroidAnalytics();
             GUILayout.EndScrollView();
         }
+
 
         private void DrawHeader()
         {
@@ -212,13 +215,6 @@ namespace Yodo1Unity
                 EditorGUILayout.Toggle("isSplashShowYodo1Logo", runtimeSettings.androidSettings.isShowYodo1Logo,
                     new GUILayoutOption[0]);
             GUILayout.EndVertical();
-
-            GUILayout.BeginVertical(gUIStyle);
-            runtimeSettings.androidSettings.share_code = EditorGUILayout.Toggle("Share",
-                runtimeSettings.androidSettings.share_code);
-            EditorGUILayout.Separator();
-
-            GUILayout.EndVertical();
         }
 
         /// <summary>
@@ -253,6 +249,41 @@ namespace Yodo1Unity
                 }
 
                 EditorGUILayout.Separator();
+                GUILayout.EndVertical();
+            }
+        }
+
+        private void DrawAndroidShare()
+        {
+            showShareStatus =
+                EditorGUILayout.Foldout(showShareStatus, "Share[社交分享]", foldoutStyle);
+            if (showShareStatus)
+            {
+                GUIStyle gUIStyle = new GUIStyle();
+                gUIStyle.padding = (new RectOffset(10, 10, 2, 2));
+
+
+                GUILayout.BeginVertical(gUIStyle);
+
+                List<AnalyticsItem> analytics = runtimeSettings.androidSettings.shareAnalytics;
+                for (int i = 0; i < analytics.Count; i++)
+                {
+                    AnalyticsItem item = analytics[i];
+                    item.Selected = EditorGUILayout.Toggle(item.Name, item.Selected);
+                    if (item.Selected)
+                    {
+                        GUILayout.BeginVertical(gUIStyle);
+                        foreach (KVItem kvItem in item.analyticsProperty)
+                        {
+                            kvItem.Value =
+                                EditorGUILayout.TextField(kvItem.Key, kvItem.Value);
+                        }
+
+                        GUILayout.EndVertical();
+                        GUILayout.Label("------------------------------------------", EditorStyles.boldLabel);
+                    }
+                }
+
                 GUILayout.EndVertical();
             }
         }

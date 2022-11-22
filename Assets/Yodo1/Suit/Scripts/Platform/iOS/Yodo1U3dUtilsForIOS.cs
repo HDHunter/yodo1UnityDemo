@@ -163,13 +163,13 @@ public class Yodo1U3dUtilsForIOS
     /// <returns><c>true</c>, if check SNS installed with type was unityed, <c>false</c> otherwise.</returns>
     /// <param name="type">Type.</param>
 #if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern bool UnityCheckSNSInstalledWithType(int type);
+    //[DllImport(Yodo1U3dConstants.LIB_NAME)]
+    //private static extern bool UnityCheckSNSInstalledWithType(int type);
 #endif
     public static bool CheckSNSInstalledWithType(Yodo1U3dConstants.Yodo1SNSType type)
     {
 #if UNITY_IPHONE
-        return UnityCheckSNSInstalledWithType((int) type);
+        //return UnityCheckSNSInstalledWithType((int) type);
 #endif
         return false;
     }

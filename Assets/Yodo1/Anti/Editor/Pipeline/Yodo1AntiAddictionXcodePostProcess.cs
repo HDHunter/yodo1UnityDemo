@@ -69,5 +69,32 @@ namespace Yodo1.AntiAddiction
             File.WriteAllText(projPath, proj.WriteToString());
 #endif
         }
+
+
+        public static void AfterBuildProcess(BuildTarget buildTarget, string pathToBuiltProject)
+        {
+            if (buildTarget == BuildTarget.iOS)
+            {
+                //得到xcode工程的路径
+                string path = Path.GetFullPath(pathToBuiltProject);
+                //编辑代码文件UnityAppController
+                EditorCode(path);
+
+                //CocoaPodsSupport(pathToBuiltProject);
+                Debug.Log("Yodo1 Anti XcodePostprocess-AfterBuildProcess pathToBuiltProject:" + path);
+            }
+        }
+
+        const string topTag = "target 'UnityFramework' do";
+        const string getDevTeam = "def getDevTeam(installer)\nproject = installer.aggregate_targets[0].user_project\nproject.targets.each do |target|\ntarget.build_configurations.each do |config|\nif !config.build_settings[\"DEVELOPMENT_TEAM\"].nil?\nreturn config.build_settings[\"DEVELOPMENT_TEAM\"]\nend\nend\nend\nreturn \"\"\nend\n";
+        const string installer = "post_install do |installer|\ndev_team = getDevTeam(installer)\ninstaller.pods_project.targets.each do |target|\nif target.respond_to?(:product_type) and target.product_type == \"com.apple.product-type.bundle\"\ntarget.build_configurations.each do |config|\nconfig.build_settings[\"DEVELOPMENT_TEAM\"] = dev_team\nend\nend\nend\nend";
+
+        private static void EditorCode(string filePath)
+        {
+            AntiXcodeFileClass app = new AntiXcodeFileClass(filePath + "/Podfile");
+
+            app.WriteBelow(topTag, installer);
+            app.WriteBelow(topTag, getDevTeam);
+        }
     }
 }

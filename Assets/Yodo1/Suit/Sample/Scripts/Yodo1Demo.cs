@@ -149,7 +149,8 @@ public class Yodo1Demo : MonoBehaviour
             Yodo1U3dShareInfo shareParam = new Yodo1U3dShareInfo();
             shareParam.SNSType = Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeWeixinMoments |
                                  Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeTencentQQ |
-                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeSinaWeibo;
+                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeSinaWeibo |
+                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeFacebook;
             shareParam.Title = "分享标题";
             shareParam.Desc = "分享内容描述";
             shareParam.Image =
@@ -160,6 +161,14 @@ public class Yodo1Demo : MonoBehaviour
             shareParam.GameLogo = "sharelogo.png"; //分享合成图片里面的logo图片名称，放在assets下面
             shareParam.Composite = true; //默认是true，分享的图片是合成了logo，icon和二维码的图片
             Yodo1U3dUtils.Share(shareParam);
+            
+            // Yodo1U3dAnalyticsUserGenerate ge = new Yodo1U3dAnalyticsUserGenerate();
+            // ge.Campaign = "test";
+            // ge.Channel = "Facebook";
+            // ge.Url = "home/park";
+            // // ge.PromoCode
+            // Yodo1U3dAnalytics.generateInviteUrlWithLinkGenerator(ge);
+            // Yodo1U3dSDK.setShareLinkGenerateDelegate();
         }
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "统计功能"))
@@ -241,8 +250,15 @@ public class Yodo1Demo : MonoBehaviour
     //退出游戏回调
     public void exitCallback(string msg)
     {
+        //if (isExit)
+        //{
+        //    Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game ...");
+        //    Applicboolation.Quit();
+        //}
+
+
         Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game callback, msg = " + msg);
-        Dictionary<string, object> dic = (Dictionary<string, object>) Yodo1JSONObject.Deserialize(msg);
+        Dictionary<string, object> dic = (Dictionary<string, object>)Yodo1JSONObject.Deserialize(msg);
 
         if (dic != null && dic.ContainsKey("code"))
         {

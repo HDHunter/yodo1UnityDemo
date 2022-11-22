@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 
 public class Yodo1U3dAnalyticsForIOS
 {
-
     /// <summary>
     /// Unities login
     /// </summary>
@@ -78,9 +77,8 @@ public class Yodo1U3dAnalyticsForIOS
     /// <param name="orderId">Order identifier.订单id </param>
     /// <param name="source">Source.支付渠道
     /// </param>
-    public static void ChargeSuccessAnalytics(string orderId, int source)
+    public static void ChargeSuccessAnalytics(Yodo1U3dDMPPay payInfo)
     {
-
     }
 
 
@@ -102,11 +100,34 @@ public class Yodo1U3dAnalyticsForIOS
     [DllImport(Yodo1U3dConstants.LIB_NAME)]
     private static extern void UnityEventAndTrackInAppPurchase(string revenue, string currency, string quantity, string contentId, string receiptId);
 #endif
-    public static void customValidateInAppPurchase(string revenue, string currency, string quantity, string contentId, string receiptId)
+    public static void customValidateInAppPurchase(string revenue, string currency, string quantity, string contentId,
+        string receiptId)
     {
 #if UNITY_IPHONE
         UnityEventAndTrackInAppPurchase(revenue, currency, quantity,
             contentId, receiptId);
+#endif
+    }
+
+#if UNITY_IPHONE
+    [DllImport(Yodo1U3dConstants.LIB_NAME)]
+    private static extern void UnityGenerateInviteUrlWithLinkGenerator(string jsonData, string gameObjectName, string methodName);
+#endif
+    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate, string gameObjectName, string methodName)
+    {
+#if UNITY_IPHONE
+        UnityGenerateInviteUrlWithLinkGenerator(generate.toJson(), gameObjectName, methodName);
+#endif
+    }
+
+#if UNITY_IPHONE
+    [DllImport(Yodo1U3dConstants.LIB_NAME)]
+    private static extern void UnityLogInviteAppsFlyerWithEventData(string jsonData);
+#endif
+    public static void logInviteAppsFlyerWithEventData(string jsonData)
+    {
+#if UNITY_IPHONE
+        UnityLogInviteAppsFlyerWithEventData(jsonData);
 #endif
     }
 }

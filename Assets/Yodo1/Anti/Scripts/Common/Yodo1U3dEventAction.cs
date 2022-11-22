@@ -6,6 +6,6 @@
         ResumeGame = 0,
 
         //end game
-        EndGame,
+        EndGame = 1,
     }
 }

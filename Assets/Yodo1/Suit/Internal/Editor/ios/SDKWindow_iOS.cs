@@ -181,6 +181,9 @@ namespace Yodo1Unity
                                             settings.GetKeyItem().AppsFlyerDevKey, new GUILayoutOption[0]);
                                     settings.GetKeyItem().AppleAppId = EditorGUILayout.TextField("Apple AppId",
                                         settings.GetKeyItem().AppleAppId, new GUILayoutOption[0]);
+                                    settings.GetKeyItem().AppsFlyerOneLinkId =
+                                        EditorGUILayout.TextField("AppsFlyer OneLinkId",
+                                            settings.GetKeyItem().AppsFlyerOneLinkId, new GUILayoutOption[0]);
                                     settings.GetKeyItem().AppsFlyer_identifier = EditorGUILayout.TextField(
                                         "AppsFlyer identifier",
                                         settings.GetKeyItem().AppsFlyer_identifier, new GUILayoutOption[0]);

@@ -177,6 +177,11 @@ namespace Yodo1Unity
                     configDic[SettingsConstants.AppsFlyerDevKey] = new PListString(item.AppsFlyerDevKey);
                 }
 
+                if (configDic.ContainsKey(SettingsConstants.AppsFlyerOneLinkId))
+                {
+                    configDic[SettingsConstants.AppsFlyerOneLinkId] = new PListString(item.AppsFlyerOneLinkId);
+                }
+
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_identifier))
                 {
                     configDic[SettingsConstants.AppsFlyer_identifier] = new PListString(item.AppsFlyer_identifier);
@@ -298,6 +303,11 @@ namespace Yodo1Unity
                     item.AppsFlyerDevKey = (PListString) configDic[SettingsConstants.AppsFlyerDevKey];
                 }
 
+                if (configDic.ContainsKey(SettingsConstants.AppsFlyerOneLinkId))
+                {
+                    item.AppsFlyerOneLinkId = (PListString)configDic[SettingsConstants.AppsFlyerOneLinkId];
+                }
+
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_identifier))
                 {
                     item.AppsFlyer_identifier = (PListString) configDic[SettingsConstants.AppsFlyer_identifier];
@@ -415,6 +425,11 @@ namespace Yodo1Unity
                 if (item.AppsFlyerDevKey != null)
                 {
                     currItem.AppsFlyerDevKey = item.AppsFlyerDevKey;
+                }
+
+                if (item.AppsFlyerOneLinkId != null)
+                {
+                    currItem.AppsFlyerOneLinkId = item.AppsFlyerOneLinkId;
                 }
 
                 if (item.AppsFlyer_identifier != null)

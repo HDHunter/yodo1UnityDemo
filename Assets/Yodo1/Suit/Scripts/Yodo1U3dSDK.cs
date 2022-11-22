@@ -10,6 +10,7 @@ public class Yodo1U3dSDK : MonoBehaviour
 {
     //ResultType
     public const int Yodo1U3dSDK_ResulType_Share = 4001;
+    public const int Yodo1U3dSDK_ResulType_ShareLink = 4002;
 
     //GameCenterLoginStatus = 5001;
     //QueryPrivacyInfo = 8002;隐私协议和策略
@@ -134,6 +135,17 @@ public class Yodo1U3dSDK : MonoBehaviour
         _shareDelegate = action;
     }
 
+    //生成分享链接回调
+    public delegate void ShareLinkGenerateDelegate(bool success, string linkUrl);
+
+    private static ShareLinkGenerateDelegate _shareLinkGenerateDelegate;
+
+    //设置生成分享链接回调
+    public static void setShareLinkGenerateDelegate(ShareLinkGenerateDelegate action)
+    {
+        _shareLinkGenerateDelegate = action;
+    }
+
     //从GoogleCould/iCloud上传数据回调
     public delegate void iCloudGetValueDelegate(int resultCode, string saveName, string saveValue);
 
@@ -250,6 +262,21 @@ public class Yodo1U3dSDK : MonoBehaviour
                 if (_shareDelegate != null)
                 {
                     _shareDelegate(bSuccess, type);
+                }
+            }
+                break;
+            case Yodo1U3dSDK_ResulType_ShareLink:
+            {
+                bool bSuccess = resultCode == 1;
+                string link = null;
+                if (bSuccess)
+                {
+                    link = obj["link"].ToString();
+                }
+
+                if (_shareLinkGenerateDelegate != null)
+                {
+                    _shareLinkGenerateDelegate(bSuccess, link);
                 }
             }
                 break;

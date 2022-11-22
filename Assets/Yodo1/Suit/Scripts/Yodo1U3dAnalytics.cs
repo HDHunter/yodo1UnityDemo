@@ -65,24 +65,24 @@ public class Yodo1U3dAnalytics
     /// <summary>
     /// 充值成功
     /// </summary>
-    public static void onRechargeSuccess(string orderId)
+    public static void onRechargeSuccess(Yodo1U3dDMPPay payInfo)
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onRechargeSuccess(orderId);
+        Yodo1U3dAnalyticsForAndroid.onRechargeSuccess(payInfo);
 #elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.ChargeSuccessAnalytics(orderId, (int) Yodo1U3dConstants.PayType.PayTypeChannel);
+        Yodo1U3dAnalyticsForIOS.ChargeSuccessAnalytics(payInfo);
 #endif
     }
 
     /// <summary>
     /// 充值失败
     /// </summary>
-    public static void onRechargeFail(string orderId)
+    public static void onRechargeFail(Yodo1U3dDMPPay payInfo)
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onRechargeFail(orderId);
+        Yodo1U3dAnalyticsForAndroid.onRechargeFail(payInfo);
 #endif
     }
 
@@ -107,7 +107,7 @@ public class Yodo1U3dAnalytics
     /// <param name="price">Price.</param>
     /// <param name="currency">Currency.</param>
     /// <param name="transactionId">Transaction identifier.</param>
-	[System.Obsolete("Please use 'eventAndValidateInAppPurchase_Apple','validateInAppPurchase_Apple' is deprecated.")]
+    [System.Obsolete("Please use 'eventAndValidateInAppPurchase_Apple','validateInAppPurchase_Apple' is deprecated.")]
     public static void validateInAppPurchase_Apple(string productId, string price, string currency,
         string transactionId)
     {
@@ -117,8 +117,38 @@ public class Yodo1U3dAnalytics
     /// <summary>
     /// Custom Validates the in app purchase apple store. 自定义事件上报支付
     /// </summary>
-    public static void eventAndValidateInAppPurchase_Apple(string revenue, string currency, string quantity, string contentId, string receiptId)
+    public static void eventAndValidateInAppPurchase_Apple(string revenue, string currency, string quantity,
+        string contentId, string receiptId)
     {
         Yodo1U3dAnalyticsForIOS.customValidateInAppPurchase(revenue, currency, quantity, contentId, receiptId);
+    }
+
+    /// <summary>
+    /// AppsFlyer 创建用户归因分享Link
+    /// </summary>
+    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate)
+    {
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAnalyticsForAndroid.generateInviteUrlWithLinkGenerator(generate, Yodo1U3dSDK.Instance.SdkObjectName,
+            Yodo1U3dSDK.Instance.SdkMethodName);
+#elif UNITY_IPHONE
+        Yodo1U3dAnalyticsForIOS.generateInviteUrlWithLinkGenerator(generate, Yodo1U3dSDK.Instance.SdkObjectName,
+            Yodo1U3dSDK.Instance.SdkMethodName);
+#endif
+    }
+
+    /// <summary>
+    /// AppsFlyer 上报”创建用户归因分享Link“事件
+    /// </summary>
+    public static void logInviteAppsFlyerWithEventData(Dictionary<string, string> value = null)
+    {
+        string jsonData = (value == null ? null : Yodo1JSONObject.Serialize(value));
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAnalyticsForAndroid.logInviteAppsFlyerWithEventData(jsonData);
+#elif UNITY_IPHONE
+        Yodo1U3dAnalyticsForIOS.logInviteAppsFlyerWithEventData(jsonData);
+#endif
     }
 }

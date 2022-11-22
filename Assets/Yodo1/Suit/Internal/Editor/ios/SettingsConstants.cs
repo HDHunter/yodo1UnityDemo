@@ -3,12 +3,13 @@
     public class SettingsConstants
     {
         /// <summary>
-        /// Ad composition type.聚合广告类型
+        /// Ad composition type.3thSDK
         /// </summary>
         public enum SettingType
         {
             Analytics,
             Basic,
+            Share
         }
 
         /// <summary>
@@ -50,6 +51,7 @@
         public const string ThinkingAppId = "ThinkingAppId";
         public const string ThinkingServerUrl = "ThinkingServerUrl";
         public const string AppsFlyerDevKey = "AppsFlyerDevKey";
+        public const string AppsFlyerOneLinkId = "AppsFlyerOneLinkId";
         public const string AppsFlyer_identifier = "AppsFlyer_Identifier";
         public const string AppsFlyer_schemes = "AppsFlyer_Schemes";
         public const string AppsFlyer_domain = "AppsFlyer_domain";

@@ -1,6 +1,5 @@
 <dependencies>
   <packages>
-    <package>com.yodo1.suit.anti:core:3.2.4.0</package>
     <package>com.yodo1.suit.pay:core:6.1.7.1</package>
   </packages>
   <files>
@@ -40,7 +39,6 @@
     <file>Assets/Plugins/Android/com.squareup.okhttp3.okhttp-3.10.0.jar</file>
     <file>Assets/Plugins/Android/com.squareup.okio.okio-1.14.0.jar</file>
     <file>Assets/Plugins/Android/com.yodo1.suit.analytics.lib-6.1.2.aar</file>
-    <file>Assets/Plugins/Android/com.yodo1.suit.anti.core-3.2.4.0.aar</file>
     <file>Assets/Plugins/Android/com.yodo1.suit.pay.core-6.1.7.1.aar</file>
     <file>Assets/Plugins/Android/com.yodo1.suit.pay.lib-6.1.2.aar</file>
     <file>Assets/Plugins/Android/com.yodo1.suit.plugin.common-6.1.7.1.aar</file>

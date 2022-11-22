@@ -21,11 +21,7 @@ public class Yodo1U3dConstants
     {
         Channel = 0,
         Device = 1,
-        Google = 2,
         Yodo1 = 3,
-        [System.Obsolete("Wechat login is deprecated.")] Wechat = 4,
-        Sina = 5,
-        [System.Obsolete("QQ login is deprecated.")] QQ = 6,
     }
 
     public enum AccountEvent
@@ -33,46 +29,52 @@ public class Yodo1U3dConstants
         Fail = 0,
         Success = 1,
         Cancel = 2,
+
         Fail_Plugin = 3,
         Fail_NetWork = 4,
         NeedRealName = 5,
     }
 
-    public enum PayType
-    {
-        PayTypeWechat = 1, //微信
-        PayTypeAlipay = 2, //支付宝
-        PayTypeChannel = 3, //支付渠道(ios为appstore)
-        PayTypeSMS = 4, //短代
-    }
-
+    //更多错误码查看开发文档
     public enum PayEvent
     {
         PayCannel = 0, //取消支付
         PaySuccess = 1, //支付成功
         PayFail = 2, //支付失败
+
         PayVerifyFail = 3, //ops验证失败
-
+        PayMissOrder = 203, //支付漏单
         PayCustomCode = 205, //支付账号异常
+        PayAlreadyOwn = 208, //支付商品已购买
     }
-
-    //--------- 统计相关的json键
-    public const string DMP_PAY_CHANNEL_CODE = "pay_channel"; //talkingdata:支付的途径，最多16个字符。例如：“支付宝”“苹果官方”“XX支付SDK”
-    public const string DMP_PAY_CHANNEL_DESC = "pay_channel_desc"; //渠道描述
-    public const string DMP_ACCOUNT_ACCOUNT_TYPE = "account_type"; //账号类型(int)
-    public const string DMP_PAY_SOURCE = "pay_source"; //支付渠道, 取值1-99（1-20已被友盟预先定义,21-99需要在友盟网站自定义）友盟
 
     public enum Yodo1SNSType
     {
         Yodo1SNSTypeNone = -1,
-        Yodo1SNSTypeTencentQQ = 1 << 0,/**< QQ分享 >*/
-        Yodo1SNSTypeWeixinMoments = 1 << 1,/**< 朋友圈 >*/
-        Yodo1SNSTypeWeixinContacts = 1 << 2, /**< 聊天界面 >*/
-        Yodo1SNSTypeSinaWeibo = 1 << 3,/**< 新浪微博 >*/
-        Yodo1SNSTypeFacebook = 1 << 4,/**< Facebook >*/
-        [System.Obsolete("Twitter share is deprecated.")] Yodo1SNSTypeTwitter = 1 << 5,/**< Twitter >*/
-        [System.Obsolete("Instagram share is deprecated.")] Yodo1SNSTypeInstagram = 1 << 6,/**< Instagram >*/
-        Yodo1SNSTypeAll = 1 << 7 /**< 所有平台分享 >*/
+
+        /**< 所有平台分享 >*/
+        Yodo1SNSTypeAll = 0,
+
+        /**< QQ分享 >*/
+        Yodo1SNSTypeTencentQQ = 1 << 0,
+
+        /**< 朋友圈 >*/
+        Yodo1SNSTypeWeixinMoments = 1 << 1,
+
+        /**< 聊天界面 >*/
+        Yodo1SNSTypeWeixinContacts = 1 << 2,
+
+        /**< 新浪微博 >*/
+        Yodo1SNSTypeSinaWeibo = 1 << 3,
+
+        /**< Facebook >*/
+        Yodo1SNSTypeFacebook = 1 << 4,
+
+        /**< Twitter >*/
+        Yodo1SNSTypeTwitter = 1 << 5,
+
+        /**< Instagram,Messenger >*/
+        Yodo1SNSTypeInstagram = 1 << 6,
     }
 
     public enum ActivityEvent

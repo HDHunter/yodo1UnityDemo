@@ -74,26 +74,35 @@ public class Yodo1U3dAnalyticsForAndroid
                 payInfo.ProductId,
                 payInfo.ProductPrice,
                 payInfo.CurrencyType,
-                payInfo.Coin,
-                (int) payInfo.PayChannel);
+                payInfo.Coin);
         }
     }
 
     //充值成功
-    public static void onRechargeSuccess(string orderId)
+    public static void onRechargeSuccess(Yodo1U3dDMPPay payInfo)
     {
-        if (null != androidCall && orderId != null)
+        if (null != androidCall && payInfo != null)
         {
-            androidCall.CallStatic("onRechargeSuccess", orderId);
+            androidCall.CallStatic("onRechargeSuccess",
+                payInfo.OrderId,
+                payInfo.ProductId,
+                payInfo.ProductPrice,
+                payInfo.CurrencyType,
+                payInfo.Coin);
         }
     }
 
     //充值失败
-    public static void onRechargeFail(string orderId)
+    public static void onRechargeFail(Yodo1U3dDMPPay payInfo)
     {
-        if (null != androidCall && orderId != null)
+        if (null != androidCall && payInfo != null)
         {
-            androidCall.CallStatic("onRechargeFail", orderId);
+            androidCall.CallStatic("onRechargeFail",
+                payInfo.OrderId,
+                payInfo.ProductId,
+                payInfo.ProductPrice,
+                payInfo.CurrencyType,
+                payInfo.Coin);
         }
     }
 
@@ -129,6 +138,24 @@ public class Yodo1U3dAnalyticsForAndroid
         if (null != androidCall)
         {
             androidCall.CallStatic("validateInAppPurchase", publicKey, signature, purchaseData, price, currency);
+        }
+    }
+
+    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate, string gameObjectName,
+        string callbackName)
+    {
+        if (null != androidCall)
+        {
+            androidCall.CallStatic("generateInviteUrlWithLinkGenerator", generate.toJson(), gameObjectName,
+                callbackName);
+        }
+    }
+
+    public static void logInviteAppsFlyerWithEventData(string jsonParam)
+    {
+        if (null != androidCall)
+        {
+            androidCall.CallStatic("logInviteAppsFlyerWithEventData", jsonParam, "", "");
         }
     }
 }

@@ -23,7 +23,6 @@ public class Yodo1U3dDMPPay
     private double productPrice; //价格(元)
     private string currencyType = "CNY"; //货币类型，使用国际标准组织ISO4217中规范的3位字母代码标记货币类型，如CNY
     private double coin; //本次消费等值的虚拟币，就是买了多少游戏币
-    private Yodo1U3dConstants.PayType payChannel = Yodo1U3dConstants.PayType.PayTypeChannel; //支付的途径
 
     /// <summary>
     /// 将实体类转换成Json字符串以便传递
@@ -38,8 +37,6 @@ public class Yodo1U3dDMPPay
         dic.Add(Yodo1U3dConstants.PAYMENT_KEY_PRODUCT_PRICE, productPrice + "");
         dic.Add(Yodo1U3dConstants.PAYMENT_KEY_CURRENCY, currencyType);
         dic.Add(Yodo1U3dConstants.PAYMENT_KEY_COIN, coin + "");
-        dic.Add(Yodo1U3dConstants.DMP_PAY_CHANNEL_CODE, payChannel + "");
-
         return Yodo1JSONObject.Serialize(dic);
     }
 
@@ -83,12 +80,5 @@ public class Yodo1U3dDMPPay
         get { return coin; }
 
         set { coin = value; }
-    }
-
-    public Yodo1U3dConstants.PayType PayChannel
-    {
-        get { return payChannel; }
-
-        set { payChannel = value; }
     }
 }

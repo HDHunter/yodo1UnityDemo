@@ -31,7 +31,7 @@ public class Yodo1U3dPaymentDelegate
 
     //购买
     public delegate void PurchaseDelegate(Yodo1U3dConstants.PayEvent status, string orderId, string channelOrderid,
-        string productId, string extra, Yodo1U3dConstants.PayType payType);
+        string productId, string extra);
 
     private static PurchaseDelegate _purchaseDelegate;
 
@@ -213,7 +213,6 @@ public class Yodo1U3dPaymentDelegate
                 string uniformProductId = ""; //商品ID
                 string extra = ""; //额外参数
                 string channelOrderId = "";
-                int paytype = 3;
                 if (obj.ContainsKey("orderId"))
                 {
                     orderId = obj["orderId"].ToString();
@@ -230,16 +229,6 @@ public class Yodo1U3dPaymentDelegate
                 else
                 {
                     Debug.Log("channelOrderId is not set key!");
-                }
-
-
-                if (obj.ContainsKey("payType"))
-                {
-                    paytype = int.Parse(obj["payType"].ToString());
-                }
-                else
-                {
-                    Debug.Log("payType is not set key!");
                 }
 
                 if (obj.ContainsKey("uniformProductId"))
@@ -263,26 +252,7 @@ public class Yodo1U3dPaymentDelegate
                 Yodo1U3dConstants.PayEvent status = (Yodo1U3dConstants.PayEvent) resultCode;
                 if (_purchaseDelegate != null)
                 {
-                    if (paytype == 1)
-                    {
-                        _purchaseDelegate(status, orderId, channelOrderId, uniformProductId, extra,
-                            Yodo1U3dConstants.PayType.PayTypeWechat);
-                    }
-                    else if (paytype == 2)
-                    {
-                        _purchaseDelegate(status, orderId, channelOrderId, uniformProductId, extra,
-                            Yodo1U3dConstants.PayType.PayTypeAlipay);
-                    }
-                    else if (paytype == 4)
-                    {
-                        _purchaseDelegate(status, orderId, channelOrderId, uniformProductId, extra,
-                            Yodo1U3dConstants.PayType.PayTypeSMS);
-                    }
-                    else
-                    {
-                        _purchaseDelegate(status, orderId, channelOrderId, uniformProductId, extra,
-                            Yodo1U3dConstants.PayType.PayTypeChannel);
-                    }
+                    _purchaseDelegate(status, orderId, channelOrderId, uniformProductId, extra);
                 }
             }
                 break;

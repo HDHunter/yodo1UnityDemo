@@ -16,9 +16,9 @@ namespace Yodo1Unity
         public string thisProjectOrient;
         public string Yodo1SDKType;
         public string yodo1_sdk_mode;
-        public bool share_code;
         public List<AnalyticsItem> configChannel;
         public List<AnalyticsItem> configAnalytics;
+        public List<AnalyticsItem> shareAnalytics;
         public bool debugEnabled;
         public bool isShowYodo1Logo;
 
@@ -40,7 +40,9 @@ namespace Yodo1Unity
             if (cutSettings.androidSettings == null || cutSettings.androidSettings.configAnalytics == null ||
                 cutSettings.androidSettings.configAnalytics.Count == 0 ||
                 cutSettings.androidSettings.configChannel == null ||
-                cutSettings.androidSettings.configChannel.Count == 0)
+                cutSettings.androidSettings.configChannel.Count == 0 ||
+                cutSettings.androidSettings.shareAnalytics == null ||
+                cutSettings.androidSettings.shareAnalytics.Count == 0)
             {
                 Debug.Log("Yodo1Suit UpdateAndroidSettings InitAndroidSettings.");
                 InitAndroidSettings(cutSettings);
@@ -74,8 +76,6 @@ namespace Yodo1Unity
                 cutSettings.androidSettings.yodo1_sdk_mode = oldSettings.androidSettings.yodo1_sdk_mode;
             }
 
-            cutSettings.androidSettings.share_code = oldSettings.androidSettings.share_code;
-
             List<AnalyticsItem> oldAnalytcs = oldSettings.androidSettings.configAnalytics;
             foreach (AnalyticsItem currentItem in cutSettings.androidSettings.configAnalytics)
             {
@@ -85,6 +85,32 @@ namespace Yodo1Unity
                 }
 
                 foreach (AnalyticsItem oldItem in oldAnalytcs)
+                {
+                    if (!string.IsNullOrEmpty(currentItem.Name) && currentItem.Name.Equals(oldItem.Name) &&
+                        oldItem != null && oldItem.analyticsProperty != null)
+                    {
+                        currentItem.Selected = oldItem.Selected;
+                        foreach (KVItem cuIte in currentItem.analyticsProperty)
+                        {
+                            KVItem item = oldItem.getAnalyticsItem(cuIte.Key);
+                            if (item != null && !string.IsNullOrEmpty(item.Value))
+                            {
+                                cuIte.Value = item.Value;
+                            }
+                        }
+                    }
+                }
+            }
+
+            List<AnalyticsItem> oldShare = oldSettings.androidSettings.shareAnalytics;
+            foreach (AnalyticsItem currentItem in cutSettings.androidSettings.shareAnalytics)
+            {
+                if (oldShare == null || oldShare.Count == 0)
+                {
+                    break;
+                }
+
+                foreach (AnalyticsItem oldItem in oldShare)
                 {
                     if (!string.IsNullOrEmpty(currentItem.Name) && currentItem.Name.Equals(oldItem.Name) &&
                         oldItem != null && oldItem.analyticsProperty != null)
@@ -136,8 +162,10 @@ namespace Yodo1Unity
                 new Yodo1PropertiesUtils(Yodo1AndroidConfig.CONFIG_Android_PATH);
             string channelList = (string) yodo1PropertiesUtils["ChannelList"];
             string analyticslist = (string) yodo1PropertiesUtils["AnalyticsList"];
+            string sharelist = (string) yodo1PropertiesUtils["ShareList"];
             string[] channles = channelList.Split(new char[] {','});
             string[] analytics = analyticslist.Split(new char[] {','});
+            string[] shares = sharelist.Split(new char[] {','});
             if (settings.androidSettings == null)
             {
                 settings.androidSettings = new RuntimeAndroidSettings();
@@ -147,6 +175,7 @@ namespace Yodo1Unity
             settings.androidSettings.Yodo1SDKType = SDKWindow_Android.Yodo1SDKType[0];
             settings.androidSettings.yodo1_sdk_mode = SDKWindow_Android.yodo1_sdk_mode[0];
             settings.androidSettings.configAnalytics = new List<AnalyticsItem>();
+            settings.androidSettings.shareAnalytics = new List<AnalyticsItem>();
             settings.androidSettings.configChannel = new List<AnalyticsItem>();
             foreach (string channelAdapter in channles)
             {
@@ -191,6 +220,25 @@ namespace Yodo1Unity
                 }
 
                 settings.androidSettings.configAnalytics.Add(analyticsItem);
+            }
+
+            foreach (string shareAdapter in shares)
+            {
+                AnalyticsItem analyticsItem = new AnalyticsItem();
+                analyticsItem.Name = shareAdapter;
+                analyticsItem.Dependency = (string) yodo1PropertiesUtils[analyticsItem.Name];
+                string configs = (string) yodo1PropertiesUtils[analyticsItem.Name + "_config"];
+                string[] configItem = configs.Split(new char[] {','});
+                analyticsItem.analyticsProperty = new List<KVItem>();
+                foreach (string item in configItem)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        analyticsItem.analyticsProperty.Add(new KVItem(item, ""));
+                    }
+                }
+
+                settings.androidSettings.shareAnalytics.Add(analyticsItem);
             }
         }
     }

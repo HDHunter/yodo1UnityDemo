@@ -34,12 +34,11 @@ public class Yodo1Payment : MonoBehaviour
     }
 
     void PurchaseDelegate(Yodo1U3dConstants.PayEvent status, string orderId, string channelOrderId, string productId,
-        string extra, Yodo1U3dConstants.PayType payType)
+        string extra)
     {
         lastOrderId = new string[0] { };
         Debug.Log(Yodo1U3dConstants.LOG_TAG + "PurchaseDelegate status : " + status + ",productId : " + productId +
-                  ", orderId : " + orderId + ",channelOrderId" + channelOrderId + ", extra : " + extra + " payType:" +
-                  payType);
+                  ", orderId : " + orderId + ",channelOrderId" + channelOrderId + ", extra : " + extra);
         if (status == Yodo1U3dConstants.PayEvent.PaySuccess)
         {
             lastOrderId = new string[] {orderId};

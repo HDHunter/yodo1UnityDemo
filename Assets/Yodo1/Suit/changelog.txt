@@ -181,3 +181,23 @@ unity iOS配置读写，iOS依赖优化
 12,sdk日志开关合规.
 13,sdk bridge.aar API修改.广告初始化优化。
 2022年10月20日11:03:37	张建秋
+
+6.1.8
+1,verify activieCode add errorCode field.
+2,channelErrorCode in orderError event.
+2022年10月24日11:40:41	张建秋
+
+6.1.9
+1,verify activieCode add errorCode field.
+2,channelErrorCode in orderError event.
+2022年10月24日11:40:41	张建秋
+
+6.1.10
+Android:
+1，隐私协议开屏更新，协议更新提醒。
+2，隐私协议/协议更新 取消交互设计。
+3，存储权限移除。	
+4,channelCode Bug fix.
+2022年11月18日	张建秋
+
+
