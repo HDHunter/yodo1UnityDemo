@@ -99,9 +99,6 @@ namespace Yodo1Unity
             proj.AddBuildProperty(mainTargetGuid, "ENABLE_BITCODE", "NO");
             proj.AddBuildProperty(mainTargetGuid, "OTHER_LDFLAGS", "-ObjC");
 
-            // facebook分享 在xcode工程BuildPhase中添加embed framework
-            //EmbedDynamicLibrariesIfNeeded(path, proj, mainTargetGuid);
-
             File.WriteAllText(projPath, proj.WriteToString());
 #endif
         }
@@ -221,74 +218,6 @@ namespace Yodo1Unity
             proc.Start();
         }
 
-        [PostProcessBuild(9990)]
-        private static void EmbedDynamicLibrariesIfNeeded(string buildPath, UnityEditor.iOS.Xcode.PBXProject project, string targetGuid)
-        {
-            var dynamicLibraryPathsPresentInProject = DynamicLibraryPathsToEmbed.Where(dynamicLibraryPath => Directory.Exists(Path.Combine(buildPath, dynamicLibraryPath))).ToList();
-            if (dynamicLibraryPathsPresentInProject.Count <= 0) return;
-
-
-
-#if UNITY_2019_3_OR_NEWER
-            // Embed framework only if the podfile does not contain target `Unity-iPhone`.
-            if (!ContainsUnityIphoneTargetInPodfile(buildPath))
-            {
-                foreach (var dynamicLibraryPath in dynamicLibraryPathsPresentInProject)
-                {
-                    var fileGuid = project.AddFile(dynamicLibraryPath, dynamicLibraryPath);
-                    project.AddFileToEmbedFrameworks(targetGuid, fileGuid);
-                }
-            }
-#else
-            string runpathSearchPaths;
-#if UNITY_2018_2_OR_NEWER
-            runpathSearchPaths = project.GetBuildPropertyForAnyConfig(targetGuid, "LD_RUNPATH_SEARCH_PATHS");
-#else
-            runpathSearchPaths = "$(inherited)";
-#endif
-            runpathSearchPaths += string.IsNullOrEmpty(runpathSearchPaths) ? "" : " ";
-
-
-
-           // Check if runtime search paths already contains the required search paths for dynamic libraries.
-            if (runpathSearchPaths.Contains("@executable_path/Frameworks")) return;
-
-
-
-           runpathSearchPaths += "@executable_path/Frameworks";
-            project.SetBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", runpathSearchPaths);
-#endif
-        }
-
-#if UNITY_2019_3_OR_NEWER
-        private static bool ContainsUnityIphoneTargetInPodfile(string buildPath)
-        {
-            var podfilePath = Path.Combine(buildPath, "Podfile");
-            if (!File.Exists(podfilePath)) return false;
-
-            var lines = File.ReadAllLines(podfilePath);
-            return lines.Any(line => line.Contains(TargetUnityIphonePodfileLine));
-        }
-#endif
-
-
-        private static List<string> DynamicLibraryPathsToEmbed
-        {
-            get
-            {
-                var dynamicLibraryPathsToEmbed = new List<string>();
-               
-
-                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBSDKCoreKit_Basics/XCFrameworks/FBSDKCoreKit_Basics.xcframework/ios-arm64_armv7/FBSDKCoreKit_Basics.framework"));
-                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBSDKCoreKit/XCFrameworks/FBSDKCoreKit.xcframework/ios-arm64_armv7/FBSDKCoreKit.framework"));
-                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBAEMKit/XCFrameworks/FBAEMKit.xcframework/ios-arm64_armv7/FBAEMKit.framework"));
-                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBSDKShareKit/XCFrameworks/FBSDKShareKit.xcframework/ios-arm64_armv7/FBSDKShareKit.framework"));
-
-
-                return dynamicLibraryPathsToEmbed;
-            }
-        }
-
         public static void AfterBuildProcess(BuildTarget buildTarget, string pathToBuiltProject)
         {
             if (buildTarget == BuildTarget.iOS)
@@ -298,8 +227,7 @@ namespace Yodo1Unity
                 //pod install
                 //RepoUpdate();
                 RuntimeiOSSettings settings = SettingsSave.LoadEditor(false);
-                //修改share所用的CFBundleURLSchemes
-                Yodo1ShareConfig.UpdateInfoPlist(pathToBuiltProject, settings);
+
                 //编辑代码文件UnityAppController
                 EditorCode(path);
 

@@ -8,8 +8,7 @@
         public enum SettingType
         {
             Analytics,
-            Basic,
-            Share
+            Basic
         }
 
         /// <summary>
@@ -17,7 +16,6 @@
         /// </summary>
         public enum BasicType
         {
-            Share,
             UCenter,
             iCloud
         }
@@ -28,9 +26,7 @@
         public enum AnalyticsType
         {
             AppsFlyer,
-            Umeng,
-            Thinking,
-            Firebase,
+            Thinking
         }
 
         //对应config.plist键值
@@ -38,16 +34,6 @@
         public const string AppKey = "GameKey";
         public const string RegionCode = "RegionCode";
         public const string SdkVersion = "SdkVersion";
-        public const string FacebookAppId = "FacebookAppId";
-        public const string WechatAppId = "WechatAppId";
-        public const string WechatUniversalLink = "WechatUniversalLink";
-        public const string QQAppId = "QQAppId";
-        public const string QQUniversalLink = "QQUniversalLink";
-        public const string SinaAppId = "SinaAppId";
-        public const string SinaCallbackUrl = "SinaCallbackUrl";
-        public const string SinaSecret = "SinaSecret";
-        public const string SinaUniversalLink = "SinaUniversalLink";
-        public const string UmengAnalytics = "UmengAnalytics";
         public const string ThinkingAppId = "ThinkingAppId";
         public const string ThinkingServerUrl = "ThinkingServerUrl";
         public const string AppsFlyerDevKey = "AppsFlyerDevKey";

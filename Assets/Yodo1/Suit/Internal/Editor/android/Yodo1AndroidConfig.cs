@@ -6,12 +6,17 @@ namespace Yodo1Unity
 {
     public class Yodo1AndroidConfig
     {
-        public const string Yodo1AndroidPlugin = "./Assets/Plugins/Android";
-        public const string manifest = Yodo1AndroidPlugin + "/AndroidManifest.xml";
+        public const string Yodo1AndroidPlugin = "./Assets/Yodo1/Suit/Plugins/Android/Yodo1Suit.androidlib/";
+
+        public const string libManifest = Yodo1AndroidPlugin + "/AndroidManifest.xml";
+        public const string manifest = "./Assets/Plugins/Android/AndroidManifest.xml";
+
         public const string Yodo1AndroidPluginRes = Yodo1AndroidPlugin + "/res";
         public const string Yodo1ValuePath = Yodo1AndroidPluginRes + "/values";
         public const string Yodo1Assets = Yodo1AndroidPlugin + "/assets";
+
         public const string Yodo1KeyInfoPath = Yodo1AndroidPluginRes + "/raw/yodo1_games_config.properties";
+
         public const string dependenciesDir = "/Assets/Yodo1/Suit/Editor/Dependencies/";
         public const string dependenciesName = "Yodo1SDKAndroidDependencies.xml";
 
@@ -37,6 +42,7 @@ namespace Yodo1Unity
 
             EditorFileUtils.DeleteFile(Yodo1KeyInfoPath);
             File.Create(Yodo1KeyInfoPath).Dispose();
+
             Yodo1PropertiesUtils props = new Yodo1PropertiesUtils(Yodo1KeyInfoPath);
             RuntimeAndroidSettings sets = settings.androidSettings;
             props.Add("mainClassName", "com.yodo1.plugin.u3d.Yodo1UnityActivity");
@@ -107,30 +113,6 @@ namespace Yodo1Unity
                 }
             }
 
-            List<AnalyticsItem> shares = sets.shareAnalytics;
-            if (shares != null && shares.Count > 0)
-            {
-                string codes = "";
-                foreach (AnalyticsItem analytic in shares)
-                {
-                    if (analytic.Selected)
-                    {
-                        List<KVItem> prop = analytic.analyticsProperty;
-                        if (prop != null && prop.Count > 0)
-                        {
-                            foreach (KVItem item in prop)
-                            {
-                                props.Add(item.Key, item.Value);
-                            }
-                        }
-
-                        codes = codes + analytic.Name + ",";
-                    }
-                }
-
-                props.Add("share_code", codes);
-            }
-
             List<AnalyticsItem> analytics = sets.configAnalytics;
             if (analytics != null && analytics.Count > 0)
             {
@@ -189,8 +171,8 @@ namespace Yodo1Unity
                                     "\t\t<repositories>");
             //开始
             CreateFile(depDir, dep,
-                "\t\t\t<repository>https://nexus.yodo1.com/repository/maven-public/</repository>\n" +
-                "\t\t\t<repository>https://mvnrepository.com/</repository>\n" +
+                //"\t\t\t<repository>https://nexus.yodo1.com/repository/maven-public/</repository>\n" +
+                //"\t\t\t<repository>https://mvnrepository.com/</repository>\n" +
                 "\t\t</repositories>");
             Yodo1PropertiesUtils prop = new Yodo1PropertiesUtils(CONFIG_Android_PATH);
 
@@ -207,7 +189,7 @@ namespace Yodo1Unity
                 foreach (AnalyticsItem item in items)
                 {
                     if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
-                        !string.IsNullOrEmpty((string) prop[item.Name]))
+                        !string.IsNullOrEmpty((string)prop[item.Name]))
                     {
                         CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
                     }
@@ -220,21 +202,7 @@ namespace Yodo1Unity
                 foreach (AnalyticsItem item in channel)
                 {
                     if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
-                        !string.IsNullOrEmpty((string) prop[item.Name]))
-                    {
-                        CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
-                    }
-                }
-            }
-
-
-            List<AnalyticsItem> shares = settings.androidSettings.shareAnalytics;
-            if (shares != null && shares.Count > 0)
-            {
-                foreach (AnalyticsItem item in shares)
-                {
-                    if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
-                        !string.IsNullOrEmpty((string) prop[item.Name]))
+                        !string.IsNullOrEmpty((string)prop[item.Name]))
                     {
                         CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
                     }

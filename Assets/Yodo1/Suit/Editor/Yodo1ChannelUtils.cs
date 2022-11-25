@@ -7,19 +7,20 @@ using Yodo1Unity;
 
 public class Yodo1ChannelUtils
 {
+    private static readonly string splashFlag = "<!--Splash_end-->";
+    private static readonly string appFlag = "</application>";
+
     public static void ChannelHandle()
     {
-        //revert.do not del game assets.
-        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1ValuePath + "/ids.xml");
         try
         {
             StreamReader sr = new StreamReader(Yodo1AndroidConfig.manifest);
             string alltext = sr.ReadToEnd();
             sr.Close();
-            Regex regex1 = new Regex("(?<=Yodo1App-->).*?(?=<!--Yodo1App_end)");
+            //Regex regex1 = new Regex("(?<=Yodo1App-->).*?(?=<!--Yodo1App_end)");
             Regex regex2 = new Regex("(?<=Splash-->).*?(?=<!--Splash_end)");
             alltext = alltext.Replace("\n", "@@");
-            alltext = regex1.Replace(alltext, "");
+            //alltext = regex1.Replace(alltext, "");
             alltext = regex2.Replace(alltext, "");
             alltext = alltext.Replace("@@", "\n");
             StreamWriter streamWriter = new StreamWriter(Yodo1AndroidConfig.manifest);
@@ -49,21 +50,6 @@ public class Yodo1ChannelUtils
             }
         }
 
-        List<AnalyticsItem> shares = settings.androidSettings.shareAnalytics;
-        if (shares != null && shares.Count > 0)
-        {
-            foreach (AnalyticsItem item in shares)
-            {
-                if (item != null && item.Selected)
-                {
-                    if ("Facebook".Equals(item.Name))
-                    {
-                        Facebook(item);
-                    }
-                }
-            }
-        }
-
         List<AnalyticsItem> channel = settings.androidSettings.configChannel;
         if (channel != null && channel.Count > 0)
         {
@@ -77,46 +63,6 @@ public class Yodo1ChannelUtils
                     }
                 }
             }
-        }
-    }
-
-    private static void Facebook(AnalyticsItem item)
-    {
-        string provider = "<provider\n" +
-                          "    android:name=\"com.facebook.FacebookContentProvider\"\n" +
-                          "    android:authorities=\"com.facebook.app.FacebookContentProvider@facebook_app_id\"\n" +
-                          "    android:exported=\"true\"\n" +
-                          "    tools:replace=\"android:authorities\" />";
-        string facebook = "<resources>\n" +
-                          "    <string name=\"facebook_app_id\">@facebook_app_id</string>\n" +
-                          "    <string name=\"facebook_client_token\">@facebook_client_token</string>\n" +
-                          "</resources>\n";
-        bool isValue = false;
-        foreach (KVItem i in item.analyticsProperty)
-        {
-            if (i.Key.Contains("facebook_app_id"))
-            {
-                provider = provider.Replace("@facebook_app_id", i.Value);
-                if (XcodePostprocess.IsVaildSNSKey(i.Value))
-                {
-                    isValue = true;
-                }
-            }
-            else if (i.Key.Contains("facebook_client_token"))
-            {
-                facebook = facebook.Replace("@facebook_client_token", i.Value);
-                if (XcodePostprocess.IsVaildSNSKey(i.Value))
-                {
-                    isValue = true;
-                }
-            }
-        }
-
-        if (isValue)
-        {
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Yodo1App_end-->",
-                provider + "<!--Yodo1App_end-->");
-            EditorFileUtils.WriteFile(Yodo1AndroidConfig.Yodo1ValuePath, "facebook.xml", facebook);
         }
     }
 
@@ -138,7 +84,7 @@ public class Yodo1ChannelUtils
                               "        android:host=\"@url_host\"\n" +
                               "        android:pathPattern=\"@url_path\"\n" +
                               "        android:scheme=\"https\" />\n" +
-                              "</intent-filter>";
+                              "</intent-filter>\n";
         String longUrl = "<intent-filter>\n" +
                          "    <action android:name=\"android.intent.action.VIEW\" />\n" +
                          "    <category android:name=\"android.intent.category.DEFAULT\" />\n" +
@@ -147,7 +93,7 @@ public class Yodo1ChannelUtils
                          "        android:host=\"go.onelink.me\"\n" +
                          "        android:pathPattern=\"@url_path\"\n" +
                          "        android:scheme=\"https\" />\n" +
-                         "</intent-filter>";
+                         "</intent-filter>\n";
         List<KVItem> ies = item.analyticsProperty;
         bool isUriValue = false;
         bool isUrlValue = false;
@@ -181,18 +127,23 @@ public class Yodo1ChannelUtils
             }
             else if (i.Key.Contains("template"))
             {
-                template = i.Value;
-                if (!i.Value.Contains("/"))
-                {
-                    i.Value = "/" + i.Value;
-                }
-
-                string j = i.Value.Replace("/", "\\\\/");
-                deeplink_url = deeplink_url.Replace("@url_path", j);
-                longUrl = longUrl.Replace("@url_path", j);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
                     isUrlValue = isLongUrl = true;
+                    template = i.Value;
+                    if (!template.Contains("/"))
+                    {
+                        template = "/" + template;
+                    }
+
+                    string j = template.Replace("/", "\\\\/");
+                    deeplink_url = deeplink_url.Replace("@url_path", j);
+                    longUrl = longUrl.Replace("@url_path", j);
+                }
+                else
+                {
+                    deeplink_url = deeplink_url.Replace("@url_path", template);
+                    longUrl = longUrl.Replace("@url_path", template);
                 }
             }
         }
@@ -207,13 +158,13 @@ public class Yodo1ChannelUtils
         {
             EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
                 deeplink_url + "<!--Splash_end-->");
-            template = deeplink_url.Replace(template, template + "\\\\/.*");
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
-                template + "<!--Splash_end-->");
         }
 
         if (isLongUrl)
         {
+            deeplink_url = deeplink_url.Replace(template, template + "\\\\/.*");
+            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
+                deeplink_url + "<!--Splash_end-->");
             EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
                 longUrl + "<!--Splash_end-->");
         }
@@ -221,6 +172,9 @@ public class Yodo1ChannelUtils
 
     private static void googlePlay(AnalyticsItem item)
     {
+        //revert.do not del game assets.
+        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1ValuePath + "/ids.xml");
+
         string appid = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                        "<resources>\n" +
                        "    <string name=\"yodo1_google_appid\">@yodo1_google_appid</string>\n" +
@@ -228,7 +182,7 @@ public class Yodo1ChannelUtils
         string manifestdata = "\n" +
                               "        <meta-data\n" +
                               "            android:name=\"com.google.android.gms.games.APP_ID\"\n" +
-                              "            android:value=\"@string/yodo1_google_appid\" />";
+                              "            android:value=\"@string/yodo1_google_appid\" />\n";
         foreach (KVItem i in item.analyticsProperty)
         {
             if (i != null && "google_app_id".Equals(i.Key))
@@ -238,7 +192,6 @@ public class Yodo1ChannelUtils
         }
 
         EditorFileUtils.WriteFile(Yodo1AndroidConfig.Yodo1ValuePath, "ids.xml", appid);
-        EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Yodo1App_end-->",
-            manifestdata + "<!--Yodo1App_end-->");
+        EditorFileUtils.Replace(Yodo1AndroidConfig.libManifest, appFlag, manifestdata + "\t" + appFlag);
     }
 }

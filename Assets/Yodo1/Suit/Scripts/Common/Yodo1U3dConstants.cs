@@ -48,35 +48,6 @@ public class Yodo1U3dConstants
         PayAlreadyOwn = 208, //支付商品已购买
     }
 
-    public enum Yodo1SNSType
-    {
-        Yodo1SNSTypeNone = -1,
-
-        /**< 所有平台分享 >*/
-        Yodo1SNSTypeAll = 0,
-
-        /**< QQ分享 >*/
-        Yodo1SNSTypeTencentQQ = 1 << 0,
-
-        /**< 朋友圈 >*/
-        Yodo1SNSTypeWeixinMoments = 1 << 1,
-
-        /**< 聊天界面 >*/
-        Yodo1SNSTypeWeixinContacts = 1 << 2,
-
-        /**< 新浪微博 >*/
-        Yodo1SNSTypeSinaWeibo = 1 << 3,
-
-        /**< Facebook >*/
-        Yodo1SNSTypeFacebook = 1 << 4,
-
-        /**< Twitter >*/
-        Yodo1SNSTypeTwitter = 1 << 5,
-
-        /**< Instagram,Messenger >*/
-        Yodo1SNSTypeInstagram = 1 << 6,
-    }
-
     public enum ActivityEvent
     {
         Fail = 0,

@@ -27,15 +27,6 @@ public class Yodo1U3dInitForAndroid
         androidCall.CallStatic("initWithConfig", sdkInitConfigJson);
     }
 
-    /// <summary>
-    public static void Share(string param, string gameObjectName, string callbackName)
-    {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("share", gameObjectName, callbackName, param);
-        }
-    }
-
     public static string getSDKVersion()
     {
         if (null != androidCall)

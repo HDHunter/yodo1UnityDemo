@@ -24,7 +24,7 @@ public class Yodo1U3dUtils
             GameObject gameObj = obj.gameObject;
             if (gameObj != null)
             {
-                string methodName = ((Delegate) callbackMethod).Method.Name;
+                string methodName = ((Delegate)callbackMethod).Method.Name;
                 if (methodName != null)
                 {
 #if UNITY_EDITOR
@@ -172,21 +172,6 @@ public class Yodo1U3dUtils
 #endif
         return value;
     }
-
-    /// <summary>
-    /// Share the specified paramJson.
-    /// </summary>
-    /// <param name="param">Parameter json.</param>
-    public static void Share(Yodo1U3dShareInfo param)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dInitForAndroid.Share(param.toJson(), Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
-#elif UNITY_IPHONE
-        //Yodo1U3dManagerForIOS.PostStatus(param.toJson());
-#endif
-    }
-
 
     /// <summary>
     /// 跳转至评价页
@@ -447,7 +432,7 @@ public class Yodo1U3dUtils
 
         if (callbackMethod != null)
         {
-            methodName = ((Delegate) callbackMethod).Method.Name;
+            methodName = ((Delegate)callbackMethod).Method.Name;
         }
 #if UNITY_ANDROID
         Yodo1U3dUtilsForAndroid.ShowAlert(title, message, positiveButton, negativeButton, neutralButton, objName,

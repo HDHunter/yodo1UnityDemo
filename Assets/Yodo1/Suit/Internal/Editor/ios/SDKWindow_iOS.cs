@@ -51,8 +51,7 @@ namespace Yodo1Unity
             if (questionMarkIcon != null && GUI.Button(new Rect(base.position.width - 35, 5, 30, 30),
                 questionMarkIcon))
             {
-                Application.OpenURL(
-                    "https://confluence.yodo1.com/pages/viewpage.action?pageId=33988454#Yodo1SuitUnityPlugin%E6%8E%A5%E5%85%A5%E6%96%87%E6%A1%A3-%E5%85%AD%EF%BC%8CiOS%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85LocalBuild");
+                Application.OpenURL("https://yodo1-suit.web.app/zh/unity/integration/");
             }
 
             if (GUI.Button(new Rect(base.position.width - 105, 5, 60, 30), "Save"))
@@ -79,8 +78,7 @@ namespace Yodo1Unity
 
                 if (settings.configBasic.Count > 0)
                 {
-                    GUILayout.Label("---------------------------------", EditorStyles.boldLabel,
-                        new GUILayoutOption[0]);
+                    GUILayout.Label("---------------------------------", EditorStyles.boldLabel, new GUILayoutOption[0]);
                 }
 
                 for (int i = 0; i < settings.configBasic.Count; i++)
@@ -91,44 +89,7 @@ namespace Yodo1Unity
                     {
                         item.Selected = EditorGUILayout.Toggle(item.Name, item.Selected, new GUILayoutOption[0]);
 
-                        if (item.Selected && item.Index == (int) SettingsConstants.BasicType.Share)
-                        {
-                            settings.GetKeyItem().WechatAppId = EditorGUILayout.TextField("[微信]AppKey",
-                                settings.GetKeyItem().WechatAppId, new GUILayoutOption[0]);
-                            settings.GetKeyItem().WechatUniversalLink = EditorGUILayout.TextField(
-                                "[微信]UniversalLink", settings.GetKeyItem().WechatUniversalLink,
-                                new GUILayoutOption[0]);
-
-                            EditorGUILayout.Separator();
-
-                            settings.GetKeyItem().SinaAppId = EditorGUILayout.TextField("[新浪微博]AppKey",
-                                settings.GetKeyItem().SinaAppId, new GUILayoutOption[0]);
-                            settings.GetKeyItem().SinaSecret = EditorGUILayout.TextField("[新浪微博]Secret",
-                                settings.GetKeyItem().SinaSecret, new GUILayoutOption[0]);
-                            settings.GetKeyItem().SinaCallbackUrl = EditorGUILayout.TextField("[新浪微博]CallbackUrl",
-                                settings.GetKeyItem().SinaCallbackUrl, new GUILayoutOption[0]);
-                            settings.GetKeyItem().SinaUniversalLink = EditorGUILayout.TextField(
-                                "[新浪微博]UniversalLink", settings.GetKeyItem().SinaUniversalLink,
-                                new GUILayoutOption[0]);
-
-                            EditorGUILayout.Separator();
-
-                            settings.GetKeyItem().QQAppId = EditorGUILayout.TextField("[QQ]AppKey",
-                                settings.GetKeyItem().QQAppId, new GUILayoutOption[0]);
-
-                            settings.GetKeyItem().QQUniversalLink = EditorGUILayout.TextField("[QQ]UniversalLink",
-                                settings.GetKeyItem().QQUniversalLink, new GUILayoutOption[0]);
-
-                            EditorGUILayout.Separator();
-
-                            settings.GetKeyItem().FacebookAppId = EditorGUILayout.TextField("[Facebook]AppId",
-                                settings.GetKeyItem().FacebookAppId, new GUILayoutOption[0]);
-
-                            EditorGUILayout.Separator();
-                        }
-
-                        GUILayout.Label("---------------------------------", EditorStyles.boldLabel,
-                            new GUILayoutOption[0]);
+                        GUILayout.Label("---------------------------------", EditorStyles.boldLabel, new GUILayoutOption[0]);
                         EditorGUILayout.Separator();
                     }
                 }
@@ -162,17 +123,7 @@ namespace Yodo1Unity
                         {
                             switch (item.Index)
                             {
-                                case (int) SettingsConstants.AnalyticsType.Umeng:
-                                    GUIStyle gUIStyle1 = new GUIStyle();
-                                    gUIStyle1.padding = (new RectOffset(20, 10, 5, 5));
-                                    GUILayout.BeginVertical(gUIStyle1, new GUILayoutOption[0]);
-                                    settings.GetKeyItem().UmengAnalytics =
-                                        EditorGUILayout.TextField("Umeng AppKey",
-                                            settings.GetKeyItem().UmengAnalytics, new GUILayoutOption[0]);
-                                    EditorGUILayout.Separator();
-                                    GUILayout.EndVertical();
-                                    break;
-                                case (int) SettingsConstants.AnalyticsType.AppsFlyer:
+                                case (int)SettingsConstants.AnalyticsType.AppsFlyer:
                                     GUIStyle gUIStyle3 = new GUIStyle();
                                     gUIStyle3.padding = (new RectOffset(20, 10, 5, 5));
                                     GUILayout.BeginVertical(gUIStyle3, new GUILayoutOption[0]);
@@ -196,7 +147,7 @@ namespace Yodo1Unity
                                     EditorGUILayout.Separator();
                                     GUILayout.EndVertical();
                                     break;
-                                case (int) SettingsConstants.AnalyticsType.Thinking:
+                                case (int)SettingsConstants.AnalyticsType.Thinking:
                                     GUIStyle gUIStyle7 = new GUIStyle();
                                     gUIStyle7.padding = (new RectOffset(20, 10, 5, 5));
                                     GUILayout.BeginVertical(gUIStyle7, new GUILayoutOption[0]);
@@ -208,9 +159,6 @@ namespace Yodo1Unity
                                             settings.GetKeyItem().ThinkingServerUrl, new GUILayoutOption[0]);
                                     EditorGUILayout.Separator();
                                     GUILayout.EndVertical();
-                                    break;
-                                case (int) SettingsConstants.AnalyticsType.Firebase:
-
                                     break;
                             }
 
@@ -285,9 +233,9 @@ namespace Yodo1Unity
             }
 
             Yodo1sdkIcon =
-                (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "yodo1sdk-icon.png", typeof(Texture2D));
+                (Texture2D)AssetDatabase.LoadAssetAtPath(PIC_PATH + "yodo1sdk-icon.png", typeof(Texture2D));
             questionMarkIcon =
-                (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "question-mark.png", typeof(Texture2D));
+                (Texture2D)AssetDatabase.LoadAssetAtPath(PIC_PATH + "question-mark.png", typeof(Texture2D));
         }
 
         private void OnDisable()

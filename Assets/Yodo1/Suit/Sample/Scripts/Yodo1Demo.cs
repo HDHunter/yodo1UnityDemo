@@ -3,8 +3,6 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Yodo1.AntiAddiction;
-using Yodo1Ads;
 
 public class Yodo1Demo : MonoBehaviour
 {
@@ -27,6 +25,9 @@ public class Yodo1Demo : MonoBehaviour
             Functions();
             return;
         }
+
+        PlayerPrefs.SetString(KEY_APP_KEY, "1BUpPjJgws");
+        PlayerPrefs.SetString(KEY_REGION_CODE, "f7b3c964");
 
         InitializeCongig();
     }
@@ -69,12 +70,6 @@ public class Yodo1Demo : MonoBehaviour
         config.AppKey = appKey;
         config.RegionCode = regionCode;
         Yodo1U3dSDK.InitWithConfig(config);
-        Yodo1U3dSDK.setShareDelegate(ShareDelegate); //分享回调
-
-        Yodo1U3dAds.InitializeSdk();
-
-        //Non automatic initialization call(非自动初始化调用).
-        Yodo1U3dAntiAddiction.Init();
 
         initialized = true;
     }
@@ -90,20 +85,6 @@ public class Yodo1Demo : MonoBehaviour
             modelStr.Equals("iPhone11,2") || modelStr.Equals("iPhone11,6");
 #endif
         return IsIphoneXDevice;
-    }
-
-    void ShareDelegate(bool result, Yodo1U3dConstants.Yodo1SNSType shareType)
-    {
-        if (result)
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "share success");
-        }
-        else
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "share fail");
-        }
-
-        Debug.Log(Yodo1U3dConstants.LOG_TAG + "shareType:" + shareType);
     }
 
 
@@ -134,41 +115,14 @@ public class Yodo1Demo : MonoBehaviour
             btn_startY = 110;
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY, btn_w, btn_h), "账户/防沉迷功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 2 + btn_h, btn_w, btn_h), "账户/防沉迷功能"))
         {
             SceneManager.LoadScene("AccountScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 2 + btn_h, btn_w, btn_h), "商品支付功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "商品支付功能"))
         {
             SceneManager.LoadScene("PayScene");
-        }
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "分享功能"))
-        {
-            Yodo1U3dShareInfo shareParam = new Yodo1U3dShareInfo();
-            shareParam.SNSType = Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeWeixinMoments |
-                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeTencentQQ |
-                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeSinaWeibo |
-                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeFacebook;
-            shareParam.Title = "分享标题";
-            shareParam.Desc = "分享内容描述";
-            shareParam.Image =
-                Application.persistentDataPath + Path.DirectorySeparatorChar + "share_test_image.png"; //分享的图片的路径
-            shareParam.QrLogo = "AppIcon.png"; //分享用于合成用的icon，放在assets下面
-            shareParam.QrText = "长按识别二维码 \n 求挑战！求带走！"; //合成图二维码文字
-            shareParam.Url = "https://www.baidu.com"; //点击分享图片可以跳转到的url
-            shareParam.GameLogo = "sharelogo.png"; //分享合成图片里面的logo图片名称，放在assets下面
-            shareParam.Composite = true; //默认是true，分享的图片是合成了logo，icon和二维码的图片
-            Yodo1U3dUtils.Share(shareParam);
-            
-            // Yodo1U3dAnalyticsUserGenerate ge = new Yodo1U3dAnalyticsUserGenerate();
-            // ge.Campaign = "test";
-            // ge.Channel = "Facebook";
-            // ge.Url = "home/park";
-            // // ge.PromoCode
-            // Yodo1U3dAnalytics.generateInviteUrlWithLinkGenerator(ge);
-            // Yodo1U3dSDK.setShareLinkGenerateDelegate();
         }
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "统计功能"))
@@ -227,17 +181,6 @@ public class Yodo1Demo : MonoBehaviour
                 string p = Yodo1U3dUtils.StringParams(livesKey, "");
                 Debug.Log(Yodo1U3dConstants.LOG_TAG + "StringParams value:" + p);
             }
-        }
-
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 10 + btn_h * 9, btn_w, btn_h), "防沉迷功能"))
-        {
-            SceneManager.LoadScene("SampleScene");
-        }
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 11 + btn_h * 10, btn_w, btn_h), "广告功能"))
-        {
-            SceneManager.LoadScene("Yodo1AdsScene");
         }
 
 

@@ -22,48 +22,12 @@ namespace Yodo1Unity
         public string RegionCode;
 
         /// <summary>
-        /// Facebook 激活需要的appid
-        /// The facebook app identifier.
-        /// </summary>
-        public string FacebookAppId;
-
-        /// <summary>
         /// Thinking of AppId
         /// </summary>
         public string ThinkingAppId;
 
         public string ThinkingServerUrl;
 
-        /// <summary>
-        /// The QQApp key.
-        /// </summary>
-        public string QQAppId;
-
-        /// <summary>
-        /// The QQ UniversalLink.
-        /// </summary>
-        public string QQUniversalLink;
-
-        /// <summary>
-        /// The sina weibo app key.
-        /// </summary>
-        public string SinaAppId;
-
-        public string SinaSecret;
-        public string SinaCallbackUrl;
-        public string SinaUniversalLink;
-
-        /// <summary>
-        /// The umeng analytics.
-        /// </summary>
-        public string UmengAnalytics;
-
-        /// <summary>
-        /// The we chat app key.
-        /// </summary>
-        public string WechatAppId;
-
-        public string WechatUniversalLink;
 
         /// <summary>
         /// The apps flyer dev key.
