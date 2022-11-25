@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dependencies>
+	<androidPackages>
+		<repositories>
+		</repositories>
+		<androidPackage spec="com.yodo1.suit.pay:core:6.1.11.1" />
+		<androidPackage spec="com.yodo1.suit.pay:google:5.0.0.1" />
+	</androidPackages>
+</dependencies>

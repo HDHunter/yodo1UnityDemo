@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e672481437ee146eba83a598ec0dbd61, type: 3}
+  m_Name: Yodo1SuitSettings
+  m_EditorClassIdentifier: 
+  androidSettings:
+    AppKey: tyrtyhz
+    RegionCode: asdfa
+    thisProjectOrient: portrait
+    Yodo1SDKType: GooglePlay
+    yodo1_sdk_mode: offline
+    configChannel:
+    - Name: GooglePlay
+      Dependency: com.yodo1.suit.pay:google:5.0.0.1
+      analyticsProperty:
+      - Key: google_publish_key
+        Value: gfasdgasdfgadfg
+      - Key: google_app_id
+        Value: sdfasdfas
+      Selected: 1
+    configAnalytics:
+    - Name: ThinkingData
+      Dependency: 
+      analyticsProperty:
+      - Key: dmp_key_thinkingdata_appId
+        Value: 
+      - Key: dmp_key_thinkingdata_url
+        Value: https://c1.yodo1.com/
+      Selected: 1
+    - Name: Appsflyer
+      Dependency: com.yodo1.suit.analytics:appsflyer:6.9.2.3
+      analyticsProperty:
+      - Key: af_dev_key
+        Value: 
+      - Key: uriSchema
+        Value: 
+      - Key: uriHost
+        Value: 
+      - Key: urlHost
+        Value: 
+      - Key: af_templateId
+        Value: 
+      Selected: 0
+    debugEnabled: 1
+    isShowYodo1Logo: 0
