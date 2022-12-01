@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Yodo1SuitSettings
   m_EditorClassIdentifier: 
   androidSettings:
-    AppKey: tyrtyhz
-    RegionCode: asdfa
+    AppKey: LFo9FuZSz
+    RegionCode: 
     thisProjectOrient: portrait
-    Yodo1SDKType: GooglePlay
+    Yodo1SDKType: ChinaMainLand
     yodo1_sdk_mode: offline
     configChannel:
     - Name: GooglePlay
@@ -26,7 +26,7 @@ MonoBehaviour:
         Value: gfasdgasdfgadfg
       - Key: google_app_id
         Value: sdfasdfas
-      Selected: 1
+      Selected: 0
     configAnalytics:
     - Name: ThinkingData
       Dependency: 
@@ -35,7 +35,7 @@ MonoBehaviour:
         Value: 
       - Key: dmp_key_thinkingdata_url
         Value: https://c1.yodo1.com/
-      Selected: 1
+      Selected: 0
     - Name: Appsflyer
       Dependency: com.yodo1.suit.analytics:appsflyer:6.9.2.3
       analyticsProperty:
@@ -51,4 +51,4 @@ MonoBehaviour:
         Value: 
       Selected: 0
     debugEnabled: 1
-    isShowYodo1Logo: 0
+    isShowYodo1Logo: 1
