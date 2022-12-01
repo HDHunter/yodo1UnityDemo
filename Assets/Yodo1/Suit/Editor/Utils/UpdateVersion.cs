@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 public class UpdateVersion : EditorWindow
 {
-    public static string Yodo1PluginVersion = "6.1.11";
+    public static string Yodo1PluginVersion = "6.1.8";
 
     WWW WwwDownload = null;
     WWW WWWJson = null;
@@ -19,7 +19,7 @@ public class UpdateVersion : EditorWindow
 
     public static void Init()
     {
-        UpdateVersion window = (UpdateVersion)EditorWindow.GetWindow(typeof(UpdateVersion));
+        UpdateVersion window = (UpdateVersion) EditorWindow.GetWindow(typeof(UpdateVersion));
         window.Show();
     }
 
@@ -36,15 +36,15 @@ public class UpdateVersion : EditorWindow
         }
         else if (NeedCheck && WWWJson.isDone)
         {
-            Dictionary<string, object> result = (Dictionary<string, object>)Yodo1JSONObject.Deserialize(WWWJson.text);
+            Dictionary<string, object> result = (Dictionary<string, object>) Yodo1JSONObject.Deserialize(WWWJson.text);
             lastVersionCode = result["lastVersionCode"].ToString();
             if (lastVersionCode.GetHashCode() > Yodo1PluginVersion.GetHashCode())
             {
                 NeedUpdate = true;
             }
 
-            Dictionary<string, object> versionInfo = (Dictionary<string, object>)result["versionInfo"];
-            Dictionary<string, object> lastVersionInfo = (Dictionary<string, object>)versionInfo[lastVersionCode];
+            Dictionary<string, object> versionInfo = (Dictionary<string, object>) result["versionInfo"];
+            Dictionary<string, object> lastVersionInfo = (Dictionary<string, object>) versionInfo[lastVersionCode];
             DownloadUrl = lastVersionInfo["downloadUrl"].ToString();
             ChangeLog = lastVersionInfo["changeLog"].ToString();
             NeedCheck = false;

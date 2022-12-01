@@ -108,26 +108,4 @@ public class Yodo1U3dAnalyticsForIOS
             contentId, receiptId);
 #endif
     }
-
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern void UnityGenerateInviteUrlWithLinkGenerator(string jsonData, string gameObjectName, string methodName);
-#endif
-    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate, string gameObjectName, string methodName)
-    {
-#if UNITY_IPHONE
-        UnityGenerateInviteUrlWithLinkGenerator(generate.toJson(), gameObjectName, methodName);
-#endif
-    }
-
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern void UnityLogInviteAppsFlyerWithEventData(string jsonData);
-#endif
-    public static void logInviteAppsFlyerWithEventData(string jsonData)
-    {
-#if UNITY_IPHONE
-        UnityLogInviteAppsFlyerWithEventData(jsonData);
-#endif
-    }
 }

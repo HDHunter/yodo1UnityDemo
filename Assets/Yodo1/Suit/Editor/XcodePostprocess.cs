@@ -99,6 +99,9 @@ namespace Yodo1Unity
             proj.AddBuildProperty(mainTargetGuid, "ENABLE_BITCODE", "NO");
             proj.AddBuildProperty(mainTargetGuid, "OTHER_LDFLAGS", "-ObjC");
 
+            // facebook分享 在xcode工程BuildPhase中添加embed framework
+            //EmbedDynamicLibrariesIfNeeded(path, proj, mainTargetGuid);
+
             File.WriteAllText(projPath, proj.WriteToString());
 #endif
         }
@@ -118,19 +121,37 @@ namespace Yodo1Unity
         }
 
         const string unityAppControllerText = "#import \"UnityAppController.h\"";
-        const string import1 = "#import \"Yodo1AnalyticsManager.h\"";
+        const string import1 = "#import <Yodo1SNSManager.h>";
+        const string import2 = "#import \"Yodo1AnalyticsManager.h\"";
 
         const string topTag = "- (void)preStartUnity               {}";
+
+        //openURL:url,source,annotation
+        const string app_openUrl =
+            "- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation\n{";
+
+        const string yodo1SNSManager =
+            "\n\t[[Yodo1SNSManager sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];\n";
+
+        const string app_openUrl_Text = app_openUrl + yodo1SNSManager + "\treturn YES;\n}";
+
+        //openURL:url,options,options.UIApplicationOpenURLOptionsKey was added only in ios10 sdk
+        // private const string openUrl =
+        //     "- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {";
+        // const string openUrl_Text = openUrl + Yodo1AnalyticsManager + "\treturn YES;\n}";
 
         //openURL:url,options,options.
         const string openUrl_iOS9_0 =
             "- (BOOL)application:(UIApplication*)app openURL:(NSURL*)url options:(NSDictionary<NSString*, id>*)options\n{";
+
+        const string openUrl_iOS9_0_Text = "\n\t[[Yodo1SNSManager sharedInstance] application:nil openURL:url options:nil];\n";
 
         const string Yodo1AnalyticsManager =
             "\n\t[[Yodo1AnalyticsManager sharedInstance] handleOpenUrl:url options:options];\n";
 
         const string openUrlText =
             "- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options \n {"
+            + openUrl_iOS9_0_Text
             + Yodo1AnalyticsManager
             + "    return YES;\n}";
 
@@ -147,17 +168,30 @@ namespace Yodo1Unity
         {
             XcodeFileClass app = new XcodeFileClass(filePath + "/Classes/UnityAppController.mm");
             app.WriteBelow(unityAppControllerText, import1);
+            app.WriteBelow(unityAppControllerText, import2);
+            //openURL:url,source,annotation
+            if (app.IsHaveText(app_openUrl))
+            {
+                app.WriteBelow(app_openUrl, yodo1SNSManager);
+                Debug.LogWarning("-------1-openURL:url,source,annotation--WriteBelow---");
+            }
+            else
+            {
+                app.WriteBelow(topTag, app_openUrl_Text);
+                Debug.LogWarning("-------2-openURL:url,source,annotation--preStartUnity---");
+            }
 
             //openURL:url,options,options.
             if (app.IsHaveText(openUrl_iOS9_0))
             {
-                app.WriteBelow(openUrl_iOS9_0, Yodo1AnalyticsManager);
-                Debug.LogWarning("-------1------");
+                app.WriteBelow(openUrl_iOS9_0, openUrl_iOS9_0_Text);
+                app.WriteBelow(openUrl_iOS9_0_Text, Yodo1AnalyticsManager);
+                Debug.LogWarning("-------3------");
             }
             else
             {
                 app.WriteBelow(topTag, openUrlText);
-                Debug.LogWarning("------2------");
+                Debug.LogWarning("------4------");
             }
 
             //continueUserActivity:userActivity,handler
@@ -218,6 +252,74 @@ namespace Yodo1Unity
             proc.Start();
         }
 
+        [PostProcessBuild(9990)]
+        private static void EmbedDynamicLibrariesIfNeeded(string buildPath, UnityEditor.iOS.Xcode.PBXProject project, string targetGuid)
+        {
+            var dynamicLibraryPathsPresentInProject = DynamicLibraryPathsToEmbed.Where(dynamicLibraryPath => Directory.Exists(Path.Combine(buildPath, dynamicLibraryPath))).ToList();
+            if (dynamicLibraryPathsPresentInProject.Count <= 0) return;
+
+
+
+#if UNITY_2019_3_OR_NEWER
+            // Embed framework only if the podfile does not contain target `Unity-iPhone`.
+            if (!ContainsUnityIphoneTargetInPodfile(buildPath))
+            {
+                foreach (var dynamicLibraryPath in dynamicLibraryPathsPresentInProject)
+                {
+                    var fileGuid = project.AddFile(dynamicLibraryPath, dynamicLibraryPath);
+                    project.AddFileToEmbedFrameworks(targetGuid, fileGuid);
+                }
+            }
+#else
+            string runpathSearchPaths;
+#if UNITY_2018_2_OR_NEWER
+            runpathSearchPaths = project.GetBuildPropertyForAnyConfig(targetGuid, "LD_RUNPATH_SEARCH_PATHS");
+#else
+            runpathSearchPaths = "$(inherited)";
+#endif
+            runpathSearchPaths += string.IsNullOrEmpty(runpathSearchPaths) ? "" : " ";
+
+
+
+           // Check if runtime search paths already contains the required search paths for dynamic libraries.
+            if (runpathSearchPaths.Contains("@executable_path/Frameworks")) return;
+
+
+
+           runpathSearchPaths += "@executable_path/Frameworks";
+            project.SetBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", runpathSearchPaths);
+#endif
+        }
+
+#if UNITY_2019_3_OR_NEWER
+        private static bool ContainsUnityIphoneTargetInPodfile(string buildPath)
+        {
+            var podfilePath = Path.Combine(buildPath, "Podfile");
+            if (!File.Exists(podfilePath)) return false;
+
+            var lines = File.ReadAllLines(podfilePath);
+            return lines.Any(line => line.Contains(TargetUnityIphonePodfileLine));
+        }
+#endif
+
+
+        private static List<string> DynamicLibraryPathsToEmbed
+        {
+            get
+            {
+                var dynamicLibraryPathsToEmbed = new List<string>();
+               
+
+                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBSDKCoreKit_Basics/XCFrameworks/FBSDKCoreKit_Basics.xcframework/ios-arm64_armv7/FBSDKCoreKit_Basics.framework"));
+                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBSDKCoreKit/XCFrameworks/FBSDKCoreKit.xcframework/ios-arm64_armv7/FBSDKCoreKit.framework"));
+                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBAEMKit/XCFrameworks/FBAEMKit.xcframework/ios-arm64_armv7/FBAEMKit.framework"));
+                dynamicLibraryPathsToEmbed.Add(Path.Combine("Pods/", "/Pods/FBSDKShareKit/XCFrameworks/FBSDKShareKit.xcframework/ios-arm64_armv7/FBSDKShareKit.framework"));
+
+
+                return dynamicLibraryPathsToEmbed;
+            }
+        }
+
         public static void AfterBuildProcess(BuildTarget buildTarget, string pathToBuiltProject)
         {
             if (buildTarget == BuildTarget.iOS)
@@ -227,7 +329,8 @@ namespace Yodo1Unity
                 //pod install
                 //RepoUpdate();
                 RuntimeiOSSettings settings = SettingsSave.LoadEditor(false);
-
+                //修改share所用的CFBundleURLSchemes
+                Yodo1ShareConfig.UpdateInfoPlist(pathToBuiltProject, settings);
                 //编辑代码文件UnityAppController
                 EditorCode(path);
 

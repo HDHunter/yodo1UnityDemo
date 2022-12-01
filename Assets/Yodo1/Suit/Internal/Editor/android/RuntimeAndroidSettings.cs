@@ -16,6 +16,7 @@ namespace Yodo1Unity
         public string thisProjectOrient;
         public string Yodo1SDKType;
         public string yodo1_sdk_mode;
+        public bool share_code;
         public List<AnalyticsItem> configChannel;
         public List<AnalyticsItem> configAnalytics;
         public bool debugEnabled;
@@ -72,6 +73,8 @@ namespace Yodo1Unity
             {
                 cutSettings.androidSettings.yodo1_sdk_mode = oldSettings.androidSettings.yodo1_sdk_mode;
             }
+
+            cutSettings.androidSettings.share_code = oldSettings.androidSettings.share_code;
 
             List<AnalyticsItem> oldAnalytcs = oldSettings.androidSettings.configAnalytics;
             foreach (AnalyticsItem currentItem in cutSettings.androidSettings.configAnalytics)
@@ -131,10 +134,10 @@ namespace Yodo1Unity
             Debug.Log("Yodo1Suit InitAndroidSettings");
             Yodo1PropertiesUtils yodo1PropertiesUtils =
                 new Yodo1PropertiesUtils(Yodo1AndroidConfig.CONFIG_Android_PATH);
-            string channelList = (string)yodo1PropertiesUtils["ChannelList"];
-            string analyticslist = (string)yodo1PropertiesUtils["AnalyticsList"];
-            string[] channles = channelList.Split(new char[] { ',' });
-            string[] analytics = analyticslist.Split(new char[] { ',' });
+            string channelList = (string) yodo1PropertiesUtils["ChannelList"];
+            string analyticslist = (string) yodo1PropertiesUtils["AnalyticsList"];
+            string[] channles = channelList.Split(new char[] {','});
+            string[] analytics = analyticslist.Split(new char[] {','});
             if (settings.androidSettings == null)
             {
                 settings.androidSettings = new RuntimeAndroidSettings();
@@ -149,9 +152,9 @@ namespace Yodo1Unity
             {
                 AnalyticsItem channelItem = new AnalyticsItem();
                 channelItem.Name = channelAdapter;
-                channelItem.Dependency = (string)yodo1PropertiesUtils[channelItem.Name];
-                string configs = (string)yodo1PropertiesUtils[channelItem.Name + "_config"];
-                string[] configItem = configs.Split(new char[] { ',' });
+                channelItem.Dependency = (string) yodo1PropertiesUtils[channelItem.Name];
+                string configs = (string) yodo1PropertiesUtils[channelItem.Name + "_config"];
+                string[] configItem = configs.Split(new char[] {','});
                 channelItem.analyticsProperty = new List<KVItem>();
                 foreach (string item in configItem)
                 {
@@ -165,9 +168,9 @@ namespace Yodo1Unity
             {
                 AnalyticsItem analyticsItem = new AnalyticsItem();
                 analyticsItem.Name = analyticsAdapter;
-                analyticsItem.Dependency = (string)yodo1PropertiesUtils[analyticsItem.Name];
-                string configs = (string)yodo1PropertiesUtils[analyticsItem.Name + "_config"];
-                string[] configItem = configs.Split(new char[] { ',' });
+                analyticsItem.Dependency = (string) yodo1PropertiesUtils[analyticsItem.Name];
+                string configs = (string) yodo1PropertiesUtils[analyticsItem.Name + "_config"];
+                string[] configItem = configs.Split(new char[] {','});
                 analyticsItem.analyticsProperty = new List<KVItem>();
                 foreach (string item in configItem)
                 {

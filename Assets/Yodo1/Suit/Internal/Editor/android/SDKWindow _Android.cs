@@ -2,7 +2,6 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using System.IO;
 
 namespace Yodo1Unity
 {
@@ -17,9 +16,9 @@ namespace Yodo1Unity
         public static GUIStyle headerLabelStyle;
         public static GUIStyle foldoutStyle;
         public static string PIC_PATH = "Assets/Yodo1/Suit/Internal/Editor/Images/";
-        public static string[] screenOrients = { "portrait", "landscape" };
-        public static string[] Yodo1SDKType = { "GooglePlay", "ChinaMainLand" };
-        public static string[] yodo1_sdk_mode = { "offline", "online" };
+        public static string[] screenOrients = {"portrait", "landscape"};
+        public static string[] Yodo1SDKType = {"GooglePlay", "ChinaMainLand"};
+        public static string[] yodo1_sdk_mode = {"offline", "online"};
 
         public Vector2 scrollPosition;
 
@@ -40,8 +39,6 @@ namespace Yodo1Unity
             {
                 SettingsSave.Save(runtimeSettings);
             }
-
-            GenerateAndroidLibProject();
 
             //修改properties
             Yodo1AndroidConfig.UpdateProperties();
@@ -64,9 +61,9 @@ namespace Yodo1Unity
             }
 
             Yodo1sdkIcon =
-                (Texture2D)AssetDatabase.LoadAssetAtPath(PIC_PATH + "yodo1sdk-icon.png", typeof(Texture2D));
+                (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "yodo1sdk-icon.png", typeof(Texture2D));
             questionMarkIcon =
-                (Texture2D)AssetDatabase.LoadAssetAtPath(PIC_PATH + "question-mark.png", typeof(Texture2D));
+                (Texture2D) AssetDatabase.LoadAssetAtPath(PIC_PATH + "question-mark.png", typeof(Texture2D));
         }
 
         private void OnDisable()
@@ -112,7 +109,6 @@ namespace Yodo1Unity
             GUILayout.EndScrollView();
         }
 
-
         private void DrawHeader()
         {
             GUI.Box(new Rect(0, 0, position.width, 40), "", BodyContentGUIStyle);
@@ -126,7 +122,7 @@ namespace Yodo1Unity
             if (questionMarkIcon != null && GUI.Button(new Rect(position.width - 35, 5, 30, 30),
                 questionMarkIcon))
             {
-                Application.OpenURL("https://yodo1-suit.web.app/zh/unity/integration/");
+                Application.OpenURL("https://confluence.yodo1.com/pages/viewpage.action?pageId=46571182");
             }
 
             if (GUI.Button(new Rect(position.width - 105, 5, 60, 30), "Save"))
@@ -216,6 +212,13 @@ namespace Yodo1Unity
                 EditorGUILayout.Toggle("isSplashShowYodo1Logo", runtimeSettings.androidSettings.isShowYodo1Logo,
                     new GUILayoutOption[0]);
             GUILayout.EndVertical();
+
+            GUILayout.BeginVertical(gUIStyle);
+            runtimeSettings.androidSettings.share_code = EditorGUILayout.Toggle("Share",
+                runtimeSettings.androidSettings.share_code);
+            EditorGUILayout.Separator();
+
+            GUILayout.EndVertical();
         }
 
         /// <summary>
@@ -288,48 +291,6 @@ namespace Yodo1Unity
                 EditorGUILayout.Separator();
                 GUILayout.EndVertical();
             }
-        }
-
-
-        private void GenerateAndroidLibProject()
-        {
-            string androidLibPath = Yodo1AndroidConfig.Yodo1AndroidPlugin;
-            if (!File.Exists(androidLibPath))
-            {
-                Directory.CreateDirectory(androidLibPath);
-            }
-
-            string manifestFile = Yodo1AndroidConfig.libManifest;// androidLibPath + "AndroidManifest.xml";
-            string manifestText = string.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                                    "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" package=\"com.yodo1.suit.app.unity\" android:versionCode=\"1\" android:versionName=\"1.0\">\n" +
-                                    "\t<application>\n" +
-                                    "\t</application>\n" +
-                                    "</manifest>");
-
-            File.WriteAllText(manifestFile, manifestText);
-
-            string resPath = androidLibPath + "res/values/";
-            if (!File.Exists(resPath))
-            {
-                Directory.CreateDirectory(resPath);
-            }
-
-            string assetsPath = Yodo1AndroidConfig.Yodo1Assets;
-            if (!File.Exists(assetsPath))
-            {
-                Directory.CreateDirectory(assetsPath);
-            }
-
-            //string stringsFile = resPath + "strings.xml";
-            //string stringsText = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            //                        "<resources>\n" +
-            //                        "</resources>");
-            //File.WriteAllText(stringsFile, stringsText);
-
-            string projectPropertiesFile = androidLibPath + "project.properties";
-            string projectPropertiesText = "target=android-9\n" +
-                                           "android.library=true";
-            File.WriteAllText(projectPropertiesFile, projectPropertiesText);
         }
     }
 }

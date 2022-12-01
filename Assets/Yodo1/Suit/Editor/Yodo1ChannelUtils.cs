@@ -7,20 +7,19 @@ using Yodo1Unity;
 
 public class Yodo1ChannelUtils
 {
-    private static readonly string splashFlag = "<!--Splash_end-->";
-    private static readonly string appFlag = "</application>";
-
     public static void ChannelHandle()
     {
+        //revert.do not del game assets.
+        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1ValuePath + "/ids.xml");
         try
         {
             StreamReader sr = new StreamReader(Yodo1AndroidConfig.manifest);
             string alltext = sr.ReadToEnd();
             sr.Close();
-            //Regex regex1 = new Regex("(?<=Yodo1App-->).*?(?=<!--Yodo1App_end)");
+            Regex regex1 = new Regex("(?<=Yodo1App-->).*?(?=<!--Yodo1App_end)");
             Regex regex2 = new Regex("(?<=Splash-->).*?(?=<!--Splash_end)");
             alltext = alltext.Replace("\n", "@@");
-            //alltext = regex1.Replace(alltext, "");
+            alltext = regex1.Replace(alltext, "");
             alltext = regex2.Replace(alltext, "");
             alltext = alltext.Replace("@@", "\n");
             StreamWriter streamWriter = new StreamWriter(Yodo1AndroidConfig.manifest);
@@ -68,113 +67,77 @@ public class Yodo1ChannelUtils
 
     private static void appsflyer(AnalyticsItem item)
     {
-        string deeplink_uri = "<intent-filter>\n" +
-                              "    <action android:name=\"android.intent.action.VIEW\" />\n" +
-                              "    <category android:name=\"android.intent.category.DEFAULT\" />\n" +
-                              "    <category android:name=\"android.intent.category.BROWSABLE\" />\n" +
-                              "    <data\n" +
-                              "        android:host=\"@uri_host\"\n" +
-                              "        android:scheme=\"@uri_schema\" />\n" +
-                              "</intent-filter>\n";
-        String deeplink_url = "    <intent-filter>\n" +
-                              "        <action android:name=\"android.intent.action.VIEW\" />\n" +
-                              "        <category android:name=\"android.intent.category.DEFAULT\" />\n" +
-                              "        <category android:name=\"android.intent.category.BROWSABLE\" />\n" +
-                              "        <data\n" +
-                              "        android:host=\"@url_host\"\n" +
-                              "        android:pathPattern=\"@url_path\"\n" +
-                              "        android:scheme=\"https\" />\n" +
-                              "</intent-filter>\n";
-        String longUrl = "<intent-filter>\n" +
-                         "    <action android:name=\"android.intent.action.VIEW\" />\n" +
-                         "    <category android:name=\"android.intent.category.DEFAULT\" />\n" +
-                         "    <category android:name=\"android.intent.category.BROWSABLE\" />\n" +
-                         "    <data\n" +
-                         "        android:host=\"go.onelink.me\"\n" +
-                         "        android:pathPattern=\"@url_path\"\n" +
-                         "        android:scheme=\"https\" />\n" +
-                         "</intent-filter>\n";
+        string deeplink = "<intent-filter>\n" +
+                          "    <action android:name=\"android.intent.action.VIEW\" />\n" +
+                          "    <category android:name=\"android.intent.category.DEFAULT\" />\n" +
+                          "    <category android:name=\"android.intent.category.BROWSABLE\" />\n" +
+                          "    <data\n" +
+                          "        android:host=\"@uri_host\"\n" +
+                          "        android:scheme=\"@uri_schema\" />\n" +
+                          "</intent-filter>\n" +
+                          "    <intent-filter android:autoVerify=\"true\">\n" +
+                          "        <action android:name=\"android.intent.action.VIEW\" />\n" +
+                          "        <category android:name=\"android.intent.category.DEFAULT\" />\n" +
+                          "        <category android:name=\"android.intent.category.BROWSABLE\" />\n" +
+                          "        <data\n" +
+                          "        android:host=\"@url_host\"\n" +
+                          "        android:pathPrefix=\"@url_path\"\n" +
+                          "        android:scheme=\"@url_schema\" />\n" +
+                          "</intent-filter>";
         List<KVItem> ies = item.analyticsProperty;
-        bool isUriValue = false;
-        bool isUrlValue = false;
-        bool isLongUrl = false;
-        string template = "";
+        bool isValue = false;
         foreach (KVItem i in ies)
         {
             if (i.Key.Contains("uriSchema"))
             {
-                deeplink_uri = deeplink_uri.Replace("@uri_schema", i.Value);
+                deeplink = deeplink.Replace("@uri_schema", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
-                    isUriValue = true;
+                    isValue = true;
                 }
             }
             else if (i.Key.Contains("uriHost"))
             {
-                deeplink_uri = deeplink_uri.Replace("@uri_host", i.Value);
+                deeplink = deeplink.Replace("@uri_host", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
-                    isUriValue = true;
+                    isValue = true;
+                }
+            }
+            else if (i.Key.Contains("urlSchema"))
+            {
+                deeplink = deeplink.Replace("@url_schema", i.Value);
+                if (XcodePostprocess.IsVaildSNSKey(i.Value))
+                {
+                    isValue = true;
                 }
             }
             else if (i.Key.Contains("urlHost"))
             {
-                deeplink_url = deeplink_url.Replace("@url_host", i.Value);
+                deeplink = deeplink.Replace("@url_host", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
-                    isUrlValue = true;
+                    isValue = true;
                 }
             }
-            else if (i.Key.Contains("template"))
+            else if (i.Key.Contains("urlPath"))
             {
+                deeplink = deeplink.Replace("@url_path", i.Value);
                 if (XcodePostprocess.IsVaildSNSKey(i.Value))
                 {
-                    isUrlValue = isLongUrl = true;
-                    template = i.Value;
-                    if (!template.Contains("/"))
-                    {
-                        template = "/" + template;
-                    }
-
-                    string j = template.Replace("/", "\\\\/");
-                    deeplink_url = deeplink_url.Replace("@url_path", j);
-                    longUrl = longUrl.Replace("@url_path", j);
-                }
-                else
-                {
-                    deeplink_url = deeplink_url.Replace("@url_path", template);
-                    longUrl = longUrl.Replace("@url_path", template);
+                    isValue = true;
                 }
             }
         }
 
-        if (isUriValue)
+        if (isValue)
         {
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
-                deeplink_uri + "<!--Splash_end-->");
-        }
-
-        if (isUrlValue)
-        {
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
-                deeplink_url + "<!--Splash_end-->");
-        }
-
-        if (isLongUrl)
-        {
-            deeplink_url = deeplink_url.Replace(template, template + "\\\\/.*");
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
-                deeplink_url + "<!--Splash_end-->");
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
-                longUrl + "<!--Splash_end-->");
+            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->", deeplink + "<!--Splash_end-->");
         }
     }
 
     private static void googlePlay(AnalyticsItem item)
     {
-        //revert.do not del game assets.
-        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1ValuePath + "/ids.xml");
-
         string appid = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                        "<resources>\n" +
                        "    <string name=\"yodo1_google_appid\">@yodo1_google_appid</string>\n" +
@@ -182,7 +145,7 @@ public class Yodo1ChannelUtils
         string manifestdata = "\n" +
                               "        <meta-data\n" +
                               "            android:name=\"com.google.android.gms.games.APP_ID\"\n" +
-                              "            android:value=\"@string/yodo1_google_appid\" />\n";
+                              "            android:value=\"@string/yodo1_google_appid\" />";
         foreach (KVItem i in item.analyticsProperty)
         {
             if (i != null && "google_app_id".Equals(i.Key))
@@ -192,6 +155,7 @@ public class Yodo1ChannelUtils
         }
 
         EditorFileUtils.WriteFile(Yodo1AndroidConfig.Yodo1ValuePath, "ids.xml", appid);
-        EditorFileUtils.Replace(Yodo1AndroidConfig.libManifest, appFlag, manifestdata + "\t" + appFlag);
+        EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Yodo1App_end-->",
+            manifestdata + "<!--Yodo1App_end-->");
     }
 }

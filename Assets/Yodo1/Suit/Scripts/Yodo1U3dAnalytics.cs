@@ -122,33 +122,4 @@ public class Yodo1U3dAnalytics
     {
         Yodo1U3dAnalyticsForIOS.customValidateInAppPurchase(revenue, currency, quantity, contentId, receiptId);
     }
-
-    /// <summary>
-    /// AppsFlyer 创建用户归因分享Link
-    /// </summary>
-    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.generateInviteUrlWithLinkGenerator(generate, Yodo1U3dSDK.Instance.SdkObjectName,
-            Yodo1U3dSDK.Instance.SdkMethodName);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.generateInviteUrlWithLinkGenerator(generate, Yodo1U3dSDK.Instance.SdkObjectName,
-            Yodo1U3dSDK.Instance.SdkMethodName);
-#endif
-    }
-
-    /// <summary>
-    /// AppsFlyer 上报”创建用户归因分享Link“事件
-    /// </summary>
-    public static void logInviteAppsFlyerWithEventData(Dictionary<string, string> value = null)
-    {
-        string jsonData = (value == null ? null : Yodo1JSONObject.Serialize(value));
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.logInviteAppsFlyerWithEventData(jsonData);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.logInviteAppsFlyerWithEventData(jsonData);
-#endif
-    }
 }

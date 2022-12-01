@@ -44,41 +44,41 @@ namespace Yodo1Unity
         private void LoadASettingConfig(string compositionName, List<SettingItem> configItem)
         {
             PListRoot root = PListRoot.Load(SDKConfig.CONFIG_PATH);
-            PListDict dic = (PListDict)root.Root;
+            PListDict dic = (PListDict) root.Root;
             if (dic.ContainsKey(SettingsConstants.SettingItemsName))
             {
-                PListArray advertArray = (PListArray)dic[SettingsConstants.SettingItemsName];
+                PListArray advertArray = (PListArray) dic[SettingsConstants.SettingItemsName];
                 foreach (PListDict itemInfo in advertArray)
                 {
                     if (itemInfo.ContainsKey(compositionName))
                     {
-                        PListArray composition = (PListArray)itemInfo[compositionName];
+                        PListArray composition = (PListArray) itemInfo[compositionName];
                         foreach (PListDict iteConfig in composition)
                         {
                             SettingItem intersItem = new SettingItem();
                             if (iteConfig.ContainsKey(SettingsConstants.kName))
                             {
-                                intersItem.Name = (PListString)iteConfig[SettingsConstants.kName];
+                                intersItem.Name = (PListString) iteConfig[SettingsConstants.kName];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kIndex))
                             {
-                                intersItem.Index = (PListInteger)iteConfig[SettingsConstants.kIndex];
+                                intersItem.Index = (PListInteger) iteConfig[SettingsConstants.kIndex];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kUrl))
                             {
-                                intersItem.Url = (PListString)iteConfig[SettingsConstants.kUrl];
+                                intersItem.Url = (PListString) iteConfig[SettingsConstants.kUrl];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kEnable))
                             {
-                                intersItem.Enable = (PListBool)iteConfig[SettingsConstants.kEnable];
+                                intersItem.Enable = (PListBool) iteConfig[SettingsConstants.kEnable];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kSelected))
                             {
-                                intersItem.Selected = (PListBool)iteConfig[SettingsConstants.kSelected];
+                                intersItem.Selected = (PListBool) iteConfig[SettingsConstants.kSelected];
                             }
 
                             if (configItem != null)
@@ -98,68 +98,113 @@ namespace Yodo1Unity
         private void LoadConfigKey()
         {
             PListRoot root = PListRoot.Load(SDKConfig.CONFIG_PATH);
-            PListDict dic = (PListDict)root.Root;
+            PListDict dic = (PListDict) root.Root;
             if (dic.ContainsKey(SettingsConstants.KeyConfigName))
             {
-                PListDict configDic = (PListDict)dic[SettingsConstants.KeyConfigName];
+                PListDict configDic = (PListDict) dic[SettingsConstants.KeyConfigName];
                 KeyItem item = new KeyItem();
                 if (configDic.ContainsKey(SettingsConstants.SdkVersion))
                 {
-                    item.SdkVersion = (PListString)configDic[SettingsConstants.SdkVersion];
+                    item.SdkVersion = (PListString) configDic[SettingsConstants.SdkVersion];
                     sdkVersion = item.SdkVersion;
-                    item.debugEnable = (PListString)configDic[SettingsConstants.DebugEnabled];
+                    item.debugEnable = (PListString) configDic[SettingsConstants.DebugEnabled];
                     Debug.LogWarning("Yodo1Suit iOS pod version:" + sdkVersion);
                     Debug.LogWarning("Yodo1Suit iOS debugEnable:" + item.debugEnable);
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppleAppId))
                 {
-                    item.AppleAppId = (PListString)configDic[SettingsConstants.AppleAppId];
+                    item.AppleAppId = (PListString) configDic[SettingsConstants.AppleAppId];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppKey))
                 {
-                    item.AppKey = (PListString)configDic[SettingsConstants.AppKey];
+                    item.AppKey = (PListString) configDic[SettingsConstants.AppKey];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.RegionCode))
                 {
-                    item.RegionCode = (PListString)configDic[SettingsConstants.RegionCode];
+                    item.RegionCode = (PListString) configDic[SettingsConstants.RegionCode];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.WechatAppId))
+                {
+                    item.WechatAppId = (PListString) configDic[SettingsConstants.WechatAppId];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.WechatUniversalLink))
+                {
+                    item.WechatUniversalLink = (PListString) configDic[SettingsConstants.WechatUniversalLink];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.SinaAppId))
+                {
+                    item.SinaAppId = (PListString) configDic[SettingsConstants.SinaAppId];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.SinaSecret))
+                {
+                    item.SinaSecret = (PListString) configDic[SettingsConstants.SinaSecret];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.SinaCallbackUrl))
+                {
+                    item.SinaCallbackUrl = (PListString) configDic[SettingsConstants.SinaCallbackUrl];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.SinaUniversalLink))
+                {
+                    item.SinaUniversalLink = (PListString) configDic[SettingsConstants.SinaUniversalLink];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.QQAppId))
+                {
+                    item.QQAppId = (PListString) configDic[SettingsConstants.QQAppId];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.QQUniversalLink))
+                {
+                    item.QQUniversalLink = (PListString) configDic[SettingsConstants.QQUniversalLink];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.FacebookAppId))
+                {
+                    item.FacebookAppId = (PListString) configDic[SettingsConstants.FacebookAppId];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.UmengAnalytics))
+                {
+                    item.UmengAnalytics = (PListString) configDic[SettingsConstants.UmengAnalytics];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyerDevKey))
                 {
-                    item.AppsFlyerDevKey = (PListString)configDic[SettingsConstants.AppsFlyerDevKey];
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.AppsFlyerOneLinkId))
-                {
-                    item.AppsFlyerOneLinkId = (PListString)configDic[SettingsConstants.AppsFlyerOneLinkId];
+                    item.AppsFlyerDevKey = (PListString) configDic[SettingsConstants.AppsFlyerDevKey];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_identifier))
                 {
-                    item.AppsFlyer_identifier = (PListString)configDic[SettingsConstants.AppsFlyer_identifier];
+                    item.AppsFlyer_identifier = (PListString) configDic[SettingsConstants.AppsFlyer_identifier];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_schemes))
                 {
-                    item.AppsFlyer_Schemes = (PListString)configDic[SettingsConstants.AppsFlyer_schemes];
+                    item.AppsFlyer_Schemes = (PListString) configDic[SettingsConstants.AppsFlyer_schemes];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_domain))
                 {
-                    item.AppsFlyer_domain = (PListString)configDic[SettingsConstants.AppsFlyer_domain];
+                    item.AppsFlyer_domain = (PListString) configDic[SettingsConstants.AppsFlyer_domain];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.ThinkingAppId))
                 {
-                    item.ThinkingAppId = (PListString)configDic[SettingsConstants.ThinkingAppId];
+                    item.ThinkingAppId = (PListString) configDic[SettingsConstants.ThinkingAppId];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.ThinkingServerUrl))
                 {
-                    item.ThinkingServerUrl = (PListString)configDic[SettingsConstants.ThinkingServerUrl];
+                    item.ThinkingServerUrl = (PListString) configDic[SettingsConstants.ThinkingServerUrl];
                 }
 
                 configKey = item;
@@ -196,16 +241,70 @@ namespace Yodo1Unity
                     sdkSettings.configKey.RegionCode = RegionCode;
                 }
 
+                string WechatAppId = oldSettings.configKey.WechatAppId;
+                if (WechatAppId != null && XcodePostprocess.IsVaildSNSKey(WechatAppId))
+                {
+                    sdkSettings.configKey.WechatAppId = WechatAppId;
+                }
+
+                string WechatUniversalLink = oldSettings.configKey.WechatUniversalLink;
+                if (WechatUniversalLink != null && XcodePostprocess.IsVaildSNSKey(WechatUniversalLink))
+                {
+                    sdkSettings.configKey.WechatUniversalLink = WechatUniversalLink;
+                }
+
+                string SinaAppId = oldSettings.configKey.SinaAppId;
+                if (SinaAppId != null && XcodePostprocess.IsVaildSNSKey(SinaAppId))
+                {
+                    sdkSettings.configKey.SinaAppId = SinaAppId;
+                }
+
+                string SinaSecret = oldSettings.configKey.SinaSecret;
+                if (SinaSecret != null && XcodePostprocess.IsVaildSNSKey(SinaSecret))
+                {
+                    sdkSettings.configKey.SinaSecret = SinaSecret;
+                }
+
+                string SinaCallbackUrl = oldSettings.configKey.SinaCallbackUrl;
+                if (SinaCallbackUrl != null && XcodePostprocess.IsVaildSNSKey(SinaCallbackUrl))
+                {
+                    sdkSettings.configKey.SinaCallbackUrl = SinaCallbackUrl;
+                }
+
+                string SinaUniversalLink = oldSettings.configKey.SinaUniversalLink;
+                if (SinaUniversalLink != null && XcodePostprocess.IsVaildSNSKey(SinaUniversalLink))
+                {
+                    sdkSettings.configKey.SinaUniversalLink = SinaUniversalLink;
+                }
+
+                string QQAppId = oldSettings.configKey.QQAppId;
+                if (QQAppId != null && XcodePostprocess.IsVaildSNSKey(QQAppId))
+                {
+                    sdkSettings.configKey.QQAppId = QQAppId;
+                }
+
+                string QQUniversalLink = oldSettings.configKey.QQUniversalLink;
+                if (QQUniversalLink != null && XcodePostprocess.IsVaildSNSKey(QQUniversalLink))
+                {
+                    sdkSettings.configKey.QQUniversalLink = QQUniversalLink;
+                }
+
+                string FacebookAppId = oldSettings.configKey.FacebookAppId;
+                if (FacebookAppId != null && XcodePostprocess.IsVaildSNSKey(FacebookAppId))
+                {
+                    sdkSettings.configKey.FacebookAppId = FacebookAppId;
+                }
+
+                string UmengAnalytics = oldSettings.configKey.UmengAnalytics;
+                if (UmengAnalytics != null && XcodePostprocess.IsVaildSNSKey(UmengAnalytics))
+                {
+                    sdkSettings.configKey.UmengAnalytics = UmengAnalytics;
+                }
+
                 string AppsFlyerDevKey = oldSettings.configKey.AppsFlyerDevKey;
                 if (AppsFlyerDevKey != null && XcodePostprocess.IsVaildSNSKey(AppsFlyerDevKey))
                 {
                     sdkSettings.configKey.AppsFlyerDevKey = AppsFlyerDevKey;
-                }
-
-                string AppsFlyerOneLinkId = oldSettings.configKey.AppsFlyerOneLinkId;
-                if (AppsFlyerOneLinkId != null && XcodePostprocess.IsVaildSNSKey(AppsFlyerOneLinkId))
-                {
-                    sdkSettings.configKey.AppsFlyerOneLinkId = AppsFlyerOneLinkId;
                 }
 
                 string AppsFlyer_Schemes = oldSettings.configKey.AppsFlyer_Schemes;
