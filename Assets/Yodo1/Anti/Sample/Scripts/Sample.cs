@@ -181,6 +181,14 @@ public class Sample : MonoBehaviour
             guestUserTxt.text = isGuestUser ? "Is it a guest(是否是试玩):Yes(是)." : "Is it a guest(是否是试玩):No(否).";
         });
     }
+    
+    public void OnGetAge()
+    {
+        // Real name authentication(实名认证).
+        // 项目组自己处理accountId
+        int age = Yodo1U3dAntiAddiction.getAge();
+        Debug.Log(" get Age is: " + age);
+    }
 
     public void OnPurchaseClick()
     {

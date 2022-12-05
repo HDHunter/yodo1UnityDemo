@@ -144,7 +144,7 @@ namespace Yodo1.AntiAddiction
 
 
         /// <summary>
-        /// 
+        /// Real name authentication(实名认证).
         /// </summary>
         /// <param name="accountId"></param>
         public void VerifyCertificationInfo(string accountId, VerifyCertificationDelegate callBack)
@@ -164,6 +164,21 @@ namespace Yodo1.AntiAddiction
             _antiAddictionDelegate.SetCertificationCallBack(callBack);
             _antiAddictionImpl.VerifyCertificationInfo(accountId, _antiAddictionDelegate.SdkObjectName,
                 _antiAddictionDelegate.SdkMethodName);
+        }
+
+        /// <summary>
+        /// 获取玩家年龄。在实名完成后获取到。
+        /// get user age after VerifyCertificationInfo callback time.
+        /// </summary>
+        public int getAge()
+        {
+            if (_antiAddictionImpl == null)
+            {
+                Debug.LogWarning("_antiAddictionImpl is null, please do not initialize the SDK repeatedly.");
+                return 0;
+            }
+
+            return _antiAddictionImpl.getAge();
         }
 
         /// <summary>

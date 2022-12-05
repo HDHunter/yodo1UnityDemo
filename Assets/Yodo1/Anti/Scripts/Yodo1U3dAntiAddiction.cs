@@ -85,6 +85,15 @@ namespace Yodo1.AntiAddiction
         }
 
         /// <summary>
+        /// 获取玩家年龄。在实名完成后获取到。
+        /// get user age after VerifyCertificationInfo callback time.
+        /// </summary>
+        public static int getAge()
+        {
+            return Yodo1U3dAntiSDK.Instance.getAge();
+        }
+
+        /// <summary>
         /// 商品价格单位为分时请使用此接口
         /// Verify consumption is restricted(验证是否已限制消费).
         /// </summary>

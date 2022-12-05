@@ -46,6 +46,15 @@ namespace Yodo1.AntiAddiction
         }
 
         /// <summary>
+        /// 获取玩家年龄。在实名完成后获取到。
+        /// get user age after VerifyCertificationInfo callback time.
+        /// </summary>
+        public virtual int getAge()
+        {
+            return 0;
+        }
+
+        /// <summary>
         ///
         /// </summary>
         /// <param name="gameObjectName"></param>

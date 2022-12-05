@@ -11,6 +11,7 @@ namespace Yodo1.AntiAddiction
         private const string CLASS_NAME = "com.yodo1.anti.bridge.open.UnityYodo1AntiAddiction";
         private const string METHOD_INIT = "UnityInit";
         private const string METHOD_VERIFY_CERTIFICATION_INFO = "UnityVerifyCertificationInfo";
+        private const string METHOD_GET_AGE = "UnityGetAge";
         private const string METHOD_VERIFY_PURCHASE = "UnityVerifyPurchase";
         private const string METHOD_REPORT_PRODUCT_RECEIPT = "UnityReportProductReceipt";
         private const string METHOD_IS_GUEST_USER = "UnityIsGuestUser";
@@ -163,6 +164,30 @@ namespace Yodo1.AntiAddiction
             }
 
             androidCallClass.CallStatic(METHOD_VERIFY_CERTIFICATION_INFO, accountId, gameObjectName, callbackName);
+        }
+
+
+        /// <summary>
+        /// 获取玩家年龄。在实名完成后获取到。
+        /// get user age after VerifyCertificationInfo callback time.
+        /// </summary>
+        public override int getAge()
+        {
+            Debug.Log("Call Yodo1U3dAntiAddictionAndroid -> getAge");
+            if (currentActivity == null)
+            {
+                Debug.LogWarning("currentActivity is null");
+                return 0;
+            }
+
+            if (androidCallClass == null)
+            {
+                Debug.LogWarning("androidCallClass is null");
+                return 0;
+            }
+
+            int age = androidCallClass.CallStatic<int>(METHOD_GET_AGE);
+            return age;
         }
 
         /// <summary>
