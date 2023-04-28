@@ -50,48 +50,48 @@ public class Yodo1Analytics : MonoBehaviour
             }
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "上传充值事件-request"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "上传充值事件-request废弃"))
         {
-            if (eventName.Equals(""))
-            {
-                Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId");
-                Yodo1U3dUtils.ShowAlert("", "请输入product001的orderId", "", "ok", "", null, null);
-            }
-            else
-            {
-                //充值请求，与充值成功需要配合调用
-                Yodo1U3dDMPPay dmpPay = new Yodo1U3dDMPPay();
-                dmpPay.OrderId = eventName; //订单号
-                dmpPay.Coin = 100; //换算成等价的虚拟币
-                dmpPay.ProductId = "product001"; //商品id
-                dmpPay.ProductName = "测试商品"; //商品名
-                dmpPay.ProductPrice = 0.1; //价格
-                dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
-                Yodo1U3dAnalytics.onRechargeRequest(dmpPay);
-            }
+            // if (eventName.Equals(""))
+            // {
+            //     Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId");
+            //     Yodo1U3dUtils.ShowAlert("", "请输入product001的orderId", "", "ok", "", null, null);
+            // }
+            // else
+            // {
+            //     //充值请求，与充值成功需要配合调用
+            //     Yodo1U3dDMPPay dmpPay = new Yodo1U3dDMPPay();
+            //     dmpPay.OrderId = eventName; //订单号
+            //     dmpPay.Coin = 100; //换算成等价的虚拟币
+            //     dmpPay.ProductId = "product001"; //商品id
+            //     dmpPay.ProductName = "测试商品"; //商品名
+            //     dmpPay.ProductPrice = 0.1; //价格
+            //     dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
+            //     // Yodo1U3dAnalytics.onRechargeRequest(dmpPay);
+            // }
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "上传充值事件-success,fail"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "上传充值事件-success,fail废弃"))
         {
-            if (eventName.Equals(""))
-            {
-                Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId");
-                Yodo1U3dUtils.ShowAlert("", "请输入product001的orderId", "", "ok", "", null, null);
-            }
-            else
-            {
-                Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId：" + eventName);
-                //充值成功/失败
-                Yodo1U3dDMPPay dmpPay = new Yodo1U3dDMPPay();
-                dmpPay.OrderId = eventName; //订单号
-                dmpPay.Coin = 100; //换算成等价的虚拟币
-                dmpPay.ProductId = "product001"; //商品id
-                dmpPay.ProductName = "测试商品"; //商品名
-                dmpPay.ProductPrice = 0.1; //价格
-                dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
-                Yodo1U3dAnalytics.onRechargeSuccess(dmpPay);
-                Yodo1U3dAnalytics.onRechargeFail(dmpPay);
-            }
+            // if (eventName.Equals(""))
+            // {
+            //     Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId");
+            //     Yodo1U3dUtils.ShowAlert("", "请输入product001的orderId", "", "ok", "", null, null);
+            // }
+            // else
+            // {
+            //     Debug.Log(Yodo1U3dConstants.LOG_TAG + "orderId：" + eventName);
+            //     //充值成功/失败
+            //     Yodo1U3dDMPPay dmpPay = new Yodo1U3dDMPPay();
+            //     dmpPay.OrderId = eventName; //订单号
+            //     dmpPay.Coin = 100; //换算成等价的虚拟币
+            //     dmpPay.ProductId = "product001"; //商品id
+            //     dmpPay.ProductName = "测试商品"; //商品名
+            //     dmpPay.ProductPrice = 0.1; //价格
+            //     dmpPay.CurrencyType = Yodo1U3dDMPPay.DMP_CURRENCY_TYPE_CNY; //货币类型
+            //     Yodo1U3dAnalytics.onRechargeSuccess(dmpPay);
+            //     Yodo1U3dAnalytics.onRechargeFail(dmpPay);
+            // }
         }
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 7 + btn_h * 6, btn_w, btn_h), "统计Login"))

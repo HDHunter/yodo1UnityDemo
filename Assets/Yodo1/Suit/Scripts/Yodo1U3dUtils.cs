@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Globalization;
 #if UNITY_EDITOR
 using UnityEditor;
 
 #endif
-// 
+// #undef UNITY_EDITOR
 
 /// <summary>
 /// yodo1 suit sdk internal utils.
@@ -24,7 +25,7 @@ public class Yodo1U3dUtils
             GameObject gameObj = obj.gameObject;
             if (gameObj != null)
             {
-                string methodName = ((Delegate) callbackMethod).Method.Name;
+                string methodName = ((Delegate)callbackMethod).Method.Name;
                 if (methodName != null)
                 {
 #if UNITY_EDITOR
@@ -47,7 +48,7 @@ public class Yodo1U3dUtils
     {
         string policy = string.Empty;
 #if UNITY_EDITOR
-        return "http://www.yodo1.com";
+        policy = "http://www.yodo1.com";
 #elif UNITY_ANDROID
         policy = Yodo1U3dUtilsForAndroid.getPolicyLink();
 #endif
@@ -63,7 +64,7 @@ public class Yodo1U3dUtils
     {
         string terms = string.Empty;
 #if UNITY_EDITOR
-        return "http://www.yodo1.com";
+        terms = "http://www.yodo1.com";
 #elif UNITY_ANDROID
         terms = Yodo1U3dUtilsForAndroid.getTermsLink();
 #endif
@@ -77,7 +78,7 @@ public class Yodo1U3dUtils
     {
         string deviceId = null;
 #if UNITY_EDITOR
-        return "00000000";
+        deviceId = SystemInfo.deviceUniqueIdentifier;
 #elif UNITY_ANDROID
         deviceId = Yodo1U3dUtilsForAndroid.getDeviceId();
 #elif UNITY_IPHONE
@@ -93,7 +94,7 @@ public class Yodo1U3dUtils
     {
         string userId = string.Empty;
 #if UNITY_EDITOR
-        return "00000000";
+        userId = "00000000";
 #elif UNITY_ANDROID
         userId = Yodo1U3dUtilsForAndroid.getUserId();
 #elif UNITY_IPHONE
@@ -110,7 +111,7 @@ public class Yodo1U3dUtils
     {
         string code = string.Empty;
 #if UNITY_EDITOR
-        return "";
+        code = "";
 #elif UNITY_ANDROID
         code = Yodo1U3dUtilsForAndroid.GetPublishChannelCode();
 #elif UNITY_IPHONE
@@ -126,7 +127,7 @@ public class Yodo1U3dUtils
     {
         string parameter = string.Empty;
 #if UNITY_EDITOR
-        return "";
+        parameter = "";
 #elif UNITY_ANDROID
         parameter = Yodo1U3dUtilsForAndroid.getConfigParameter(key);
 #elif UNITY_IPHONE
@@ -145,7 +146,7 @@ public class Yodo1U3dUtils
     {
         string param = string.Empty;
 #if UNITY_EDITOR
-        return defaultValue;
+        param = defaultValue;
 #elif UNITY_ANDROID
         param = Yodo1U3dAnalyticsForAndroid.StringParams(key, defaultValue);
 #elif UNITY_IPHONE
@@ -164,7 +165,7 @@ public class Yodo1U3dUtils
     {
         bool value = defaultValue;
 #if UNITY_EDITOR
-        return defaultValue;
+        value = defaultValue;
 #elif UNITY_ANDROID
         value = Yodo1U3dAnalyticsForAndroid.BoolParams(key, defaultValue);
 #elif UNITY_IPHONE
@@ -172,22 +173,6 @@ public class Yodo1U3dUtils
 #endif
         return value;
     }
-
-    /// <summary>
-    /// Share the specified paramJson.
-    /// </summary>
-    /// <param name="param">Parameter json.</param>
-    public static void Share(Yodo1U3dShareInfo param)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dInitForAndroid.Share(param.toJson(), Yodo1U3dSDK.Instance.SdkObjectName,
-            Yodo1U3dSDK.Instance.SdkMethodName);
-#elif UNITY_IPHONE
-        Yodo1U3dManagerForIOS.PostStatus(param.toJson());
-#endif
-    }
-
 
     /// <summary>
     /// 跳转至评价页
@@ -251,8 +236,9 @@ public class Yodo1U3dUtils
         return Yodo1U3dInitForAndroid.getSDKVersion();
 #elif UNITY_IPHONE
         return Yodo1U3dUtilsForIOS.getSDKVersion();
-#endif
+#else
         return string.Empty;
+#endif
     }
 
     /// <summary>
@@ -278,8 +264,9 @@ public class Yodo1U3dUtils
         return Yodo1U3dInitForAndroid.GetTagForUnderAgeOfConsent();
 #elif UNITY_IPHONE
         return Yodo1U3dManagerForIOS.GetTagForUnderAgeOfConsent();
-#endif
+#else
         return false;
+#endif
     }
 
     /// <summary>
@@ -448,7 +435,7 @@ public class Yodo1U3dUtils
 
         if (callbackMethod != null)
         {
-            methodName = ((Delegate) callbackMethod).Method.Name;
+            methodName = ((Delegate)callbackMethod).Method.Name;
         }
 #if UNITY_ANDROID
         Yodo1U3dUtilsForAndroid.ShowAlert(title, message, positiveButton, negativeButton, neutralButton, objName,
@@ -480,15 +467,15 @@ public class Yodo1U3dUtils
     /// 判断当前是不是大陆地区 【中国用户】
     /// </summary>
     /// <returns></returns>
-	[System.Obsolete("'IsChineseMainland' is deprecated.")]
+    [System.Obsolete("'IsChineseMainland' is deprecated.", true)]
     public static bool IsChineseMainland()
     {
-#if UNITY_EDITOR
-#elif UNITY_IPHONE
-        return Yodo1U3dUtilsForIOS.IsChineseMainland();
-#elif UNITY_ANDROID
-        return Yodo1U3dUtilsForAndroid.IsChineseMainland();
-#endif
+        //#if UNITY_EDITOR
+        //#elif UNITY_IPHONE
+        //        return Yodo1U3dUtilsForIOS.IsChineseMainland();
+        //#elif UNITY_ANDROID
+        //        return Yodo1U3dUtilsForAndroid.IsChineseMainland();
+        //#endif
         return true;
     }
 

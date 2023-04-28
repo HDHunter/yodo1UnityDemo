@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Yodo1.AntiAddiction;
 
@@ -56,14 +57,12 @@ public class Sample : MonoBehaviour
                 if (action == Yodo1U3dEventAction.ResumeGame)
                 {
                     // Prompt when 10 minutes remain(剩余10分钟时提示).
-                    //Dialog.ShowMsgDialog(title, content);
+                    Dialog.ShowMsgDialog(title, content);
                 }
                 else if (action == Yodo1U3dEventAction.EndGame)
                 {
                     // The game handles the pop-up prompt to exit the game(游戏处理退出游戏的弹框提示).
-                    //Dialog.ShowMsgDialog(title, content, true, ()=> {
-                    //    Application.Quit();
-                    //});
+                    Dialog.ShowMsgDialog(title, content, true, () => { Application.Quit(); });
                 }
             });
 
@@ -173,15 +172,14 @@ public class Sample : MonoBehaviour
             else if (eventAction == Yodo1U3dEventAction.EndGame)
             {
                 //Real name authentication failure prompt and exit the game(实名认证失败提示并退出游戏).
-                //Dialog.ShowMsgDialog("Warm prompt(温馨提示)", "Real name authentication failed(实名认证失败)!", true, () => {
-                //    Application.Quit();
-                //});
+                Dialog.ShowMsgDialog("Warm prompt(温馨提示)", "Real name authentication failed(实名认证失败)!", true,
+                    () => { Application.Quit(); });
             }
 
             guestUserTxt.text = isGuestUser ? "Is it a guest(是否是试玩):Yes(是)." : "Is it a guest(是否是试玩):No(否).";
         });
     }
-    
+
     public void OnGetAge()
     {
         // Real name authentication(实名认证).
@@ -216,8 +214,13 @@ public class Sample : MonoBehaviour
             else
             {
                 //Can't buy prompt player(不可以购买并提示玩家).
-                //Dialog.ShowMsgDialog("Warm prompt(温馨提示)", content);
+                Dialog.ShowMsgDialog("Warm prompt(温馨提示)", content);
             }
         });
+    }
+
+    public void OnExit()
+    {
+        SceneManager.LoadScene("Yodo1Demo");
     }
 }

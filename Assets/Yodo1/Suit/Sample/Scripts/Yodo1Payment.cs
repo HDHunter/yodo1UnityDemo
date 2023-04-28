@@ -45,7 +45,7 @@ public class Yodo1Payment : MonoBehaviour
             //支付成功
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "Pay success");
         }
-        else if (status == Yodo1U3dConstants.PayEvent.PayCannel)
+        else if (status == Yodo1U3dConstants.PayEvent.PayCancel)
         {
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "PayCannel");
         }
@@ -72,13 +72,14 @@ public class Yodo1Payment : MonoBehaviour
         if (products != null)
         {
             this.products = products;
-            foreach (Yodo1U3dProductData product in products)
-            {
-                Debug.Log(Yodo1U3dConstants.LOG_TAG + "productId:" + product.ProductId + ",PriceDisplay:" +
-                          product.PriceDisplay + ",PriceDisplay:" + product.PriceDisplay);
-                Debug.Log(Yodo1U3dConstants.LOG_TAG + "MarketId:" + product.MarketId + ",Currency:" + product.Currency +
-                          "\n" + "Description" + product.Description + "\n");
-            }
+            // foreach (Yodo1U3dProductData product in products)
+            // {
+            //     Debug.Log(Yodo1U3dConstants.LOG_TAG + "productId:" + product.ProductId + ",PriceDisplay:" +
+            //               product.PriceDisplay + ",PriceDisplay:" + product.PriceDisplay);
+            //     Debug.Log(Yodo1U3dConstants.LOG_TAG + "MarketId:" + product.MarketId + ",Currency:" + product.Currency +
+            //               "\n" + "Description" + product.Description + "\n");
+            // }
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + " 一共解析获取到数量：" + products.Count);
         }
     }
 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-// 
+// #undef UNITY_EDITOR
 
 /// <summary>
 /// yodo1 analytics feature support.
@@ -52,39 +52,20 @@ public class Yodo1U3dAnalytics
     /// <summary>
     /// 充值请求
     /// </summary>
-    public static void onRechargeRequest(Yodo1U3dDMPPay payInfo)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onRechargeRequest(payInfo);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.ChargeRequstAnalytics(payInfo);
-#endif
-    }
+    [System.Obsolete("", true)]
+    public static void onRechargeRequest(Yodo1U3dDMPPay payInfo) { }
 
     /// <summary>
     /// 充值成功
     /// </summary>
-    public static void onRechargeSuccess(Yodo1U3dDMPPay payInfo)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onRechargeSuccess(payInfo);
-#elif UNITY_IPHONE
-        Yodo1U3dAnalyticsForIOS.ChargeSuccessAnalytics(payInfo);
-#endif
-    }
+    [System.Obsolete("", true)]
+    public static void onRechargeSuccess(Yodo1U3dDMPPay payInfo) { }
 
     /// <summary>
     /// 充值失败
     /// </summary>
-    public static void onRechargeFail(Yodo1U3dDMPPay payInfo)
-    {
-#if UNITY_EDITOR
-#elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.onRechargeFail(payInfo);
-#endif
-    }
+    [System.Obsolete("", true)]
+    public static void onRechargeFail(Yodo1U3dDMPPay payInfo) { }
 
     /// <summary>
     /// Validates the in app purchase google play. 目前只有Appsflyer，注：使用Yodo1支付系统请忽略该方法
@@ -94,8 +75,7 @@ public class Yodo1U3dAnalytics
     /// <param name="purchaseData">Purchase data.</param>
     /// <param name="price">Price.</param>
     /// <param name="currency">Currency.</param>
-    public static void validateInAppPurchase_GooglePlay(string publicKey, string signature, string purchaseData,
-        string price, string currency)
+    public static void validateInAppPurchase_GooglePlay(string publicKey, string signature, string purchaseData, string price, string currency)
     {
         Yodo1U3dAnalyticsForAndroid.validateInAppPurchase(publicKey, signature, purchaseData, price, currency);
     }
@@ -108,8 +88,7 @@ public class Yodo1U3dAnalytics
     /// <param name="currency">Currency.</param>
     /// <param name="transactionId">Transaction identifier.</param>
     [System.Obsolete("Please use 'eventAndValidateInAppPurchase_Apple','validateInAppPurchase_Apple' is deprecated.")]
-    public static void validateInAppPurchase_Apple(string productId, string price, string currency,
-        string transactionId)
+    public static void validateInAppPurchase_Apple(string productId, string price, string currency, string transactionId)
     {
         Yodo1U3dAnalyticsForIOS.validateInAppPurchase(productId, price, currency, transactionId);
     }
@@ -121,5 +100,34 @@ public class Yodo1U3dAnalytics
         string contentId, string receiptId)
     {
         Yodo1U3dAnalyticsForIOS.customValidateInAppPurchase(revenue, currency, quantity, contentId, receiptId);
+    }
+
+    /// <summary>
+    /// AppsFlyer 创建用户归因分享Link
+    /// </summary>
+    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate)
+    {
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAnalyticsForAndroid.generateInviteUrlWithLinkGenerator(generate, Yodo1U3dSDK.Instance.SdkObjectName,
+            Yodo1U3dSDK.Instance.SdkMethodName);
+#elif UNITY_IPHONE
+        Yodo1U3dAnalyticsForIOS.generateInviteUrlWithLinkGenerator(generate, Yodo1U3dSDK.Instance.SdkObjectName,
+            Yodo1U3dSDK.Instance.SdkMethodName);
+#endif
+    }
+
+    /// <summary>
+    /// AppsFlyer 上报”创建用户归因分享Link“事件
+    /// </summary>
+    public static void logInviteAppsFlyerWithEventData(Dictionary<string, string> value = null)
+    {
+        string jsonData = (value == null ? null : Yodo1JSONObject.Serialize(value));
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAnalyticsForAndroid.logInviteAppsFlyerWithEventData(jsonData);
+#elif UNITY_IPHONE
+        Yodo1U3dAnalyticsForIOS.logInviteAppsFlyerWithEventData(jsonData);
+#endif
     }
 }

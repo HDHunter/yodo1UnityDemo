@@ -17,13 +17,6 @@ namespace Yodo1.AntiAddiction
     public class Yodo1U3dAntiAddictionEditor : EditorWindow
     {
         public const string K_SDK_ROOT_NAME = "Yodo1/Anti";
-        const string K_LAN_ROOT = "Yodo1/Anti/Editor";
-        const string K_LANGUAGE_CSV_NAME = "Language.csv";
-
-        public static string CSVPath
-        {
-            get { return Application.dataPath + "/" + K_LAN_ROOT + "/" + K_LANGUAGE_CSV_NAME; }
-        }
 
         private static Yodo1U3dAntiAddictionEditor _instance;
 
@@ -62,48 +55,11 @@ namespace Yodo1.AntiAddiction
             }
         }
 
-        [MenuItem("Yodo1/Yodo1Anti Settings")]
+        [MenuItem("Yodo1/Anti-Addiction SDK/Settings")]
         public static void OpenWindow()
         {
             // Instance.Close();
             Instance.Show();
-        }
-
-        [MenuItem("Yodo1/Yodo1Anti Tools/Update Language Asset")]
-        public static void UpdateLanAsset()
-        {
-            if (File.Exists(CSVPath))
-            {
-                string[] lines = File.ReadAllLines(CSVPath);
-                Debug.Log(">>> CSV Lines: " + lines.Length);
-
-                if (lines == null || lines.Length == 0)
-                {
-                    Debug.LogError("Read CSV Fail...");
-                    return;
-                }
-
-                List<Yodo1U3dLanguageSourceTerm> list = new List<Yodo1U3dLanguageSourceTerm>();
-
-                var header = lines[0];
-                for (var i = 1; i < lines.Length; i++)
-                {
-                    var term = new Yodo1U3dLanguageSourceTerm();
-                    term.ParseRaw(header, lines[i]);
-                    list.Add(term);
-                }
-
-
-                Yodo1U3dLanguageSource source = Yodo1U3dLanguageSource.LoadOrCreate();
-                source.terms = list;
-                source.Save();
-
-                AssetDatabase.Refresh();
-            }
-            else
-            {
-                Debug.LogError(">>> Importe Fail, Can't find CSV: " + CSVPath);
-            }
         }
 
         private static void OnPlayModeChanged(PlayModeStateChange pmsc)
@@ -124,7 +80,7 @@ namespace Yodo1.AntiAddiction
         private bool m_isDirty = false;
 
 
-        private float m_titleW = 80;
+        private float m_titleW = 140;
         private float m_headerGap = 20;
         private float m_lineGap = 10;
 
@@ -132,7 +88,6 @@ namespace Yodo1.AntiAddiction
         {
             this.titleContent = new GUIContent("Settings Data");
         }
-
 
         private void OnEnable()
         {
@@ -145,7 +100,6 @@ namespace Yodo1.AntiAddiction
             m_isDirty = false;
         }
 
-
         /// <summary>
         /// Editor GUI
         /// </summary>
@@ -155,14 +109,14 @@ namespace Yodo1.AntiAddiction
 
             //EditorGUI.indentLevel ++;
 
-            GUI_StringFixBlock(ref m_appKey, "AppKey", m_titleW);
+            GUI_StringFixBlock(ref m_appKey, "App Key*", m_titleW);
             if (m_appKey != m_settings.AppKey)
             {
                 m_settings.AppKey = m_appKey;
                 m_isDirty = true;
             }
 
-            GUI_StringFixBlock(ref m_regionCode, "Regin Code", m_titleW);
+            GUI_StringFixBlock(ref m_regionCode, "Regin Code(Optional)", m_titleW);
             if (m_regionCode != m_settings.RegionCode)
             {
                 m_settings.RegionCode = m_regionCode;

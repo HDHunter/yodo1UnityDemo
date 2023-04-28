@@ -31,18 +31,6 @@ public class EditorFileUtils : Editor
         return true;
     }
 
-    public static void copyFile(string fromFile, string toFile)
-    {
-        int split = toFile.LastIndexOf("/");
-        string pathFolder = toFile.Substring(0, split);
-        if (!Directory.Exists(pathFolder))
-        {
-            Directory.CreateDirectory(pathFolder);
-        }
-
-        File.Copy(fromFile, toFile, true);
-    }
-
     public static bool DeleteDir(string strPath, bool delPath = false)
     {
         // 清除空格 
@@ -95,38 +83,12 @@ public class EditorFileUtils : Editor
         streamWriter.Close();
     }
 
-    public static bool DeleteText(string filePath, string text)
-    {
-        StreamReader streamReader = new StreamReader(filePath);
-        string text_all = streamReader.ReadToEnd();
-        streamReader.Close();
-        if (text_all.Contains(text))
-        {
-            Debug.Log("Yodo1Suit  delete:" + text);
-            int beginIndex = text_all.IndexOf(text);
-
-            text_all = text_all.Remove(beginIndex, text.Length);
-            StreamWriter streamWriter = new StreamWriter(filePath);
-            streamWriter.Write(text_all);
-            streamWriter.Close();
-            return true;
-        }
-
-        return false;
-    }
-
     public static void DeleteFile(string filePath)
     {
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
         }
-    }
-
-    public static void moveFile(string fromFile, string toFile)
-    {
-        copyFile(fromFile, toFile);
-        File.Delete(fromFile);
     }
 
     public static void Replace(string filePath, string oldStr, string newStr)

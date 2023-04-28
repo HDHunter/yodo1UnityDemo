@@ -87,13 +87,13 @@ public class Yodo1U3dManagerForIOS
     /// <param name="callbackMethod">Callback method.</param>
     /// 
 #if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern void UnityPostStatus(string paramJson, string callbackGameObj, string callbackMethod);
+    //[DllImport(Yodo1U3dConstants.LIB_NAME)]
+    //private static extern void UnityPostStatus(string paramJson, string callbackGameObj, string callbackMethod);
 #endif
     public static void PostStatus(string paramJson)
     {
 #if UNITY_IPHONE
-        UnityPostStatus(paramJson, Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
+        //UnityPostStatus(paramJson, Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
 #endif
     }
 

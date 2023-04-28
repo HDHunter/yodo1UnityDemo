@@ -1,4 +1,4 @@
-// 
+// #undef UNITY_EDITOR
 
 /// <summary>
 /// yodo1 account feature support.
@@ -16,7 +16,7 @@ public class Yodo1U3dAccount
 #elif UNITY_ANDROID
         Yodo1U3dAccountForAndroid.submitUser(user);
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.SubmitUser(user);
+        Yodo1U3dAccountForIOS.SubmitUser(user);
 #endif
     }
 

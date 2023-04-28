@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// 
+// #undef UNITY_EDITOR
 
 /// <summary>
 /// yodo1 suit sdk tools.
@@ -9,7 +9,7 @@ using UnityEngine;
 public class Yodo1U3dSDK : MonoBehaviour
 {
     //ResultType
-    public const int Yodo1U3dSDK_ResulType_Share = 4001;
+    public const int Yodo1U3dSDK_ResulType_ShareLink = 4002;
 
     //GameCenterLoginStatus = 5001;
     //QueryPrivacyInfo = 8002;隐私协议和策略
@@ -123,15 +123,15 @@ public class Yodo1U3dSDK : MonoBehaviour
         _activityVerifyDelegate = action;
     }
 
-    //分享回调
-    public delegate void ShareDelegate(bool success, Yodo1U3dConstants.Yodo1SNSType shareType);
+    //生成分享链接回调
+    public delegate void ShareLinkGenerateDelegate(bool success, string linkUrl);
 
-    private static ShareDelegate _shareDelegate;
+    private static ShareLinkGenerateDelegate _shareLinkGenerateDelegate;
 
-    //设置分享回调
-    public static void setShareDelegate(ShareDelegate action)
+    //设置生成分享链接回调
+    public static void setShareLinkGenerateDelegate(ShareLinkGenerateDelegate action)
     {
-        _shareDelegate = action;
+        _shareLinkGenerateDelegate = action;
     }
 
     //从GoogleCould/iCloud上传数据回调
@@ -160,7 +160,7 @@ public class Yodo1U3dSDK : MonoBehaviour
         int flag = 0;
         int resultCode = 0;
         string errorMsg = "";
-        Dictionary<string, object> obj = (Dictionary<string, object>) Yodo1JSONObject.Deserialize(result);
+        Dictionary<string, object> obj = (Dictionary<string, object>)Yodo1JSONObject.Deserialize(result);
         if (obj != null)
         {
             if (obj.ContainsKey("resulType"))
@@ -188,90 +188,83 @@ public class Yodo1U3dSDK : MonoBehaviour
         switch (flag)
         {
             case Yodo1U3dSDK_ResulType_UserPrivateInfo:
-            {
-                int userAge = 0;
-                if (obj.ContainsKey("age"))
                 {
-                    userAge = int.Parse(obj["age"].ToString());
-                }
+                    int userAge = 0;
+                    if (obj.ContainsKey("age"))
+                    {
+                        userAge = int.Parse(obj["age"].ToString());
+                    }
 
-                bool isCoppaChild = false;
-                if (obj.ContainsKey("isChild"))
-                {
-                    isCoppaChild = bool.Parse(obj["isCoppaChild"].ToString());
-                }
+                    bool isCoppaChild = false;
+                    if (obj.ContainsKey("isChild"))
+                    {
+                        isCoppaChild = bool.Parse(obj["isCoppaChild"].ToString());
+                    }
 
-                bool isGdprChild = false;
-                if (obj.ContainsKey("isChild"))
-                {
-                    isGdprChild = bool.Parse(obj["isGdprChild"].ToString());
-                }
+                    bool isGdprChild = false;
+                    if (obj.ContainsKey("isChild"))
+                    {
+                        isGdprChild = bool.Parse(obj["isGdprChild"].ToString());
+                    }
 
-                bool open_switch = false;
-                if (obj.ContainsKey("accept"))
-                {
-                    open_switch = bool.Parse(obj["accept"].ToString());
-                }
+                    bool open_switch = false;
+                    if (obj.ContainsKey("accept"))
+                    {
+                        open_switch = bool.Parse(obj["accept"].ToString());
+                    }
 
-                if (_userPrivateInfoUIDelegate != null)
-                {
-                    _userPrivateInfoUIDelegate(open_switch, userAge, isGdprChild, isCoppaChild);
+                    if (_userPrivateInfoUIDelegate != null)
+                    {
+                        _userPrivateInfoUIDelegate(open_switch, userAge, isGdprChild, isCoppaChild);
+                    }
                 }
-            }
                 break;
             case Yodo1U3dSDK_ResulType_Verify:
-            {
-                if (obj != null)
                 {
-                    Yodo1U3dActivationCodeData data = Yodo1U3dActivationCodeData.GetActivationCodeData(result);
-                    if (_activityVerifyDelegate != null)
+                    if (obj != null)
                     {
-                        _activityVerifyDelegate(data);
+                        Yodo1U3dActivationCodeData data = Yodo1U3dActivationCodeData.GetActivationCodeData(result);
+                        if (_activityVerifyDelegate != null)
+                        {
+                            _activityVerifyDelegate(data);
+                        }
                     }
                 }
-            }
                 break;
-            case Yodo1U3dSDK_ResulType_Share: //Share
-            {
-                bool bSuccess = false;
-                Yodo1U3dConstants.Yodo1SNSType type = Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeNone;
-                if (obj != null)
+            case Yodo1U3dSDK_ResulType_ShareLink:
                 {
-                    if (resultCode == 1)
+                    bool bSuccess = resultCode == 1;
+                    string link = null;
+                    if (bSuccess)
                     {
-                        bSuccess = true;
+                        link = obj["link"].ToString();
                     }
 
-                    string snsType = obj["snsType"].ToString();
-                    int tempSNSType = int.Parse(snsType);
-                    type = (Yodo1U3dConstants.Yodo1SNSType) tempSNSType;
+                    if (_shareLinkGenerateDelegate != null)
+                    {
+                        _shareLinkGenerateDelegate(bSuccess, link);
+                    }
                 }
-
-                if (_shareDelegate != null)
-                {
-                    _shareDelegate(bSuccess, type);
-                }
-            }
                 break;
             case Yodo1U3dSDK_ResulType_iCloudGetValue:
-            {
-                string saveName = "";
-                if (obj.ContainsKey("saveName"))
                 {
-                    saveName = obj["saveName"].ToString();
-                }
+                    string saveName = "";
+                    if (obj.ContainsKey("saveName"))
+                    {
+                        saveName = obj["saveName"].ToString();
+                    }
 
-                string saveValue = "";
-                if (obj.ContainsKey("saveValue"))
-                {
-                    saveValue = obj["saveValue"].ToString();
-                }
+                    string saveValue = "";
+                    if (obj.ContainsKey("saveValue"))
+                    {
+                        saveValue = obj["saveValue"].ToString();
+                    }
 
-                if (_iCloudGetValueDelegate != null)
-                {
-                    _iCloudGetValueDelegate(resultCode, saveName, saveValue);
+                    if (_iCloudGetValueDelegate != null)
+                    {
+                        _iCloudGetValueDelegate(resultCode, saveName, saveValue);
+                    }
                 }
-            }
                 break;
         }
     }

@@ -77,7 +77,7 @@ namespace Yodo1Unity
                 index = i;
             }
 
-            return (KeyItem) this.configKey[index];
+            return (KeyItem)this.configKey[index];
         }
 
         public void SaveAllKeyItem()
@@ -98,10 +98,10 @@ namespace Yodo1Unity
         public void SaveKeyItem(KeyItem item)
         {
             PListRoot root = getPlist();
-            PListDict dic = (PListDict) root.Root;
+            PListDict dic = (PListDict)root.Root;
             if (dic.ContainsKey(SettingsConstants.KeyConfigName))
             {
-                PListDict configDic = (PListDict) dic[SettingsConstants.KeyConfigName];
+                PListDict configDic = (PListDict)dic[SettingsConstants.KeyConfigName];
 
                 if (configDic.ContainsKey(SettingsConstants.AppKey))
                 {
@@ -118,63 +118,14 @@ namespace Yodo1Unity
                     configDic[SettingsConstants.SdkVersion] = new PListString(item.SdkVersion);
                 }
 
-                //微信
-                if (configDic.ContainsKey(SettingsConstants.WechatAppId))
-                {
-                    configDic[SettingsConstants.WechatAppId] = new PListString(item.WechatAppId);
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.WechatUniversalLink))
-                {
-                    configDic[SettingsConstants.WechatUniversalLink] = new PListString(item.WechatUniversalLink);
-                }
-
-                //新浪微博
-                if (configDic.ContainsKey(SettingsConstants.SinaAppId))
-                {
-                    configDic[SettingsConstants.SinaAppId] = new PListString(item.SinaAppId);
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.SinaSecret))
-                {
-                    configDic[SettingsConstants.SinaSecret] = new PListString(item.SinaSecret);
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.SinaCallbackUrl))
-                {
-                    configDic[SettingsConstants.SinaCallbackUrl] = new PListString(item.SinaCallbackUrl);
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.SinaUniversalLink))
-                {
-                    configDic[SettingsConstants.SinaUniversalLink] = new PListString(item.SinaUniversalLink);
-                }
-
-                //QQ
-                if (configDic.ContainsKey(SettingsConstants.QQAppId))
-                {
-                    configDic[SettingsConstants.QQAppId] = new PListString(item.QQAppId);
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.QQUniversalLink))
-                {
-                    configDic[SettingsConstants.QQUniversalLink] = new PListString(item.QQUniversalLink);
-                }
-
-                //Facebook
-                if (configDic.ContainsKey(SettingsConstants.FacebookAppId))
-                {
-                    configDic[SettingsConstants.FacebookAppId] = new PListString(item.FacebookAppId);
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.UmengAnalytics))
-                {
-                    configDic[SettingsConstants.UmengAnalytics] = new PListString(item.UmengAnalytics);
-                }
-
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyerDevKey))
                 {
                     configDic[SettingsConstants.AppsFlyerDevKey] = new PListString(item.AppsFlyerDevKey);
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.AppsFlyerOneLinkId))
+                {
+                    configDic[SettingsConstants.AppsFlyerOneLinkId] = new PListString(item.AppsFlyerOneLinkId);
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_identifier))
@@ -218,114 +169,65 @@ namespace Yodo1Unity
         public void LoadConfigKey()
         {
             PListRoot root = getPlist();
-            PListDict dic = (PListDict) root.Root;
+            PListDict dic = (PListDict)root.Root;
             if (dic.ContainsKey(SettingsConstants.KeyConfigName))
             {
-                PListDict configDic = (PListDict) dic[SettingsConstants.KeyConfigName];
+                PListDict configDic = (PListDict)dic[SettingsConstants.KeyConfigName];
                 KeyItem item = new KeyItem();
                 if (configDic.ContainsKey(SettingsConstants.AppKey))
                 {
-                    item.AppKey = (PListString) configDic[SettingsConstants.AppKey];
+                    item.AppKey = (PListString)configDic[SettingsConstants.AppKey];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.RegionCode))
                 {
-                    item.RegionCode = (PListString) configDic[SettingsConstants.RegionCode];
+                    item.RegionCode = (PListString)configDic[SettingsConstants.RegionCode];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.SdkVersion))
                 {
-                    item.SdkVersion = (PListString) configDic[SettingsConstants.SdkVersion];
+                    item.SdkVersion = (PListString)configDic[SettingsConstants.SdkVersion];
                     sdkVersion = item.SdkVersion;
-                }
-
-                //微信
-                if (configDic.ContainsKey(SettingsConstants.WechatAppId))
-                {
-                    item.WechatAppId = (PListString) configDic[SettingsConstants.WechatAppId];
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.WechatUniversalLink))
-                {
-                    item.WechatUniversalLink = (PListString) configDic[SettingsConstants.WechatUniversalLink];
-                }
-
-                //新浪微博
-                if (configDic.ContainsKey(SettingsConstants.SinaAppId))
-                {
-                    item.SinaAppId = (PListString) configDic[SettingsConstants.SinaAppId];
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.SinaSecret))
-                {
-                    item.SinaSecret = (PListString) configDic[SettingsConstants.SinaSecret];
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.SinaCallbackUrl))
-                {
-                    item.SinaCallbackUrl = (PListString) configDic[SettingsConstants.SinaCallbackUrl];
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.SinaUniversalLink))
-                {
-                    item.SinaUniversalLink = (PListString) configDic[SettingsConstants.SinaUniversalLink];
-                }
-
-                //QQ
-                if (configDic.ContainsKey(SettingsConstants.QQAppId))
-                {
-                    item.QQAppId = (PListString) configDic[SettingsConstants.QQAppId];
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.QQUniversalLink))
-                {
-                    item.QQUniversalLink = (PListString) configDic[SettingsConstants.QQUniversalLink];
-                }
-
-                //Facebook
-                if (configDic.ContainsKey(SettingsConstants.FacebookAppId))
-                {
-                    item.FacebookAppId = (PListString) configDic[SettingsConstants.FacebookAppId];
-                }
-
-                if (configDic.ContainsKey(SettingsConstants.UmengAnalytics))
-                {
-                    item.UmengAnalytics = (PListString) configDic[SettingsConstants.UmengAnalytics];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyerDevKey))
                 {
-                    item.AppsFlyerDevKey = (PListString) configDic[SettingsConstants.AppsFlyerDevKey];
+                    item.AppsFlyerDevKey = (PListString)configDic[SettingsConstants.AppsFlyerDevKey];
+                }
+
+                if (configDic.ContainsKey(SettingsConstants.AppsFlyerOneLinkId))
+                {
+                    item.AppsFlyerOneLinkId = (PListString)configDic[SettingsConstants.AppsFlyerOneLinkId];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_identifier))
                 {
-                    item.AppsFlyer_identifier = (PListString) configDic[SettingsConstants.AppsFlyer_identifier];
+                    item.AppsFlyer_identifier = (PListString)configDic[SettingsConstants.AppsFlyer_identifier];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_schemes))
                 {
-                    item.AppsFlyer_Schemes = (PListString) configDic[SettingsConstants.AppsFlyer_schemes];
+                    item.AppsFlyer_Schemes = (PListString)configDic[SettingsConstants.AppsFlyer_schemes];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppsFlyer_domain))
                 {
-                    item.AppsFlyer_domain = (PListString) configDic[SettingsConstants.AppsFlyer_domain];
+                    item.AppsFlyer_domain = (PListString)configDic[SettingsConstants.AppsFlyer_domain];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.AppleAppId))
                 {
-                    item.AppleAppId = (PListString) configDic[SettingsConstants.AppleAppId];
+                    item.AppleAppId = (PListString)configDic[SettingsConstants.AppleAppId];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.ThinkingAppId))
                 {
-                    item.ThinkingAppId = (PListString) configDic[SettingsConstants.ThinkingAppId];
+                    item.ThinkingAppId = (PListString)configDic[SettingsConstants.ThinkingAppId];
                 }
 
                 if (configDic.ContainsKey(SettingsConstants.ThinkingServerUrl))
                 {
-                    item.ThinkingServerUrl = (PListString) configDic[SettingsConstants.ThinkingServerUrl];
+                    item.ThinkingServerUrl = (PListString)configDic[SettingsConstants.ThinkingServerUrl];
                 }
 
                 configKey.Add(item);
@@ -362,59 +264,14 @@ namespace Yodo1Unity
                     currItem.SdkVersion = item.SdkVersion;
                 }
 
-                if (item.WechatAppId != null)
-                {
-                    currItem.WechatAppId = item.WechatAppId;
-                }
-
-                if (item.WechatUniversalLink != null)
-                {
-                    currItem.WechatUniversalLink = item.WechatUniversalLink;
-                }
-
-                if (item.SinaAppId != null)
-                {
-                    currItem.SinaAppId = item.SinaAppId;
-                }
-
-                if (item.SinaSecret != null)
-                {
-                    currItem.SinaSecret = item.SinaSecret;
-                }
-
-                if (item.SinaCallbackUrl != null)
-                {
-                    currItem.SinaCallbackUrl = item.SinaCallbackUrl;
-                }
-
-                if (item.SinaUniversalLink != null)
-                {
-                    currItem.SinaUniversalLink = item.SinaUniversalLink;
-                }
-
-                if (item.QQAppId != null)
-                {
-                    currItem.QQAppId = item.QQAppId;
-                }
-
-                if (item.QQUniversalLink != null)
-                {
-                    currItem.QQUniversalLink = item.QQUniversalLink;
-                }
-
-                if (item.FacebookAppId != null)
-                {
-                    currItem.FacebookAppId = item.FacebookAppId;
-                }
-
-                if (item.UmengAnalytics != null)
-                {
-                    currItem.UmengAnalytics = item.UmengAnalytics;
-                }
-
                 if (item.AppsFlyerDevKey != null)
                 {
                     currItem.AppsFlyerDevKey = item.AppsFlyerDevKey;
+                }
+
+                if (item.AppsFlyerOneLinkId != null)
+                {
+                    currItem.AppsFlyerOneLinkId = item.AppsFlyerOneLinkId;
                 }
 
                 if (item.AppsFlyer_identifier != null)
@@ -465,7 +322,7 @@ namespace Yodo1Unity
                     for (int i = 0; i < this.configBasic.Count; i++)
                     {
                         SettingItem element = this.configBasic[i];
-                        int _index = (int) element.Index;
+                        int _index = (int)element.Index;
                         if (_index == adtype)
                         {
                             index = _index;
@@ -480,7 +337,7 @@ namespace Yodo1Unity
                     for (int i = 0; i < this.configAnalytics.Count; i++)
                     {
                         SettingItem element = this.configAnalytics[i];
-                        int _index = (int) element.Index;
+                        int _index = (int)element.Index;
                         if (_index == adtype)
                         {
                             index = _index;
@@ -502,41 +359,41 @@ namespace Yodo1Unity
         public void LoadASettingConfig(string compositionName, List<SettingItem> configItem)
         {
             PListRoot root = getPlist();
-            PListDict dic = (PListDict) root.Root;
+            PListDict dic = (PListDict)root.Root;
             if (dic.ContainsKey(SettingsConstants.SettingItemsName))
             {
-                PListArray advertArray = (PListArray) dic[SettingsConstants.SettingItemsName];
+                PListArray advertArray = (PListArray)dic[SettingsConstants.SettingItemsName];
                 foreach (PListDict itemInfo in advertArray)
                 {
                     if (itemInfo.ContainsKey(compositionName))
                     {
-                        PListArray composition = (PListArray) itemInfo[compositionName];
+                        PListArray composition = (PListArray)itemInfo[compositionName];
                         foreach (PListDict iteConfig in composition)
                         {
                             SettingItem intersItem = new SettingItem();
                             if (iteConfig.ContainsKey(SettingsConstants.kName))
                             {
-                                intersItem.Name = (PListString) iteConfig[SettingsConstants.kName];
+                                intersItem.Name = (PListString)iteConfig[SettingsConstants.kName];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kIndex))
                             {
-                                intersItem.Index = (PListInteger) iteConfig[SettingsConstants.kIndex];
+                                intersItem.Index = (PListInteger)iteConfig[SettingsConstants.kIndex];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kUrl))
                             {
-                                intersItem.Url = (PListString) iteConfig[SettingsConstants.kUrl];
+                                intersItem.Url = (PListString)iteConfig[SettingsConstants.kUrl];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kEnable))
                             {
-                                intersItem.Enable = (PListBool) iteConfig[SettingsConstants.kEnable];
+                                intersItem.Enable = (PListBool)iteConfig[SettingsConstants.kEnable];
                             }
 
                             if (iteConfig.ContainsKey(SettingsConstants.kSelected))
                             {
-                                intersItem.Selected = (PListBool) iteConfig[SettingsConstants.kSelected];
+                                intersItem.Selected = (PListBool)iteConfig[SettingsConstants.kSelected];
                             }
 
                             if (configItem != null)
@@ -561,7 +418,7 @@ namespace Yodo1Unity
                         continue;
                     }
 
-                    SettingItem currItem = GetSettingItem(type, (int) item.Index);
+                    SettingItem currItem = GetSettingItem(type, (int)item.Index);
                     if (currItem == null || currItem.Enable == false)
                     {
                         continue;
@@ -600,18 +457,18 @@ namespace Yodo1Unity
             if (item != null)
             {
                 PListRoot root = getPlist();
-                PListDict dic = (PListDict) root.Root;
+                PListDict dic = (PListDict)root.Root;
                 if (dic.ContainsKey(SettingsConstants.SettingItemsName))
                 {
-                    PListArray advertArray = (PListArray) dic[SettingsConstants.SettingItemsName];
+                    PListArray advertArray = (PListArray)dic[SettingsConstants.SettingItemsName];
                     foreach (PListDict itemInfo in advertArray)
                     {
                         if (itemInfo.ContainsKey(compositionName))
                         {
-                            PListArray admobComposition = (PListArray) itemInfo[compositionName];
+                            PListArray admobComposition = (PListArray)itemInfo[compositionName];
                             foreach (PListDict adItem in admobComposition)
                             {
-                                string platformName = (PListString) adItem[SettingsConstants.kName];
+                                string platformName = (PListString)adItem[SettingsConstants.kName];
                                 if (platformName.Equals(item.Name, StringComparison.Ordinal) == true)
                                 {
                                     if (adItem.ContainsKey(SettingsConstants.kName))

@@ -11,33 +11,30 @@ namespace Yodo1Unity
 
     public class SDKConfig
     {
-        public const string CONFIG_PATH = "./Assets/Yodo1/Suit/Internal/config.plist";
+        public static readonly string CONFIG_PATH = "./Assets/Yodo1/Suit/Internal/config.plist";
 
-        public const string Yodo1BunldePath = "./Assets/Plugins/iOS/Yodo1KeyConfig.bundle";
-        public const string Yodo1KeyInfoPath = Yodo1BunldePath + "/Yodo1KeyInfo.plist";
+        public static readonly string Yodo1BunldePath = "./Assets/Plugins/iOS/Yodo1KeyConfig.bundle";
+        public static readonly string Yodo1KeyInfoPath = Yodo1BunldePath + "/Yodo1KeyInfo.plist";
 
-        public const string dependenciesDir = "/Assets/Yodo1/Suit/Editor/Dependencies/";
-        public const string dependenciesName = "Yodo1SDKiOSDependencies.xml";
+        public static readonly string dependenciesDir = "/Assets/Yodo1/Suit/Editor/Dependencies/";
+        public static readonly string dependenciesName = "Yodo1SDKiOSDependencies.xml";
 
         //设置自定义宏
-        private static readonly string YODO1EmptyDefine = "<Clear>";
+        //private static readonly string YODO1EmptyDefine = "<Clear>";
 
-        private static string[] StoreDefines =
-        {
-            YODO1EmptyDefine
-        };
+        //private static string[] StoreDefines =
+        //{
+        //    YODO1EmptyDefine
+        //};
 
-        public static string GetPodfileDirPath()
-        {
-            return Path.GetFullPath(".") + dependenciesDir;
-        }
+
 
         public static bool EnableSelected(RuntimeiOSSettings settings, SettingType type, int index)
         {
             SettingItem basicItem = settings.GetSettingItem(type, index);
             if (basicItem == null)
             {
-                Debug.LogError("Yodo1Suit SettingItem null.");
+                Debug.LogWarning("Yodo1Suit SettingItem null.");
             }
 
             return basicItem != null && basicItem.Selected && basicItem.Enable;
@@ -57,59 +54,27 @@ namespace Yodo1Unity
             File.Copy(CONFIG_PATH, Yodo1KeyInfoPath, true);
             RuntimeiOSSettings settings = SettingsSave.LoadEditor(false);
             PListRoot root = PListRoot.Load(Yodo1KeyInfoPath);
-            PListDict dic = (PListDict) root.Root;
+            PListDict dic = (PListDict)root.Root;
 
             if (dic.ContainsKey(SettingsConstants.KeyConfigName))
             {
-                PListDict configDic = (PListDict) dic[SettingsConstants.KeyConfigName];
+                PListDict configDic = (PListDict)dic[SettingsConstants.KeyConfigName];
 
-                bool isShareEnable = EnableSelected(settings, SettingType.Basic, (int) BasicType.Share);
-
-                string WechatAppId = settings.GetKeyItem().WechatAppId;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.WechatAppId, WechatAppId);
-                string WechatUniversalLink = settings.GetKeyItem().WechatUniversalLink;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.WechatUniversalLink,
-                    WechatUniversalLink);
-                string FacebookAppId = settings.GetKeyItem().FacebookAppId;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.FacebookAppId,
-                    FacebookAppId);
-
-                string QQAppId = settings.GetKeyItem().QQAppId;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.QQAppId, QQAppId);
-                string QQUniversalLink = settings.GetKeyItem().QQUniversalLink;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.QQUniversalLink, QQUniversalLink);
-
-                string SinaAppId = settings.GetKeyItem().SinaAppId;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.SinaAppId, SinaAppId);
-                string SinaSecret = settings.GetKeyItem().SinaSecret;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.SinaSecret, SinaSecret);
-                string SinaCallbackUrl = settings.GetKeyItem().SinaCallbackUrl;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.SinaCallbackUrl, SinaCallbackUrl);
-                string SinaUniversalLink = settings.GetKeyItem().SinaUniversalLink;
-                updatePlistInfoItem(isShareEnable, configDic, SettingsConstants.SinaUniversalLink, SinaUniversalLink);
-
-                bool isUmengEnable = EnableSelected(settings, SettingType.Analytics,
-                    (int) SettingsConstants.AnalyticsType.Umeng);
-                string UmengAnalytics = settings.GetKeyItem().UmengAnalytics;
-                updatePlistInfoItem(isUmengEnable, configDic, SettingsConstants.UmengAnalytics,
-                    UmengAnalytics);
-
-                bool isAFEnable = EnableSelected(settings, SettingType.Analytics,
-                    (int) SettingsConstants.AnalyticsType.AppsFlyer);
+                bool isAFEnable = EnableSelected(settings, SettingType.Analytics, (int)SettingsConstants.AnalyticsType.AppsFlyer);
                 string AppsFlyerDevKey = settings.GetKeyItem().AppsFlyerDevKey;
                 updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyerDevKey, AppsFlyerDevKey);
                 string AppleAppId = settings.GetKeyItem().AppleAppId;
                 updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppleAppId, AppleAppId);
+                string AppsFlyerOneLinkId = settings.GetKeyItem().AppsFlyerOneLinkId;
+                updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyerOneLinkId, AppsFlyerOneLinkId);
                 string AppsFlyer_identifier = settings.GetKeyItem().AppsFlyer_identifier;
-                updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyer_identifier,
-                    AppsFlyer_identifier);
+                updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyer_identifier, AppsFlyer_identifier);
                 string AppsFlyer_Schemes = settings.GetKeyItem().AppsFlyer_Schemes;
                 updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyer_schemes, AppsFlyer_Schemes);
                 string AppsFlyer_domain = settings.GetKeyItem().AppsFlyer_domain;
                 updatePlistInfoItem(isAFEnable, configDic, SettingsConstants.AppsFlyer_domain, AppsFlyer_domain);
 
-                bool isThdEnable = EnableSelected(settings, SettingType.Analytics,
-                    (int) SettingsConstants.AnalyticsType.Thinking);
+                bool isThdEnable = EnableSelected(settings, SettingType.Analytics, (int)SettingsConstants.AnalyticsType.Thinking);
                 string ThinkingAppId = settings.GetKeyItem().ThinkingAppId;
                 updatePlistInfoItem(isThdEnable, configDic, SettingsConstants.ThinkingAppId, ThinkingAppId);
                 string ThinkingServerUrl = settings.GetKeyItem().ThinkingServerUrl;
@@ -125,12 +90,12 @@ namespace Yodo1Unity
 
             if (dic.ContainsKey(SettingsConstants.SettingItemsName))
             {
-                PListArray configArray = (PListArray) dic[SettingsConstants.SettingItemsName];
+                PListArray configArray = (PListArray)dic[SettingsConstants.SettingItemsName];
                 foreach (PListDict plistItem in configArray)
                 {
                     if (plistItem.ContainsKey(SettingsConstants.BasicItemName))
                     {
-                        PListArray plista = (PListArray) plistItem[SettingsConstants.BasicItemName];
+                        PListArray plista = (PListArray)plistItem[SettingsConstants.BasicItemName];
                         foreach (PListDict item in plista)
                         {
                             if (item.ContainsKey(SettingsConstants.kName))
@@ -148,7 +113,7 @@ namespace Yodo1Unity
                     }
                     else if (plistItem.ContainsKey(SettingsConstants.AnalyticsItemName))
                     {
-                        PListArray plistb = (PListArray) plistItem[SettingsConstants.AnalyticsItemName];
+                        PListArray plistb = (PListArray)plistItem[SettingsConstants.AnalyticsItemName];
                         foreach (PListDict item in plistb)
                         {
                             if (item.ContainsKey(SettingsConstants.kName))
@@ -173,7 +138,7 @@ namespace Yodo1Unity
 
         private static void updatePlistInfoItem(bool enable, PListDict configDic, string key, string value)
         {
-            if (enable && XcodePostprocess.IsVaildSNSKey(value))
+            if (enable && Yodo1EditorUtils.IsVaildValue(value))
             {
                 configDic[key] = new PListString(value);
             }
@@ -203,10 +168,7 @@ namespace Yodo1Unity
                 "\t\t\t<source>https://github.com/Yodo1Games/Yodo1-Games-Spec.git</source>");
             CreateFile(podfileDirPath, dependenciesName, "\t\t</sources>");
 
-            string pod =
-                string.Format(
-                    "\t\t<iosPod name=\"Yodo1Suit/Yodo1_UnityConfigKey\" version=\"{0}\" bitcode=\"false\" minTargetSdk=\"10.0\" />",
-                    RuntimeiOSSettings.sdkVersion);
+            string pod = string.Format("\t\t<iosPod name=\"Yodo1Suit/Yodo1_UnityConfigKey\" version=\"{0}\" bitcode=\"false\" minTargetSdk=\"10.0\" />", RuntimeiOSSettings.sdkVersion);
 
             CreateFile(podfileDirPath, dependenciesName, pod);
 
@@ -222,6 +184,10 @@ namespace Yodo1Unity
             CreateFile(podfileDirPath, dependenciesName, "</dependencies>");
         }
 
+        private static string GetPodfileDirPath()
+        {
+            return Path.GetFullPath(".") + dependenciesDir;
+        }
 
         private static void CreateAdCompositionConfig(string podfileDirPath, List<SettingItem> configItems)
         {
@@ -271,20 +237,20 @@ namespace Yodo1Unity
         {
             List<string> defineString = new List<string>();
 
-            //保留原来项目用的define
-            List<string> symbols = GetScriptingDefineSymbols(BuildTargetGroup.iOS);
-            bool enable = EnableSelected(settings, SettingType.Basic, (int) BasicType.iCloud);
+            bool enable = EnableSelected(settings, SettingType.Basic, (int)BasicType.iCloud);
             if (enable)
             {
                 defineString.Add("YODO1_iCLOUD");
             }
 
-            enable = EnableSelected(settings, SettingType.Basic, (int) BasicType.UCenter);
+            enable = EnableSelected(settings, SettingType.Basic, (int)BasicType.UCenter);
             if (enable)
             {
                 defineString.Add("YODO1_UCENTER");
             }
 
+            //保留原来项目用的define
+            List<string> symbols = GetScriptingDefineSymbols(BuildTargetGroup.iOS);
             foreach (string storeDefine in symbols)
             {
                 if (!storeDefine.StartsWith("YODO1"))
@@ -293,10 +259,7 @@ namespace Yodo1Unity
                 }
             }
 
-            if (defineString.Count > 0)
-            {
-                UpdateScriptDefines(defineString, BuildTargetGroup.iOS);
-            }
+            UpdateScriptDefines(defineString, BuildTargetGroup.iOS);
         }
 
         /// <summary>
@@ -305,7 +268,7 @@ namespace Yodo1Unity
         /// <param name="path">Path.文件创建目录</param>
         /// <param name="name">Name.文件的名称</param>
         /// <param name="info">Info.写入的内容</param>
-        public static void CreateFile(string path, string name, string info)
+        private static void CreateFile(string path, string name, string info)
         {
             //文件流信息
             StreamWriter sw;
@@ -373,11 +336,5 @@ namespace Yodo1Unity
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, symbolsStr);
             }
         }
-
-
-        //private static void GetPlaySetting()
-        //{
-        //    PlayerSettings.iOS.appleDeveloperTeamID
-        //}
     }
 }

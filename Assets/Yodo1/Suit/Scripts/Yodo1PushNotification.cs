@@ -1,4 +1,4 @@
-// 
+// #undef UNITY_EDITOR
 
 /// <summary>
 /// 应用内通知

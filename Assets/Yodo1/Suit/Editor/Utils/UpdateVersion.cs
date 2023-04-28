@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 public class UpdateVersion : EditorWindow
 {
-    public static string Yodo1PluginVersion = "6.1.8";
+    public static string Yodo1PluginVersion = "6.2.0";
 
     WWW WwwDownload = null;
     WWW WWWJson = null;
@@ -19,7 +19,7 @@ public class UpdateVersion : EditorWindow
 
     public static void Init()
     {
-        UpdateVersion window = (UpdateVersion) EditorWindow.GetWindow(typeof(UpdateVersion));
+        UpdateVersion window = (UpdateVersion)EditorWindow.GetWindow(typeof(UpdateVersion));
         window.Show();
     }
 
@@ -30,21 +30,20 @@ public class UpdateVersion : EditorWindow
 
         if (NeedCheck && WWWJson == null)
         {
-            String UrlJson =
-                "https://bj-ali-opp-sdk-update.oss-cn-beijing.aliyuncs.com/Yodo1Sdk_OpenSuit/version.json";
+            String UrlJson = "https://bj-ali-opp-sdk-update.oss-cn-beijing.aliyuncs.com/Yodo1Sdk_OpenSuit/version.json";
             WWWJson = new WWW(UrlJson);
         }
         else if (NeedCheck && WWWJson.isDone)
         {
-            Dictionary<string, object> result = (Dictionary<string, object>) Yodo1JSONObject.Deserialize(WWWJson.text);
+            Dictionary<string, object> result = (Dictionary<string, object>)Yodo1JSONObject.Deserialize(WWWJson.text);
             lastVersionCode = result["lastVersionCode"].ToString();
-            if (lastVersionCode.GetHashCode() > Yodo1PluginVersion.GetHashCode())
+            if (CompareVersion(lastVersionCode, Yodo1PluginVersion))
             {
                 NeedUpdate = true;
             }
 
-            Dictionary<string, object> versionInfo = (Dictionary<string, object>) result["versionInfo"];
-            Dictionary<string, object> lastVersionInfo = (Dictionary<string, object>) versionInfo[lastVersionCode];
+            Dictionary<string, object> versionInfo = (Dictionary<string, object>)result["versionInfo"];
+            Dictionary<string, object> lastVersionInfo = (Dictionary<string, object>)versionInfo[lastVersionCode];
             DownloadUrl = lastVersionInfo["downloadUrl"].ToString();
             ChangeLog = lastVersionInfo["changeLog"].ToString();
             NeedCheck = false;
@@ -61,11 +60,11 @@ public class UpdateVersion : EditorWindow
         }
         else if (WWWJson.isDone && !string.IsNullOrEmpty(ChangeLog))
         {
-            if (lastVersionCode.GetHashCode() < Yodo1PluginVersion.GetHashCode())
+            if (CompareVersion(Yodo1PluginVersion, lastVersionCode))
             {
                 GUILayout.Label("在开发版本，未发布到OSS.");
             }
-            else if (lastVersionCode.GetHashCode() == Yodo1PluginVersion.GetHashCode())
+            else
             {
                 GUILayout.Label(ChangeLog);
             }
@@ -149,5 +148,34 @@ public class UpdateVersion : EditorWindow
         sw.Close();
         //销毁流  
         sw.Dispose();
+    }
+
+    /// <summary>
+    /// 版本号比较：newVersion > oldVersion
+    /// </summary>
+    /// <param name="newVersion">6.1.0</param>
+    /// <param name="oldVersion">6.0.10</param>
+    /// <returns></returns>
+    bool CompareVersion(string newVersion, string oldVersion)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(newVersion) || string.IsNullOrEmpty(oldVersion))
+            {
+                return false;
+            }
+
+            Version v_new = new Version(newVersion);
+            Version v_old = new Version(oldVersion);
+            if (v_new > v_old)
+            {
+                return true;
+            }
+            return false;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 }

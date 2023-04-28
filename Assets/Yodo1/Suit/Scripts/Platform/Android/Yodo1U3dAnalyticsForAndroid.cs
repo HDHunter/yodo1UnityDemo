@@ -140,4 +140,22 @@ public class Yodo1U3dAnalyticsForAndroid
             androidCall.CallStatic("validateInAppPurchase", publicKey, signature, purchaseData, price, currency);
         }
     }
+
+    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate, string gameObjectName,
+        string callbackName)
+    {
+        if (null != androidCall)
+        {
+            androidCall.CallStatic("generateInviteUrlWithLinkGenerator", generate.toJson(), gameObjectName,
+                callbackName);
+        }
+    }
+
+    public static void logInviteAppsFlyerWithEventData(string jsonParam)
+    {
+        if (null != androidCall)
+        {
+            androidCall.CallStatic("logInviteAppsFlyerWithEventData", jsonParam, "", "");
+        }
+    }
 }

@@ -100,12 +100,13 @@ public class Yodo1AdsTest : MonoBehaviour
 
     void OnGUI()
     {
-        int buttonHeight = Screen.height / 13;
-        int buttonWidth = Screen.width / 2;
-        int buttonSpace = buttonHeight / 2;
-        int startHeight = buttonHeight / 2;
+        int btnHt = Screen.height / 14;
+        int btnWid = Screen.width / 2;
+        int spac = btnHt / 4;
+        int start = btnHt / 2;
+        int x = Screen.width / 4;
 
-        if (GUI.Button(new Rect(Screen.width / 4, startHeight, buttonWidth, buttonHeight), "show banner ad"))
+        if (GUI.Button(new Rect(x, start, btnWid, btnHt), "show banner ad"))
         {
             if (!Yodo1U3dAds.BannerIsReady())
             {
@@ -128,7 +129,7 @@ public class Yodo1AdsTest : MonoBehaviour
             Yodo1U3dAds.ShowBanner();
         }
 
-        if (GUI.Button(new Rect(Screen.width / 4, startHeight + buttonSpace + buttonHeight, buttonWidth, buttonHeight),
+        if (GUI.Button(new Rect(x, start + spac + btnHt, btnWid, btnHt),
             "hide banner ad"))
         {
             //Hide banner ad
@@ -136,7 +137,7 @@ public class Yodo1AdsTest : MonoBehaviour
         }
 
         if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 2 + buttonSpace * 2, buttonWidth, buttonHeight),
+            new Rect(x, start + btnHt * 2 + spac * 2, btnWid, btnHt),
             "show interstitial ad"))
         {
             //Show interstitial ad
@@ -151,7 +152,7 @@ public class Yodo1AdsTest : MonoBehaviour
         }
 
         if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 3 + buttonSpace * 3, buttonWidth, buttonHeight),
+            new Rect(x, start + btnHt * 3 + spac * 3, btnWid, btnHt),
             "show reward video ad"))
         {
             //Show reward video ad
@@ -167,7 +168,7 @@ public class Yodo1AdsTest : MonoBehaviour
 
 
         if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 4 + buttonSpace * 4, buttonWidth, buttonHeight),
+            new Rect(x, start + btnHt * 4 + spac * 4, btnWid, btnHt),
             "show Native Ad"))
         {
             //Show native game
@@ -182,7 +183,7 @@ public class Yodo1AdsTest : MonoBehaviour
         }
 
         if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 5 + buttonSpace * 5, buttonWidth, buttonHeight),
+            new Rect(x, start + btnHt * 5 + spac * 5, btnWid, btnHt),
             "remove Native Ad"))
         {
             //remove native game
@@ -190,9 +191,8 @@ public class Yodo1AdsTest : MonoBehaviour
         }
 
 
-        if (GUI.Button(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 6 + buttonSpace * 6, buttonWidth, buttonHeight),
-            "show lucky wheel"))
+        if (GUI.Button(new Rect(x, start + btnHt * 6 + spac * 6, btnWid, btnHt),
+            "show lucky wheel-rewardGame"))
         {
             //Show reward game
             if (Yodo1U3dAds.RewardGameIsEnable())
@@ -206,13 +206,18 @@ public class Yodo1AdsTest : MonoBehaviour
         }
 
         bool isT = GUI.Toggle(
-            new Rect(Screen.width / 4, startHeight + buttonHeight * 7 + buttonSpace * 7, buttonWidth, buttonHeight),
+            new Rect(x, start + btnHt * 7 + spac * 7, btnWid, btnHt),
             isPersonal,
             "个性化推荐开关");
         if (isPersonal != isT)
         {
             Yodo1U3dAds.SetPersonal(isT);
             isPersonal = isT;
+        }
+
+        if (GUI.Button(new Rect(x, start + btnHt * 8 + spac * 8, btnWid, btnHt), "返回"))
+        {
+            SceneManager.LoadScene("Yodo1Demo");
         }
     }
 }

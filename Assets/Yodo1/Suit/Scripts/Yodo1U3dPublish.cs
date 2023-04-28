@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-// 
+// #undef UNITY_EDITOR
 
 /// <summary>
 /// yodo1 channel publish special feature support.
