@@ -13,17 +13,17 @@ public class Yodo1U3dProductData
         /// <summary>
         /// The consumables(可消耗).
         /// </summary>
-        Consumables,
+        Consumables = 1,
 
         /// <summary>
         /// The auto subscription(自动订阅), Only works on iOS.
         /// </summary>
-        Auto_Subscription,
+        Auto_Subscription = 2,
 
         /// <summary>
         /// The none auto subscription(非自动订阅), Only works on iOS.
         /// </summary>
-        None_Auto_Subscription
+        None_Auto_Subscription = 3
     }
 
     private string orderId;

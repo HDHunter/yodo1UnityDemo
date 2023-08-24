@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -69,7 +70,6 @@ public class Yodo1Demo : MonoBehaviour
         config.AppKey = appKey;
         config.RegionCode = regionCode;
         Yodo1U3dSDK.InitWithConfig(config);
-        Yodo1U3dSDK.setShareDelegate(ShareDelegate); //分享回调
 
         Yodo1U3dAds.InitializeSdk();
 
@@ -92,7 +92,7 @@ public class Yodo1Demo : MonoBehaviour
         return IsIphoneXDevice;
     }
 
-    void ShareDelegate(bool result, Yodo1U3dConstants.Yodo1SNSType shareType)
+    void ShareDelegate(bool result,int shareType)
     {
         if (result)
         {
@@ -146,20 +146,17 @@ public class Yodo1Demo : MonoBehaviour
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "分享功能"))
         {
-            Yodo1U3dShareInfo shareParam = new Yodo1U3dShareInfo();
-            shareParam.SNSType = Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeWeixinMoments |
-                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeTencentQQ |
-                                 Yodo1U3dConstants.Yodo1SNSType.Yodo1SNSTypeSinaWeibo;
-            shareParam.Title = "分享标题";
-            shareParam.Desc = "分享内容描述";
-            shareParam.Image =
+            Dictionary<string,object> s = new Dictionary<string,object>();
+            s.Add("title","分享标题");
+            s.Add("desc","分享内容描述");
+            string p =
                 Application.persistentDataPath + Path.DirectorySeparatorChar + "share_test_image.png"; //分享的图片的路径
-            shareParam.QrLogo = "AppIcon.png"; //分享用于合成用的icon，放在assets下面
-            shareParam.QrText = "长按识别二维码 \n 求挑战！求带走！"; //合成图二维码文字
-            shareParam.Url = "https://www.baidu.com"; //点击分享图片可以跳转到的url
-            shareParam.GameLogo = "sharelogo.png"; //分享合成图片里面的logo图片名称，放在assets下面
-            shareParam.Composite = true; //默认是true，分享的图片是合成了logo，icon和二维码的图片
-            Yodo1U3dUtils.Share(shareParam);
+            s.Add("image",p);
+            s.Add("gameLogo","AppIcon.png");
+            s.Add("url","https://www.baidu.com");
+            s.Add("composite",true);
+            s.Add("qrText","长按识别二维码 \n 求挑战！求带走！");
+            // Yodo1U3dUtilsForAndroid.Share(shareParam);
         }
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "统计功能"))
@@ -197,9 +194,9 @@ public class Yodo1Demo : MonoBehaviour
             Debug.Log(Yodo1U3dConstants.LOG_TAG + ">>> publishChannelCode : " + publishChannelCode);
         }
 
-        livesKey = GUI.TextField(new Rect(btn_x, btn_startY * 8 + btn_h * 7, btn_w, btn_h), livesKey);
+        livesKey = GUI.TextField(new Rect(btn_x, btn_startY * 7 + btn_h * 6, btn_w, btn_h), livesKey);
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 9 + btn_h * 8, btn_w, btn_h), "获取在线打印在线参数"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 8 + btn_h * 7, btn_w, btn_h), "获取在线打印在线参数"))
         {
             string param = Yodo1U3dUtils.StringParams("Platform_SplashAdsSwitch", "on");
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1OnlineParam SplashAdsSwitch: " + param);
@@ -207,7 +204,7 @@ public class Yodo1Demo : MonoBehaviour
             bool param2 = Yodo1U3dUtils.BoolParams("Platform_SplashAdsSwitch", false);
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1OnlineParam SplashAdsSwitch: " + param2);
 
-            if (livesKey.Equals(""))
+            if (string.IsNullOrEmpty(livesKey))
             {
                 Debug.Log(Yodo1U3dConstants.LOG_TAG + "请输入onlineKey");
                 Yodo1U3dUtils.ShowAlert("", "请输入onlineKey", "", "ok", "", null, null);

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Yodo1Unity
+namespace Yodo1.Suit
 {
     [Serializable]
     public class RuntimeSettings : ScriptableObject

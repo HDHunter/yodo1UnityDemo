@@ -1,19 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2018 Google Inc. All Rights Reserved.
 
 AntiAddiction Ios Android Dependencies.
 -->
 <dependencies>
-    <iosPods>
-        <sources>
-            <source>https://github.com/Yodo1Games/Yodo1-Games-Spec.git</source>
-        </sources>
-        <iosPod name="Yodo1AntiAddiction" version="3.2.5" minTargetSdk="10.0">
-        </iosPod>
-    </iosPods>
-    <androidPackages>
-        <repositories>
-            <repository>https://nexus.yodo1.com/repository/maven-public/</repository>
-        </repositories>
-        <androidPackage spec="com.yodo1.suit.anti:core:3.2.6.0"/>
-    </androidPackages>
+	<iosPods>
+		<sources>
+			<source>https://github.com/Yodo1Games/Yodo1-Games-Spec.git</source>
+		</sources>
+		<iosPod name="Yodo1AntiAddiction" version="3.2.9" minTargetSdk="11.0">
+		</iosPod>
+	</iosPods>
+	<androidPackages>
+		<repositories>
+			<repository>https://nexus.yodo1.com/repository/maven-public/</repository>
+		</repositories>
+		<androidPackage spec="com.yodo1.suit.anti:core:3.2.9.0" />
+	</androidPackages>
 </dependencies>

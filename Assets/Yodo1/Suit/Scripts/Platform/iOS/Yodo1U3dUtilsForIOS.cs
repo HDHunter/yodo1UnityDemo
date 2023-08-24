@@ -158,23 +158,6 @@ public class Yodo1U3dUtilsForIOS
     }
 
     /// <summary>
-    /// 检测sns 客户端是否安装
-    /// </summary>
-    /// <returns><c>true</c>, if check SNS installed with type was unityed, <c>false</c> otherwise.</returns>
-    /// <param name="type">Type.</param>
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern bool UnityCheckSNSInstalledWithType(int type);
-#endif
-    public static bool CheckSNSInstalledWithType(Yodo1U3dConstants.Yodo1SNSType type)
-    {
-#if UNITY_IPHONE
-        return UnityCheckSNSInstalledWithType((int) type);
-#endif
-        return false;
-    }
-
-    /// <summary>
     /// 设置游戏语言
     /// </summary>
 #if UNITY_IPHONE
@@ -187,24 +170,6 @@ public class Yodo1U3dUtilsForIOS
         Unity3dSelectLocalLanguage(language);
 #endif
     }
-
-    //
-    /// <summary>
-    /// 判断当前是不是大陆地区 【中国用户】
-    /// </summary>
-    /// <returns></returns>
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern bool UnityIsChineseMainland();
-#endif
-    public static bool IsChineseMainland()
-    {
-#if UNITY_IPHONE
-        return UnityIsChineseMainland();
-#endif
-        return false;
-    }
-
 
     //
     /// <summary>

@@ -16,15 +16,6 @@ public class Yodo1Account : MonoBehaviour
         Yodo1U3dAccount.SetLoginDelegate(LoginDelegate);
         Yodo1U3dAccount.SetLogoutDelegate(LogoutDelegate);
         Yodo1U3dAccount.SetRegistDelegate(RegistDelegate);
-
-        if (Yodo1U3dUtils.IsChineseMainland())
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "中国大陆用户");
-        }
-        else
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "不是中国大陆用户");
-        }
     }
 
     void LoginDelegate(Yodo1U3dConstants.AccountEvent accountEvent, Yodo1U3dUser user)

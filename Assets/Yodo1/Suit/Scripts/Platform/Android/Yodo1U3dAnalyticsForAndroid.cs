@@ -21,11 +21,11 @@ public class Yodo1U3dAnalyticsForAndroid
         }
     }
 
-    public static void customEvent(string eventName)
+    public static void TrackEvent(string eventName)
     {
         if (null != androidCall)
         {
-            androidCall.CallStatic("customEvent", eventName);
+            androidCall.CallStatic("trackEvent", eventName);
         }
     }
 
@@ -34,11 +34,11 @@ public class Yodo1U3dAnalyticsForAndroid
     /// </summary>
     /// <param name="eventId">事件id</param>
     /// <param name="jsonData">值</param>
-    public static void customEvent(string eventId, string jsonData)
+    public static void TrackEvent(string eventId, string jsonData)
     {
         if (null != androidCall)
         {
-            androidCall.CallStatic("onCustomEvent", eventId, jsonData);
+            androidCall.CallStatic("trackEvent", eventId, jsonData);
         }
     }
 
@@ -55,54 +55,38 @@ public class Yodo1U3dAnalyticsForAndroid
             androidCall.CallStatic("login", userjson);
         }
     }
-
-    public static void customEventAppsflyer(string eventId, string jsonData)
+    
+    public static void logout()
     {
         if (null != androidCall)
         {
-            androidCall.CallStatic("onCustomEventAppsflyer", eventId, jsonData);
+            androidCall.CallStatic("logout");
         }
     }
 
-    //充值请求
-    public static void onRechargeRequest(Yodo1U3dDMPPay payInfo)
+    public static void TrackUAEvent(string eventId, string jsonData)
     {
-        if (null != androidCall && payInfo != null)
+        if (null != androidCall)
         {
-            androidCall.CallStatic("onRechargeRequest",
-                payInfo.OrderId,
-                payInfo.ProductId,
-                payInfo.ProductPrice,
-                payInfo.CurrencyType,
-                payInfo.Coin);
+            androidCall.CallStatic("trackUAEvent", eventId, jsonData);
         }
     }
 
-    //充值成功
-    public static void onRechargeSuccess(Yodo1U3dDMPPay payInfo)
+    //jsonInfo,ProductOrderData; jsonData,additionalParam.
+    public static void TrackIAPRevenue(string jsonInfo, string jsonData)
     {
-        if (null != androidCall && payInfo != null)
+        if (null != androidCall)
         {
-            androidCall.CallStatic("onRechargeSuccess",
-                payInfo.OrderId,
-                payInfo.ProductId,
-                payInfo.ProductPrice,
-                payInfo.CurrencyType,
-                payInfo.Coin);
+            androidCall.CallStatic("trackIAPRevenue", jsonInfo, jsonData);
         }
     }
 
-    //充值失败
-    public static void onRechargeFail(Yodo1U3dDMPPay payInfo)
+    public static void TrackAdRevenue(string source, string currency, string price, string network, string unit,
+        string place, string jsonMap)
     {
-        if (null != androidCall && payInfo != null)
+        if (null != androidCall)
         {
-            androidCall.CallStatic("onRechargeFail",
-                payInfo.OrderId,
-                payInfo.ProductId,
-                payInfo.ProductPrice,
-                payInfo.CurrencyType,
-                payInfo.Coin);
+            androidCall.CallStatic("trackAdRevenue", source, currency, price, network, unit, place, jsonMap);
         }
     }
 
@@ -138,6 +122,24 @@ public class Yodo1U3dAnalyticsForAndroid
         if (null != androidCall)
         {
             androidCall.CallStatic("validateInAppPurchase", publicKey, signature, purchaseData, price, currency);
+        }
+    }
+
+    public static void generateInviteUrlWithLinkGenerator(Yodo1U3dAnalyticsUserGenerate generate, string gameObjectName,
+        string callbackName)
+    {
+        if (null != androidCall)
+        {
+            androidCall.CallStatic("generateInviteUrlWithLinkGenerator", generate.toJson(), gameObjectName,
+                callbackName);
+        }
+    }
+
+    public static void logInviteAppsFlyerWithEventData(string jsonParam)
+    {
+        if (null != androidCall)
+        {
+            androidCall.CallStatic("logInviteAppsFlyerWithEventData", jsonParam, "", "");
         }
     }
 }

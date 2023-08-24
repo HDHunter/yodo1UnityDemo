@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Yodo1Payment : MonoBehaviour
 {
-    List<Yodo1U3dProductData> products = new List<Yodo1U3dProductData>();
+    List<Yodo1U3dProductData> products = new();
     string[] lastOrderId = new string[0] { };
 
     // Use this for initialization
@@ -45,26 +45,14 @@ public class Yodo1Payment : MonoBehaviour
             //支付成功
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "Pay success");
         }
-        else if (status == Yodo1U3dConstants.PayEvent.PayCannel)
+        else if (status == Yodo1U3dConstants.PayEvent.PayCancel)
         {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "PayCannel");
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "PayCancel");
         }
         else
         {
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "PayFailed");
         }
-    }
-
-    void ValidatePaymentDelegate(string productId, Yodo1U3dIAPReceipt receipt)
-    {
-#if UNITY_ANDROID
-        Debug.Log("productId : " + productId + ",ChannelProductId : " + receipt.ChannelProductId + ", PurchaseData : " +
-                  receipt.PurchaseData + ", Signature : " + receipt.Signature);
-#else
-        Debug.Log("productId : " + productId + ",ChannelProductId : " + receipt.ChannelProductId +
-                  ", transactionIdentifier : " + receipt.TransactionID + ", transactionReceipt : " +
-                  receipt.TransactionReceipt);
-#endif
     }
 
     void RequestProductsInfoDelegate(bool success, List<Yodo1U3dProductData> products)

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-// 
+// #undef UNITY_EDITOR
 
 /// <summary>
 /// yodo1 iap payment support.
@@ -13,7 +13,7 @@ public class Yodo1U3dPayment
     /// <param name="action">Action.</param>
     public static void SetPurchaseDelegate(Yodo1U3dPaymentDelegate.PurchaseDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setPurchaseDelegate(action);
+        Yodo1U3dPaymentDelegate.SetPurchaseDelegate(action);
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ public class Yodo1U3dPayment
     /// <param name="action">Action.</param>
     public static void SetRequestProductsInfoDelegate(Yodo1U3dPaymentDelegate.RequestProductsInfoDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setRequestProductsInfoDelegate(action);
+        Yodo1U3dPaymentDelegate.SetRequestProductsInfoDelegate(action);
     }
 
     /// <summary>
@@ -31,59 +31,59 @@ public class Yodo1U3dPayment
     /// <param name="action">Action.</param>    
     public static void SetLossOrderIdPurchasesDelegate(Yodo1U3dPaymentDelegate.LossOrderIdPurchasesDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setLossOrderIdPurchasesDelegate(action);
+        Yodo1U3dPaymentDelegate.SetLossOrderIdPurchasesDelegate(action);
     }
 
     //恢复购买
     public static void SetRestorePurchasesDelegate(Yodo1U3dPaymentDelegate.RestorePurchasesDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setRestorePurchasesDelegate(action);
+        Yodo1U3dPaymentDelegate.SetRestorePurchasesDelegate(action);
     }
 
     //获取激活码兑换的产品信息
     public static void SetVerifyProductsInfoDelegate(Yodo1U3dPaymentDelegate.VerifyProductsInfoDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setVerifyProductsInfoDelegate(action);
+        Yodo1U3dPaymentDelegate.SetVerifyProductsInfoDelegate(action);
     }
 
     //查询订阅
     public static void SetQuerySubscriptionsDelegate(Yodo1U3dPaymentDelegate.QuerySubscriptionsDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setQuerySubscriptionsDelegate(action);
+        Yodo1U3dPaymentDelegate.SetQuerySubscriptionsDelegate(action);
     }
 
     //查询Promotion排序
     public static void SetFetchStorePromotionOrderDelegate(
         Yodo1U3dPaymentDelegate.FetchStorePromotionOrderDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setFetchStorePromotionOrderDelegate(action);
+        Yodo1U3dPaymentDelegate.SetFetchStorePromotionOrderDelegate(action);
     }
 
     //更新Promotion显示状态
     public static void SetUpdateStorePromotionVisibilityDelegate(
         Yodo1U3dPaymentDelegate.UpdateStorePromotionVisibilityDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setUpdateStorePromotionVisibilityDelegate(action);
+        Yodo1U3dPaymentDelegate.SetUpdateStorePromotionVisibilityDelegate(action);
     }
 
     //更新Promotion排序
     public static void SetUpdateStorePromotionOrderDelegate(
         Yodo1U3dPaymentDelegate.UpdateStorePromotionOrderDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setUpdateStorePromotionOrderDelegate(action);
+        Yodo1U3dPaymentDelegate.SetUpdateStorePromotionOrderDelegate(action);
     }
 
     //获取当前用户点击的promotion product
     public static void SetGetPromotionProductDelegate(Yodo1U3dPaymentDelegate.GetPromotionProductDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setGetPromotionProductDelegate(action);
+        Yodo1U3dPaymentDelegate.SetGetPromotionProductDelegate(action);
     }
 
     //查询Promotion显示状态
     public static void SetFetchPromotionVisibilityDelegate(
         Yodo1U3dPaymentDelegate.FetchPromotionVisibilityDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setFetchPromotionVisibilityDelegate(action);
+        Yodo1U3dPaymentDelegate.SetFetchPromotionVisibilityDelegate(action);
     }
 
     public static void SetSendGoodsOverDelegate(Yodo1U3dPaymentDelegate.SendGoodsOverDelegate action)
@@ -107,7 +107,7 @@ public class Yodo1U3dPayment
         Yodo1U3dPaymentForAndroid.QueryLossOrder(Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.QueryLossOrder();
+        Yodo1U3dPaymentForIOS.QueryLossOrder();
 #endif
     }
 
@@ -123,7 +123,7 @@ public class Yodo1U3dPayment
             orders);
 #elif UNITY_IPHONE
         string orderString = string.Join(",", orders);
-        Yodo1U3dUCenterForIOS.SendGoodsOver(orderString);
+        Yodo1U3dPaymentForIOS.SendGoodsOver(orderString);
 #endif
     }
 
@@ -139,7 +139,7 @@ public class Yodo1U3dPayment
             orders);
 #elif UNITY_IPHONE
         string orderString = string.Join(",", orders);
-        Yodo1U3dUCenterForIOS.SendGoodsOverFail(orderString);
+        Yodo1U3dPaymentForIOS.SendGoodsOverFail(orderString);
 #endif
     }
 
@@ -155,7 +155,7 @@ public class Yodo1U3dPayment
         Yodo1U3dPaymentForAndroid.requestProductsDataById(productId, Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.ProductInfoWithProductId(productId);
+        Yodo1U3dPaymentForIOS.ProductInfoWithProductId(productId);
 #endif
     }
 
@@ -169,7 +169,7 @@ public class Yodo1U3dPayment
         Yodo1U3dPaymentForAndroid.requestProductsData(Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.ProductInfo();
+        Yodo1U3dPaymentForIOS.ProductInfo();
 #endif
     }
 
@@ -195,7 +195,7 @@ public class Yodo1U3dPayment
         Yodo1U3dPaymentForAndroid.purchase(productId, extra, Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.purchase(productId, extra);
+        Yodo1U3dPaymentForIOS.purchase(productId, extra);
 #endif
     }
 
@@ -209,7 +209,7 @@ public class Yodo1U3dPayment
         Yodo1U3dPaymentForAndroid.restorePurchases(Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.RestorePayment();
+        Yodo1U3dPaymentForIOS.RestorePayment();
 #endif
     }
 
@@ -237,7 +237,7 @@ public class Yodo1U3dPayment
         Yodo1U3dPaymentForAndroid.querySubscriptions(Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.QuerySubscriptions(excludeOldTransactions);
+        Yodo1U3dPaymentForIOS.QuerySubscriptions(excludeOldTransactions);
 #endif
     }
 
@@ -248,7 +248,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.ReadyToContinuePurchaseFromPromotion();
+        Yodo1U3dPaymentForIOS.ReadyToContinuePurchaseFromPromotion();
 #endif
     }
 
@@ -259,7 +259,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.CancelPromotion();
+        Yodo1U3dPaymentForIOS.CancelPromotion();
 #endif
     }
 
@@ -270,7 +270,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.GetPromotionProduct();
+        Yodo1U3dPaymentForIOS.GetPromotionProduct();
 #endif
     }
 
@@ -283,7 +283,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.UpdateStorePromotionVisibility(visible, uniformProductId);
+        Yodo1U3dPaymentForIOS.UpdateStorePromotionVisibility(visible, uniformProductId);
 #endif
     }
 
@@ -295,7 +295,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.UpdateStorePromotionOrder(productids);
+        Yodo1U3dPaymentForIOS.UpdateStorePromotionOrder(productids);
 #endif
     }
 
@@ -306,7 +306,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.FetchStorePromotionOrder();
+        Yodo1U3dPaymentForIOS.FetchStorePromotionOrder();
 #endif
     }
 
@@ -318,7 +318,7 @@ public class Yodo1U3dPayment
     {
 #if UNITY_EDITOR
 #elif UNITY_IPHONE
-        Yodo1U3dUCenterForIOS.FetchStorePromotionVisibilityForProduct(uniformProductId);
+        Yodo1U3dPaymentForIOS.FetchStorePromotionVisibilityForProduct(uniformProductId);
 #endif
     }
 }
