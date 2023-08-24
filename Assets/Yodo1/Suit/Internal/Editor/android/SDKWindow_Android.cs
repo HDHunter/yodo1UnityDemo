@@ -1,22 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using System.IO;
 
-namespace Yodo1Unity
+namespace Yodo1.Suit
 {
-    public class SDKWindow_Android : EditorWindow
+    public class SDKWindow_Android : SDKWindow
     {
         public RuntimeSettings runtimeSettings;
-        public static Texture2D sdkIcon;
-        public static Texture2D questionMarkIcon;
-        public static Texture2D BodyContentTexture;
-        public static GUIStyle BodyContentGUIStyle;
-        public static GUIStyle pressedButton;
-        public static GUIStyle headerLabelStyle;
-        public static GUIStyle foldoutStyle;
-        public static string PIC_PATH = "Assets/Yodo1/Suit/Internal/Editor/Images/";
+
         public static string[] screenOrients = { "portrait", "landscape" };
         public static string[] sdkTypes = { "GooglePlay", "ChinaMainLand" };
         public static string[] sdkModes = { "offline", "online" };
@@ -41,7 +35,7 @@ namespace Yodo1Unity
                 SettingsSave.Save(runtimeSettings);
             }
 
-            GenerateAndroidLibProject();
+            Yodo1AndroidConfig.GenerateAndroidLibProject();
 
             //修改properties
             Yodo1AndroidConfig.UpdateProperties();
@@ -51,8 +45,10 @@ namespace Yodo1Unity
             Yodo1ChannelUtils.ChannelHandle();
         }
 
-        private void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
+
             if (runtimeSettings == null)
             {
                 Debug.Log("Yodo1Suit SDKWindowAndroid OnEnable:" + runtimeSettings);
@@ -62,9 +58,6 @@ namespace Yodo1Unity
             {
                 Debug.Log("Yodo1Suit SDKWindowAndroid OnEnable::" + runtimeSettings);
             }
-
-            sdkIcon = (Texture2D)AssetDatabase.LoadAssetAtPath(PIC_PATH + "yodo1sdk-icon.png", typeof(Texture2D));
-            questionMarkIcon = (Texture2D)AssetDatabase.LoadAssetAtPath(PIC_PATH + "question-mark.png", typeof(Texture2D));
         }
 
         private void OnDisable()
@@ -72,59 +65,9 @@ namespace Yodo1Unity
             SaveConfig();
         }
 
-        private void OnGUI()
+        public override void OnGUI()
         {
-            if (BodyContentTexture == null)
-            {
-                BodyContentTexture = new Texture2D(1, 1);
-                Color color = new Color(0.5f, 0.5f, 0.5f);
-                BodyContentTexture.SetPixel(0, 0, color);
-                BodyContentTexture.Apply();
-                BodyContentGUIStyle = new GUIStyle();
-                BodyContentGUIStyle.normal.background = BodyContentTexture;
-            }
-
-            if (pressedButton == null)
-            {
-                pressedButton = new GUIStyle("button");
-            }
-
-            if (headerLabelStyle == null)
-            {
-                headerLabelStyle = EditorStyles.boldLabel;
-            }
-
-            if (foldoutStyle == null)
-            {
-                foldoutStyle = EditorStyles.foldout;
-                foldoutStyle.fontStyle = FontStyle.Bold;
-                foldoutStyle.focused.background = foldoutStyle.normal.background;
-            }
-
-            GUI.SetNextControlName("ClearFocus");
-            DrawHeader();
-            scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-            DrawAndroidContent();
-            DrawAndroidChannel();
-            DrawAndroidAnalytics();
-            GUILayout.EndScrollView();
-        }
-
-
-        private void DrawHeader()
-        {
-            GUI.Box(new Rect(0, 0, position.width, 40), "", BodyContentGUIStyle);
-            if (sdkIcon != null)
-            {
-                GUI.Label(new Rect(2, 2, 35, 35), sdkIcon);
-            }
-
-            GUIStyle gUIStyle = new GUIStyle();
-            gUIStyle.fontSize = 14;
-            if (questionMarkIcon != null && GUI.Button(new Rect(position.width - 35, 5, 30, 30), questionMarkIcon))
-            {
-                Application.OpenURL("https://yodo1-suit.web.app/zh/unity/integration/");
-            }
+            base.OnGUI();
 
             if (GUI.Button(new Rect(position.width - 105, 5, 60, 30), "Save"))
             {
@@ -132,9 +75,12 @@ namespace Yodo1Unity
                 Close();
             }
 
-            GUILayout.Space(45);
+            scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+            DrawAndroidContent();
+            DrawAndroidChannel();
+            DrawAndroidAnalytics();
+            GUILayout.EndScrollView();
         }
-
 
         private void DrawAndroidContent()
         {
@@ -145,16 +91,19 @@ namespace Yodo1Unity
 
             EditorGUILayout.Separator();
 
-            runtimeSettings.androidSettings.debugEnabled = EditorGUILayout.Toggle("Debug Mode", runtimeSettings.androidSettings.debugEnabled, new GUILayoutOption[0]);
+            runtimeSettings.androidSettings.debugEnabled = EditorGUILayout.Toggle("Debug Mode",
+                runtimeSettings.androidSettings.debugEnabled, new GUILayoutOption[0]);
             EditorGUILayout.Separator();
 
-            runtimeSettings.androidSettings.AppKey = EditorGUILayout.TextField("App Key*", runtimeSettings.androidSettings.AppKey);
+            runtimeSettings.androidSettings.AppKey =
+                EditorGUILayout.TextField("App Key*", runtimeSettings.androidSettings.AppKey);
             if (string.IsNullOrEmpty(runtimeSettings.androidSettings.AppKey))
             {
                 EditorGUILayout.HelpBox("AppKey Missing for this platform", MessageType.Warning);
             }
 
-            runtimeSettings.androidSettings.RegionCode = EditorGUILayout.TextField("Region Code(Optional)", runtimeSettings.androidSettings.RegionCode);
+            runtimeSettings.androidSettings.RegionCode = EditorGUILayout.TextField("Region Code(Optional)",
+                runtimeSettings.androidSettings.RegionCode);
 
             GUILayout.EndVertical();
 
@@ -207,7 +156,8 @@ namespace Yodo1Unity
 
             float originalValue = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = originalValue + 10;
-            runtimeSettings.androidSettings.isShowYodo1Logo = EditorGUILayout.Toggle("Enable Yodo1 Splash Logo", runtimeSettings.androidSettings.isShowYodo1Logo);
+            runtimeSettings.androidSettings.isShowYodo1Logo = EditorGUILayout.Toggle("Enable Yodo1 Splash Logo",
+                runtimeSettings.androidSettings.isShowYodo1Logo);
             EditorGUIUtility.labelWidth = originalValue;
 
             GUILayout.EndVertical();
@@ -270,7 +220,16 @@ namespace Yodo1Unity
                         {
                             float originalValue = EditorGUIUtility.labelWidth;
                             EditorGUIUtility.labelWidth = originalValue + 20;
-                            kvItem.Value = EditorGUILayout.TextField(kvItem.Key, kvItem.Value);
+                            if (kvItem.Key.Contains("_is"))
+                            {
+                                kvItem.Value = EditorGUILayout.Toggle(kvItem.Key,
+                                    (!string.IsNullOrEmpty(kvItem.Value)) && Boolean.Parse(kvItem.Value)).ToString();
+                            }
+                            else
+                            {
+                                kvItem.Value = EditorGUILayout.TextField(kvItem.Key, kvItem.Value);
+                            }
+
                             EditorGUIUtility.labelWidth = originalValue;
                         }
 
@@ -285,39 +244,6 @@ namespace Yodo1Unity
         }
 
 
-        private void GenerateAndroidLibProject()
-        {
-            string androidLibPath = Yodo1AndroidConfig.Yodo1AndroidPlugin;
-            if (!File.Exists(androidLibPath))
-            {
-                Directory.CreateDirectory(androidLibPath);
-            }
 
-            string manifestFile = Yodo1AndroidConfig.libManifest;// androidLibPath + "AndroidManifest.xml";
-            string manifestText = string.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                                    "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" package=\"com.yodo1.suit.app.unity\" android:versionCode=\"1\" android:versionName=\"1.0\">\n" +
-                                    "\t<application>\n" +
-                                    "\t</application>\n" +
-                                    "</manifest>");
-
-            File.WriteAllText(manifestFile, manifestText);
-
-            string resPath = androidLibPath + "res/values/";
-            if (!File.Exists(resPath))
-            {
-                Directory.CreateDirectory(resPath);
-            }
-
-            string assetsPath = Yodo1AndroidConfig.Yodo1Assets;
-            if (!File.Exists(assetsPath))
-            {
-                Directory.CreateDirectory(assetsPath);
-            }
-
-            string projectPropertiesFile = androidLibPath + "project.properties";
-            string projectPropertiesText = "target=android-9\n" +
-                                           "android.library=true";
-            File.WriteAllText(projectPropertiesFile, projectPropertiesText);
-        }
     }
 }

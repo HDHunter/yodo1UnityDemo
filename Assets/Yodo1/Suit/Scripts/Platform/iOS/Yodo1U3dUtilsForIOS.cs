@@ -131,13 +131,13 @@ public class Yodo1U3dUtilsForIOS
 #endif
     }
 
-#if YODO1_UCENTER
+#if UNITY_IPHONE
     [DllImport(Yodo1U3dConstants.LIB_NAME)]
     private static extern void UnityVerifyActivationcode(string activationCode, string objName, string callbackMethod);
 #endif
     public static void verifyActivationcode(string activationCode, string objName, string callbackMethod)
     {
-#if YODO1_UCENTER
+#if UNITY_IPHONE
         UnityVerifyActivationcode(activationCode, objName, callbackMethod);
 #endif
     }
@@ -170,24 +170,6 @@ public class Yodo1U3dUtilsForIOS
         Unity3dSelectLocalLanguage(language);
 #endif
     }
-
-    //
-    /// <summary>
-    /// 判断当前是不是大陆地区 【中国用户】
-    /// </summary>
-    /// <returns></returns>
-    //#if UNITY_IPHONE
-    //    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    //    private static extern bool UnityIsChineseMainland();
-    //#endif
-    //    public static bool IsChineseMainland()
-    //    {
-    //#if UNITY_IPHONE
-    //        return UnityIsChineseMainland();
-    //#endif
-    //        return false;
-    //    }
-
 
     //
     /// <summary>

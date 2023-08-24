@@ -17,10 +17,9 @@ public class Yodo1U3dPublish
 #elif UNITY_ANDROID
         Yodo1U3dUtilsForAndroid.moreGame();
 #elif UNITY_IPHONE
-        Yodo1U3dManagerForIOS.ShowMoreGame();
+
 #endif
     }
-
 
     /// <summary>
     /// has the more game feature.
@@ -41,7 +40,6 @@ public class Yodo1U3dPublish
 #elif UNITY_ANDROID
         ret = Yodo1U3dUtilsForAndroid.hasMoreGame();
 #elif UNITY_IPHONE
-        ret = Yodo1U3dManagerForIOS.SwitchMoreGame();
 #endif
         return ret;
     }
@@ -151,7 +149,7 @@ public class Yodo1U3dPublish
             GameObject gameObj = obj.gameObject;
             if (gameObj != null)
             {
-                string methodName = ((Delegate) callbackMethod).Method.Name;
+                string methodName = ((Delegate)callbackMethod).Method.Name;
                 if (methodName != null)
                 {
 #if UNITY_EDITOR

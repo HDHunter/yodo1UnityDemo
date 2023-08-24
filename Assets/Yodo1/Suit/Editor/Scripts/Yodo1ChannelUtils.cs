@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using Yodo1Unity;
+using Yodo1.Suit;
 
 public class Yodo1ChannelUtils
 {
@@ -35,6 +35,7 @@ public class Yodo1ChannelUtils
 
         //特定处理
         RuntimeSettings settings = SettingsSave.Load(false);
+
         List<AnalyticsItem> items = settings.androidSettings.configAnalytics;
         if (items != null && items.Count > 0)
         {
@@ -44,7 +45,11 @@ public class Yodo1ChannelUtils
                 {
                     if ("Appsflyer".Equals(item.Name))
                     {
-                        appsflyer(item);
+                        Appsflyer(item);
+                    }
+                    else if ("Adjust".Equals(item.Name))
+                    {
+                        Adjust(item);
                     }
                 }
             }
@@ -59,14 +64,60 @@ public class Yodo1ChannelUtils
                 {
                     if ("GooglePlay".Equals(item.Name))
                     {
-                        googlePlay(item);
+                        GooglePlay(item);
                     }
                 }
             }
         }
     }
 
-    private static void appsflyer(AnalyticsItem item)
+    private static void Adjust(AnalyticsItem item)
+    {
+        string deep_schema = "<intent-filter>\n" +
+                             "    <action android:name=\"android.intent.action.VIEW\" />\n" +
+                             "    <category android:name=\"android.intent.category.DEFAULT\" />\n" +
+                             "    <category android:name=\"android.intent.category.BROWSABLE\" />\n" +
+                             "    <data\n" +
+                             "        android:scheme=\"@uriSchema\" />\n" +
+                             "</intent-filter>\n";
+        string deep_host = "<intent-filter>\n" +
+                           "    <action android:name=\"android.intent.action.VIEW\" />\n" +
+                           "    <category android:name=\"android.intent.category.DEFAULT\" />\n" +
+                           "    <category android:name=\"android.intent.category.BROWSABLE\" />\n" +
+                           "    <data\n" +
+                           "        android:host=\"@uriHost\"\n" +
+                           "        android:scheme=\"https\" />\n" +
+                           "</intent-filter>\n";
+        List<KVItem> ies = item.analyticsProperty;
+        string uriSchema = "", uriHost = "app.adjust.com";
+        foreach (KVItem i in ies)
+        {
+            if (i.Key.Contains("uriSchema"))
+            {
+                uriSchema = i.Value;
+                deep_schema = deep_schema.Replace("@uriSchema", uriSchema);
+            }
+            else if (i.Key.Contains("uriHost"))
+            {
+                uriHost = i.Value;
+            }
+        }
+
+        if (Yodo1EditorUtils.IsVaildValue(uriSchema))
+        {
+            Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
+                deep_schema + "<!--Splash_end-->");
+        }
+
+        if (Yodo1EditorUtils.IsVaildValue(uriSchema) && Yodo1EditorUtils.IsVaildValue(uriHost))
+        {
+            deep_host = deep_host.Replace("@uriHost", uriHost);
+            Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
+                deep_host + "<!--Splash_end-->");
+        }
+    }
+
+    private static void Appsflyer(AnalyticsItem item)
     {
         string deeplink_uri = "<intent-filter>\n" +
                               "    <action android:name=\"android.intent.action.VIEW\" />\n" +
@@ -150,48 +201,61 @@ public class Yodo1ChannelUtils
 
         if (isUriValue)
         {
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
+            Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
                 deeplink_uri + "<!--Splash_end-->");
         }
 
         if (isUrlValue)
         {
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
+            Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
                 deeplink_url + "<!--Splash_end-->");
         }
 
         if (isLongUrl)
         {
             deeplink_url = deeplink_url.Replace(template, template + "\\\\/.*");
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
+            Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
                 deeplink_url + "<!--Splash_end-->");
-            EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
+            Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",
                 longUrl + "<!--Splash_end-->");
         }
     }
 
-    private static void googlePlay(AnalyticsItem item)
+    private static void GooglePlay(AnalyticsItem item)
     {
         //revert.do not del game assets.
-        EditorFileUtils.DeleteDir(Yodo1AndroidConfig.Yodo1ValuePath + "/ids.xml");
+        Yodo1EditorFileUtils.DeleteDir(Yodo1AndroidConfig.androidLibValues + "/ids.xml");
 
-        string appid = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                       "<resources>\n" +
-                       "    <string name=\"yodo1_google_appid\">@yodo1_google_appid</string>\n" +
-                       "</resources>";
-        string manifestdata = "\n" +
-                              "        <meta-data\n" +
-                              "            android:name=\"com.google.android.gms.games.APP_ID\"\n" +
-                              "            android:value=\"@string/yodo1_google_appid\" />\n";
+        string googleAppId = "";
         foreach (KVItem i in item.analyticsProperty)
         {
             if (i != null && "google_app_id".Equals(i.Key))
             {
-                appid = appid.Replace("@yodo1_google_appid", i.Value);
+                googleAppId = i.Value;
+                break;
             }
         }
 
-        EditorFileUtils.WriteFile(Yodo1AndroidConfig.Yodo1ValuePath, "ids.xml", appid);
-        EditorFileUtils.Replace(Yodo1AndroidConfig.libManifest, appFlag, manifestdata + "\t" + appFlag);
+        if (!Yodo1EditorUtils.IsVaildValue(googleAppId))
+        {
+            return;
+        }
+
+        // Update ids.xml
+        string appid = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                       "<resources>\n" +
+                       "    <string name=\"yodo1_google_appid\">@yodo1_google_appid</string>\n" +
+                       "</resources>";
+        appid = appid.Replace("@yodo1_google_appid", googleAppId);
+
+        Yodo1EditorFileUtils.WriteFile(Yodo1AndroidConfig.androidLibValues, "ids.xml", appid);
+
+        // Update androidLibManifest
+        string manifestdata = "\n" +
+                              "        <meta-data\n" +
+                              "            android:name=\"com.google.android.gms.games.APP_ID\"\n" +
+                              "            android:value=\"@string/yodo1_google_appid\" />\n";
+
+        Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.androidLibManifest, appFlag, manifestdata + "\t" + appFlag);
     }
 }

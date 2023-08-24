@@ -88,7 +88,7 @@ public class Yodo1U3dAccount
     /// <param name="loginDelegate">Login delegate</param>
     public static void SetLoginDelegate(Yodo1U3dAccountDelegate.LoginDelegate loginDelegate)
     {
-        Yodo1U3dAccountDelegate.setLoginDelegate(loginDelegate);
+        Yodo1U3dAccountDelegate.SetLoginDelegate(loginDelegate);
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ public class Yodo1U3dAccount
     /// <param name="logoutDelegate">Logout delegate</param>
     public static void SetLogoutDelegate(Yodo1U3dAccountDelegate.LogoutDelegate logoutDelegate)
     {
-        Yodo1U3dAccountDelegate.setLogoutDelegate(logoutDelegate);
+        Yodo1U3dAccountDelegate.SetLogoutDelegate(logoutDelegate);
     }
 
     /// <summary>
@@ -106,6 +106,6 @@ public class Yodo1U3dAccount
     /// <param name="registDelegate">Regist delegate</param>
     public static void SetRegistDelegate(Yodo1U3dAccountDelegate.RegistDelegate registDelegate)
     {
-        Yodo1U3dAccountDelegate.setRegistDelegate(registDelegate);
+        Yodo1U3dAccountDelegate.SetRegistDelegate(registDelegate);
     }
 }

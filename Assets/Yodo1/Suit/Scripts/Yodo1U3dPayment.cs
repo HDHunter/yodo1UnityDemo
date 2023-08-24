@@ -13,7 +13,7 @@ public class Yodo1U3dPayment
     /// <param name="action">Action.</param>
     public static void SetPurchaseDelegate(Yodo1U3dPaymentDelegate.PurchaseDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setPurchaseDelegate(action);
+        Yodo1U3dPaymentDelegate.SetPurchaseDelegate(action);
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ public class Yodo1U3dPayment
     /// <param name="action">Action.</param>
     public static void SetRequestProductsInfoDelegate(Yodo1U3dPaymentDelegate.RequestProductsInfoDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setRequestProductsInfoDelegate(action);
+        Yodo1U3dPaymentDelegate.SetRequestProductsInfoDelegate(action);
     }
 
     /// <summary>
@@ -31,59 +31,59 @@ public class Yodo1U3dPayment
     /// <param name="action">Action.</param>    
     public static void SetLossOrderIdPurchasesDelegate(Yodo1U3dPaymentDelegate.LossOrderIdPurchasesDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setLossOrderIdPurchasesDelegate(action);
+        Yodo1U3dPaymentDelegate.SetLossOrderIdPurchasesDelegate(action);
     }
 
     //恢复购买
     public static void SetRestorePurchasesDelegate(Yodo1U3dPaymentDelegate.RestorePurchasesDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setRestorePurchasesDelegate(action);
+        Yodo1U3dPaymentDelegate.SetRestorePurchasesDelegate(action);
     }
 
     //获取激活码兑换的产品信息
     public static void SetVerifyProductsInfoDelegate(Yodo1U3dPaymentDelegate.VerifyProductsInfoDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setVerifyProductsInfoDelegate(action);
+        Yodo1U3dPaymentDelegate.SetVerifyProductsInfoDelegate(action);
     }
 
     //查询订阅
     public static void SetQuerySubscriptionsDelegate(Yodo1U3dPaymentDelegate.QuerySubscriptionsDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setQuerySubscriptionsDelegate(action);
+        Yodo1U3dPaymentDelegate.SetQuerySubscriptionsDelegate(action);
     }
 
     //查询Promotion排序
     public static void SetFetchStorePromotionOrderDelegate(
         Yodo1U3dPaymentDelegate.FetchStorePromotionOrderDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setFetchStorePromotionOrderDelegate(action);
+        Yodo1U3dPaymentDelegate.SetFetchStorePromotionOrderDelegate(action);
     }
 
     //更新Promotion显示状态
     public static void SetUpdateStorePromotionVisibilityDelegate(
         Yodo1U3dPaymentDelegate.UpdateStorePromotionVisibilityDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setUpdateStorePromotionVisibilityDelegate(action);
+        Yodo1U3dPaymentDelegate.SetUpdateStorePromotionVisibilityDelegate(action);
     }
 
     //更新Promotion排序
     public static void SetUpdateStorePromotionOrderDelegate(
         Yodo1U3dPaymentDelegate.UpdateStorePromotionOrderDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setUpdateStorePromotionOrderDelegate(action);
+        Yodo1U3dPaymentDelegate.SetUpdateStorePromotionOrderDelegate(action);
     }
 
     //获取当前用户点击的promotion product
     public static void SetGetPromotionProductDelegate(Yodo1U3dPaymentDelegate.GetPromotionProductDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setGetPromotionProductDelegate(action);
+        Yodo1U3dPaymentDelegate.SetGetPromotionProductDelegate(action);
     }
 
     //查询Promotion显示状态
     public static void SetFetchPromotionVisibilityDelegate(
         Yodo1U3dPaymentDelegate.FetchPromotionVisibilityDelegate action)
     {
-        Yodo1U3dPaymentDelegate.setFetchPromotionVisibilityDelegate(action);
+        Yodo1U3dPaymentDelegate.SetFetchPromotionVisibilityDelegate(action);
     }
 
     public static void SetSendGoodsOverDelegate(Yodo1U3dPaymentDelegate.SendGoodsOverDelegate action)

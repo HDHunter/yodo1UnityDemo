@@ -149,7 +149,7 @@ public class Yodo1PropertiesUtils : Hashtable
     public void Save()
     {
         string filePath = this.fileName;
-        EditorFileUtils.DeleteFile(filePath);
+        Yodo1EditorFileUtils.DeleteFile(filePath);
 
         FileStream fileStream = File.Create(filePath);
         StreamWriter sw = new StreamWriter(fileStream);

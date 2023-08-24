@@ -35,7 +35,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static PurchaseDelegate _purchaseDelegate;
 
-    public static void setPurchaseDelegate(PurchaseDelegate action)
+    public static void SetPurchaseDelegate(PurchaseDelegate action)
     {
         _purchaseDelegate = action;
     }
@@ -45,7 +45,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static RequestProductsInfoDelegate _requestProductsInfoDelegate;
 
-    public static void setRequestProductsInfoDelegate(RequestProductsInfoDelegate action)
+    public static void SetRequestProductsInfoDelegate(RequestProductsInfoDelegate action)
     {
         _requestProductsInfoDelegate = action;
     }
@@ -55,7 +55,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static LossOrderIdPurchasesDelegate _lossOrderIdPurchasesDelegate;
 
-    public static void setLossOrderIdPurchasesDelegate(LossOrderIdPurchasesDelegate action)
+    public static void SetLossOrderIdPurchasesDelegate(LossOrderIdPurchasesDelegate action)
     {
         _lossOrderIdPurchasesDelegate = action;
     }
@@ -65,7 +65,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static RestorePurchasesDelegate _restorePurchasesDelegate;
 
-    public static void setRestorePurchasesDelegate(RestorePurchasesDelegate action)
+    public static void SetRestorePurchasesDelegate(RestorePurchasesDelegate action)
     {
         _restorePurchasesDelegate = action;
     }
@@ -75,7 +75,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static VerifyProductsInfoDelegate _verifyProductsInfoDelegate;
 
-    public static void setVerifyProductsInfoDelegate(VerifyProductsInfoDelegate action)
+    public static void SetVerifyProductsInfoDelegate(VerifyProductsInfoDelegate action)
     {
         _verifyProductsInfoDelegate = action;
     }
@@ -86,7 +86,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static QuerySubscriptionsDelegate _querySubscriptionsDelegate;
 
-    public static void setQuerySubscriptionsDelegate(QuerySubscriptionsDelegate action)
+    public static void SetQuerySubscriptionsDelegate(QuerySubscriptionsDelegate action)
     {
         _querySubscriptionsDelegate = action;
     }
@@ -96,7 +96,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static FetchStorePromotionOrderDelegate _fetchStorePromotionOrderDelegate;
 
-    public static void setFetchStorePromotionOrderDelegate(FetchStorePromotionOrderDelegate action)
+    public static void SetFetchStorePromotionOrderDelegate(FetchStorePromotionOrderDelegate action)
     {
         _fetchStorePromotionOrderDelegate = action;
     }
@@ -106,7 +106,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static UpdateStorePromotionVisibilityDelegate _updateStorePromotionVisibilityDelegate;
 
-    public static void setUpdateStorePromotionVisibilityDelegate(UpdateStorePromotionVisibilityDelegate action)
+    public static void SetUpdateStorePromotionVisibilityDelegate(UpdateStorePromotionVisibilityDelegate action)
     {
         _updateStorePromotionVisibilityDelegate = action;
     }
@@ -116,7 +116,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static UpdateStorePromotionOrderDelegate _updateStorePromotionOrderDelegate;
 
-    public static void setUpdateStorePromotionOrderDelegate(UpdateStorePromotionOrderDelegate action)
+    public static void SetUpdateStorePromotionOrderDelegate(UpdateStorePromotionOrderDelegate action)
     {
         _updateStorePromotionOrderDelegate = action;
     }
@@ -126,7 +126,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static GetPromotionProductDelegate _getPromotionProductDelegate;
 
-    public static void setGetPromotionProductDelegate(GetPromotionProductDelegate action)
+    public static void SetGetPromotionProductDelegate(GetPromotionProductDelegate action)
     {
         _getPromotionProductDelegate = action;
     }
@@ -136,7 +136,7 @@ public class Yodo1U3dPaymentDelegate
 
     private static FetchPromotionVisibilityDelegate _fetchPromotionVisibilityDelegate;
 
-    public static void setFetchPromotionVisibilityDelegate(FetchPromotionVisibilityDelegate action)
+    public static void SetFetchPromotionVisibilityDelegate(FetchPromotionVisibilityDelegate action)
     {
         _fetchPromotionVisibilityDelegate = action;
     }
@@ -180,338 +180,338 @@ public class Yodo1U3dPaymentDelegate
         switch (flag)
         {
             case Yodo1U3dSDK_ResulType_RequestProductsInfo: //请求商品信息
-            {
-                if (resultCode == 1)
                 {
-                    List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
-                    List<object> products = (List<object>) obj["data"];
-                    foreach (Dictionary<string, object> productData in products)
+                    if (resultCode == 1)
                     {
-                        if (productData == null)
-                            continue;
-                        Yodo1U3dProductData product = AddProductFromDictionary(productData);
-                        resultData.Add(product);
-                    }
+                        List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
+                        List<object> products = (List<object>)obj["data"];
+                        foreach (Dictionary<string, object> productData in products)
+                        {
+                            if (productData == null)
+                                continue;
+                            Yodo1U3dProductData product = AddProductFromDictionary(productData);
+                            resultData.Add(product);
+                        }
 
-                    if (_requestProductsInfoDelegate != null)
+                        if (_requestProductsInfoDelegate != null)
+                        {
+                            _requestProductsInfoDelegate(true, resultData);
+                        }
+                    }
+                    else
                     {
-                        _requestProductsInfoDelegate(true, resultData);
+                        if (_requestProductsInfoDelegate != null)
+                        {
+                            _requestProductsInfoDelegate(false, null);
+                        }
                     }
                 }
-                else
-                {
-                    if (_requestProductsInfoDelegate != null)
-                    {
-                        _requestProductsInfoDelegate(false, null);
-                    }
-                }
-            }
                 break;
             case Yodo1U3dSDK_ResulType_Payment: //支付
-            {
-                string orderId = ""; //订单号
-                string uniformProductId = ""; //商品ID
-                string extra = ""; //额外参数
-                string channelOrderId = "";
-                if (obj.ContainsKey("orderId"))
                 {
-                    orderId = obj["orderId"].ToString();
-                }
-                else
-                {
-                    Debug.Log("orderId is not set key!");
-                }
+                    string orderId = ""; //订单号
+                    string uniformProductId = ""; //商品ID
+                    string extra = ""; //额外参数
+                    string channelOrderId = "";
+                    if (obj.ContainsKey("orderId"))
+                    {
+                        orderId = obj["orderId"].ToString();
+                    }
+                    else
+                    {
+                        Debug.Log("orderId is not set key!");
+                    }
 
-                if (obj.ContainsKey("channelOrderid"))
-                {
-                    channelOrderId = obj["channelOrderid"].ToString();
-                }
-                else
-                {
-                    Debug.Log("channelOrderId is not set key!");
-                }
+                    if (obj.ContainsKey("channelOrderid"))
+                    {
+                        channelOrderId = obj["channelOrderid"].ToString();
+                    }
+                    else
+                    {
+                        Debug.Log("channelOrderId is not set key!");
+                    }
 
-                if (obj.ContainsKey("uniformProductId"))
-                {
-                    uniformProductId = obj["uniformProductId"].ToString();
-                }
-                else
-                {
-                    Debug.Log("uniformProductId is not set key!");
-                }
+                    if (obj.ContainsKey("uniformProductId"))
+                    {
+                        uniformProductId = obj["uniformProductId"].ToString();
+                    }
+                    else
+                    {
+                        Debug.Log("uniformProductId is not set key!");
+                    }
 
-                if (obj.ContainsKey("extra"))
-                {
-                    extra = obj["extra"].ToString();
-                }
-                else
-                {
-                    Debug.Log("extra is not set key!");
-                }
+                    if (obj.ContainsKey("extra"))
+                    {
+                        extra = obj["extra"].ToString();
+                    }
+                    else
+                    {
+                        Debug.Log("extra is not set key!");
+                    }
 
-                Yodo1U3dConstants.PayEvent status = (Yodo1U3dConstants.PayEvent) resultCode;
-                if (_purchaseDelegate != null)
-                {
-                    _purchaseDelegate(status, orderId, channelOrderId, uniformProductId, extra);
+                    Yodo1U3dConstants.PayEvent status = (Yodo1U3dConstants.PayEvent)resultCode;
+                    if (_purchaseDelegate != null)
+                    {
+                        _purchaseDelegate(status, orderId, channelOrderId, uniformProductId, extra);
+                    }
                 }
-            }
                 break;
             case Yodo1U3dSDK_ResulType_LossOrderIdQuery:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_LossOrderIdQuery==========");
-                if (resultCode == 1)
                 {
-                    List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
-                    List<object> products = (List<object>) obj["data"];
-                    foreach (Dictionary<string, object> productData in products)
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_LossOrderIdQuery==========");
+                    if (resultCode == 1)
                     {
-                        if (productData == null)
-                            continue;
-                        Yodo1U3dProductData product = AddProductFromDictionary(productData);
-                        resultData.Add(product);
-                    }
+                        List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
+                        List<object> products = (List<object>)obj["data"];
+                        foreach (Dictionary<string, object> productData in products)
+                        {
+                            if (productData == null)
+                                continue;
+                            Yodo1U3dProductData product = AddProductFromDictionary(productData);
+                            resultData.Add(product);
+                        }
 
-                    if (_lossOrderIdPurchasesDelegate != null)
+                        if (_lossOrderIdPurchasesDelegate != null)
+                        {
+                            _lossOrderIdPurchasesDelegate(true, resultData);
+                        }
+                    }
+                    else
                     {
-                        _lossOrderIdPurchasesDelegate(true, resultData);
+                        if (_lossOrderIdPurchasesDelegate != null)
+                        {
+                            _lossOrderIdPurchasesDelegate(false, null);
+                        }
                     }
                 }
-                else
-                {
-                    if (_lossOrderIdPurchasesDelegate != null)
-                    {
-                        _lossOrderIdPurchasesDelegate(false, null);
-                    }
-                }
-            }
                 break;
 
             case Yodo1U3dSDK_ResulType_RestorePayment:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_RestorePayment==========");
-                if (resultCode == 1)
                 {
-                    List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
-                    List<object> products = (List<object>) obj["data"];
-                    foreach (Dictionary<string, object> productData in products)
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_RestorePayment==========");
+                    if (resultCode == 1)
                     {
-                        if (productData == null)
-                            continue;
-                        Yodo1U3dProductData product = AddProductFromDictionary(productData);
-                        resultData.Add(product);
-                    }
-
-                    if (_restorePurchasesDelegate != null)
-                    {
-                        _restorePurchasesDelegate(true, resultData);
-                    }
-                }
-                else
-                {
-                    if (_restorePurchasesDelegate != null)
-                    {
-                        _restorePurchasesDelegate(false, null);
-                    }
-                }
-            }
-                break;
-            case Yodo1U3dSDK_ResulType_VerifyProductsInfo: //激活码兑换的商品信息
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_VerifyProductsInfo==========");
-                if (resultCode == 1)
-                {
-                    List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
-                    List<object> products = (List<object>) obj["data"];
-                    foreach (Dictionary<string, object> productData in products)
-                    {
-                        if (productData == null)
-                            continue;
-                        Yodo1U3dProductData product = AddProductFromDictionary(productData);
-                        resultData.Add(product);
-                    }
-
-                    if (_verifyProductsInfoDelegate != null)
-                    {
-                        _verifyProductsInfoDelegate(resultCode, resultData);
-                    }
-                }
-                else
-                {
-                    if (_verifyProductsInfoDelegate != null)
-                    {
-                        _verifyProductsInfoDelegate(resultCode, null);
-                    }
-                }
-            }
-                break;
-            case Yodo1U3dSDK_ResulType_QuerySubscriptions:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_QuerySubscriptions==========");
-                QuerySubscriptionsCallback(resultCode, obj);
-            }
-                break;
-            case Yodo1U3dSDK_ResulType_UpdateStorePromotionVisibility:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_UpdateStorePromotionVisibility==========");
-                if (resultCode == 1)
-                {
-                    if (_updateStorePromotionVisibilityDelegate != null)
-                    {
-                        _updateStorePromotionVisibilityDelegate(resultCode);
-                    }
-                }
-                else
-                {
-                    if (_updateStorePromotionVisibilityDelegate != null)
-                    {
-                        _updateStorePromotionVisibilityDelegate(resultCode);
-                    }
-                }
-            }
-                break;
-            case Yodo1U3dSDK_ResulType_UpdateStorePromotionOrder:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_UpdateStorePromotionOrder==========");
-                if (resultCode == 1)
-                {
-                    if (_updateStorePromotionOrderDelegate != null)
-                    {
-                        _updateStorePromotionOrderDelegate(resultCode);
-                    }
-                }
-                else
-                {
-                    if (_updateStorePromotionOrderDelegate != null)
-                    {
-                        _updateStorePromotionOrderDelegate(resultCode);
-                    }
-                }
-            }
-                break;
-            case Yodo1U3dSDK_ResulType_GetPromotionProduct:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_GetPromotionProduct==========");
-                if (resultCode == 1)
-                {
-                    if (_getPromotionProductDelegate != null)
-                    {
-                        Yodo1U3dProductData product = AddProductFromDictionary(obj);
-                        _getPromotionProductDelegate(resultCode, product);
-                    }
-                }
-                else
-                {
-                    if (_getPromotionProductDelegate != null)
-                    {
-                        _getPromotionProductDelegate(resultCode, null);
-                    }
-                }
-            }
-                break;
-            case Yodo1U3dSDK_ResulType_FetchStorePromotionOrder:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_FetchStorePromotionOrder==========");
-                if (resultCode == 1)
-                {
-                    List<string> products = new List<string>();
-                    if (obj.ContainsKey("storePromotionOrder"))
-                    {
-                        List<object> temp = (List<object>) obj["storePromotionOrder"];
-                        for (int i = 0; i < temp.Count; i++)
+                        List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
+                        List<object> products = (List<object>)obj["data"];
+                        foreach (Dictionary<string, object> productData in products)
                         {
-                            products.Add(temp[i].ToString());
+                            if (productData == null)
+                                continue;
+                            Yodo1U3dProductData product = AddProductFromDictionary(productData);
+                            resultData.Add(product);
+                        }
+
+                        if (_restorePurchasesDelegate != null)
+                        {
+                            _restorePurchasesDelegate(true, resultData);
                         }
                     }
-
-                    if (_fetchStorePromotionOrderDelegate != null)
+                    else
                     {
-                        _fetchStorePromotionOrderDelegate(resultCode, products);
+                        if (_restorePurchasesDelegate != null)
+                        {
+                            _restorePurchasesDelegate(false, null);
+                        }
                     }
                 }
-                else
+                break;
+            case Yodo1U3dSDK_ResulType_VerifyProductsInfo: //激活码兑换的商品信息
                 {
-                    if (_fetchStorePromotionOrderDelegate != null)
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_VerifyProductsInfo==========");
+                    if (resultCode == 1)
+                    {
+                        List<Yodo1U3dProductData> resultData = new List<Yodo1U3dProductData>();
+                        List<object> products = (List<object>)obj["data"];
+                        foreach (Dictionary<string, object> productData in products)
+                        {
+                            if (productData == null)
+                                continue;
+                            Yodo1U3dProductData product = AddProductFromDictionary(productData);
+                            resultData.Add(product);
+                        }
+
+                        if (_verifyProductsInfoDelegate != null)
+                        {
+                            _verifyProductsInfoDelegate(resultCode, resultData);
+                        }
+                    }
+                    else
+                    {
+                        if (_verifyProductsInfoDelegate != null)
+                        {
+                            _verifyProductsInfoDelegate(resultCode, null);
+                        }
+                    }
+                }
+                break;
+            case Yodo1U3dSDK_ResulType_QuerySubscriptions:
+                {
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_QuerySubscriptions==========");
+                    QuerySubscriptionsCallback(resultCode, obj);
+                }
+                break;
+            case Yodo1U3dSDK_ResulType_UpdateStorePromotionVisibility:
+                {
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_UpdateStorePromotionVisibility==========");
+                    if (resultCode == 1)
+                    {
+                        if (_updateStorePromotionVisibilityDelegate != null)
+                        {
+                            _updateStorePromotionVisibilityDelegate(resultCode);
+                        }
+                    }
+                    else
+                    {
+                        if (_updateStorePromotionVisibilityDelegate != null)
+                        {
+                            _updateStorePromotionVisibilityDelegate(resultCode);
+                        }
+                    }
+                }
+                break;
+            case Yodo1U3dSDK_ResulType_UpdateStorePromotionOrder:
+                {
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_UpdateStorePromotionOrder==========");
+                    if (resultCode == 1)
+                    {
+                        if (_updateStorePromotionOrderDelegate != null)
+                        {
+                            _updateStorePromotionOrderDelegate(resultCode);
+                        }
+                    }
+                    else
+                    {
+                        if (_updateStorePromotionOrderDelegate != null)
+                        {
+                            _updateStorePromotionOrderDelegate(resultCode);
+                        }
+                    }
+                }
+                break;
+            case Yodo1U3dSDK_ResulType_GetPromotionProduct:
+                {
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_GetPromotionProduct==========");
+                    if (resultCode == 1)
+                    {
+                        if (_getPromotionProductDelegate != null)
+                        {
+                            Yodo1U3dProductData product = AddProductFromDictionary(obj);
+                            _getPromotionProductDelegate(resultCode, product);
+                        }
+                    }
+                    else
+                    {
+                        if (_getPromotionProductDelegate != null)
+                        {
+                            _getPromotionProductDelegate(resultCode, null);
+                        }
+                    }
+                }
+                break;
+            case Yodo1U3dSDK_ResulType_FetchStorePromotionOrder:
+                {
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_FetchStorePromotionOrder==========");
+                    if (resultCode == 1)
                     {
                         List<string> products = new List<string>();
-                        _fetchStorePromotionOrderDelegate(resultCode, products);
+                        if (obj.ContainsKey("storePromotionOrder"))
+                        {
+                            List<object> temp = (List<object>)obj["storePromotionOrder"];
+                            for (int i = 0; i < temp.Count; i++)
+                            {
+                                products.Add(temp[i].ToString());
+                            }
+                        }
+
+                        if (_fetchStorePromotionOrderDelegate != null)
+                        {
+                            _fetchStorePromotionOrderDelegate(resultCode, products);
+                        }
+                    }
+                    else
+                    {
+                        if (_fetchStorePromotionOrderDelegate != null)
+                        {
+                            List<string> products = new List<string>();
+                            _fetchStorePromotionOrderDelegate(resultCode, products);
+                        }
                     }
                 }
-            }
                 break;
             case Yodo1U3dSDK_ResulType_FetchPromotionVisibility:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_FetchPromotionVisibility==========");
-                if (resultCode == 1)
                 {
-                    int visible = 0;
-                    if (obj.ContainsKey("visible"))
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_FetchPromotionVisibility==========");
+                    if (resultCode == 1)
                     {
-                        int.TryParse(obj["visible"].ToString(), out visible);
-                    }
+                        int visible = 0;
+                        if (obj.ContainsKey("visible"))
+                        {
+                            int.TryParse(obj["visible"].ToString(), out visible);
+                        }
 
-                    if (_fetchPromotionVisibilityDelegate != null)
+                        if (_fetchPromotionVisibilityDelegate != null)
+                        {
+                            _fetchPromotionVisibilityDelegate(resultCode, (PROMOTION_VISIBLE)visible);
+                        }
+                    }
+                    else
                     {
-                        _fetchPromotionVisibilityDelegate(resultCode, (PROMOTION_VISIBLE) visible);
+                        if (_fetchPromotionVisibilityDelegate != null)
+                        {
+                            _fetchPromotionVisibilityDelegate(resultCode, (PROMOTION_VISIBLE)0);
+                        }
                     }
                 }
-                else
-                {
-                    if (_fetchPromotionVisibilityDelegate != null)
-                    {
-                        _fetchPromotionVisibilityDelegate(resultCode, (PROMOTION_VISIBLE) 0);
-                    }
-                }
-            }
                 break;
             case Yodo1U3dSDK_ResulType_SendGoodsOver:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_SendGoodsOver==========");
-                string errorMsg = string.Empty;
-                if (obj.ContainsKey("error"))
                 {
-                    errorMsg = obj["error"].ToString();
-                }
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_SendGoodsOver==========");
+                    string errorMsg = string.Empty;
+                    if (obj.ContainsKey("error"))
+                    {
+                        errorMsg = obj["error"].ToString();
+                    }
 
-                if (resultCode == 1)
-                {
-                    if (_sendGoodsOverDelegate != null)
+                    if (resultCode == 1)
                     {
-                        _sendGoodsOverDelegate(true, errorMsg);
+                        if (_sendGoodsOverDelegate != null)
+                        {
+                            _sendGoodsOverDelegate(true, errorMsg);
+                        }
+                    }
+                    else
+                    {
+                        if (_sendGoodsOverDelegate != null)
+                        {
+                            _sendGoodsOverDelegate(false, errorMsg);
+                        }
                     }
                 }
-                else
-                {
-                    if (_sendGoodsOverDelegate != null)
-                    {
-                        _sendGoodsOverDelegate(false, errorMsg);
-                    }
-                }
-            }
                 break;
             case Yodo1U3dSDK_ResulType_SendGoodsFail:
-            {
-                Debug.Log("===========Yodo1U3dSDK_ResulType_SendGoodsFail==========");
-                string errorMsg = string.Empty;
-                if (obj.ContainsKey("error"))
                 {
-                    errorMsg = obj["error"].ToString();
-                }
+                    Debug.Log("===========Yodo1U3dSDK_ResulType_SendGoodsFail==========");
+                    string errorMsg = string.Empty;
+                    if (obj.ContainsKey("error"))
+                    {
+                        errorMsg = obj["error"].ToString();
+                    }
 
-                if (resultCode == 1)
-                {
-                    if (_sendGoodsOverDelegate != null)
+                    if (resultCode == 1)
                     {
-                        _sendGoodsFailDelegate(true, errorMsg);
+                        if (_sendGoodsOverDelegate != null)
+                        {
+                            _sendGoodsFailDelegate(true, errorMsg);
+                        }
+                    }
+                    else
+                    {
+                        if (_sendGoodsOverDelegate != null)
+                        {
+                            _sendGoodsFailDelegate(false, errorMsg);
+                        }
                     }
                 }
-                else
-                {
-                    if (_sendGoodsOverDelegate != null)
-                    {
-                        _sendGoodsFailDelegate(false, errorMsg);
-                    }
-                }
-            }
                 break;
         }
     }
@@ -579,7 +579,7 @@ public class Yodo1U3dPaymentDelegate
             int.TryParse(productData["ProductType"].ToString(), out _productType);
         }
 
-        product.ProductType = (Yodo1U3dProductData.ProductTypeEnum) _productType;
+        product.ProductType = (Yodo1U3dProductData.ProductTypeEnum)_productType;
 
         return product;
     }
@@ -589,7 +589,7 @@ public class Yodo1U3dPaymentDelegate
         if (reslutCode == 1)
         {
             List<Yodo1U3dSubscriptionInfo> resultData = new List<Yodo1U3dSubscriptionInfo>();
-            List<object> subscriptions = (List<object>) obj["data"];
+            List<object> subscriptions = (List<object>)obj["data"];
             double serverTime = 0;
             if (obj.ContainsKey("serverTime"))
             {

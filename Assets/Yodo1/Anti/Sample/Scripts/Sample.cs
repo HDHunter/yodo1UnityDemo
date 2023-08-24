@@ -88,7 +88,7 @@ public class Sample : MonoBehaviour
         {
             //购买成功后，开始上报支付数据
 
-            System.DateTime dateTime = System.DateTime.UtcNow;
+            DateTime dateTime = DateTime.UtcNow;
             Yodo1U3dProductType yodo1U3DProductType = Yodo1U3dProductType.Consumables;
             //TODO 这里的订单号仅用于测试，接入后请使用真实的支付订单
             string orderId = string.Format("0{0}{1}{2}{3}{4}{5}1HY6YNH", dateTime.Year, dateTime.Month, dateTime.Day,

@@ -1,3 +1,15 @@
-﻿﻿fileFormatVersion: 2
-guid: 0bf4a8b4e2e29402fb3fdb75d2e35f68
-timeCreated: 1642568580
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Yodo1/Suit/Scripts/Platform/iOS/Yodo1U3dAccountForIOS.cs.meta
+guid: ef74f5163c28744988dde0eb9d02c41e
+========
+guid: b4a4dcbb80aef4ce4a4a5f0537a0e4fd
+>>>>>>>> newDev:Assets/Yodo1/Suit/Editor/Scripts/Yodo1BuildProcess .cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

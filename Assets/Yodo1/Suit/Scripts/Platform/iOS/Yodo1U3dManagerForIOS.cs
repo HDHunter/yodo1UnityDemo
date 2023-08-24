@@ -63,40 +63,6 @@ public class Yodo1U3dManagerForIOS
         return defaultValue;
     }
 
-    /// <summary>
-    /// Unities the switch yodo1 GM.GMG在线参数开关控制
-    /// </summary>
-    /// <returns><c>true</c>, if switch yodo1 GM was unityed, <c>false</c> otherwise.</returns>
-    public static bool SwitchMoreGame()
-    {
-        return false;
-    }
-
-    /// <summary>
-    /// Unities the show yodo1 basic promotion.显示更多游戏
-    /// </summary>
-    public static void ShowMoreGame()
-    {
-    }
-
-    /// <summary>
-    /// Unities the post status.
-    /// </summary>
-    /// <param name="paramJson">Parameter json.json格式的参数字符串</param>
-    /// <param name="callbackGameObj">Callback game object.</param>
-    /// <param name="callbackMethod">Callback method.</param>
-    /// 
-#if UNITY_IPHONE
-    //[DllImport(Yodo1U3dConstants.LIB_NAME)]
-    //private static extern void UnityPostStatus(string paramJson, string callbackGameObj, string callbackMethod);
-#endif
-    public static void PostStatus(string paramJson)
-    {
-#if UNITY_IPHONE
-        //UnityPostStatus(paramJson, Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
-#endif
-    }
-
 #if UNITY_IPHONE
     [DllImport(Yodo1U3dConstants.LIB_NAME)]
     private static extern void UnitySetDoNotSell(bool doNotSell);
@@ -168,12 +134,12 @@ public class Yodo1U3dManagerForIOS
 
 #if UNITY_IPHONE
     [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern void UnityShowUserConsent(string SdkObjectName, string SdkMethodName);
+    private static extern void Unity3dShowUserConsent(string SdkObjectName, string SdkMethodName);
 #endif
     public static void ShowUserConsent(string SdkObjectName, string SdkMethodName)
     {
 #if UNITY_IPHONE
-        UnityShowUserConsent(SdkObjectName, SdkMethodName);
+        Unity3dShowUserConsent(SdkObjectName, SdkMethodName);
 #endif
     }
 }

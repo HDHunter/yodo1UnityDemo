@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ExternalDependencyManager/Editor/1.2.175.meta
+guid: 4303f20f85f914742a6744e2c598e312
+========
 guid: 40037c87b6764fd5934ec6dd5d404003
+>>>>>>>> newDev:Assets/Yodo1/Suit/Editor/Builder.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

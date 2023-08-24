@@ -1,36 +1,36 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 
-namespace Yodo1Unity
+namespace Yodo1.Suit
 {
     public class Yodo1AndroidConfig
     {
-        public const string Yodo1AndroidPlugin = "./Assets/Plugins/Android/Yodo1Suit.androidlib/";
-
-        public const string libManifest = Yodo1AndroidPlugin + "/AndroidManifest.xml";
         public const string manifest = "./Assets/Plugins/Android/AndroidManifest.xml";
 
-        public const string Yodo1AndroidPluginRes = Yodo1AndroidPlugin + "/res";
-        public const string Yodo1ValuePath = Yodo1AndroidPluginRes + "/values";
-        public const string Yodo1Assets = Yodo1AndroidPlugin + "/assets";
+        public const string androidLib = "./Assets/Plugins/Android/Yodo1Suit.androidlib/";
+        public const string androidLibManifest = androidLib + "/AndroidManifest.xml";
+        public const string androidLibAssets = androidLib + "/assets";
+        public const string androidLibRes = androidLib + "/res";
+        public const string androidLibValues = androidLibRes + "/values";
+        public const string androidLibRaw = androidLibRes + "/raw";
 
-        public const string Yodo1KeyInfoPath = Yodo1AndroidPluginRes + "/raw/yodo1_games_config.properties";
+        private const string Yodo1KeyInfoPath = androidLibRaw + "/yodo1_games_config.properties";
 
-        public const string dependenciesDir = "/Assets/Yodo1/Suit/Editor/Dependencies/";
-        public const string dependenciesName = "Yodo1SDKAndroidDependencies.xml";
+        private const string dependenciesDir = "/Assets/Yodo1/Suit/Editor/Dependencies/";
+        private const string dependenciesName = "Yodo1SDKAndroidDependencies.xml";
 
         public const string CONFIG_Android_PATH = "./Assets/Yodo1/Suit/Internal/config_Android.properties";
-        public const string iapExcel = SettingsSave.parentPath + "/IapConfig.xls";
+        public const string iapExcel = SettingsSave.RESOURCE_PATH + "/IapConfig.xls";
 
         /// <summary>
         /// Updates the yodo1 key info.
         /// </summary>
         public static void UpdateProperties()
         {
-            if (!Directory.Exists(Yodo1AndroidPluginRes + "/raw"))
+            if (!Directory.Exists(androidLibRaw))
             {
-                Directory.CreateDirectory(Yodo1AndroidPluginRes + "/raw");
+                Directory.CreateDirectory(androidLibRaw);
             }
 
             RuntimeSettings settings = SettingsSave.Load(false);
@@ -40,14 +40,14 @@ namespace Yodo1Unity
                 return;
             }
 
-            EditorFileUtils.DeleteFile(Yodo1KeyInfoPath);
+            Yodo1EditorFileUtils.DeleteFile(Yodo1KeyInfoPath);
             File.Create(Yodo1KeyInfoPath).Dispose();
 
             Yodo1PropertiesUtils props = new Yodo1PropertiesUtils(Yodo1KeyInfoPath);
             RuntimeAndroidSettings sets = settings.androidSettings;
             props.Add("mainClassName", "com.yodo1.plugin.u3d.Yodo1UnityActivity");
             props.Add("isshow_yodo1_logo", sets.isShowYodo1Logo ? "true" : "false");
-            props.Add("Yodo1SDKVersion", UpdateVersion.Yodo1PluginVersion);
+            props.Add("Yodo1SDKVersion", Yodo1UpdateVersion.Yodo1PluginVersion);
             props.Add("channelPackageName", Application.identifier);
             if (!string.IsNullOrEmpty(sets.AppKey))
             {
@@ -74,28 +74,28 @@ namespace Yodo1Unity
                 {
                     if ("portrait".Equals(sets.thisProjectOrient))
                     {
-                        EditorFileUtils.Replace(manifest, "landscape", "sensorPortrait");
-                        EditorFileUtils.Replace(manifest, "portrait", "sensorPortrait");
-                        EditorFileUtils.Replace(manifest, "user", "sensorPortrait");
-                        EditorFileUtils.Replace(manifest, "fullSensor", "sensorPortrait");
-                        EditorFileUtils.Replace(manifest, "sensorLandscape", "sensorPortrait");
+                        Yodo1EditorFileUtils.Replace(manifest, "landscape", "sensorPortrait");
+                        Yodo1EditorFileUtils.Replace(manifest, "portrait", "sensorPortrait");
+                        Yodo1EditorFileUtils.Replace(manifest, "user", "sensorPortrait");
+                        Yodo1EditorFileUtils.Replace(manifest, "fullSensor", "sensorPortrait");
+                        Yodo1EditorFileUtils.Replace(manifest, "sensorLandscape", "sensorPortrait");
                     }
                     else
                     {
-                        EditorFileUtils.Replace(manifest, "landscape", "sensorLandscape");
-                        EditorFileUtils.Replace(manifest, "portrait", "sensorLandscape");
-                        EditorFileUtils.Replace(manifest, "user", "sensorLandscape");
-                        EditorFileUtils.Replace(manifest, "fullSensor", "sensorLandscape");
-                        EditorFileUtils.Replace(manifest, "sensorPortrait", "sensorLandscape");
+                        Yodo1EditorFileUtils.Replace(manifest, "landscape", "sensorLandscape");
+                        Yodo1EditorFileUtils.Replace(manifest, "portrait", "sensorLandscape");
+                        Yodo1EditorFileUtils.Replace(manifest, "user", "sensorLandscape");
+                        Yodo1EditorFileUtils.Replace(manifest, "fullSensor", "sensorLandscape");
+                        Yodo1EditorFileUtils.Replace(manifest, "sensorPortrait", "sensorLandscape");
                     }
                 }
                 else
                 {
-                    EditorFileUtils.Replace(manifest, "landscape", "user");
-                    EditorFileUtils.Replace(manifest, "portrait", "user");
-                    EditorFileUtils.Replace(manifest, "fullSensor", "user");
-                    EditorFileUtils.Replace(manifest, "sensorPortrait", "user");
-                    EditorFileUtils.Replace(manifest, "sensorLandscape", "user");
+                    Yodo1EditorFileUtils.Replace(manifest, "landscape", "user");
+                    Yodo1EditorFileUtils.Replace(manifest, "portrait", "user");
+                    Yodo1EditorFileUtils.Replace(manifest, "fullSensor", "user");
+                    Yodo1EditorFileUtils.Replace(manifest, "sensorPortrait", "user");
+                    Yodo1EditorFileUtils.Replace(manifest, "sensorLandscape", "user");
                 }
             }
 
@@ -165,7 +165,7 @@ namespace Yodo1Unity
             }
 
             string dep = dependenciesName;
-            EditorFileUtils.DeleteFile(depDir + "//" + dep);
+            Yodo1EditorFileUtils.DeleteFile(depDir + "//" + dep);
             CreateFile(depDir, dep, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                                     "<dependencies>\n" +
                                     "\t<androidPackages>\n" +
@@ -190,7 +190,7 @@ namespace Yodo1Unity
                 foreach (AnalyticsItem item in items)
                 {
                     if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
-                        !string.IsNullOrEmpty((string) prop[item.Name]))
+                        !string.IsNullOrEmpty((string)prop[item.Name]))
                     {
                         CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
                     }
@@ -203,7 +203,7 @@ namespace Yodo1Unity
                 foreach (AnalyticsItem item in channel)
                 {
                     if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
-                        !string.IsNullOrEmpty((string) prop[item.Name]))
+                        !string.IsNullOrEmpty((string)prop[item.Name]))
                     {
                         CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
                     }
@@ -256,6 +256,42 @@ namespace Yodo1Unity
             StreamWriter streamWriter = new StreamWriter(st);
             streamWriter.Write(text_all);
             streamWriter.Close();
+        }
+
+
+        public static void GenerateAndroidLibProject()
+        {
+            string androidLibPath = Yodo1AndroidConfig.androidLib;
+            if (!File.Exists(androidLibPath))
+            {
+                Directory.CreateDirectory(androidLibPath);
+            }
+
+            string manifestFile = Yodo1AndroidConfig.androidLibManifest; // androidLibPath + "AndroidManifest.xml";
+            string manifestText = string.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                                                "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" package=\"com.yodo1.suit.app.unity\" android:versionCode=\"1\" android:versionName=\"1.0\">\n" +
+                                                "\t<application>\n" +
+                                                "\t</application>\n" +
+                                                "</manifest>");
+
+            File.WriteAllText(manifestFile, manifestText);
+
+            string resPath = androidLibPath + "res/values/";
+            if (!File.Exists(resPath))
+            {
+                Directory.CreateDirectory(resPath);
+            }
+
+            string assetsPath = Yodo1AndroidConfig.androidLibAssets;
+            if (!File.Exists(assetsPath))
+            {
+                Directory.CreateDirectory(assetsPath);
+            }
+
+            string projectPropertiesFile = androidLibPath + "project.properties";
+            string projectPropertiesText = "target=android-9\n" +
+                                           "android.library=true";
+            File.WriteAllText(projectPropertiesFile, projectPropertiesText);
         }
     }
 }

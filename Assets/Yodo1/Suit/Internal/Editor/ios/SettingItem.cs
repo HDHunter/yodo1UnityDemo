@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Yodo1Unity
+namespace Yodo1.Suit
 {
     [Serializable]
     public class SettingItem

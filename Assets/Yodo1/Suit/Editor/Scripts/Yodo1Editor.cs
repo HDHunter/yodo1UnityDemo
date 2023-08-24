@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 using UnityEditor;
-using Yodo1Unity;
+using Yodo1.Suit;
 
 public class Yodo1Editor : Editor
 {
@@ -26,7 +26,7 @@ public class Yodo1Editor : Editor
     public static void Builder()
     {
         string shell = Path.GetFullPath(Path.GetFullPath(".") + "/Assets/Yodo1/Suit/Editor/Builder");
-        EditorUtils.Command(shell, "Builder");
+        Yodo1EditorUtils.Command(shell, "Builder");
     }
 
     [MenuItem("Yodo1/Suit SDK/Documentation")]
@@ -40,7 +40,7 @@ public class Yodo1Editor : Editor
     public static void Version()
     {
         Debug.LogWarning("start UpdateVersion");
-        UpdateVersion.Init();
+        Yodo1UpdateVersion.Init();
         Debug.LogWarning("end UpdateVersion");
     }
 }

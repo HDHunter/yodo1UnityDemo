@@ -1,5 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ExternalDependencyManager/Editor/1.2.175/Google.JarResolver.dll.meta
+guid: af3ced639768447f9ece45f038c5ee35
+labels:
+- gvh
+- gvh_version-1.2.175
+- gvhp_exportpath-ExternalDependencyManager/Editor/1.2.175/Google.JarResolver.dll
+- gvhp_targets-editor
+========
 guid: 76e46996d05f8422c9d5ff71c6849856
+>>>>>>>> newDev:Assets/Yodo1/Yodo1Ads/Plugins/Android/mas-unity-bridge.aar.meta
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Yodo1Unity
+namespace Yodo1.Suit
 {
     [Serializable]
     public class KeyItem
@@ -28,7 +28,7 @@ namespace Yodo1Unity
 
         public string ThinkingServerUrl;
 
-
+        #region AppsFlyer
         /// <summary>
         /// The apps flyer dev key.
         /// </summary>
@@ -38,5 +38,17 @@ namespace Yodo1Unity
         public string AppsFlyer_identifier;
         public string AppsFlyer_Schemes;
         public string AppsFlyer_domain;
+
+        #endregion
+
+        #region Adjust
+
+        public string AdjustAppToken;
+        public bool AdjustEnvironmentSandbox;
+        public string AdjustURLIdentifier;
+        public string AdjustURLSechemes;
+        public string AdjustUniversalLinksDomain;
+
+        #endregion
     }
 }

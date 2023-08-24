@@ -200,6 +200,7 @@ public class Yodo1U3dUtils
     {
 #if UNITY_EDITOR
         Debug.Log(Yodo1U3dConstants.LOG_TAG + "openWebPage,url:" + url);
+        Application.OpenURL(url);
 #elif UNITY_ANDROID
         Yodo1U3dUtilsForAndroid.openWebPage(url, maps);
 #elif UNITY_IPHONE

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Yodo1Unity
+namespace Yodo1.Suit
 {
     [Serializable]
     public class RuntimeAndroidSettings
@@ -11,14 +11,15 @@ namespace Yodo1Unity
          * Android Properties Part.
          */
         public string AppKey;
-
         public string RegionCode;
+
+        public bool debugEnabled;
+
         public string thisProjectOrient;
         public string Yodo1SDKType;
         public string yodo1_sdk_mode;
         public List<AnalyticsItem> configChannel;
         public List<AnalyticsItem> configAnalytics;
-        public bool debugEnabled;
         public bool isShowYodo1Logo;
 
         public RuntimeAndroidSettings()
@@ -129,8 +130,7 @@ namespace Yodo1Unity
         public static void InitAndroidSettings(RuntimeSettings settings)
         {
             Debug.Log("Yodo1Suit InitAndroidSettings");
-            Yodo1PropertiesUtils yodo1PropertiesUtils =
-                new Yodo1PropertiesUtils(Yodo1AndroidConfig.CONFIG_Android_PATH);
+            Yodo1PropertiesUtils yodo1PropertiesUtils = new Yodo1PropertiesUtils(Yodo1AndroidConfig.CONFIG_Android_PATH);
             string channelList = (string)yodo1PropertiesUtils["ChannelList"];
             string analyticslist = (string)yodo1PropertiesUtils["AnalyticsList"];
             string[] channles = channelList.Split(new char[] { ',' });

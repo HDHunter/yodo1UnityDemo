@@ -3,43 +3,6 @@ using System.Runtime.InteropServices;
 
 public class Yodo1U3dGCManagerForIOS
 {
-    /// <summary>
-    /// iOS 本地通知推送注册
-    /// </summary>
-    /// <param name="notificationKey">Notification key.</param>
-    /// <param name="notificationId">Notification identifier.</param>
-    /// <param name="alertTime">Alert time.</param>
-    /// <param name="title">Title.</param>
-    /// <param name="msg">Message.</param>
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern void UnityRegisterLocalNotification(string notificationKey, int notificationId,
-        string alertTime, string title, string msg);
-#endif
-    public static void PushNotification(string notificationKey, int notificationId, long alertTime, string title,
-        string msg)
-    {
-#if UNITY_IPHONE
-        UnityRegisterLocalNotification(notificationKey, notificationId, alertTime.ToString(), title, msg);
-#endif
-    }
-
-#if UNITY_IPHONE
-    [DllImport(Yodo1U3dConstants.LIB_NAME)]
-    private static extern void UnityCancelLocalNotificationWithKey(string notificationKey, int notificationId);
-#endif
-    /// <summary>
-    /// iOS 本地通知推送取消
-    /// </summary>
-    /// <param name="notificationKey">Notification key.</param>
-    /// <param name="notificationId">Notification identifier.</param>
-    public static void CancelNotification(string notificationKey, int notificationId)
-    {
-#if UNITY_IPHONE
-        UnityCancelLocalNotificationWithKey(notificationKey, notificationId);
-#endif
-    }
-
 #if YODO1_iCLOUD
     [DllImport(Yodo1U3dConstants.LIB_NAME)]
     private static extern void UnitySaveToCloud(string saveName, string saveValue);
@@ -69,7 +32,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void LoadToCloud(string saveName)
     {
 #if YODO1_iCLOUD
-            UnityLoadToCloud(saveName, Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
+        UnityLoadToCloud(saveName, Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
 #endif
     }
 
@@ -84,7 +47,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void RemoveRecordWithRecordName(string saveName)
     {
 #if YODO1_iCLOUD
-            UnityRemoveRecordWithRecordName(saveName);
+        UnityRemoveRecordWithRecordName(saveName);
 #endif
     }
 
@@ -100,7 +63,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void GameCenterLogin()
     {
 #if UNITY_IPHONE
-            UnityGameCenterLogin(Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
+        UnityGameCenterLogin(Yodo1U3dSDK.Instance.SdkObjectName, Yodo1U3dSDK.Instance.SdkMethodName);
 #endif
     }
 
@@ -115,7 +78,7 @@ public class Yodo1U3dGCManagerForIOS
     public static bool GameCenterIsLogin()
     {
 #if UNITY_IPHONE
-            return UnityGameCenterIsLogin();
+        return UnityGameCenterIsLogin();
 #endif
         return false;
     }
@@ -132,7 +95,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void AchievementsUnlock(string achievementId)
     {
 #if UNITY_IPHONE
-            UnityAchievementsUnlock(achievementId);
+        UnityAchievementsUnlock(achievementId);
 #endif
     }
 
@@ -148,7 +111,7 @@ public class Yodo1U3dGCManagerForIOS
     public static double ProgressForAchievement(string achievementId)
     {
 #if UNITY_IPHONE
-            return UnityProgressForAchievement(achievementId);
+        return UnityProgressForAchievement(achievementId);
 #endif
         return 0;
     }
@@ -166,7 +129,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void UpdateScore(string scoreId, int score)
     {
 #if UNITY_IPHONE
-            UnityUpdateScore(scoreId, score);
+        UnityUpdateScore(scoreId, score);
 #endif
     }
 
@@ -183,7 +146,7 @@ public class Yodo1U3dGCManagerForIOS
     public static int HighScoreForLeaderboard(string identifier)
     {
 #if UNITY_IPHONE
-            return UnityHighScoreForLeaderboard(identifier);
+        return UnityHighScoreForLeaderboard(identifier);
 #endif
         return 0;
     }
@@ -199,7 +162,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void ShowGameCenter()
     {
 #if UNITY_IPHONE
-            UnityShowGameCenter();
+        UnityShowGameCenter();
 #endif
     }
 
@@ -214,7 +177,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void LeaderboardsOpen()
     {
 #if UNITY_IPHONE
-            UnityLeaderboardsOpen();
+        UnityLeaderboardsOpen();
 #endif
     }
 
@@ -229,7 +192,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void AchievementsOpen()
     {
 #if UNITY_IPHONE
-            UnityAchievementsOpen();
+        UnityAchievementsOpen();
 #endif
     }
 
@@ -243,7 +206,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void StartScreenRecorder()
     {
 #if UNITY_IPHONE
-            UnityStartScreenRecorder();
+        UnityStartScreenRecorder();
 #endif
     }
 
@@ -258,7 +221,7 @@ public class Yodo1U3dGCManagerForIOS
     public static bool SupportReplay()
     {
 #if UNITY_IPHONE
-            return UnitySupportReplay();
+        return UnitySupportReplay();
 #endif
         return false;
     }
@@ -273,7 +236,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void StopScreenRecorder()
     {
 #if UNITY_IPHONE
-            UnityStopScreenRecorder();
+        UnityStopScreenRecorder();
 #endif
     }
 
@@ -287,7 +250,7 @@ public class Yodo1U3dGCManagerForIOS
     public static void ShowRecorder()
     {
 #if UNITY_IPHONE
-            UnityShowRecorder();
+        UnityShowRecorder();
 #endif
     }
 }
