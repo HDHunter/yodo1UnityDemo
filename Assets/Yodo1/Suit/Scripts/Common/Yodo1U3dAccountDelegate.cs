@@ -2,9 +2,11 @@ using System.Collections.Generic;
 
 public class Yodo1U3dAccountDelegate
 {
+    public const int Yodo1U3dSDK_ResulType_Exit = 3000;
     public const int Yodo1U3dSDK_ResulType_Login = 3001;
     public const int Yodo1U3dSDK_ResulType_Logout = 3002;
     public const int Yodo1U3dSDK_ResulType_Regist = 3004;
+    public const int Yodo1U3dSDK_ResulType_ACHIEVE = 3005;
 
     //登录回调
     public delegate void LoginDelegate(Yodo1U3dConstants.AccountEvent accountEvent, Yodo1U3dUser user);
@@ -36,6 +38,28 @@ public class Yodo1U3dAccountDelegate
         _registDelegate = action;
     }
 
+    //注册获取成就回调
+    public delegate void AchievementDelegate(Yodo1U3dConstants.AccountEvent accountEvent,
+        Dictionary<string, object> resultData);
+
+    private static AchievementDelegate _achievementDelegate;
+
+    public static void SetAchivementDelegate(AchievementDelegate action)
+    {
+        _achievementDelegate = action;
+    }
+
+    //注册退出游戏回调
+    public delegate void ExitDelegate(Yodo1U3dConstants.AccountEvent accountEvent,
+        Dictionary<string, object> resultData);
+
+    private static ExitDelegate _exitDelegate;
+
+    public static void SetExitDelegate(ExitDelegate action)
+    {
+        _exitDelegate = action;
+    }
+
 
     public static void OnDestroy()
     {
@@ -46,40 +70,56 @@ public class Yodo1U3dAccountDelegate
 
     public static void Callback(int flag, int resultCode, Dictionary<string, object> obj)
     {
-        Yodo1U3dConstants.AccountEvent accountEvent = (Yodo1U3dConstants.AccountEvent)resultCode;
+        Yodo1U3dConstants.AccountEvent accountEvent = (Yodo1U3dConstants.AccountEvent) resultCode;
         switch (flag)
         {
             case Yodo1U3dSDK_ResulType_Login: //登录
+            {
+                Yodo1U3dUser user = null;
+
+                if (obj.ContainsKey("data"))
                 {
-                    Yodo1U3dUser user = null;
-
-                    if (obj.ContainsKey("data"))
-                    {
-                        Dictionary<string, object> dic = (Dictionary<string, object>)obj["data"];
-                        user = Yodo1U3dUser.getEntityToJson(dic);
-                    }
-
-                    if (_loginDelegate != null)
-                    {
-                        _loginDelegate(accountEvent, user);
-                    }
+                    Dictionary<string, object> dic = (Dictionary<string, object>) obj["data"];
+                    user = Yodo1U3dUser.getEntityToJson(dic);
                 }
+
+                if (_loginDelegate != null)
+                {
+                    _loginDelegate(accountEvent, user);
+                }
+            }
                 break;
             case Yodo1U3dSDK_ResulType_Logout: //登出
+            {
+                if (_logoutDelegate != null)
                 {
-                    if (_logoutDelegate != null)
-                    {
-                        _logoutDelegate(accountEvent);
-                    }
+                    _logoutDelegate(accountEvent);
                 }
+            }
                 break;
             case Yodo1U3dSDK_ResulType_Regist: //注册
+            {
+                if (_registDelegate != null)
                 {
-                    if (_registDelegate != null)
-                    {
-                        _registDelegate(accountEvent);
-                    }
+                    _registDelegate(accountEvent);
                 }
+            }
+                break;
+            case Yodo1U3dSDK_ResulType_ACHIEVE: //获取成就
+            {
+                if (_achievementDelegate != null)
+                {
+                    _achievementDelegate(accountEvent, obj);
+                }
+            }
+                break;
+            case Yodo1U3dSDK_ResulType_Exit: //退出
+            {
+                if (_exitDelegate != null)
+                {
+                    _exitDelegate(accountEvent, obj);
+                }
+            }
                 break;
         }
     }

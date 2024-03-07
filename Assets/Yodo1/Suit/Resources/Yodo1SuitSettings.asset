@@ -21,7 +21,7 @@ MonoBehaviour:
     yodo1_sdk_mode: offline
     configChannel:
     - Name: GooglePlay
-      Dependency: com.yodo1.suit.pay:google:17.0.0.12
+      Dependency: com.yodo1.suit.pay:google:19.0.0.2
       analyticsProperty:
       - Key: google_publish_key
         Value: 
@@ -37,22 +37,8 @@ MonoBehaviour:
       - Key: dmp_key_thinkingdata_url
         Value: https://c1.yodo1.com/
       Selected: 0
-    - Name: Appsflyer
-      Dependency: com.yodo1.suit.analytics:appsflyer:6.12.2.0
-      analyticsProperty:
-      - Key: af_dev_key
-        Value: 
-      - Key: af_uriSchema
-        Value: 
-      - Key: af_uriHost
-        Value: 
-      - Key: af_urlHost
-        Value: 
-      - Key: af_templateId
-        Value: 
-      Selected: 0
     - Name: Adjust
-      Dependency: com.yodo1.suit.analytics:adjust:4.33.5.0
+      Dependency: com.yodo1.suit.analytics:adjust:4.38.0.0
       analyticsProperty:
       - Key: adjust_app_token
         Value: 

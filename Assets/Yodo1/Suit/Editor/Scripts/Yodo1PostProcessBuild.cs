@@ -19,11 +19,7 @@ public class Yodo1PostProcessBuild
         else if (BPOption.target == BuildTarget.iOS)
         {
 #if UNITY_IOS || UNITY_IPHONE
-<<<<<<<< HEAD:Assets/Yodo1/Suit/Editor/Scripts/Yodo1BuildProcess .cs
-            XcodePostprocess.BeforeBuildProcess(BPOption);
-========
             Yodo1PostProcessBuild_IOS.BeforeBuildProcess(BPOption);
->>>>>>>> newDev:Assets/Yodo1/Suit/Editor/Scripts/Yodo1PostProcessBuild.cs
 #endif
         }
 
@@ -41,11 +37,7 @@ public class Yodo1PostProcessBuild
         else if (buildTarget == BuildTarget.iOS)
         {
 #if UNITY_IOS || UNITY_IPHONE
-<<<<<<<< HEAD:Assets/Yodo1/Suit/Editor/Scripts/Yodo1BuildProcess .cs
-            XcodePostprocess.AfterBuildProcess(buildTarget, pathToBuiltProject);
-========
             Yodo1PostProcessBuild_IOS.AfterBuildProcess(buildTarget, pathToBuiltProject);
->>>>>>>> newDev:Assets/Yodo1/Suit/Editor/Scripts/Yodo1PostProcessBuild.cs
 #endif
         }
     }

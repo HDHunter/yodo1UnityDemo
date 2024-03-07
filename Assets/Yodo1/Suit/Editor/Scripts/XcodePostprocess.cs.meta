@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Yodo1/Suit/Editor/Utils/Yodo1EditorUtils.cs.meta
-guid: b05209f1e91934b058dfd42f692e2172
-========
 guid: deaa99d335ba446d18465607d88e4809
->>>>>>>> newDev:Assets/Yodo1/Suit/Editor/Scripts/XcodePostprocess.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

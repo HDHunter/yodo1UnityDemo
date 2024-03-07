@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Yodo1Payment : MonoBehaviour
 {
-    List<Yodo1U3dProductData> products = new();
+    List<Yodo1U3dProductData> products = new List<Yodo1U3dProductData>();
     string[] lastOrderId = new string[0] { };
 
     // Use this for initialization
@@ -41,7 +41,7 @@ public class Yodo1Payment : MonoBehaviour
                   ", orderId : " + orderId + ",channelOrderId" + channelOrderId + ", extra : " + extra);
         if (status == Yodo1U3dConstants.PayEvent.PaySuccess)
         {
-            lastOrderId = new string[] {orderId};
+            lastOrderId = new string[] { orderId };
             //支付成功
             Debug.Log(Yodo1U3dConstants.LOG_TAG + "Pay success");
         }
@@ -60,14 +60,13 @@ public class Yodo1Payment : MonoBehaviour
         if (products != null)
         {
             this.products = products;
-            // foreach (Yodo1U3dProductData product in products)
-            // {
-            //     Debug.Log(Yodo1U3dConstants.LOG_TAG + "productId:" + product.ProductId + ",PriceDisplay:" +
-            //               product.PriceDisplay + ",PriceDisplay:" + product.PriceDisplay);
-            //     Debug.Log(Yodo1U3dConstants.LOG_TAG + "MarketId:" + product.MarketId + ",Currency:" + product.Currency +
-            //               "\n" + "Description" + product.Description + "\n");
-            // }
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + " 一共解析获取到数量：" + products.Count);
+            foreach (Yodo1U3dProductData product in products)
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "productId:" + product.ProductId + ",PriceDisplay:" +
+                          product.PriceDisplay + ",PriceDisplay:" + product.PriceDisplay);
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "MarketId:" + product.MarketId + ",Currency:" + product.Currency +
+                          "\n" + "Description" + product.Description + "\n");
+            }
         }
     }
 

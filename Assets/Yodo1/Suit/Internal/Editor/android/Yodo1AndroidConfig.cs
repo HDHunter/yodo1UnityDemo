@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
 namespace Yodo1.Suit
 {
@@ -99,6 +100,34 @@ namespace Yodo1.Suit
                 }
             }
 
+            List<AnalyticsItem> items = settings.androidSettings.configAnalytics;
+            if (items != null && items.Count > 0)
+            {
+                List<string> ll = new List<string>();
+                foreach (AnalyticsItem item in items)
+                {
+                    if (item != null && item.Selected)
+                    {
+                        ll.Add(item.Name);
+                    }
+                }
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < ll.Count; i++)
+                {
+                    if (i == ll.Count - 1)
+                    {
+                        sb.Append(ll[i]);
+                    }
+                    else
+                    {
+                        sb.Append(ll[i]).Append(",");
+                    }
+                }
+
+                props.Add("analytics_code", sb.ToString());
+            }
+
             if (!string.IsNullOrEmpty(setsYodo1SDKType))
             {
                 if (setsYodo1SDKType.Equals("GooglePlay"))
@@ -168,44 +197,41 @@ namespace Yodo1.Suit
             Yodo1EditorFileUtils.DeleteFile(depDir + "//" + dep);
             CreateFile(depDir, dep, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                                     "<dependencies>\n" +
-                                    "\t<androidPackages>\n" +
-                                    "\t\t<repositories>");
-            //开始
-            CreateFile(depDir, dep,
-                //"\t\t\t<repository>https://nexus.yodo1.com/repository/maven-public/</repository>\n" +
-                //"\t\t\t<repository>https://mvnrepository.com/</repository>\n" +
-                "\t\t</repositories>");
+                                    "\t<androidPackages>");
             Yodo1PropertiesUtils prop = new Yodo1PropertiesUtils(CONFIG_Android_PATH);
 
             RuntimeSettings settings = SettingsSave.Load(false);
-            //非gp渠道，使用PA打包。
+            //非gp渠道，使用PA打包，其他依赖忽略。
             if (settings.androidSettings.Yodo1SDKType.Equals("GooglePlay"))
             {
                 CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop["suitCore"]));
-            }
 
-            List<AnalyticsItem> items = settings.androidSettings.configAnalytics;
-            if (items != null && items.Count > 0)
-            {
-                foreach (AnalyticsItem item in items)
+
+                List<AnalyticsItem> items = settings.androidSettings.configAnalytics;
+                if (items != null && items.Count > 0)
                 {
-                    if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
-                        !string.IsNullOrEmpty((string)prop[item.Name]))
+                    foreach (AnalyticsItem item in items)
                     {
-                        CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
+                        if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
+                            !string.IsNullOrEmpty((string) prop[item.Name]))
+                        {
+                            CreateFile(depDir, dep,
+                                string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
+                        }
                     }
                 }
-            }
 
-            List<AnalyticsItem> channel = settings.androidSettings.configChannel;
-            if (channel != null && channel.Count > 0)
-            {
-                foreach (AnalyticsItem item in channel)
+                List<AnalyticsItem> channel = settings.androidSettings.configChannel;
+                if (channel != null && channel.Count > 0)
                 {
-                    if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
-                        !string.IsNullOrEmpty((string)prop[item.Name]))
+                    foreach (AnalyticsItem item in channel)
                     {
-                        CreateFile(depDir, dep, string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
+                        if (item != null && item.Selected && !string.IsNullOrEmpty(item.Name) &&
+                            !string.IsNullOrEmpty((string) prop[item.Name]))
+                        {
+                            CreateFile(depDir, dep,
+                                string.Format("\t\t<androidPackage spec=\"{0}\" />", prop[item.Name]));
+                        }
                     }
                 }
             }
@@ -261,13 +287,13 @@ namespace Yodo1.Suit
 
         public static void GenerateAndroidLibProject()
         {
-            string androidLibPath = Yodo1AndroidConfig.androidLib;
+            string androidLibPath = androidLib;
             if (!File.Exists(androidLibPath))
             {
                 Directory.CreateDirectory(androidLibPath);
             }
 
-            string manifestFile = Yodo1AndroidConfig.androidLibManifest; // androidLibPath + "AndroidManifest.xml";
+            string manifestFile = androidLibManifest; // androidLibPath + "AndroidManifest.xml";
             string manifestText = string.Format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                                                 "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" package=\"com.yodo1.suit.app.unity\" android:versionCode=\"1\" android:versionName=\"1.0\">\n" +
                                                 "\t<application>\n" +
@@ -282,7 +308,7 @@ namespace Yodo1.Suit
                 Directory.CreateDirectory(resPath);
             }
 
-            string assetsPath = Yodo1AndroidConfig.androidLibAssets;
+            string assetsPath = androidLibAssets;
             if (!File.Exists(assetsPath))
             {
                 Directory.CreateDirectory(assetsPath);

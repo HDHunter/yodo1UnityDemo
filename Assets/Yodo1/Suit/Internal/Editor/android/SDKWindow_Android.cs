@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using System.IO;
 
 namespace Yodo1.Suit
 {
@@ -11,9 +10,9 @@ namespace Yodo1.Suit
     {
         public RuntimeSettings runtimeSettings;
 
-        public static string[] screenOrients = { "portrait", "landscape" };
-        public static string[] sdkTypes = { "GooglePlay", "ChinaMainLand" };
-        public static string[] sdkModes = { "offline", "online" };
+        public static string[] screenOrients = {"portrait", "landscape"};
+        public static string[] sdkTypes = {"GooglePlay", "ChinaMainLand"};
+        public static string[] sdkModes = {"offline", "online"};
 
         public Vector2 scrollPosition;
 
@@ -77,37 +76,24 @@ namespace Yodo1.Suit
 
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
             DrawAndroidContent();
-            DrawAndroidChannel();
-            DrawAndroidAnalytics();
+            int index = 0;
+            if (!string.IsNullOrEmpty(runtimeSettings.androidSettings.Yodo1SDKType))
+            {
+                index = sdkTypes.ToList().IndexOf(runtimeSettings.androidSettings.Yodo1SDKType);
+            }
+
+            if (index == 0)
+            {
+                DrawAppBasicConfig();
+                DrawAndroidChannel();
+                DrawAndroidAnalytics();
+            }
+
             GUILayout.EndScrollView();
         }
 
-        private void DrawAndroidContent()
+        private void DrawAppBasicConfig()
         {
-            GUILayout.Label("Android Settings", EditorStyles.boldLabel);
-            GUIStyle gUIStyle = new GUIStyle();
-            gUIStyle.padding = new RectOffset(10, 10, 2, 2);
-            GUILayout.BeginVertical(gUIStyle);
-
-            EditorGUILayout.Separator();
-
-            runtimeSettings.androidSettings.debugEnabled = EditorGUILayout.Toggle("Debug Mode",
-                runtimeSettings.androidSettings.debugEnabled, new GUILayoutOption[0]);
-            EditorGUILayout.Separator();
-
-            runtimeSettings.androidSettings.AppKey =
-                EditorGUILayout.TextField("App Key*", runtimeSettings.androidSettings.AppKey);
-            if (string.IsNullOrEmpty(runtimeSettings.androidSettings.AppKey))
-            {
-                EditorGUILayout.HelpBox("AppKey Missing for this platform", MessageType.Warning);
-            }
-
-            runtimeSettings.androidSettings.RegionCode = EditorGUILayout.TextField("Region Code(Optional)",
-                runtimeSettings.androidSettings.RegionCode);
-
-            GUILayout.EndVertical();
-
-            GUILayout.BeginVertical(gUIStyle);
             int index = 0;
             if (!string.IsNullOrEmpty(runtimeSettings.androidSettings.thisProjectOrient))
             {
@@ -121,25 +107,7 @@ namespace Yodo1.Suit
             }
 
             EditorGUILayout.Separator();
-            GUILayout.EndVertical();
-
-            GUILayout.BeginVertical(gUIStyle);
-            index = 0;
-            if (!string.IsNullOrEmpty(runtimeSettings.androidSettings.Yodo1SDKType))
-            {
-                index = sdkTypes.ToList().IndexOf(runtimeSettings.androidSettings.Yodo1SDKType);
-            }
-
-            selectIndex = EditorGUILayout.Popup("Publishing Store", index, sdkTypes);
-            if (selectIndex >= 0)
-            {
-                runtimeSettings.androidSettings.Yodo1SDKType = sdkTypes[selectIndex];
-            }
-
-            EditorGUILayout.Separator();
-            GUILayout.EndVertical();
-
-            GUILayout.BeginVertical(gUIStyle);
+            
             index = 0;
             if (!string.IsNullOrEmpty(runtimeSettings.androidSettings.yodo1_sdk_mode))
             {
@@ -151,15 +119,51 @@ namespace Yodo1.Suit
             {
                 runtimeSettings.androidSettings.yodo1_sdk_mode = sdkModes[selectIndex];
             }
-
             EditorGUILayout.Separator();
-
+            
             float originalValue = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = originalValue + 10;
             runtimeSettings.androidSettings.isShowYodo1Logo = EditorGUILayout.Toggle("Enable Yodo1 Splash Logo",
                 runtimeSettings.androidSettings.isShowYodo1Logo);
             EditorGUIUtility.labelWidth = originalValue;
 
+            EditorGUILayout.Separator();
+        }
+
+        private void DrawAndroidContent()
+        {
+            GUILayout.Label("Android Settings", EditorStyles.boldLabel);
+            GUIStyle gUIStyle = new GUIStyle();
+            gUIStyle.padding = new RectOffset(10, 10, 2, 2);
+
+            GUILayout.BeginVertical(gUIStyle);
+            EditorGUILayout.Separator();
+            runtimeSettings.androidSettings.debugEnabled = EditorGUILayout.Toggle("Debug Mode",
+                runtimeSettings.androidSettings.debugEnabled, new GUILayoutOption[0]);
+
+            runtimeSettings.androidSettings.AppKey =
+                EditorGUILayout.TextField("App Key*", runtimeSettings.androidSettings.AppKey);
+            if (string.IsNullOrEmpty(runtimeSettings.androidSettings.AppKey))
+            {
+                EditorGUILayout.HelpBox("AppKey Missing for this platform", MessageType.Warning);
+            }
+            EditorGUILayout.Separator();
+
+            runtimeSettings.androidSettings.RegionCode = EditorGUILayout.TextField("Region Code(Optional)",
+                runtimeSettings.androidSettings.RegionCode);
+            
+            int index = 0;
+            if (!string.IsNullOrEmpty(runtimeSettings.androidSettings.Yodo1SDKType))
+            {
+                index = sdkTypes.ToList().IndexOf(runtimeSettings.androidSettings.Yodo1SDKType);
+            }
+
+            int selectIndex = EditorGUILayout.Popup("Publishing Store", index, sdkTypes);
+            if (selectIndex >= 0)
+            {
+                runtimeSettings.androidSettings.Yodo1SDKType = sdkTypes[selectIndex];
+            }
+            EditorGUILayout.Separator();
             GUILayout.EndVertical();
         }
 
@@ -242,8 +246,5 @@ namespace Yodo1.Suit
                 GUILayout.EndVertical();
             }
         }
-
-
-
     }
 }

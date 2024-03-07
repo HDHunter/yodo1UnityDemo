@@ -48,17 +48,24 @@ public class Yodo1U3dActivationCodeData
         Yodo1U3dActivationCodeData codeData = new Yodo1U3dActivationCodeData();
         codeData.Code = Yodo1U3dConstants.ActivityEvent.Fail;
 
-        Dictionary<string, object> dic = (Dictionary<string, object>) Yodo1JSONObject.Deserialize(data);
+        Dictionary<string, object> dic = (Dictionary<string, object>)Yodo1JSONObject.Deserialize(data);
         if (dic != null)
         {
             if (dic.ContainsKey("code"))
             {
-                codeData.Code = (Yodo1U3dConstants.ActivityEvent) (int.Parse(dic["code"].ToString()));
+                codeData.Code = (Yodo1U3dConstants.ActivityEvent)(int.Parse(dic["code"].ToString()));
             }
 
             if (dic.ContainsKey("reward"))
             {
-                codeData.Rewards = (Dictionary<string, object>) dic["reward"];
+                try
+                {
+                    codeData.Rewards = (Dictionary<string, object>)dic["reward"];
+                }
+                catch (Exception e)
+                {
+                    codeData.Rewards = null;
+                }
             }
 
             if (dic.ContainsKey("rewardDes"))

@@ -55,7 +55,7 @@ public class Yodo1U3dAnalyticsForAndroid
             androidCall.CallStatic("login", userjson);
         }
     }
-    
+
     public static void logout()
     {
         if (null != androidCall)
@@ -135,11 +135,11 @@ public class Yodo1U3dAnalyticsForAndroid
         }
     }
 
-    public static void logInviteAppsFlyerWithEventData(string jsonParam)
+    public static void logInviteAppsFlyerWithEventData(string jsonParam, string gameObjectName, string callbackName)
     {
         if (null != androidCall)
         {
-            androidCall.CallStatic("logInviteAppsFlyerWithEventData", jsonParam, "", "");
+            androidCall.CallStatic("logInviteAppsFlyerWithEventData", jsonParam, gameObjectName, callbackName);
         }
     }
 }

@@ -13,53 +13,49 @@ public class Yodo1Account : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Yodo1U3dAccount.SetLoginDelegate(LoginDelegate);
-        Yodo1U3dAccount.SetLogoutDelegate(LogoutDelegate);
-        Yodo1U3dAccount.SetRegistDelegate(RegistDelegate);
-    }
-
-    void LoginDelegate(Yodo1U3dConstants.AccountEvent accountEvent, Yodo1U3dUser user)
-    {
-        Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit LoginDelegate.");
-        if (accountEvent == Yodo1U3dConstants.AccountEvent.Success)
+        Yodo1U3dAccount.SetLoginDelegate((Yodo1U3dConstants.AccountEvent accountEvent, Yodo1U3dUser user) =>
         {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "login success, " + user.toJson());
-            if (user != null)
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit LoginDelegate.");
+            if (accountEvent == Yodo1U3dConstants.AccountEvent.Success)
             {
-                gameUser = user;
-                ContinueGame(0);
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "login success, " + user.toJson());
+                if (user != null)
+                {
+                    gameUser = user;
+                    ContinueGame(0);
+                }
+                else
+                {
+                    Yodo1U3dUtils.ShowAlert("Warning", "登录失败...", "Ok");
+                }
             }
-            else
+            else if (accountEvent == Yodo1U3dConstants.AccountEvent.Fail)
             {
-                Yodo1U3dUtils.ShowAlert("Warning", "登录失败...", "Ok");
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "login failed");
             }
-        }
-        else if (accountEvent == Yodo1U3dConstants.AccountEvent.Fail)
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "login failed");
-        }
-    }
+        });
 
-    void LogoutDelegate(Yodo1U3dConstants.AccountEvent accountEvent)
-    {
-        Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit LogoutDelegate.");
-        if (accountEvent == Yodo1U3dConstants.AccountEvent.Success)
+        Yodo1U3dAccount.SetLogoutDelegate((Yodo1U3dConstants.AccountEvent accountEvent) =>
         {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Logout success");
-        }
-        else if (accountEvent == Yodo1U3dConstants.AccountEvent.Fail)
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Logout failed");
-        }
-    }
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit LogoutDelegate.");
+            if (accountEvent == Yodo1U3dConstants.AccountEvent.Success)
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "Logout success");
+            }
+            else if (accountEvent == Yodo1U3dConstants.AccountEvent.Fail)
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "Logout failed");
+            }
+        });
 
-    void RegistDelegate(Yodo1U3dConstants.AccountEvent accountEvent)
-    {
-        Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit RegistDelegate.");
-        if (accountEvent == Yodo1U3dConstants.AccountEvent.Success)
+        Yodo1U3dAccount.SetRegistDelegate((Yodo1U3dConstants.AccountEvent accountEvent) =>
         {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Regsit success");
-        }
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit RegistDelegate.");
+            if (accountEvent == Yodo1U3dConstants.AccountEvent.Success)
+            {
+                Debug.Log(Yodo1U3dConstants.LOG_TAG + "Regsit success");
+            }
+        });
     }
 
     // Update is called once per frame
@@ -188,7 +184,8 @@ public class Yodo1Account : MonoBehaviour
         {
             var policyLink = Yodo1U3dUtils.getPolicyLink();
             var termsLink = Yodo1U3dUtils.getTermsLink();
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit policyLink:" + policyLink + " termsLink:" + termsLink);
+            var childPrivacyLink = Yodo1U3dUtils.getChildPrivacyLink();
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Yodo1Suit policyLink:" + policyLink + " termsLink:" + termsLink+ " childPrivacyLink:" + childPrivacyLink);
         }
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 13 + btn_h * 12, btn_w, btn_h), "打开排行榜"))

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Yodo1SDKSettings
   m_EditorClassIdentifier: 
   configKey:
-    SdkVersion: 6.3.3
+    SdkVersion: 6.3.8
     AppleAppId: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684AppleAppId]"
     debugEnable: 0
     AppKey: "[\u8BF7\u8F93\u5165\u9879\u76EE\u6B63\u786E\u7684Yodo1 AppKey]"
@@ -32,6 +32,8 @@ MonoBehaviour:
     AdjustURLIdentifier: 
     AdjustURLSechemes: 
     AdjustUniversalLinksDomain: 
+    DouyinAppId: 
+    DouyinClientKey: 
   configBasic:
   - Name: "UCpayment[\u5185\u4ED8\u8D39]"
     Index: 1
@@ -67,7 +69,7 @@ MonoBehaviour:
   - Name: AppsFlyer
     Index: 0
     Url: Yodo1Suit/Analytics/AppsFlyer
-    Enable: 1
+    Enable: 0
     Selected: 0
   - Name: "Thinking[\u6570\u6570\u7EDF\u8BA1]"
     Index: 1

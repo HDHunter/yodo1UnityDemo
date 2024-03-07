@@ -72,6 +72,7 @@ namespace Yodo1.Suit
                 string isdebug = settings.GetKeyItem().debugEnable;
                 UpdatePlistStringItem(true, configDic, SettingsConstants.K_DEBUG_ENABLED, isdebug);
 
+                #region AppsFlyer
                 bool isAFEnable = EnableSelected(settings, SettingType.Analytics, (int)SettingsConstants.AnalyticsType.AppsFlyer);
                 string AppsFlyerDevKey = settings.GetKeyItem().AppsFlyerDevKey;
                 UpdatePlistStringItem(isAFEnable, configDic, SettingsConstants.K_AF_DEV_KEY, AppsFlyerDevKey);
@@ -85,19 +86,32 @@ namespace Yodo1.Suit
                 UpdatePlistStringItem(isAFEnable, configDic, SettingsConstants.K_AF_SCHEMES, AppsFlyer_Schemes);
                 string AppsFlyer_domain = settings.GetKeyItem().AppsFlyer_domain;
                 UpdatePlistStringItem(isAFEnable, configDic, SettingsConstants.K_AF_DOMAIN, AppsFlyer_domain);
+                #endregion
 
+                #region Adjust
                 bool isAdjustEnable = EnableSelected(settings, SettingType.Analytics, (int)SettingsConstants.AnalyticsType.Adjust);
                 string AdjustAppToken = settings.GetKeyItem().AdjustAppToken;
                 UpdatePlistStringItem(isAdjustEnable, configDic, SettingsConstants.K_ADJ_APP_TOKEN, AdjustAppToken);
 
                 bool AdjustSandbox = settings.GetKeyItem().AdjustEnvironmentSandbox;
                 UpdatePlistBoolItem(isAdjustEnable, configDic, SettingsConstants.K_ADJ_ENV_SANDBOX, AdjustSandbox);
+                #endregion
 
+                #region Thinking Data
                 bool isThinkingEnable = EnableSelected(settings, SettingType.Analytics, (int)SettingsConstants.AnalyticsType.Thinking);
                 string ThinkingAppId = settings.GetKeyItem().ThinkingAppId;
                 UpdatePlistStringItem(isThinkingEnable, configDic, SettingsConstants.K_THINKING_APP_ID, ThinkingAppId);
                 string ThinkingServerUrl = settings.GetKeyItem().ThinkingServerUrl;
                 UpdatePlistStringItem(isThinkingEnable, configDic, SettingsConstants.K_THINKING_SERVER_URL, ThinkingServerUrl);
+                #endregion
+
+                #region Replay
+                //bool isThinkingEnable = EnableSelected(settings, SettingType.Analytics, (int)SettingsConstants.AnalyticsType.Thinking);
+                string DouyinAppId = settings.GetKeyItem().DouyinAppId;
+                UpdatePlistStringItem(true, configDic, SettingsConstants.K_DOUYIN_APP_ID, DouyinAppId);
+                string DouyinClientKey = settings.GetKeyItem().DouyinClientKey;
+                UpdatePlistStringItem(true, configDic, SettingsConstants.K_DOUYIN_CLIENT_KEY, DouyinClientKey);
+                #endregion
             }
 
             if (dic.ContainsKey(SettingsConstants.K_DICT_SETTING_ITEMS))

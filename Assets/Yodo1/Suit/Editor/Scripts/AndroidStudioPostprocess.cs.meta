@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Yodo1/Suit/Editor/Scripts/Yodo1AppsFlyerPostprocess.cs.meta
-guid: 40a59225b88d84137b0c571e33cfd6b3
-========
 guid: 87a1602fc0b06498796e6346f3837349
->>>>>>>> newDev:Assets/Yodo1/Suit/Editor/Scripts/AndroidStudioPostprocess.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

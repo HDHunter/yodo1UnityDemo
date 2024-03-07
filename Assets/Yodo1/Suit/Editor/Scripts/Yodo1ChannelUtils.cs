@@ -89,7 +89,7 @@ public class Yodo1ChannelUtils
                            "        android:scheme=\"https\" />\n" +
                            "</intent-filter>\n";
         List<KVItem> ies = item.analyticsProperty;
-        string uriSchema = "", uriHost = "app.adjust.com";
+        string uriSchema = "", uriHost = "";
         foreach (KVItem i in ies)
         {
             if (i.Key.Contains("uriSchema"))
@@ -109,7 +109,7 @@ public class Yodo1ChannelUtils
                 deep_schema + "<!--Splash_end-->");
         }
 
-        if (Yodo1EditorUtils.IsVaildValue(uriSchema) && Yodo1EditorUtils.IsVaildValue(uriHost))
+        if (Yodo1EditorUtils.IsVaildValue(uriHost))
         {
             deep_host = deep_host.Replace("@uriHost", uriHost);
             Yodo1EditorFileUtils.Replace(Yodo1AndroidConfig.manifest, "<!--Splash_end-->",

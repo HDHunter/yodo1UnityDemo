@@ -178,12 +178,12 @@ public class Yodo1U3dSDK : MonoBehaviour
                 errorMsg = obj["error"].ToString(); //error msg
             }
 
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "flag:" + flag + ", resultCode:" + resultCode + ", errorMsg:" +
-                      errorMsg);
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "flag:" + flag + ", resultCode:" + resultCode + ", errorMsg:" + errorMsg);
         }
 
         Yodo1U3dPaymentDelegate.Callback(flag, resultCode, obj);
         Yodo1U3dAccountDelegate.Callback(flag, resultCode, obj);
+        Yodo1U3dReplay.ReplayDelegate.Callback(flag, resultCode, errorMsg);
 
         switch (flag)
         {

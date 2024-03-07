@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Globalization;
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -16,28 +15,16 @@ public class Yodo1U3dUtils
     /// <summary>
     /// Quit the game.
     /// </summary>
-    /// <param name="obj"></param>
-    /// <param name="callbackMethod"></param>
-    public static void exit(MonoBehaviour obj, Yodo1U3dCallback.onResult callbackMethod)
+    public static void exit()
     {
-        if (obj != null && callbackMethod != null)
-        {
-            GameObject gameObj = obj.gameObject;
-            if (gameObj != null)
-            {
-                string methodName = ((Delegate)callbackMethod).Method.Name;
-                if (methodName != null)
-                {
 #if UNITY_EDITOR
-                    Application.Quit();
+        Application.Quit();
 #elif UNITY_ANDROID
-                    Yodo1U3dUtilsForAndroid.exit(gameObj.name, methodName);
+        Yodo1U3dUtilsForAndroid.exit(Yodo1U3dSDK.Instance.SdkObjectName,
+            Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
-                    Application.Quit();
+        Application.Quit();
 #endif
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -57,7 +44,7 @@ public class Yodo1U3dUtils
 
 
     /// <summary>
-    /// 获取用户用户协议链接
+    /// 获取用户协议链接
     /// </summary>
     /// <returns></returns>
     public static string getTermsLink()
@@ -67,6 +54,21 @@ public class Yodo1U3dUtils
         terms = "http://www.yodo1.com";
 #elif UNITY_ANDROID
         terms = Yodo1U3dUtilsForAndroid.getTermsLink();
+#endif
+        return terms;
+    }
+
+    /// <summary>
+    /// 获取儿童隐私协议链接
+    /// </summary>
+    /// <returns></returns>
+    public static string getChildPrivacyLink()
+    {
+        string terms = string.Empty;
+#if UNITY_EDITOR
+        terms = "http://www.yodo1.com";
+#elif UNITY_ANDROID
+        terms = Yodo1U3dUtilsForAndroid.getChildPrivacy();
 #endif
         return terms;
     }
@@ -436,7 +438,7 @@ public class Yodo1U3dUtils
 
         if (callbackMethod != null)
         {
-            methodName = ((Delegate)callbackMethod).Method.Name;
+            methodName = ((Delegate) callbackMethod).Method.Name;
         }
 #if UNITY_ANDROID
         Yodo1U3dUtilsForAndroid.ShowAlert(title, message, positiveButton, negativeButton, neutralButton, objName,
@@ -464,35 +466,19 @@ public class Yodo1U3dUtils
 #endif
     }
 
-    /// <summary>
-    /// 判断当前是不是大陆地区 【中国用户】
-    /// </summary>
-    /// <returns></returns>
-    [System.Obsolete("'IsChineseMainland' is deprecated.", true)]
-    public static bool IsChineseMainland()
+    public static void SaveToNativeRuntime(string key, Dictionary<string, string> valuePairs)
     {
-        //#if UNITY_EDITOR
-        //#elif UNITY_IPHONE
-        //        return Yodo1U3dUtilsForIOS.IsChineseMainland();
-        //#elif UNITY_ANDROID
-        //        return Yodo1U3dUtilsForAndroid.IsChineseMainland();
-        //#endif
-        return true;
-    }
-
-    public static void SaveToNativeRuntime(string key, Dictionary<string, string> valuepairs)
-    {
-        var serialize = Yodo1JSONObject.Serialize(valuepairs);
+        var serialize = Yodo1JSONObject.Serialize(valuePairs);
         SaveToNativeRuntime(key, serialize);
     }
 
-    public static void SaveToNativeRuntime(string key, string valuepairs)
+    public static void SaveToNativeRuntime(string key, string valuePairs)
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dUtilsForAndroid.saveToNativeRuntime(key, valuepairs);
+        Yodo1U3dUtilsForAndroid.saveToNativeRuntime(key, valuePairs);
 #elif UNITY_IPHONE
-        Yodo1U3dUtilsForIOS.saveToNativeRuntime(key, valuepairs);
+        Yodo1U3dUtilsForIOS.saveToNativeRuntime(key, valuePairs);
 #endif
     }
 

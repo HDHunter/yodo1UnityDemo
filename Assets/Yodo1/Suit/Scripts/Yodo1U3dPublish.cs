@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 // #undef UNITY_EDITOR
 
 /// <summary>
@@ -17,7 +14,6 @@ public class Yodo1U3dPublish
 #elif UNITY_ANDROID
         Yodo1U3dUtilsForAndroid.moreGame();
 #elif UNITY_IPHONE
-
 #endif
     }
 
@@ -86,7 +82,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.achievementsOpen();
+        Yodo1U3dAccountForAndroid.AchievementsOpen();
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.AchievementsOpen();
 #endif
@@ -100,7 +96,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.achievementsUnlock(achievementStr);
+        Yodo1U3dAccountForAndroid.AchievementsUnlock(achievementStr);
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.AchievementsUnlock(achievementStr);
 #endif
@@ -115,7 +111,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.achievementsUnlock(achievementStr, step);
+        Yodo1U3dAccountForAndroid.AchievementsUnlock(achievementStr, step);
 #elif UNITY_IPHONE
 #endif
     }
@@ -139,27 +135,15 @@ public class Yodo1U3dPublish
     /// <summary>
     /// 获取当前所有成就的进度
     /// </summary>
-    /// <param name="obj"></param>
-    /// <param name="callbackMethod">回调函数，返回json串。
     /// 格式:{"code":"结果码","msg":"结果信息","data":{"成就id1","值"..., "成就idN","值"}}</param>
-    public static void getAchievementSteps(MonoBehaviour obj, Yodo1U3dCallback.onResult callbackMethod)
+    public static void getAchievementSteps()
     {
-        if (obj != null && callbackMethod != null)
-        {
-            GameObject gameObj = obj.gameObject;
-            if (gameObj != null)
-            {
-                string methodName = ((Delegate)callbackMethod).Method.Name;
-                if (methodName != null)
-                {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-                    Yodo1U3dAccountForAndroid.getAchievementSteps(gameObj.name, methodName);
+        Yodo1U3dAccountForAndroid.GetAchievementSteps(Yodo1U3dSDK.Instance.SdkObjectName,
+            Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
 #endif
-                }
-            }
-        }
     }
 
 
@@ -172,7 +156,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.saveToCloud(SaveName, SaveValue);
+        Yodo1U3dAccountForAndroid.SaveToCloud(SaveName, SaveValue);
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.SaveToCloud(SaveName, SaveValue);
 #endif
@@ -189,7 +173,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.loadToCloud(name, Yodo1U3dSDK.Instance.SdkObjectName,
+        Yodo1U3dAccountForAndroid.LoadToCloud(name, Yodo1U3dSDK.Instance.SdkObjectName,
             Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.LoadToCloud(name);
@@ -200,7 +184,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.saveToCloud(fileName, "");
+        Yodo1U3dAccountForAndroid.SaveToCloud(fileName, "");
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.RemoveRecordWithRecordName(fileName);
 #endif
@@ -214,7 +198,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.leaderboardsOpen();
+        Yodo1U3dAccountForAndroid.LeaderboardsOpen();
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.LeaderboardsOpen();
 #endif
@@ -229,7 +213,7 @@ public class Yodo1U3dPublish
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.updateScore(scoreId, score);
+        Yodo1U3dAccountForAndroid.UpdateScore(scoreId, score);
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.UpdateScore(scoreId, (int) score);
 #endif
@@ -251,36 +235,43 @@ public class Yodo1U3dPublish
         return 0;
     }
 
-
+    [System.Obsolete("Please use `Yodo1U3dReplay` instead.", false)]
     public static void BeginRecordVideo()
     {
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAccountForAndroid.ShowRecordVideo();
+        Yodo1U3dAccountForAndroid.RecordVideo();
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.StartScreenRecorder();
 #endif
     }
 
-    //停止录制，仅支持iOS
+    //停止录制
+    [System.Obsolete("Please use `Yodo1U3dReplay` instead.", false)]
     public static void StopRecordVideo()
     {
 #if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAccountForAndroid.StopRecordVideo();
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.StopScreenRecorder();
 #endif
     }
 
-    //展示录制内容，仅支持iOS
+    //展示录制内容
+    [System.Obsolete("Please use `Yodo1U3dReplay` instead.", false)]
     public static void ShowRecordVideo()
     {
 #if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAccountForAndroid.ShowRecordVideo();
 #elif UNITY_IPHONE
         Yodo1U3dGCManagerForIOS.ShowRecorder();
 #endif
     }
 
     //是否支持截屏
+    [System.Obsolete("Please use `Yodo1U3dReplay` instead.", false)]
     public static bool IsCaptureSupported()
     {
 #if UNITY_EDITOR

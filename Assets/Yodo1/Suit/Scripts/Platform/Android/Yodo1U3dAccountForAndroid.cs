@@ -27,7 +27,7 @@ public class Yodo1U3dAccountForAndroid
     /// </summary>
     /// <param name="gameObjectName"></param>
     /// <param name="callbackName"></param>
-    public static void login(string gameObjectName, string callbackName)
+    public static void Login(string gameObjectName, string callbackName)
     {
         if (null != androidCall)
         {
@@ -42,7 +42,7 @@ public class Yodo1U3dAccountForAndroid
     /// <param name="extra">扩展参数</param>
     /// <param name="gameObjectName"></param>
     /// <param name="callbackName"></param>
-    public static void login(int loginType, string extra, string gameObjectName, string callbackName)
+    public static void Login(int loginType, string extra, string gameObjectName, string callbackName)
     {
         if (null != androidCall)
         {
@@ -57,7 +57,7 @@ public class Yodo1U3dAccountForAndroid
     /// <param name="extra">扩展参数</param>
     /// <param name="gameObjectName"></param>
     /// <param name="callbackName"></param>
-    public static void changeAccount(int loginType, string extra, string gameObjectName, string callbackName)
+    public static void ChangeAccount(int loginType, string extra, string gameObjectName, string callbackName)
     {
         if (null != androidCall)
         {
@@ -66,7 +66,7 @@ public class Yodo1U3dAccountForAndroid
     }
 
     //登出
-    public static void logout(string gameObjectName, string callbackName)
+    public static void Logout(string gameObjectName, string callbackName)
     {
         if (null != androidCall)
         {
@@ -75,7 +75,7 @@ public class Yodo1U3dAccountForAndroid
     }
 
     //提交用户信息
-    public static void submitUser(Yodo1U3dUser user)
+    public static void SubmitUser(Yodo1U3dUser user)
     {
         if (null != androidCall)
         {
@@ -85,12 +85,12 @@ public class Yodo1U3dAccountForAndroid
                 jsonData = user.toJson();
             }
 
-            androidCall.CallStatic("sumbitUser", jsonData);
+            androidCall.CallStatic("submitUser", jsonData);
         }
     }
 
     //判断当前渠道的登录状态
-    public static bool isLogin()
+    public static bool IsLogin()
     {
         if (null != androidCall)
         {
@@ -103,7 +103,7 @@ public class Yodo1U3dAccountForAndroid
 
 
     //打开成就页
-    public static void achievementsOpen()
+    public static void AchievementsOpen()
     {
         if (null != androidCall)
         {
@@ -112,7 +112,7 @@ public class Yodo1U3dAccountForAndroid
     }
 
     //解锁成就
-    public static void achievementsUnlock(string achievementStr)
+    public static void AchievementsUnlock(string achievementStr)
     {
         if (null != androidCall)
         {
@@ -121,7 +121,7 @@ public class Yodo1U3dAccountForAndroid
     }
 
     //解锁成就
-    public static void achievementsUnlock(string achievementStr, int step)
+    public static void AchievementsUnlock(string achievementStr, int step)
     {
         if (null != androidCall)
         {
@@ -130,7 +130,7 @@ public class Yodo1U3dAccountForAndroid
     }
 
     //获取当前所有成就的进度
-    public static void getAchievementSteps(string gameObjectName, string callbackName)
+    public static void GetAchievementSteps(string gameObjectName, string callbackName)
     {
         if (null != androidCall)
         {
@@ -141,7 +141,7 @@ public class Yodo1U3dAccountForAndroid
     /// <summary>
     /// 打开排行榜
     /// </summary>
-    public static void leaderboardsOpen()
+    public static void LeaderboardsOpen()
     {
         if (null != androidCall)
         {
@@ -154,7 +154,7 @@ public class Yodo1U3dAccountForAndroid
     /// </summary>
     /// <param name="scoreId">分数Id</param>
     /// <param name="score">分数值</param>
-    public static void updateScore(string scoreId, long score)
+    public static void UpdateScore(string scoreId, long score)
     {
         if (null != androidCall)
         {
@@ -163,7 +163,7 @@ public class Yodo1U3dAccountForAndroid
     }
 
     //储存信息至google云端
-    public static void saveToCloud(string saveName, string savaValue)
+    public static void SaveToCloud(string saveName, string savaValue)
     {
         if (null != androidCall)
         {
@@ -172,7 +172,7 @@ public class Yodo1U3dAccountForAndroid
     }
 
     //从google云端读取信息
-    public static void loadToCloud(string name, string gameObjectName, string callbackName)
+    public static void LoadToCloud(string name, string gameObjectName, string callbackName)
     {
         if (null != androidCall)
         {
@@ -182,20 +182,27 @@ public class Yodo1U3dAccountForAndroid
 
     public static bool IsCaptureSupported()
     {
+        return Yodo1U3dReplay.IsSupport();
+    }
+
+    /// <summary>
+    /// BeginRecordVideo 老逻辑不动,渠道录屏业务
+    /// </summary>
+    public static void RecordVideo()
+    {
         if (null != androidCall)
         {
-            bool value = androidCall.CallStatic<bool>("isCaptureSupported");
-            return value;
+            androidCall.CallStatic("screenRecording");
         }
+    }
 
-        return false;
+    public static void StopRecordVideo()
+    {
+        Yodo1U3dReplay.StopRecord();
     }
 
     public static void ShowRecordVideo()
     {
-        if (null != androidCall)
-        {
-            androidCall.CallStatic("showRecordVideo");
-        }
+        Yodo1U3dReplay.ShowRecorder();
     }
 }

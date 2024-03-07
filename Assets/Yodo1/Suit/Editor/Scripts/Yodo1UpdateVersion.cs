@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 public class Yodo1UpdateVersion : EditorWindow
 {
-    public static string Yodo1PluginVersion = "6.3.3";
+    public static string Yodo1PluginVersion = "6.3.9";
     static readonly string HOST = "https://bj-ali-opp-sdk-update.oss-cn-beijing.aliyuncs.com/";
     static readonly string VERSION_JSON = HOST + "Yodo1Sdk_OpenSuit/version.json";
 

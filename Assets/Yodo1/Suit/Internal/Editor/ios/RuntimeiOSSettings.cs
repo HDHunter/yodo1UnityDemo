@@ -137,6 +137,7 @@ namespace Yodo1.Suit
                 item.RegionCode = (PListString)configDict[SettingsConstants.K_REGION_CODE];
             }
 
+            #region AppsFyler
             if (configDict.ContainsKey(SettingsConstants.K_AF_DEV_KEY))
             {
                 item.AppsFlyerDevKey = (PListString)configDict[SettingsConstants.K_AF_DEV_KEY];
@@ -161,7 +162,9 @@ namespace Yodo1.Suit
             {
                 item.AppsFlyer_domain = (PListString)configDict[SettingsConstants.K_AF_DOMAIN];
             }
+            #endregion
 
+            #region Thinking Data
             if (configDict.ContainsKey(SettingsConstants.K_THINKING_APP_ID))
             {
                 item.ThinkingAppId = (PListString)configDict[SettingsConstants.K_THINKING_APP_ID];
@@ -171,6 +174,7 @@ namespace Yodo1.Suit
             {
                 item.ThinkingServerUrl = (PListString)configDict[SettingsConstants.K_THINKING_SERVER_URL];
             }
+            #endregion
 
             #region Adjust
             if (configDict.ContainsKey(SettingsConstants.K_ADJ_APP_TOKEN))
@@ -197,6 +201,20 @@ namespace Yodo1.Suit
             {
                 item.AdjustUniversalLinksDomain = (PListString)configDict[SettingsConstants.K_ADJ_UNIVERSAL_LINK_DOMAIN];
             }
+            #endregion
+
+            #region Replay
+
+            if (configDict.ContainsKey(SettingsConstants.K_DOUYIN_APP_ID))
+            {
+                item.DouyinAppId = (PListString)configDict[SettingsConstants.K_DOUYIN_APP_ID];
+            }
+
+            if (configDict.ContainsKey(SettingsConstants.K_DOUYIN_CLIENT_KEY))
+            {
+                item.DouyinClientKey = (PListString)configDict[SettingsConstants.K_DOUYIN_CLIENT_KEY];
+            }
+
             #endregion
 
             configKey = item;
@@ -234,6 +252,7 @@ namespace Yodo1.Suit
                     sdkSettings.configKey.RegionCode = RegionCode;
                 }
 
+                #region AppsFlyer
                 string AppsFlyerDevKey = oldSettings.configKey.AppsFlyerDevKey;
                 if (AppsFlyerDevKey != null && Yodo1EditorUtils.IsVaildValue(AppsFlyerDevKey))
                 {
@@ -263,7 +282,9 @@ namespace Yodo1.Suit
                 {
                     sdkSettings.configKey.AppsFlyer_identifier = AppsFlyer_identifier;
                 }
+                #endregion
 
+                #region Thinking Data
                 string ThinkingAppId = oldSettings.configKey.ThinkingAppId;
                 if (ThinkingAppId != null && Yodo1EditorUtils.IsVaildValue(ThinkingAppId))
                 {
@@ -275,6 +296,7 @@ namespace Yodo1.Suit
                 {
                     sdkSettings.configKey.ThinkingServerUrl = ThinkingServerUrl;
                 }
+                #endregion
 
                 #region Adjust
                 string adjustAppToken = oldSettings.configKey.AdjustAppToken;
@@ -302,6 +324,19 @@ namespace Yodo1.Suit
                 if (!string.IsNullOrEmpty(adjustUniversalLinksDomain) && Yodo1EditorUtils.IsVaildValue(adjustUniversalLinksDomain))
                 {
                     sdkSettings.configKey.AdjustUniversalLinksDomain = adjustUniversalLinksDomain;
+                }
+                #endregion
+
+                #region Replay
+                string douyinAppId = oldSettings.configKey.DouyinAppId;
+                if (!string.IsNullOrEmpty(douyinAppId) && Yodo1EditorUtils.IsVaildValue(douyinAppId))
+                {
+                    sdkSettings.configKey.DouyinAppId = douyinAppId;
+                }
+                string douyinClientKey = oldSettings.configKey.DouyinClientKey;
+                if (!string.IsNullOrEmpty(douyinClientKey) && Yodo1EditorUtils.IsVaildValue(douyinClientKey))
+                {
+                    sdkSettings.configKey.DouyinClientKey = douyinClientKey;
                 }
                 #endregion
             }

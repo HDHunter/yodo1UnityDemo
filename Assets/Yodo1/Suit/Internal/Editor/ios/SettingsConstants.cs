@@ -54,6 +54,8 @@
         public static readonly string K_ADJ_URL_SCHEMES = "AdjustURLSechemes";
         public static readonly string K_ADJ_UNIVERSAL_LINK_DOMAIN = "AdjustUniversalLinksDomain";
 
+        public static readonly string K_DOUYIN_APP_ID = "DouyinAppId";
+        public static readonly string K_DOUYIN_CLIENT_KEY = "DouyinClientKey";
 
         // PList SettingsItems
         public static readonly string K_DICT_SETTING_ITEMS = "SettingItems";

@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Yodo1/Suit/Scripts/Common/Entity/Yodo1U3dAnalyticsUserGenerate.cs.meta
-guid: 31b97b3bd74774ec98cd20bc2f8de453
-========
 guid: e523fd166053148c3a883bcaa0e50d36
->>>>>>>> newDev:Assets/Yodo1/Suit/Editor/Scripts/Yodo1AssetsImporter.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -40,10 +40,15 @@ public class Yodo1U3dAnalytics
 #endif
     }
 
-    [System.Obsolete("Please use `TrackEvent` instead.", true)]
-    public static void customEvent(string eventId, Dictionary<string, string> eventValues = null)
+    public static void TrackEvent(string eventId, Dictionary<string, object> eventValues = null)
     {
-        TrackEvent(eventId, eventValues);
+        string jsonData = (eventValues == null ? null : Yodo1JSONObject.Serialize(eventValues));
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
+        Yodo1U3dAnalyticsForAndroid.TrackEvent(eventId, jsonData);
+#elif UNITY_IPHONE
+        Yodo1U3dAnalyticsForIOS.TrackEvent(eventId, jsonData);
+#endif
     }
 
 
@@ -56,12 +61,6 @@ public class Yodo1U3dAnalytics
 #elif UNITY_IPHONE
         Yodo1U3dAnalyticsForIOS.TrackUAEvent(eventId, jsonData);
 #endif
-    }
-
-    [System.Obsolete("Please use `TrackUAEvent` instead.", true)]
-    public static void customEventAppsflyer(string eventId, Dictionary<string, string> eventValues = null)
-    {
-        TrackUAEvent(eventId, eventValues);
     }
 
     #endregion
@@ -111,54 +110,6 @@ public class Yodo1U3dAnalytics
 #endif
     }
 
-    /// <summary>
-    /// Validates the in app purchase google play. 目前只有Appsflyer，注：使用Yodo1支付系统请忽略该方法
-    /// </summary>
-    /// <param name="publicKey">Public key.</param>
-    /// <param name="signature">Signature.</param>
-    /// <param name="purchaseData">Purchase data.</param>
-    /// <param name="price">Price.</param>
-    /// <param name="currency">Currency.</param>
-    [System.Obsolete("Please use `TrackIAPRevenue` instead.", false)]
-    public static void validateInAppPurchase_GooglePlay(string publicKey, string signature, string purchaseData, string price, string currency)
-    {
-        Yodo1U3dAnalyticsForAndroid.validateInAppPurchase(publicKey, signature, purchaseData, price, currency);
-    }
-
-    /// <summary>
-    /// Validates the in app purchase apple store. 目前只有Appsflyer，注：使用Yodo1支付系统请忽略该方法
-    /// </summary>
-    /// <param name="productId">Product identifier.</param>
-    /// <param name="price">Price.</param>
-    /// <param name="currency">Currency.</param>
-    /// <param name="transactionId">Transaction identifier.</param>
-    [System.Obsolete("Please use `TrackIAPRevenue` instead.", true)]
-    public static void validateInAppPurchase_Apple(string productId, string price, string currency, string transactionId)
-    {
-        Yodo1U3dIAPRevenue iAPRevenue = new Yodo1U3dIAPRevenue();
-        iAPRevenue.ProductIdentifier = productId;
-        iAPRevenue.Revenue = price;
-        iAPRevenue.Currency = currency;
-        iAPRevenue.TransactionId = transactionId;
-
-        TrackIAPRevenue(iAPRevenue);
-    }
-
-    /// <summary>
-    /// Custom Validates the in app purchase apple store. 自定义事件上报支付
-    /// </summary>
-    [System.Obsolete("Please use `TrackIAPRevenue` instead.", true)]
-    public static void eventAndValidateInAppPurchase_Apple(string revenue, string currency, string quantity, string contentId, string receiptId)
-    {
-        Yodo1U3dIAPRevenue iAPRevenue = new Yodo1U3dIAPRevenue();
-        iAPRevenue.ProductIdentifier = contentId;
-        iAPRevenue.Revenue = revenue;
-        iAPRevenue.Currency = currency;
-        iAPRevenue.ReceiptId = receiptId;
-
-        TrackIAPRevenue(iAPRevenue);
-    }
-
     #endregion
 
     #region User Invite
@@ -186,7 +137,8 @@ public class Yodo1U3dAnalytics
         string jsonData = (value == null ? null : Yodo1JSONObject.Serialize(value));
 #if UNITY_EDITOR
 #elif UNITY_ANDROID
-        Yodo1U3dAnalyticsForAndroid.logInviteAppsFlyerWithEventData(jsonData);
+        Yodo1U3dAnalyticsForAndroid.logInviteAppsFlyerWithEventData(jsonData,Yodo1U3dSDK.Instance.SdkObjectName,
+            Yodo1U3dSDK.Instance.SdkMethodName);
 #elif UNITY_IPHONE
         Yodo1U3dAnalyticsForIOS.logInviteAppsFlyerWithEventData(jsonData);
 #endif

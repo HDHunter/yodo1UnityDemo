@@ -120,9 +120,29 @@ namespace Yodo1.Suit
                     {
                         item.Selected = EditorGUILayout.Toggle(item.Name, item.Selected, new GUILayoutOption[0]);
 
-                        GUILayout.Label("---------------------------------", EditorStyles.boldLabel, new GUILayoutOption[0]);
-                        EditorGUILayout.Separator();
+                        if (item.Name == "Replay" && item.Selected)
+                        {
+                            GUIStyle gUIStyle7 = new GUIStyle()
+                            {
+                                padding = new RectOffset(20, 10, 5, 5)
+                            };
+                            //gUIStyle7.padding = (new RectOffset(20, 10, 5, 5));
+                            GUILayout.BeginVertical(gUIStyle7, new GUILayoutOption[0]);
+
+                            float originalValue = EditorGUIUtility.labelWidth;
+                            EditorGUIUtility.labelWidth = originalValue + 20;
+
+                            settings.GetKeyItem().DouyinAppId = EditorGUILayout.TextField("Douyin App Id", settings.GetKeyItem().DouyinAppId, new GUILayoutOption[0]);
+                            settings.GetKeyItem().DouyinClientKey = EditorGUILayout.TextField("Douyin Client Key", settings.GetKeyItem().DouyinClientKey, new GUILayoutOption[0]);
+
+                            EditorGUIUtility.labelWidth = originalValue;
+
+                            EditorGUILayout.Separator();
+                            GUILayout.EndVertical();
+                        }
                     }
+                    GUILayout.Label("---------------------------------", EditorStyles.boldLabel, new GUILayoutOption[0]);
+                    EditorGUILayout.Separator();
                 }
 
                 EditorGUILayout.Separator();

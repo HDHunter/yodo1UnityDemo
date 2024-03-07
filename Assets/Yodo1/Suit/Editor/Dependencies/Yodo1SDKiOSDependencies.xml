@@ -4,7 +4,7 @@
 		<sources>
 			<source>https://github.com/Yodo1Games/Yodo1-Games-Spec.git</source>
 		</sources>
-		<iosPod name="Yodo1Suit/UnityCore" version="6.3.3" bitcode="false" minTargetSdk="11.0" />
+		<iosPod name="Yodo1Suit/UnityCore" version="6.3.8" bitcode="false" minTargetSdk="11.0" />
 		<!--Basic-->
 		<!--Analytics-->
 	</iosPods>

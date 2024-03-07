@@ -159,16 +159,6 @@ public class Yodo1U3dUtilsForAndroid
         return false;
     }
 
-    public static bool IsChineseMainland()
-    {
-        if (null != androidCall)
-        {
-            return androidCall.CallStatic<bool>("IsChineseMainland");
-        }
-
-        return false;
-    }
-
     //弹出系统对话框
     public static void ShowAlert(string title, string message, string positiveButton, string negativeButton,
         string neutralButton, string objName, string callbackMethod)
@@ -233,6 +223,17 @@ public class Yodo1U3dUtilsForAndroid
         if (null != androidCall)
         {
             return androidCall.CallStatic<string>("getPolicyLink");
+        }
+
+        return "";
+    }
+
+    //获取儿童隐私政策链接
+    public static string getChildPrivacy()
+    {
+        if (null != androidCall)
+        {
+            return androidCall.CallStatic<string>("getChildPrivacy");
         }
 
         return "";

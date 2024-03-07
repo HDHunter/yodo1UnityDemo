@@ -27,6 +27,15 @@ public class Yodo1U3dInitForAndroid
         androidCall.CallStatic("initWithConfig", sdkInitConfigJson);
     }
 
+    /// <summary>
+    public static void Share(string param, string gameObjectName, string callbackName)
+    {
+        if (null != androidCall)
+        {
+            androidCall.CallStatic("share", gameObjectName, callbackName, param);
+        }
+    }
+
     public static string getSDKVersion()
     {
         if (null != androidCall)
@@ -96,6 +105,19 @@ public class Yodo1U3dInitForAndroid
         if (null != androidCall)
         {
             androidCall.CallStatic("showUserConsent", gameObjectName, callbackName);
+        }
+    }
+    
+
+    /// <summary>
+    /// The SetDebugLog method enable debug log.
+    /// </summary>
+    /// <param name="debugLog"></param>
+    public static void SetDebugLog(bool debugLog)
+    {
+        if (androidCall != null)
+        {
+             androidCall.CallStatic<string>("setDebug",debugLog);
         }
     }
 }

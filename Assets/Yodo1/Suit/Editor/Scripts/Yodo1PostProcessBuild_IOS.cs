@@ -49,6 +49,11 @@ namespace Yodo1.Suit
 
                 BuildUAProcess(buildTarget, pathToBuiltProject);
 
+                BuildReplayProcess(buildTarget, pathToBuiltProject);
+
+                //编辑代码文件UnityAppController
+                EditorCycleCodes(Path.GetFullPath(pathToBuiltProject));
+
                 Debug.Log("Yodo1Suit XcodePostprocess-AfterBuildProcess pathToBuiltProject:" + path);
             }
         }
@@ -169,28 +174,35 @@ namespace Yodo1.Suit
                 AddAssociatedDomaInCapability(pathToBuiltProject, domains.ToArray());
             }
 
-            string path = Path.GetFullPath(pathToBuiltProject);
-            //编辑代码文件UnityAppController
-            EditorCode(path);
+
         }
 
         #endregion
 
-        #region UA - Life cycle code
+        #region Life cycle code
 
         const string unityAppControllerImport = "#import \"UnityAppController.h\"";
+
         const string yodo1AnalyticsManagerImport = "#import \"Yodo1AnalyticsManager.h\"";
+        const string yodo1ReplayManagerImport = "#import \"Yodo1ReplayManager.h\"";
 
         const string topTag = "- (void)preStartUnity               {}";
+
+        // didFinishLaunchingWithOptions
+        const string didFinishLaunchingWithOptions = "- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions\n{";
+        const string didFinishLaunchingWithOptions_Replay = "\n\t[[Yodo1ReplayManager sharedInstance] didFinishLaunchingWithOptions:launchOptions];\n";
+
 
         //openURL:url,options,options.
         const string openUrlText_iOS9_0 = "- (BOOL)application:(UIApplication*)app openURL:(NSURL*)url options:(NSDictionary<NSString*, id>*)options\n{";
 
-        const string handleOpenUrl = "\n\t[[Yodo1AnalyticsManager sharedInstance] handleOpenUrl:url options:options];\n";
+        const string handleOpenUrl_Analytics = "\n\t[[Yodo1AnalyticsManager sharedInstance] handleOpenUrl:url options:options];\n";
+        const string handleOpenUrl_Replay = "\n\t[[Yodo1ReplayManager sharedInstance] handleOpenURL:url options:options];\n";
 
         const string openUrlText =
             "- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options \n {"
-            + handleOpenUrl
+            + handleOpenUrl_Analytics + "\n"
+            + handleOpenUrl_Replay + "\n"
             + "    return YES;\n}";
 
         //continueUserActivity:userActivity,handler
@@ -203,15 +215,23 @@ namespace Yodo1.Suit
         const string continueUserActivityText = "\n\t[[Yodo1AnalyticsManager sharedInstance] continueUserActivity:userActivity];\n";
         const string continueUserActivityAndReturnText = continueUser + continueUserActivityText + "\treturn YES;\n}";
 
-        private static void EditorCode(string filePath)
+        private static void EditorCycleCodes(string filePath)
         {
             Yodo1XcodeFileClass app = new Yodo1XcodeFileClass(filePath + "/Classes/UnityAppController.mm");
             app.WriteBelow(unityAppControllerImport, yodo1AnalyticsManagerImport);
+            app.WriteBelow(unityAppControllerImport, yodo1ReplayManagerImport);
+
+            // didFinishLaunchingWithOptions
+            if (app.IsHaveText(didFinishLaunchingWithOptions))
+            {
+                app.WriteBelow(didFinishLaunchingWithOptions, didFinishLaunchingWithOptions_Replay);
+            }
 
             //openURL:url,options,options.
             if (app.IsHaveText(openUrlText_iOS9_0))
             {
-                app.WriteBelow(openUrlText_iOS9_0, handleOpenUrl);
+                app.WriteBelow(openUrlText_iOS9_0, handleOpenUrl_Analytics);
+                app.WriteBelow(openUrlText_iOS9_0, handleOpenUrl_Replay);
                 Debug.LogWarning("-------1------");
             }
             else
@@ -342,6 +362,83 @@ namespace Yodo1.Suit
             entitlements.WriteToFile();
         }
 
+        #endregion
+
+        #region Replay - Build process
+
+        private static void BuildReplayProcess(BuildTarget buildTarget, string pathToBuiltProject)
+        {
+            RuntimeiOSSettings settings = SettingsSave.LoadEditor(false);
+
+            UpdateInfoPlist_Douyin(pathToBuiltProject, settings);
+        }
+
+        private static void UpdateInfoPlist_Douyin(string path, RuntimeiOSSettings settings)
+        {
+            string plistPath = Path.Combine(path, "Info.plist");
+            PlistDocument plist = new PlistDocument();
+            plist.ReadFromString(File.ReadAllText(plistPath));
+
+            //Get Root
+            PlistElementDict root = plist.root;
+
+            // CFBundleURLTypes
+            PlistElementArray urltypes = (PlistElementArray)root["CFBundleURLTypes"];
+            if (urltypes == null)
+            {
+                urltypes = root.CreateArray("CFBundleURLTypes");
+            }
+
+            string douyinIdentifier = "douyin";
+            string douyinClientKey = settings.GetKeyItem().DouyinClientKey;
+            if (Yodo1EditorUtils.IsVaildValue(douyinIdentifier) && Yodo1EditorUtils.IsVaildValue(douyinClientKey) && CheckURLTypes(urltypes, douyinIdentifier))
+            {
+                PlistElementDict elementDic = urltypes.AddDict();
+                elementDic.SetString("CFBundleTypeRole", "Editor");
+                elementDic.SetString("CFBundleURLName", douyinIdentifier);
+
+                PlistElementArray schemesArray = elementDic.CreateArray("CFBundleURLSchemes");
+                schemesArray.AddString(douyinClientKey);
+            }
+
+            // LSApplicationQueriesSchemes
+            PlistElementArray queriesSchemes = (PlistElementArray)root["LSApplicationQueriesSchemes"];
+            if (queriesSchemes == null)
+            {
+                queriesSchemes = root.CreateArray("LSApplicationQueriesSchemes");
+            }
+
+            if (CheckQueriesSchemes(queriesSchemes, "douyinopensdk"))
+            {
+                queriesSchemes.AddString("douyinopensdk");
+            }
+            if (CheckQueriesSchemes(queriesSchemes, "douyinsharesdk"))
+            {
+                queriesSchemes.AddString("douyinsharesdk");
+            }
+            if (CheckQueriesSchemes(queriesSchemes, "snssdk1128"))
+            {
+                queriesSchemes.AddString("snssdk1128");
+            }
+
+            plist.WriteToFile(plistPath);
+        }
+
+        private static bool CheckQueriesSchemes(PlistElementArray array, string identifier)
+        {
+            bool isAdd = true;
+            List<PlistElement> values = array.values;
+            foreach (PlistElement element in values)
+            {
+                string id = element.AsString();
+                if (!string.IsNullOrEmpty(id) && id.Equals(identifier))
+                {
+                    isAdd = false;
+                    break;
+                }
+            }
+            return isAdd;
+        }
         #endregion
     }
 }

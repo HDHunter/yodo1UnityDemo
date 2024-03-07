@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Yodo1.AntiAddiction;
-using Yodo1Ads;
 
 public class Yodo1Demo : MonoBehaviour
 {
@@ -27,6 +23,17 @@ public class Yodo1Demo : MonoBehaviour
         {
             Functions();
             return;
+        }
+
+        string gameKey = Yodo1U3dUtils.getConfigParameter("game_key");
+        if (!string.IsNullOrEmpty(gameKey))
+        {
+            PlayerPrefs.SetString(KEY_APP_KEY, Yodo1U3dUtils.getConfigParameter("game_key"));
+        }
+        string regionCode = Yodo1U3dUtils.getConfigParameter("regionCode");
+        if (!string.IsNullOrEmpty(regionCode))
+        {
+            PlayerPrefs.SetString(KEY_REGION_CODE, Yodo1U3dUtils.getConfigParameter("regionCode"));
         }
 
         InitializeCongig();
@@ -71,11 +78,6 @@ public class Yodo1Demo : MonoBehaviour
         config.RegionCode = regionCode;
         Yodo1U3dSDK.InitWithConfig(config);
 
-        Yodo1U3dAds.InitializeSdk();
-
-        //Non automatic initialization call(非自动初始化调用).
-        Yodo1U3dAntiAddiction.Init();
-
         initialized = true;
     }
 
@@ -92,29 +94,29 @@ public class Yodo1Demo : MonoBehaviour
         return IsIphoneXDevice;
     }
 
-    void ShareDelegate(bool result,int shareType)
+
+    //退出游戏回调
+    void ExitCallback(Yodo1U3dConstants.AccountEvent accountEvent, Dictionary<string, object> resultData)
     {
-        if (result)
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "share success");
-        }
-        else
-        {
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "share fail");
-        }
+        Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game callback, msg = " + resultData);
 
-        Debug.Log(Yodo1U3dConstants.LOG_TAG + "shareType:" + shareType);
+        if (Yodo1U3dConstants.AccountEvent.Success == accountEvent)
+        {
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game ...");
+            Application.Quit();
+        }
     }
-
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Yodo1U3dUtils.exit(this, exitCallback);
+            Yodo1U3dAccount.SetExitDelegate(ExitCallback);
+            Yodo1U3dUtils.exit();
         }
     }
+
 
     void OnGUI()
     {
@@ -134,29 +136,14 @@ public class Yodo1Demo : MonoBehaviour
             btn_startY = 110;
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY, btn_w, btn_h), "账户/防沉迷功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 2 + btn_h, btn_w, btn_h), "账户/防沉迷功能"))
         {
             SceneManager.LoadScene("AccountScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 2 + btn_h, btn_w, btn_h), "商品支付功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "商品支付功能"))
         {
             SceneManager.LoadScene("PayScene");
-        }
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 3 + btn_h * 2, btn_w, btn_h), "分享功能"))
-        {
-            Dictionary<string,object> s = new Dictionary<string,object>();
-            s.Add("title","分享标题");
-            s.Add("desc","分享内容描述");
-            string p =
-                Application.persistentDataPath + Path.DirectorySeparatorChar + "share_test_image.png"; //分享的图片的路径
-            s.Add("image",p);
-            s.Add("gameLogo","AppIcon.png");
-            s.Add("url","https://www.baidu.com");
-            s.Add("composite",true);
-            s.Add("qrText","长按识别二维码 \n 求挑战！求带走！");
-            // Yodo1U3dUtilsForAndroid.Share(shareParam);
         }
 
         if (GUI.Button(new Rect(btn_x, btn_startY * 4 + btn_h * 3, btn_w, btn_h), "统计功能"))
@@ -176,6 +163,7 @@ public class Yodo1Demo : MonoBehaviour
 
             string policyLink = Yodo1U3dUtils.getPolicyLink();
             string termsLink = Yodo1U3dUtils.getTermsLink();
+            string childLink = Yodo1U3dUtils.getChildPrivacyLink();
             string userId = Yodo1U3dUtils.getUserId();
             string countryCode = Yodo1U3dUtils.getCountryCode();
             bool userConsent = Yodo1U3dUtils.GetUserConsent();
@@ -185,6 +173,7 @@ public class Yodo1Demo : MonoBehaviour
             string publishChannelCode = Yodo1U3dUtils.GetPublishChannelCode();
             Debug.Log(Yodo1U3dConstants.LOG_TAG + ">>> policyLink : " + policyLink);
             Debug.Log(Yodo1U3dConstants.LOG_TAG + ">>> termsLink : " + termsLink);
+            Debug.Log(Yodo1U3dConstants.LOG_TAG + ">>> childPrivacyLink : " + childLink);
             Debug.Log(Yodo1U3dConstants.LOG_TAG + ">>> getDeviceId : " + deviceId);
             Debug.Log(Yodo1U3dConstants.LOG_TAG + ">>> userId : " + userId);
             Debug.Log(Yodo1U3dConstants.LOG_TAG + ">>> countryCode : " + countryCode);
@@ -217,39 +206,15 @@ public class Yodo1Demo : MonoBehaviour
             }
         }
 
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 10 + btn_h * 9, btn_w, btn_h), "防沉迷功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 9 + btn_h * 8, btn_w, btn_h), "Replay"))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("ReplayDemoScene");
         }
 
-        if (GUI.Button(new Rect(btn_x, btn_startY * 11 + btn_h * 10, btn_w, btn_h), "广告功能"))
+        if (GUI.Button(new Rect(btn_x, btn_startY * 10 + btn_h * 9, btn_w, btn_h), "退出"))
         {
-            SceneManager.LoadScene("Yodo1AdsScene");
-        }
-
-
-        if (GUI.Button(new Rect(btn_x, btn_startY * 12 + btn_h * 11, btn_w, btn_h), "退出"))
-        {
-            Yodo1U3dUtils.exit(this, exitCallback);
-        }
-    }
-
-    //退出游戏回调
-    public void exitCallback(string msg)
-    {
-        Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game callback, msg = " + msg);
-        Dictionary<string, object> dic = (Dictionary<string, object>) Yodo1JSONObject.Deserialize(msg);
-
-        if (dic != null && dic.ContainsKey("code"))
-        {
-            int code = int.Parse(dic["code"].ToString());
-            Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game code = " + code);
-            if (code == 1)
-            {
-                Debug.Log(Yodo1U3dConstants.LOG_TAG + "Quit game ...");
-                Application.Quit();
-            }
+            Yodo1U3dAccount.SetExitDelegate(ExitCallback);
+            Yodo1U3dUtils.exit();
         }
     }
 

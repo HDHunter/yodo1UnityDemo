@@ -50,5 +50,12 @@ namespace Yodo1.Suit
         public string AdjustUniversalLinksDomain;
 
         #endregion
+
+        #region Replay
+
+        public string DouyinAppId;
+        public string DouyinClientKey;
+
+        #endregion
     }
 }
